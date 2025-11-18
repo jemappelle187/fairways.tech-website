@@ -4,8 +4,8 @@ import { useState } from "react";
 
 const navItems = [
   { id: "hero", label: "Home" },
-  { id: "the-problem", label: "The Problem" },
-  { id: "our-solution", label: "Our Solution" },
+  { id: "the-problem", label: "Problem" },
+  { id: "our-solution", label: "Solution" },
   { id: "how-it-works", label: "Approach" },
   { id: "compliance", label: "Compliance" },
   { id: "partnerships", label: "Partnerships" },
@@ -72,31 +72,33 @@ function Header() {
           </div>
         </button>
       </div>
-      <nav
-        className={`md:hidden border-t border-stone-200 bg-sand/95 backdrop-blur-sm overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="mx-auto max-w-6xl px-4 py-4 space-y-2">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => handleNavClick(e, item.id)}
-              className="block rounded-full px-4 py-2 text-sm font-medium text-stone/90 transition hover:bg-forest/10 hover:text-forest"
-            >
-              {item.label}
-            </a>
-          ))}
-          <a
-            href="#call-to-action"
-            onClick={(e) => handleNavClick(e, "call-to-action")}
-            className="block mt-4 rounded-full border border-forest/30 px-4 py-2 text-sm font-semibold text-center text-forest transition hover:bg-forest hover:text-sand"
-          >
-            Partner With Us
-          </a>
-        </div>
-      </nav>
+      {isMenuOpen && (
+        <nav className="md:hidden fixed inset-x-0 top-[64px] z-40 bg-sand/95 backdrop-blur-sm border-t border-stone-200">
+          <div className="flex min-h-[calc(100vh-64px)] flex-col px-4 pb-6 pt-2">
+            <nav className="flex-1 space-y-4 overflow-y-auto pt-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className="block rounded-full px-4 py-2 text-sm font-medium text-stone/90 transition hover:bg-forest/10 hover:text-forest"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <div className="pt-4">
+              <a
+                href="#call-to-action"
+                onClick={(e) => handleNavClick(e, "call-to-action")}
+                className="block w-full rounded-full border border-forest/30 px-4 py-2 text-sm font-semibold text-center text-forest transition hover:bg-forest hover:text-sand"
+              >
+                Partner With Us
+              </a>
+            </div>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
@@ -220,10 +222,10 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-leaf">
             Community-Driven Agri–Fintech
           </p>
-          <h1 className="mt-4 text-2xl font-semibold leading-tight text-stone sm:text-3xl lg:text-4xl lg:leading-tight">
+          <h1 className="mt-4 text-3xl font-semibold leading-tight text-stone sm:text-4xl">
             Digital infrastructure empowering farmers to scale.
           </h1>
-          <p className="mt-6 text-lg text-stone/80">
+          <p className="mt-6 text-base sm:text-lg text-stone/80 max-w-xl">
             Fairways.Tech is a community-driven agri-fintech ecosystem helping
             smallholder farmers and horticultural producers grow beyond survival
             by unlocking fair, compliant, and scalable access to finance,
@@ -396,7 +398,7 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section id="partnerships" className="py-10 space-y-6 sm:py-16">
+        <section id="partnerships" className="block py-12 space-y-6 sm:py-16">
           <div>
             <p className="text-sm font-semibold text-leaf">
               Partnerships & ecosystem
