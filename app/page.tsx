@@ -593,7 +593,7 @@ export default function HomePage() {
               </div>
 
               <div className="grid gap-6 sm:grid-cols-3">
-                <div className="rounded-3xl bg-white/90 p-6 text-center shadow-sm">
+                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
                     Countries
                   </p>
@@ -606,7 +606,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-3xl bg-white/90 p-6 text-center shadow-sm">
+                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
                     Farmers
                   </p>
@@ -619,7 +619,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="rounded-3xl bg-white/90 p-6 text-center shadow-sm">
+                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
                     Community agents
                   </p>

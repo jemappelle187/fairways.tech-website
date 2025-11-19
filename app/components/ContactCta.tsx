@@ -145,6 +145,7 @@ export function ContactCta() {
                       <option value="+44">🇬🇧 +44</option>
                       <option value="+49">🇩🇪 +49</option>
                       <option value="+33">🇫🇷 +33</option>
+                      <option value="+39">🇮🇹 +39</option>
                       <option value="+1">🇺🇸 +1</option>
                       <option value="other">Other</option>
                     </select>
@@ -179,6 +180,7 @@ export function ContactCta() {
                   <option value="united-kingdom">United Kingdom</option>
                   <option value="germany">Germany</option>
                   <option value="france">France</option>
+                  <option value="italy">Italy</option>
                   <option value="other">Other</option>
                 </select>
               </div>
