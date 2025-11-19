@@ -13,6 +13,7 @@ const config: Config = {
         leaf: "#3C6E47",
         clay: "#B97332",
         sand: "#F4EFE7",
+        "sand-muted": "#E8E0D4",
         stone: "#111827"
       },
       fontFamily: {
