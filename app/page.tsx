@@ -601,7 +601,7 @@ export default function HomePage() {
                     <Counter target={statsInView ? 3 : 0} suffix="+" />
                   </p>
                   <p className="mt-2 text-sm text-slate-700">
-                    Building rails across Ghana and the Netherlands, with room to
+                    Building rails across Africa, Asia and Europe, with room to
                     grow.
                   </p>
                 </div>
