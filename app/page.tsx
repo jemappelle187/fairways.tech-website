@@ -564,7 +564,7 @@ export default function HomePage() {
                 Exploring circular image crops.
               </h2>
               <p className="mt-4 text-sm text-stone-700">
-                This section is a design sandbox for circular imagery and layout. In production we'll use real farm, value-chain and community photos here.
+                This section is a design sandbox for circular imagery and layout. In production we&apos;ll use real farm, value-chain and community photos here.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-stone-700">
                 <li>• Visual exploration of circular image formats</li>
@@ -622,13 +622,13 @@ export default function HomePage() {
         <section id="call-to-action" className="py-10 sm:py-16">
           <div className="rounded-3xl border border-forest/20 bg-white/90 p-4 text-center shadow-lg sm:p-6 lg:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-leaf">
-              Let's scale farming communities together.
+              Let&apos;s scale farming communities together.
             </p>
             <h2 className="mt-4 text-2xl font-semibold text-stone sm:text-3xl">
               Call to Action
             </h2>
             <p className="mt-4 text-stone/80">
-              Whether you're a bank, buyer, regulator, cooperative, or development
+              Whether you&apos;re a bank, buyer, regulator, cooperative, or development
               partner — Fairways.Tech is ready to collaborate.
             </p>
             <p className="mt-6 text-lg font-semibold text-forest">
