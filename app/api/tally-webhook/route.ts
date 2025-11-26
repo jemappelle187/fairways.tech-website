@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 type TallyField = {
   key: string;
-  label: string;
+  label: string | null;
   type: string;
   value: any;
+  options?: { id: string; text: string }[];
 };
 
 export async function POST(req: NextRequest) {
@@ -15,12 +16,12 @@ export async function POST(req: NextRequest) {
     const data = body?.data;
     const fieldsArray: TallyField[] = data?.fields ?? [];
 
-    // Optional: only handle real submissions (Tally uses FORM_RESPONSE)
+    // Only handle real submissions
     if (eventType && eventType !== "FORM_RESPONSE") {
       return NextResponse.json({ ok: true, ignored: true });
     }
 
-    // Turn the fields array into a simple { [label]: value } map
+    // Map by label (for fields that actually have labels)
     const fieldByLabel: Record<string, any> = {};
     for (const f of fieldsArray) {
       if (f?.label) {
@@ -28,21 +29,46 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // ----- Email: first INPUT_EMAIL field -----
+    const emailField = fieldsArray.find(
+      (f) => f.type === "INPUT_EMAIL"
+    );
+    const emailValue =
+      emailField?.value ??
+      fieldByLabel["Email"] ??
+      fieldByLabel["Yourname@example.com"] ??
+      "";
+
+    // ----- Country: first DROPDOWN field, map id -> text -----
+    let countryText = "";
+    const countryField = fieldsArray.find(
+      (f) => f.type === "DROPDOWN"
+    );
+    if (countryField) {
+      const v = countryField.value;
+      if (Array.isArray(v) && v.length > 0 && Array.isArray(countryField.options)) {
+        const match = countryField.options.find((opt) => opt.id === v[0]);
+        if (match) countryText = match.text;
+      }
+    }
+
     const airtableFields: Record<string, any> = {
       "First name": fieldByLabel["First name"] ?? "",
       "Last name": fieldByLabel["Last name"] ?? "",
       "Company": fieldByLabel["Company"] ?? "",
-      "Email": fieldByLabel["Email"] ?? "",
-      "Country": fieldByLabel["Country"] ?? "",
-      "Message": fieldByLabel["What would you like to ask/tell us?"] ?? fieldByLabel["Message"] ?? "",
+      "Email": emailValue,
+      "Country": countryText,
+      "Message":
+        fieldByLabel["What would you like to ask/tell us?"] ??
+        fieldByLabel["Message"] ??
+        "",
 
-      // Hidden diagnostic fields (labels come from your Tally form)
+      // Hidden diagnostics (labels from Tally hidden fields)
       "IP Address": fieldByLabel["ip_address"] ?? "",
       "Geo Country": fieldByLabel["geo_country"] ?? "",
       "User Agent": fieldByLabel["user_agent"] ?? "",
       "Referrer": fieldByLabel["referrer"] ?? "",
 
-      // Raw payload + timestamp for debugging/audit
       "Raw Submission": JSON.stringify(body),
       "Created At": new Date().toISOString(),
     };
@@ -93,7 +119,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Quick health-check endpoint
 export async function GET() {
   return NextResponse.json({ ok: true, message: "Tally webhook is live" });
 }
