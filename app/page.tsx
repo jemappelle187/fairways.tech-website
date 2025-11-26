@@ -223,15 +223,15 @@ function Hero() {
     <section id="hero" className="relative overflow-hidden py-16 sm:py-20">
       {/* Background image with parallax */}
       <div
-        className="absolute inset-0 bg-[url('/hero-fairways.jpg')] bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-[url('/hero-fairways.jpg')] bg-cover bg-center"
         style={{ transform: `translateY(${parallaxOffset}px)` }}
       />
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 z-0 bg-black/30" />
       {/* Bottom fade into sand */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-sand/10 to-sand" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-b from-transparent via-sand/10 to-sand" />
 
-      <div className="relative mx-auto max-w-5xl px-4 pt-16 sm:px-6 sm:pt-24 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 pt-16 sm:px-6 sm:pt-24 lg:px-8">
         {/* Gradient border wrapper */}
         <div
           className={`relative mx-auto max-w-3xl rounded-[36px] bg-gradient-to-r from-forest/45 via-leaf/35 to-amber-300/35 p-[1px] shadow-xl shadow-black/10 transition-all duration-1000 md:-mt-6 lg:-mt-10 ${
