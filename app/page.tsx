@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import { ContactCta } from "./components/ContactCta";
 import { Leaf, Landmark, Users2, Store, GraduationCap, Globe2, ShieldCheck } from "lucide-react";
@@ -715,7 +715,9 @@ export default function HomePage() {
             </div>
           </section>
 
-          <ContactCta />
+          <Suspense fallback={<div className="h-64" />}>
+            <ContactCta />
+          </Suspense>
         </div>
       </main>
       <Footer />
