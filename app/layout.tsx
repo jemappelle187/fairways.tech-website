@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.ico" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
     apple: "/apple-touch-icon.png",
   },
@@ -32,32 +32,35 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Fairways.Tech – digital infrastructure empowering farmers to scale",
-      }
-    ]
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Fairways.Tech – Digital infrastructure empowering farmers to scale",
     description:
       "Community-driven agri-fintech enabling farmers to scale responsibly with trusted data and compliant finance.",
-    images: ["/og-fairways-tech.png"]
-  }
+    images: ["/og-fairways-tech.png"],
+  },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
+        {children}
+
+        {/* Umami analytics */}
         <Script
           src="https://cloud.umami.is/script.js"
-          data-website-id="35737669-48d9-417b-84b5-219610fbff91"
+          data-website-id="35737669-48d9-417b-84b8-219610fbff91"
+          data-domains="fairways.tech"
           strategy="afterInteractive"
         />
-        {children}
       </body>
     </html>
   );
