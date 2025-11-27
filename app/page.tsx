@@ -549,11 +549,11 @@ export default function HomePage() {
 
   <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-10 px-6 md:px-8">
     {/* centered heading */}
-    <div className="mx-auto max-w-3xl text-center">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+    <div className="mx-auto max-w-3xl text-center text-white">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
         Our approach
       </p>
-      <h2 className="mt-2 text-xl font-semibold text-stone sm:text-2xl">
+      <h2 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
         Clear. Compliant. Community-driven.
       </h2>
     </div>
@@ -671,14 +671,14 @@ export default function HomePage() {
   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-[#f4efe5]/35 to-[#f4efe5]" />
 
   <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-6 md:px-8">
-    <div className="mx-auto max-w-3xl text-center">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+    <div className="mx-auto max-w-3xl text-center text-white">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
         Partnerships &amp; ecosystem
       </p>
-      <h2 className="mt-2 text-xl font-semibold text-stone sm:text-2xl">
+      <h2 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
         Built with local partners, for local communities.
       </h2>
-      <p className="mt-3 text-slate-700 leading-relaxed">
+      <p className="mt-3 text-white/90 leading-relaxed">
         We collaborate with the partners who make agricultural systems work on
         the ground.
       </p>
