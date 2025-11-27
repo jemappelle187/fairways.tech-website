@@ -5,6 +5,12 @@
 :root {
   color: #111827;
   background-color: #f4efe7;
+  --fw-logo-green: #41a65b;
+  --fw-logo-green-light: #6ecf87;
+  --fw-logo-green-dark: #2f7c44;
+  --fw-forest: #1f4d36;
+  --fw-leaf: #3c7a4a;
+  --fw-sand: #f4efe7;
 }
 
 html {

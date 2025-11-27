@@ -1,6 +1,6 @@
-import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
+import { UmamiLoader } from "./components/UmamiLoader";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fairways.tech"),
@@ -53,64 +53,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
         {children}
-
-        <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="35737669-48d9-417b-84b8-219610fbff91"
-          data-domains="fairways.tech"
-          strategy="afterInteractive"
-        />
-
-        {/* One-time visit event -> Slack via /api/umami-to-slack */}
-        <Script
-          id="umami-slack-visit"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-(function () {
-  if (typeof window === "undefined" || !window.fetch) return;
-
-  try {
-    // Simple, privacy-friendly first-time vs returning flag
-    var visitorType = "first-time";
-    try {
-      var key = "fw_visit_seen";
-      var stored = window.localStorage.getItem(key);
-      if (stored === "1") {
-        visitorType = "returning";
-      } else {
-        window.localStorage.setItem(key, "1");
-      }
-    } catch (e) {
-      // localStorage may be disabled; ignore
-    }
-
-    var payload = {
-      title: document.title || null,
-      url: window.location.href,
-      hostname: window.location.hostname,
-      language: navigator.language || null,
-      referrer: document.referrer || null,
-      screen: window.innerWidth + "x" + window.innerHeight,
-      visitorType: visitorType
-    };
-
-    fetch("/api/umami-to-slack", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true
-    }).catch(function () {
-      // swallow client-side errors
-    });
-
-  } catch (e) {
-    console.error("[UMAMI_SLACK_VISIT] client error", e);
-  }
-})();
-            `,
-          }}
-        />
+        <UmamiLoader />
       </body>
     </html>
   );
