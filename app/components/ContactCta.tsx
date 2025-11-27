@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { track } from "@/lib/umami";
 
 const TALLY_BASE_URL = "https://tally.so/r/2EjXOj";
 
@@ -157,6 +158,7 @@ export function ContactCta() {
           <button
             type="button"
             onClick={() => {
+              track("cta_opened");
               setOpen(true);
               setIframeLoaded(false);
             }}

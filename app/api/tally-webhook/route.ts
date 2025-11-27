@@ -111,6 +111,41 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await airtableRes.json();
+
+    // 🔔 Send Slack notification (non-blocking)
+    const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
+
+    if (slackWebhookUrl) {
+      const slackText = [
+        `*New Fairways.Tech contact form submission*`,
+        ``,
+        `*Name:* ${airtableFields["First name"] || "-"} ${airtableFields["Last name"] || ""}`,
+        `*Company:* ${airtableFields["Company"] || "-"}`,
+        `*Email:* ${airtableFields["Email"] || "-"}`,
+        `*Country (form):* ${airtableFields["Country"] || "-"}`,
+        `*Geo Country (IP):* ${airtableFields["Geo Country"] || "-"}`,
+        `*Browser:* ${airtableFields["Browser"] || "-"}`,
+        `*Geo City:* ${airtableFields["Geo City"] || "-"}`,
+        ``,
+        `*Message:* ${
+          airtableFields["Message"] && String(airtableFields["Message"]).trim().length
+            ? airtableFields["Message"]
+            : "_(no message)_"
+        }`,
+      ].join("\n");
+
+      // Fire and forget – don’t block the response on Slack
+      fetch(slackWebhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: slackText }),
+      }).catch((err) => {
+        console.error("Slack webhook error:", err);
+      });
+    } else {
+      console.warn("SLACK_WEBHOOK_URL is not set. Skipping Slack notification.");
+    }
+
     return NextResponse.json({ ok: true, airtable: result });
   } catch (err: any) {
     console.error("Webhook error", err);
@@ -121,6 +156,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// Quick health-check endpoint
 export async function GET() {
   return NextResponse.json({ ok: true, message: "Tally webhook is live" });
 }

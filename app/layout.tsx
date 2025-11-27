@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -51,6 +52,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="35737669-48d9-417b-84b5-219610fbff91"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>

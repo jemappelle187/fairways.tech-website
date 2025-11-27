@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { track } from "@/lib/umami";
 import { ContactCta } from "./components/ContactCta";
 import { Leaf, Landmark, Users2, Store, GraduationCap, Globe2, ShieldCheck } from "lucide-react";
 
@@ -398,6 +400,19 @@ function CookieBanner() {
   );
 }
 
+function ViaTracker() {
+  const searchParams = useSearchParams();
+  const via = searchParams.get("via");
+
+  useEffect(() => {
+    if (via) {
+      track(`via_${via}`);
+    }
+  }, [via]);
+
+  return null;
+}
+
 export default function HomePage() {
   const [statsInView, setStatsInView] = useState(false);
   const statsRef = useRef<HTMLDivElement | null>(null);
@@ -422,6 +437,9 @@ export default function HomePage() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <ViaTracker />
+      </Suspense>
       <Header />
       <main className="flex flex-col gap-20 pb-20">
         <Hero />
