@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
         fieldByLabel["What would you like to ask/tell us?"] ??
         fieldByLabel["Message"] ??
         "",
-    
+
       // Hidden diagnostic fields
       "IP Address": fieldByLabel["ip_address"] ?? "",
       "Geo Country": fieldByLabel["geo_country"] ?? "",
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       "Geo City": fieldByLabel["geo_city"] ?? "",
       "User Agent": fieldByLabel["user_agent"] ?? "",
       "Referrer": fieldByLabel["referrer"] ?? "",
-    
+
       "Raw Submission": JSON.stringify(body),
       "Created At": new Date().toISOString(),
     };
