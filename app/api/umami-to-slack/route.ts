@@ -18,6 +18,16 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as UmamiEventPayload;
 
+    const hostname = body.hostname || "";
+
+    // Ignore localhost & Vercel preview traffic
+    if (
+      hostname === "localhost" ||
+      hostname.endsWith(".vercel.app")
+    ) {
+      return NextResponse.json({ ok: true, skipped: true });
+    }
+
     const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
 
     if (!slackWebhookUrl) {
@@ -28,20 +38,16 @@ export async function POST(req: NextRequest) {
     }
 
     const lines = [
-      "*📊 New Umami event on Fairways.Tech*",
+      "📊 *New Umami event on Fairways.Tech*",
       "",
       `*Title:* ${body.title || "-"}`,
       `*URL:* ${body.url || "-"}`,
       "",
-      `*Hostname:* ${body.hostname || "-"}`,
+      `*Hostname:* ${hostname || "-"}`,
       `*Language:* ${body.language || "-"}`,
       `*Referrer:* ${body.referrer || "-"}`,
       "",
-      `*Browser:* ${body.browser || "-"}`,
-      `*OS:* ${body.os || "-"}`,
-      `*Device:* ${body.device || "-"}`,
       `*Screen:* ${body.screen || "-"}`,
-      `*Country:* ${body.country || "-"}`,
     ];
 
     const text = lines.join("\n");
@@ -70,4 +76,3 @@ export async function GET() {
     message: "Umami webhook is live",
   });
 }
-
