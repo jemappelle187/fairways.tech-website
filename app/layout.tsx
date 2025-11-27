@@ -71,13 +71,26 @@ export default function RootLayout({
   if (typeof window === "undefined" || !window.fetch) return;
 
   try {
+    var nav = window.navigator || {};
+    var lang = nav.language || null;
+    var ua = nav.userAgent || null;
+    var screenSize =
+      window.innerWidth && window.innerHeight
+        ? window.innerWidth + "x" + window.innerHeight
+        : null;
+
     var payload = {
       title: document.title || null,
       url: window.location.href,
       hostname: window.location.hostname,
-      language: navigator.language || null,
+      language: lang,
       referrer: document.referrer || null,
-      screen: window.innerWidth + "x" + window.innerHeight,
+      screen: screenSize,
+      // Basic client hints; backend will enrich with geo-IP
+      browser: ua,
+      os: null,
+      device: null,
+      country: null,
     };
 
     fetch("/api/umami-to-slack", {
@@ -86,10 +99,9 @@ export default function RootLayout({
       body: JSON.stringify(payload),
       keepalive: true,
     }).catch(function () {
-      // swallow client-side errors
+      // swallow client-side errors so analytics never break the page
     });
   } catch (e) {
-    // never break the page if analytics fails
     console.error("[UMAMI_SLACK_VISIT] client error", e);
   }
 })();
