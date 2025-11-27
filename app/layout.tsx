@@ -71,36 +71,39 @@ export default function RootLayout({
   if (typeof window === "undefined" || !window.fetch) return;
 
   try {
-    var nav = window.navigator || {};
-    var lang = nav.language || null;
-    var ua = nav.userAgent || null;
-    var screenSize =
-      window.innerWidth && window.innerHeight
-        ? window.innerWidth + "x" + window.innerHeight
-        : null;
+    // Simple, privacy-friendly first-time vs returning flag
+    var visitorType = "first-time";
+    try {
+      var key = "fw_visit_seen";
+      var stored = window.localStorage.getItem(key);
+      if (stored === "1") {
+        visitorType = "returning";
+      } else {
+        window.localStorage.setItem(key, "1");
+      }
+    } catch (e) {
+      // localStorage may be disabled; ignore
+    }
 
     var payload = {
       title: document.title || null,
       url: window.location.href,
       hostname: window.location.hostname,
-      language: lang,
+      language: navigator.language || null,
       referrer: document.referrer || null,
-      screen: screenSize,
-      // Basic client hints; backend will enrich with geo-IP
-      browser: ua,
-      os: null,
-      device: null,
-      country: null,
+      screen: window.innerWidth + "x" + window.innerHeight,
+      visitorType: visitorType
     };
 
     fetch("/api/umami-to-slack", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-      keepalive: true,
+      keepalive: true
     }).catch(function () {
-      // swallow client-side errors so analytics never break the page
+      // swallow client-side errors
     });
+
   } catch (e) {
     console.error("[UMAMI_SLACK_VISIT] client error", e);
   }
