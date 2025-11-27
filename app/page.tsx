@@ -126,6 +126,7 @@ function Header() {
         }`}
       >
         <div className="flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo-fairways-forest.svg"
             alt="Fairways.Tech"

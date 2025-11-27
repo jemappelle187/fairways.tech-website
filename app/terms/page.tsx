@@ -17,8 +17,8 @@ export default function TermsPage() {
               1. Who we are
             </h2>
             <p className="mt-2">
-              These Website Terms &amp; Conditions ("Terms") apply to your use
-              of the website <strong>www.fairways.tech</strong> (the "Website").
+              These Website Terms &amp; Conditions (&quot;Terms&quot;) apply to your use
+              of the website <strong>www.fairways.tech</strong> (the &quot;Website&quot;).
             </p>
             <p className="mt-2">
               The Website is operated by:
@@ -28,7 +28,7 @@ export default function TermsPage() {
               <li>Fairways.Tech Ltd (Ghana)</li>
             </ul>
             <p className="mt-2">
-              Together referred to as "Fairways.Tech", "we", "us" or "our".
+              Together referred to as &quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot; or &quot;our&quot;.
               The Website is a corporate / informational site. It does not
               provide account opening, loan applications, or any regulated
               financial services directly.
@@ -208,7 +208,7 @@ export default function TermsPage() {
             </h2>
             <p className="mt-2">
               We may update these Terms from time to time to reflect changes in
-              our business, technology or legal requirements. The "Last updated"
+              our business, technology or legal requirements. The &quot;Last updated&quot;
               date will be revised accordingly. By continuing to use the Website
               after changes take effect, you accept the updated Terms.
             </p>

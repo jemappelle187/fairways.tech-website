@@ -18,9 +18,9 @@ export default function CookiesPage() {
             </h2>
             <p className="mt-2">
               This Cookie &amp; Local Storage Policy explains how Fairways.Tech
-              B.V. and Fairways.Tech Ltd ("Fairways.Tech", "we", "us") use
+              B.V. and Fairways.Tech Ltd (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;) use
               cookies and similar technologies on{" "}
-              <strong>www.fairways.tech</strong> (the "Website").
+              <strong>www.fairways.tech</strong> (the &quot;Website&quot;).
             </p>
           </section>
 
@@ -144,7 +144,7 @@ export default function CookiesPage() {
             <p className="mt-2">
               We may update this Cookie &amp; Local Storage Policy if we change
               the technologies we use, introduce new analytics or security
-              tools, or if legal requirements change. The "Last updated" date
+              tools, or if legal requirements change. The &quot;Last updated&quot; date
               will be revised accordingly. Where required, we will present an
               updated cookie banner.
             </p>

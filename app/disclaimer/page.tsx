@@ -17,9 +17,9 @@ export default function DisclaimerPage() {
               1. Informational purpose only
             </h2>
             <p className="mt-2">
-              The website <strong>www.fairways.tech</strong> (the "Website") is
+              The website <strong>www.fairways.tech</strong> (the &quot;Website&quot;) is
               operated by Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd
-              (Ghana) ("Fairways.Tech", "we", "us").
+              (Ghana) (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;).
             </p>
             <p className="mt-2">
               All content on this Website is provided solely for general

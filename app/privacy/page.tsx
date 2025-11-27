@@ -18,9 +18,9 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-2">
               This Privacy Policy explains how Fairways.Tech B.V. (Netherlands)
-              and Fairways.Tech Ltd (Ghana) ("Fairways.Tech", "we", "us",
-              "our") process personal data when you visit{" "}
-              <strong>www.fairways.tech</strong> (the "Website") or use the
+              and Fairways.Tech Ltd (Ghana) (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;,
+              &quot;our&quot;) process personal data when you visit{" "}
+              <strong>www.fairways.tech</strong> (the &quot;Website&quot;) or use the
               Website contact form.
             </p>
             <p className="mt-2">
@@ -238,7 +238,7 @@ export default function PrivacyPage() {
             <ul className="mt-2 list-disc pl-5">
               <li>Right of access</li>
               <li>Right to rectification</li>
-              <li>Right to erasure ("right to be forgotten")</li>
+              <li>Right to erasure (&quot;right to be forgotten&quot;)</li>
               <li>Right to restriction of processing</li>
               <li>Right to data portability</li>
               <li>
@@ -282,7 +282,7 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-2">
               We may update this Privacy Policy to reflect changes in our
-              Website, our business or applicable laws. The "Last updated" date
+              Website, our business or applicable laws. The &quot;Last updated&quot; date
               will be revised accordingly. We encourage you to review this
               Policy periodically.
             </p>
