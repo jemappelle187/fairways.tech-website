@@ -142,8 +142,8 @@ export function ContactCta() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-b from-transparent via-[#f4efe5]/35 to-[#f4efe5]" />
 
       {/* Content card */}
-      <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="relative flex flex-col items-center rounded-3xl bg-white/92 px-6 py-10 text-center shadow-xl shadow-black/10 backdrop-blur-sm md:px-12 md:py-12">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="relative flex flex-col items-center rounded-3xl border border-white/40 bg-white/80 px-6 py-10 text-center shadow-lg shadow-black/10 backdrop-blur-sm md:px-12 md:py-12">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
             Let&apos;s scale farming communities together.
           </p>
