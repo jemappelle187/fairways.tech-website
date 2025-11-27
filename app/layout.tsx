@@ -61,6 +61,20 @@ export default function RootLayout({
           data-domains="fairways.tech"
           strategy="afterInteractive"
         />
+
+        <Script id="umami-slack-forwarder" strategy="afterInteractive">
+          {`
+            document.addEventListener('umami:event', function (event) {
+              const payload = event.detail?.payload || {};
+              
+              fetch('/api/umami-to-slack', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+            });
+          `}
+        </Script>
       </body>
     </html>
   );
