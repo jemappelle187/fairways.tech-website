@@ -84,26 +84,8 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
       }));
     }
 
-    // IP + geo lookup (using ipinfo.io for better accuracy, especially for IPv6)
+    // IP + geo lookup (using ipapi.co - was giving correct city in emails)
     const fetchIp = async () => {
-      try {
-        // Try ipinfo.io first (more accurate for IPv6 addresses)
-        const res = await fetch("https://ipinfo.io/json");
-        if (res.ok) {
-          const data = await res.json();
-          setTracking((prev) => ({
-            ...prev,
-            ip: data.ip ?? "",
-            geoCountry: data.country ?? "",
-            geoCity: data.city ?? "",
-          }));
-          return;
-        }
-      } catch {
-        // Fallback to ipapi.co
-      }
-
-      // Fallback to ipapi.co
       try {
         const res = await fetch("https://ipapi.co/json/");
         if (!res.ok) return;
