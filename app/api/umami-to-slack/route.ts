@@ -81,6 +81,11 @@ export async function POST(req: NextRequest) {
     const { browser, os, device } = parseUserAgent(uaRaw);
 
     const clientIp = getClientIp(req);
+    
+    // Debug: log IP extraction
+    if (!clientIp) {
+      console.warn("[UMAMI_WEBHOOK] No client IP extracted from headers");
+    }
 
     // --- 3. Optional IP enrichment via ipapi.co (matches contact form) ---
     let geoCity = "";
@@ -97,13 +102,21 @@ export async function POST(req: NextRequest) {
         });
         if (geoRes.ok) {
           const geoData: any = await geoRes.json();
-          geoCity = geoData.city || "";
-          geoRegion = geoData.region || "";
-          geoCountry = geoData.country_name || "";
-          geoOrg = geoData.org || "";
-          if (geoData.latitude && geoData.longitude) {
-            geoLat = String(geoData.latitude);
-            geoLon = String(geoData.longitude);
+          // Check if API returned an error (ipapi.co returns error field on rate limit)
+          if (geoData.error) {
+            console.warn(
+              `[UMAMI_WEBHOOK] ipapi.co error for ${clientIp}:`,
+              geoData.reason || geoData.error
+            );
+          } else {
+            geoCity = geoData.city || "";
+            geoRegion = geoData.region || "";
+            geoCountry = geoData.country_name || "";
+            geoOrg = geoData.org || "";
+            if (geoData.latitude && geoData.longitude) {
+              geoLat = String(geoData.latitude);
+              geoLon = String(geoData.longitude);
+            }
           }
         } else {
           const errorText = await geoRes.text();
