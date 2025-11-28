@@ -82,8 +82,26 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
       }));
     }
 
-    // IP + geo lookup
+    // IP + geo lookup (using ipinfo.io for better accuracy, especially for IPv6)
     const fetchIp = async () => {
+      try {
+        // Try ipinfo.io first (more accurate for IPv6 addresses)
+        const res = await fetch("https://ipinfo.io/json");
+        if (res.ok) {
+          const data = await res.json();
+          setTracking((prev) => ({
+            ...prev,
+            ip: data.ip ?? "",
+            geoCountry: data.country ?? "",
+            geoCity: data.city ?? "",
+          }));
+          return;
+        }
+      } catch {
+        // Fallback to ipapi.co
+      }
+
+      // Fallback to ipapi.co
       try {
         const res = await fetch("https://ipapi.co/json/");
         if (!res.ok) return;
@@ -165,7 +183,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.firstName}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
 
@@ -183,7 +201,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.lastName}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
       </div>
@@ -201,7 +219,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
           name="company"
           value={formData.company}
           onChange={handleChange}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+          className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
         />
       </div>
 
@@ -220,7 +238,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
 
@@ -231,13 +249,14 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
           >
             Phone (optional)
           </label>
-          <div className="flex gap-2">
+          <div className="relative">
             <select
               id="phoneCountryCode"
               name="phoneCountryCode"
               value={formData.phoneCountryCode}
               onChange={handleChange}
-              className="w-24 rounded-lg border border-slate-200 px-2 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 border-0 bg-transparent text-sm text-slate-600 focus:outline-none"
+              style={{ width: "auto" }}
             >
               <option value="+31">🇳🇱 +31</option>
               <option value="+233">🇬🇭 +233</option>
@@ -257,7 +276,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
               value={formData.phone}
               onChange={handleChange}
               placeholder="123456789"
-              className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-20 pr-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
             />
           </div>
         </div>
@@ -270,13 +289,13 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         >
           Country
         </label>
-        <select
-          id="country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
-        >
+          <select
+            id="country"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+          >
           <option value="">Select a country</option>
           <option value="Ghana">Ghana</option>
           <option value="Netherlands">Netherlands</option>
@@ -296,16 +315,16 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         >
           How would you like to collaborate? <span className="text-red-500">*</span>
         </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest resize-none"
-          placeholder="Tell us about your interest in Fairways.Tech..."
-        />
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={5}
+            value={formData.message}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest resize-none"
+            placeholder="Tell us about your interest in Fairways.Tech..."
+          />
       </div>
 
       <div className="flex items-center justify-between pt-2">

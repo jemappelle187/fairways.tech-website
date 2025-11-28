@@ -107,26 +107,41 @@ export function ContactCta() {
         </div>
       )}
 
-      {/* Success toast (after form submission) */}
+      {/* Premium success notification (after form submission) */}
       {showToast && (
-        <div className="fixed bottom-6 left-1/2 z-40 w-[92%] max-w-md -translate-x-1/2">
-          <div className="flex items-start gap-3 rounded-2xl bg-forest px-4 py-3 shadow-xl shadow-black/30">
-            <div className="mt-1 h-2 w-2 rounded-full bg-emerald-300" />
-            <div className="flex-1 text-sm text-white">
-              <p className="font-semibold">Thanks for reaching out.</p>
-              <p className="mt-0.5 text-[11px] text-emerald-100/90">
-                We&apos;ve received your details and will get back to you as
-                soon as possible.
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+          <div className="relative w-full max-w-md transform rounded-3xl bg-white/95 p-0 shadow-2xl shadow-black/30 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
+            <div className="flex flex-col items-center px-8 py-10 text-center">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-forest/10">
+                <svg
+                  className="h-8 w-8 text-forest"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-slate-900">
+                Message sent successfully
+              </h3>
+              <p className="mb-6 text-sm leading-relaxed text-slate-600">
+                Thanks for reaching out. We&apos;ve received your details and will
+                get back to you as soon as possible.
               </p>
+              <button
+                type="button"
+                onClick={() => setShowToast(false)}
+                className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
+              >
+                Close
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowToast(false)}
-              className="ml-1 text-lg leading-none text-emerald-100/80 hover:text-white"
-              aria-label="Dismiss"
-            >
-              ×
-            </button>
           </div>
         </div>
       )}
