@@ -8,13 +8,7 @@ type UmamiEventPayload = {
   referrer?: string | null;
   screen?: string;
   visitorType?: "first-time" | "returning" | string;
-};
-
-type IpinfoResponse = {
-  ip?: string;
   country?: string;
-  city?: string;
-  org?: string;
 };
 
 function getClientIp(req: NextRequest): string | null {
@@ -75,7 +69,6 @@ export async function POST(req: NextRequest) {
     const body = (await req.json()) as UmamiEventPayload;
 
     const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
-    const ipinfoToken = process.env.IPINFO_TOKEN;
 
     if (!slackWebhookUrl) {
       console.warn(
@@ -88,68 +81,66 @@ export async function POST(req: NextRequest) {
     const { browser, os, device } = parseUserAgent(uaRaw);
 
     const clientIp = getClientIp(req);
-    let ipinfo: IpinfoResponse | null = null;
 
-    if (clientIp && ipinfoToken) {
-      try {
-        const res = await fetch(
-          `https://ipinfo.io/${clientIp}?token=${ipinfoToken}`
+    // --- 3. Optional IP enrichment via ipinfo.io ---
+    let ipinfoCity = "";
+    let ipinfoRegion = "";
+    let ipinfoCountry = "";
+    let ipinfoOrg = "";
+    let ipLat = "";
+    let ipLon = "";
+
+    try {
+      const ipinfoToken = process.env.IPINFO_TOKEN;
+      if (ipinfoToken && clientIp && clientIp !== "127.0.0.1") {
+        const ipinfoRes = await fetch(
+          `https://ipinfo.io/${clientIp}?token=${ipinfoToken}`,
+          { cache: "no-store" }
         );
-        if (res.ok) {
-          const data = (await res.json()) as any;
-          ipinfo = {
-            ip: data.ip,
-            country: data.country,
-            city: data.city,
-            org: data.org,
-          };
+        if (ipinfoRes.ok) {
+          const ipinfoData: any = await ipinfoRes.json();
+          ipinfoCity = ipinfoData.city || "";
+          ipinfoRegion = ipinfoData.region || "";
+          ipinfoCountry = ipinfoData.country || "";
+          ipinfoOrg = ipinfoData.org || "";
+          if (typeof ipinfoData.loc === "string") {
+            const [lat, lon] = ipinfoData.loc.split(",");
+            ipLat = lat || "";
+            ipLon = lon || "";
+          }
         } else {
           console.warn(
-            "[UMAMI_WEBHOOK] ipinfo non-200 response:",
-            res.status,
-            await res.text()
+            "[UMAMI_WEBHOOK] ipinfo lookup failed:",
+            await ipinfoRes.text()
           );
         }
-      } catch (e) {
-        console.error("[UMAMI_WEBHOOK] ipinfo error:", e);
       }
+    } catch (e) {
+      console.error("[UMAMI_WEBHOOK] ipinfo error:", e);
     }
 
-    const visitorLabel =
-      body.visitorType === "returning"
-        ? "Returning visitor"
-        : body.visitorType === "first-time"
-        ? "First-time visitor"
-        : "-";
-
-    const lines: string[] = [
-      "📊 *New Umami event on Fairways.Tech*",
+    const lines = [
+      "📊 New Umami event on Fairways.Tech",
       "",
       `*Title:* ${body.title || "-"}`,
       `*URL:* ${body.url || "-"}`,
       "",
       `*Hostname:* ${body.hostname || "-"}`,
       `*Language:* ${body.language || "-"}`,
-      `*Visitor:* ${visitorLabel}`,
       `*Referrer:* ${body.referrer || "-"}`,
       "",
-      `*Browser:* ${browser || "-"}`,
-      `*OS:* ${os || "-"}`,
-      `*Device:* ${device || "-"}`,
       `*Screen:* ${body.screen || "-"}`,
+      "",
+      `*IP (proxy header):* ${clientIp || "-"}`,
+      `*Country (Umami):* ${body.country || "-"}`,
+      `*Geo Country (ipinfo):* ${ipinfoCountry || "-"}`,
+      `*Geo Region (ipinfo):* ${ipinfoRegion || "-"}`,
+      `*Geo City (ipinfo):* ${ipinfoCity || "-"}`,
+      `*Network org (ipinfo):* ${ipinfoOrg || "-"}`,
+      ipLat && ipLon
+        ? `*Coordinates (ipinfo):* ${ipLat}, ${ipLon}`
+        : "*Coordinates (ipinfo):* -",
     ];
-
-    if (clientIp) {
-      lines.push("", `*IP (proxy header):* ${clientIp}`);
-    }
-
-    if (ipinfo) {
-      lines.push(
-        `*Geo Country (ipinfo):* ${ipinfo.country || "-"}`,
-        `*Geo City (ipinfo):* ${ipinfo.city || "-"}`,
-        `*Network org (ipinfo):* ${ipinfo.org || "-"}`
-      );
-    }
 
     const text = lines.join("\n");
 
