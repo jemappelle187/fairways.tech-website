@@ -106,11 +106,15 @@ export async function POST(req: NextRequest) {
             geoLon = String(geoData.longitude);
           }
         } else {
+          const errorText = await geoRes.text();
           console.warn(
-            "[UMAMI_WEBHOOK] ipapi.co lookup failed:",
-            await geoRes.text()
+            `[UMAMI_WEBHOOK] ipapi.co lookup failed for ${clientIp}:`,
+            geoRes.status,
+            errorText
           );
         }
+      } else {
+        console.warn("[UMAMI_WEBHOOK] No valid client IP for geo lookup");
       }
     } catch (e) {
       console.error("[UMAMI_WEBHOOK] ipapi.co error:", e);
@@ -133,6 +137,10 @@ export async function POST(req: NextRequest) {
       `🔗 *Referrer:* ${body.referrer || "-"}`,
       "",
       `📱 *Screen:* ${body.screen || "-"}`,
+      "",
+      `💻 *Browser:* ${browser || "-"}`,
+      `🖥️ *OS:* ${os || "-"}`,
+      `📱 *Device:* ${device || "-"}`,
       "",
       `🌍 *IP (proxy header):* ${clientIp || "-"}`,
       `🌍 *Country (Umami):* ${body.country || "-"}`,
