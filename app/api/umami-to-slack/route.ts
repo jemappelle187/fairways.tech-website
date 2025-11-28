@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
         : "-";
 
     const lines = [
-      "📊 *New Umami event on Fairways.Tech*",
+      "👤 *New visitor on fairways.tech*",
       "",
       `📄 *Title:* ${body.title || "-"}`,
       `🌐 *URL:* ${body.url || "-"}`,
@@ -136,11 +136,11 @@ export async function POST(req: NextRequest) {
       "",
       `🌍 *IP (proxy header):* ${clientIp || "-"}`,
       `🌍 *Country (Umami):* ${body.country || "-"}`,
-      `🗺️ *Geo Country (ipapi.co):* ${geoCountry || "-"}`,
-      `🗺️ *Geo Region (ipapi.co):* ${geoRegion || "-"}`,
-      `🏙️ *Geo City (ipapi.co):* ${geoCity || "-"}`,
-      `🏢 *Network org (ipapi.co):* ${geoOrg || "-"}`,
-      `📍 *Coordinates (ipapi.co):* ${coordinatesText}`,
+      `🗺️ *Geo Country:* ${geoCountry || "-"}`,
+      `🗺️ *Geo Region:* ${geoRegion || "-"}`,
+      `🏙️ *Geo City:* ${geoCity || "-"}`,
+      `🏢 *Network org:* ${geoOrg || "-"}`,
+      `📍 *Coordinates:* ${coordinatesText}`,
     ];
 
     const text = lines.join("\n");
