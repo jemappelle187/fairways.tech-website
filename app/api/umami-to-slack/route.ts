@@ -13,23 +13,28 @@ type UmamiEventPayload = {
 
 function getClientIp(req: NextRequest): string | null {
   // Vercel sets x-forwarded-for with the client IP
+  // Format: "client-ip, proxy1-ip, proxy2-ip"
   const xff = req.headers.get("x-forwarded-for");
   if (xff) {
-    // x-forwarded-for can contain multiple IPs, the first one is the original client
-    const ips = xff.split(",").map((ip) => ip.trim());
-    // Filter out Vercel internal IPs and localhost
-    const clientIp = ips.find(
-      (ip) => !ip.startsWith("10.") && !ip.startsWith("172.16.") && ip !== "127.0.0.1"
-    ) || ips[0];
-    if (clientIp) return clientIp;
+    // x-forwarded-for can contain multiple IPs, the first one is usually the original client
+    const ips = xff.split(",").map((ip) => ip.trim()).filter(Boolean);
+    // Take the first IP (original client), but skip localhost
+    const clientIp = ips.find((ip) => ip !== "127.0.0.1" && ip !== "::1") || ips[0];
+    if (clientIp && clientIp !== "127.0.0.1") {
+      return clientIp;
+    }
   }
   
   // Fallback headers
   const realIp = req.headers.get("x-real-ip");
-  if (realIp) return realIp.trim();
+  if (realIp && realIp !== "127.0.0.1") {
+    return realIp.trim();
+  }
   
   const cfConnectingIp = req.headers.get("cf-connecting-ip"); // Cloudflare
-  if (cfConnectingIp) return cfConnectingIp.trim();
+  if (cfConnectingIp && cfConnectingIp !== "127.0.0.1") {
+    return cfConnectingIp.trim();
+  }
   
   return null;
 }
@@ -112,10 +117,13 @@ export async function POST(req: NextRequest) {
     let geoLat = "";
     let geoLon = "";
 
-    try {
-      if (clientIp && clientIp !== "127.0.0.1") {
+    if (clientIp && clientIp !== "127.0.0.1" && !clientIp.startsWith("::")) {
+      try {
         const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
           cache: "no-store",
+          headers: {
+            "User-Agent": "Fairways.Tech-Webhook/1.0",
+          },
         });
         
         if (geoRes.ok) {
@@ -127,7 +135,6 @@ export async function POST(req: NextRequest) {
               `[UMAMI_WEBHOOK] ipapi.co API error for ${clientIp}:`,
               geoData.reason || geoData.error
             );
-            // Don't use fallback - just leave fields empty to show "-"
           } else {
             // Extract data from ipapi.co
             geoCity = geoData.city || "";
@@ -138,23 +145,25 @@ export async function POST(req: NextRequest) {
               geoLat = String(geoData.latitude);
               geoLon = String(geoData.longitude);
             }
-            console.log(`[UMAMI_WEBHOOK] Geo data from ipapi.co: ${geoCity}, ${geoCountry}`);
+            console.log(
+              `[UMAMI_WEBHOOK] Geo data from ipapi.co for ${clientIp}: ${geoCity}, ${geoCountry}`
+            );
           }
         } else {
           const errorText = await geoRes.text();
           console.warn(
             `[UMAMI_WEBHOOK] ipapi.co lookup failed for ${clientIp}:`,
             geoRes.status,
-            errorText.substring(0, 200) // Limit error text length
+            errorText.substring(0, 200)
           );
-          // Don't use fallback - just leave fields empty
         }
-      } else {
-        console.warn("[UMAMI_WEBHOOK] No valid client IP for geo lookup");
+      } catch (e) {
+        console.error(`[UMAMI_WEBHOOK] Geo lookup error for ${clientIp}:`, e);
       }
-    } catch (e) {
-      console.error("[UMAMI_WEBHOOK] Geo lookup error:", e);
-      // Don't use fallback - just leave fields empty
+    } else {
+      console.warn(
+        `[UMAMI_WEBHOOK] No valid client IP for geo lookup. IP: ${clientIp || "null"}`
+      );
     }
 
     // Build coordinates link if available
