@@ -12,12 +12,25 @@ type UmamiEventPayload = {
 };
 
 function getClientIp(req: NextRequest): string | null {
+  // Vercel sets x-forwarded-for with the client IP
   const xff = req.headers.get("x-forwarded-for");
   if (xff) {
-    return xff.split(",")[0].trim();
+    // x-forwarded-for can contain multiple IPs, the first one is the original client
+    const ips = xff.split(",").map((ip) => ip.trim());
+    // Filter out Vercel internal IPs and localhost
+    const clientIp = ips.find(
+      (ip) => !ip.startsWith("10.") && !ip.startsWith("172.16.") && ip !== "127.0.0.1"
+    ) || ips[0];
+    if (clientIp) return clientIp;
   }
+  
+  // Fallback headers
   const realIp = req.headers.get("x-real-ip");
   if (realIp) return realIp.trim();
+  
+  const cfConnectingIp = req.headers.get("cf-connecting-ip"); // Cloudflare
+  if (cfConnectingIp) return cfConnectingIp.trim();
+  
   return null;
 }
 
