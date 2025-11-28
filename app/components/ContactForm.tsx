@@ -8,6 +8,7 @@ type ContactFormData = {
   lastName: string;
   company: string;
   email: string;
+  phoneCountryCode: string;
   phone: string;
   country: string;
   message: string;
@@ -34,6 +35,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
     lastName: "",
     company: "",
     email: "",
+    phoneCountryCode: "+31",
     phone: "",
     country: "",
     message: "",
@@ -107,20 +109,17 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
     setIsSubmitting(true);
 
     try {
-      console.log("[ContactForm] Submitting form:", { formData, tracking });
-      
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          phone: formData.phoneCountryCode + formData.phone,
           ...tracking,
         }),
       });
 
-      console.log("[ContactForm] Response status:", response.status);
       const result = await response.json();
-      console.log("[ContactForm] Response data:", result);
 
       if (!response.ok) {
         throw new Error(result.error || "Failed to submit form");
@@ -129,7 +128,6 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
       track("contact_form_submitted");
       onSuccess();
     } catch (err: any) {
-      console.error("[ContactForm] Error:", err);
       setError(err.message || "Something went wrong. Please try again.");
       setIsSubmitting(false);
     }
@@ -233,14 +231,35 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
           >
             Phone (optional)
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
-          />
+          <div className="flex gap-2">
+            <select
+              id="phoneCountryCode"
+              name="phoneCountryCode"
+              value={formData.phoneCountryCode}
+              onChange={handleChange}
+              className="w-24 rounded-lg border border-slate-200 px-2 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            >
+              <option value="+31">🇳🇱 +31</option>
+              <option value="+233">🇬🇭 +233</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+234">🇳🇬 +234</option>
+              <option value="+254">🇰🇪 +254</option>
+              <option value="+27">🇿🇦 +27</option>
+            </select>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="123456789"
+              className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            />
+          </div>
         </div>
       </div>
 

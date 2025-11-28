@@ -95,14 +95,11 @@ export async function POST(req: NextRequest) {
     const fromEmail = process.env.RESEND_FROM_EMAIL || "emmanuel.martina@fairways.tech";
 
     if (!resendApiKey) {
-      console.error("[CONTACT_API] RESEND_API_KEY missing, cannot send email");
       return NextResponse.json(
         { error: "Email service not configured" },
         { status: 500 }
       );
     }
-
-    console.log("[CONTACT_API] Sending email:", { from: fromEmail, to: recipientEmail });
 
     try {
       const emailResult = await resend.emails.send({
