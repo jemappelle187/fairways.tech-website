@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+if (!resendApiKey) {
+  console.error("[CONTACT_API] RESEND_API_KEY is not set");
+}
+const resend = new Resend(resendApiKey);
 
 type ContactFormData = {
   firstName: string;
@@ -88,7 +92,17 @@ export async function POST(req: NextRequest) {
 
     // Send email via Resend
     const recipientEmail = process.env.CONTACT_EMAIL || "emmanuel.martina@fairways.tech";
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "emmanuel.martina@fairways.tech";
+
+    if (!resendApiKey) {
+      console.error("[CONTACT_API] RESEND_API_KEY missing, cannot send email");
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
+    console.log("[CONTACT_API] Sending email:", { from: fromEmail, to: recipientEmail });
 
     try {
       const emailResult = await resend.emails.send({
