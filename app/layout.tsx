@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { UmamiLoader } from "./components/UmamiLoader";
+import { VisitTracker } from "./components/VisitTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fairways.tech"),
@@ -55,6 +56,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
         {children}
+        <VisitTracker />
         <UmamiLoader />
       </body>
     </html>
