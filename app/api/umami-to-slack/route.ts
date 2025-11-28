@@ -122,25 +122,44 @@ export async function POST(req: NextRequest) {
         ? `<https://www.google.com/maps?q=${geoLat},${geoLon}|${geoLat}, ${geoLon}>`
         : "-";
 
+    // Visitor type emoji and text
+    const visitorTypeEmoji = body.visitorType === "returning" ? "🔄" : "🆕";
+    const visitorTypeText =
+      body.visitorType === "returning" ? "Returning visitor" : "First-time visitor";
+
+    // Format timestamp
+    const timestamp = new Date().toLocaleString("en-US", {
+      timeZone: "Europe/Amsterdam",
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+
     const lines = [
-      "👤 *New visitor on fairways.tech*",
+      `*${visitorTypeEmoji} New visitor on fairways.tech*`,
+      `_${visitorTypeText} • ${timestamp}_`,
       "",
-      `📄 *Title:* ${body.title || "-"}`,
-      `🌐 *URL:* ${body.url || "-"}`,
+      "*📄 Page Information*",
+      `• Title: ${body.title || "-"}`,
+      `• URL: ${body.url || "-"}`,
+      `• Referrer: ${body.referrer || "Direct visit"}`,
       "",
-      `🏠 *Hostname:* ${body.hostname || "-"}`,
-      `🗣️ *Language:* ${body.language || "-"}`,
-      `🔗 *Referrer:* ${body.referrer || "-"}`,
+      "*🌍 Location & Network*",
+      `• Country: ${geoCountry || body.country || "-"}`,
+      `• Region: ${geoRegion || "-"}`,
+      `• City: ${geoCity || "-"}`,
+      `• Coordinates: ${coordinatesText}`,
+      `• Network: ${geoOrg || "-"}`,
       "",
-      `📱 *Screen:* ${body.screen || "-"}`,
+      "*💻 Device & Browser*",
+      `• Browser: ${browser || "-"}`,
+      `• OS: ${os || "-"}`,
+      `• Device: ${device || "-"}`,
+      `• Screen: ${body.screen || "-"}`,
+      `• Language: ${body.language || "-"}`,
       "",
-      `🌍 *IP (proxy header):* ${clientIp || "-"}`,
-      `🌍 *Country (Umami):* ${body.country || "-"}`,
-      `🗺️ *Geo Country (ipapi.co):* ${geoCountry || "-"}`,
-      `🗺️ *Geo Region (ipapi.co):* ${geoRegion || "-"}`,
-      `🏙️ *Geo City (ipapi.co):* ${geoCity || "-"}`,
-      `🏢 *Network org (ipapi.co):* ${geoOrg || "-"}`,
-      `📍 *Coordinates (ipapi.co):* ${coordinatesText}`,
+      `*🔍 Technical*`,
+      `• IP: ${clientIp || "-"}`,
+      `• Hostname: ${body.hostname || "-"}`,
     ];
 
     const text = lines.join("\n");
