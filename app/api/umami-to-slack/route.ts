@@ -88,6 +88,7 @@ export async function POST(req: NextRequest) {
     }
 
     // --- 3. Optional IP enrichment via ipapi.co (matches contact form) ---
+    // Fallback to ipinfo.io if ipapi.co fails (rate limits, etc.)
     let geoCity = "";
     let geoRegion = "";
     let geoCountry = "";
@@ -97,40 +98,75 @@ export async function POST(req: NextRequest) {
 
     try {
       if (clientIp && clientIp !== "127.0.0.1") {
-        const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
-          cache: "no-store",
-        });
-        if (geoRes.ok) {
-          const geoData: any = await geoRes.json();
-          // Check if API returned an error (ipapi.co returns error field on rate limit)
-          if (geoData.error) {
-            console.warn(
-              `[UMAMI_WEBHOOK] ipapi.co error for ${clientIp}:`,
-              geoData.reason || geoData.error
-            );
-          } else {
-            geoCity = geoData.city || "";
-            geoRegion = geoData.region || "";
-            geoCountry = geoData.country_name || "";
-            geoOrg = geoData.org || "";
-            if (geoData.latitude && geoData.longitude) {
-              geoLat = String(geoData.latitude);
-              geoLon = String(geoData.longitude);
+        // Try ipapi.co first (matches contact form)
+        let geoData: any = null;
+        try {
+          const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
+            cache: "no-store",
+          });
+          if (geoRes.ok) {
+            geoData = await geoRes.json();
+            // Check if API returned an error (ipapi.co returns error field on rate limit)
+            if (geoData.error) {
+              console.warn(
+                `[UMAMI_WEBHOOK] ipapi.co error for ${clientIp}:`,
+                geoData.reason || geoData.error
+              );
+              geoData = null; // Will trigger fallback
             }
+          } else {
+            const errorText = await geoRes.text();
+            console.warn(
+              `[UMAMI_WEBHOOK] ipapi.co lookup failed for ${clientIp}:`,
+              geoRes.status,
+              errorText
+            );
+          }
+        } catch (e) {
+          console.warn("[UMAMI_WEBHOOK] ipapi.co fetch error:", e);
+        }
+
+        // Extract data from ipapi.co if successful
+        if (geoData && !geoData.error) {
+          geoCity = geoData.city || "";
+          geoRegion = geoData.region || "";
+          geoCountry = geoData.country_name || "";
+          geoOrg = geoData.org || "";
+          if (geoData.latitude && geoData.longitude) {
+            geoLat = String(geoData.latitude);
+            geoLon = String(geoData.longitude);
           }
         } else {
-          const errorText = await geoRes.text();
-          console.warn(
-            `[UMAMI_WEBHOOK] ipapi.co lookup failed for ${clientIp}:`,
-            geoRes.status,
-            errorText
-          );
+          // Fallback to ipinfo.io if available
+          const ipinfoToken = process.env.IPINFO_TOKEN;
+          if (ipinfoToken) {
+            try {
+              const ipinfoRes = await fetch(
+                `https://ipinfo.io/${clientIp}?token=${ipinfoToken}`,
+                { cache: "no-store" }
+              );
+              if (ipinfoRes.ok) {
+                const ipinfoData: any = await ipinfoRes.json();
+                geoCity = ipinfoData.city || geoCity;
+                geoRegion = ipinfoData.region || geoRegion;
+                geoCountry = ipinfoData.country || geoCountry;
+                geoOrg = ipinfoData.org || geoOrg;
+                if (typeof ipinfoData.loc === "string") {
+                  const [lat, lon] = ipinfoData.loc.split(",");
+                  geoLat = lat || geoLat;
+                  geoLon = lon || geoLon;
+                }
+              }
+            } catch (e) {
+              console.warn("[UMAMI_WEBHOOK] ipinfo.io fallback error:", e);
+            }
+          }
         }
       } else {
         console.warn("[UMAMI_WEBHOOK] No valid client IP for geo lookup");
       }
     } catch (e) {
-      console.error("[UMAMI_WEBHOOK] ipapi.co error:", e);
+      console.error("[UMAMI_WEBHOOK] Geo lookup error:", e);
     }
 
     // Build coordinates link if available
