@@ -8,6 +8,7 @@ type ContactFormData = {
   lastName: string;
   company: string;
   email: string;
+  emailVerify: string;
   phoneCountryCode: string;
   phone: string;
   country: string;
@@ -35,6 +36,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
     lastName: "",
     company: "",
     email: "",
+    emailVerify: "",
     phoneCountryCode: "+31",
     phone: "",
     country: "",
@@ -124,6 +126,13 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Validate email match
+    if (formData.email !== formData.emailVerify) {
+      setError("Email addresses do not match");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -244,6 +253,24 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
 
         <div>
           <label
+            htmlFor="emailVerify"
+            className="block text-xs font-medium text-slate-700 mb-1.5"
+          >
+            Verify email <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="emailVerify"
+            name="emailVerify"
+            required
+            value={formData.emailVerify}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+          />
+        </div>
+
+        <div>
+          <label
             htmlFor="phone"
             className="block text-xs font-medium text-slate-700 mb-1.5"
           >
@@ -255,8 +282,8 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
               name="phoneCountryCode"
               value={formData.phoneCountryCode}
               onChange={handleChange}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 border-0 bg-transparent text-sm text-slate-600 focus:outline-none"
-              style={{ width: "auto" }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 border-0 bg-transparent text-sm text-slate-600 focus:outline-none pr-2"
+              style={{ width: "auto", paddingRight: "8px" }}
             >
               <option value="+31">🇳🇱 +31</option>
               <option value="+233">🇬🇭 +233</option>
@@ -274,9 +301,17 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
               id="phone"
               name="phone"
               value={formData.phone}
-              onChange={handleChange}
+              onChange={(e) => {
+                // Remove non-digits and limit based on country code (max 10 total including country code)
+                const digitsOnly = e.target.value.replace(/\D/g, '');
+                const countryCodeDigits = formData.phoneCountryCode.replace(/\D/g, '').length;
+                const maxPhoneDigits = 10 - countryCodeDigits;
+                const limited = digitsOnly.slice(0, maxPhoneDigits);
+                setFormData((prev) => ({ ...prev, phone: limited }));
+              }}
               placeholder="123456789"
-              className="w-full rounded-lg border border-slate-200 bg-white pl-20 pr-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+              maxLength={10}
+              className="w-full rounded-lg border border-slate-200 bg-white pl-24 pr-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
             />
           </div>
         </div>

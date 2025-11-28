@@ -12,6 +12,7 @@ type ContactFormData = {
   lastName: string;
   company?: string;
   email: string;
+  emailVerify?: string;
   phone?: string;
   country?: string;
   message: string;
@@ -71,7 +72,7 @@ export async function POST(req: NextRequest) {
       };
 
       try {
-        await fetch(
+        const airtableRes = await fetch(
           `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`,
           {
             method: "POST",
@@ -84,6 +85,11 @@ export async function POST(req: NextRequest) {
             }),
           }
         );
+
+        if (!airtableRes.ok) {
+          const errorText = await airtableRes.text();
+          console.error("Airtable error (non-blocking):", airtableRes.status, errorText);
+        }
       } catch (airtableError) {
         console.error("Airtable error (non-blocking):", airtableError);
         // Continue even if Airtable fails
@@ -204,6 +210,13 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
     // Send Slack notification (non-blocking)
     const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
     if (slackWebhookUrl) {
+      // Log geo data for debugging
+      console.log("[CONTACT_API] Geo data received:", {
+        geoCity: body.geoCity,
+        geoCountry: body.geoCountry,
+        ip: body.ip,
+      });
+
       const slackText = [
         `*New Fairways.Tech contact form submission*`,
         ``,
@@ -213,7 +226,7 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
         `*Country (form):* ${body.country || "-"}`,
         `*Geo Country (IP):* ${body.geoCountry || "-"}`,
         `*Browser:* ${body.browser || "-"}`,
-        `*Geo City:* ${body.geoCity || "-"}`,
+        `*Geo City (IP):* ${body.geoCity || "-"}`,
         ``,
         `*Message:* ${
           body.message && body.message.trim().length
