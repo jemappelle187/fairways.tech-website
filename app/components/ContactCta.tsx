@@ -112,7 +112,7 @@ export function ContactCta() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
           <div className="relative w-full max-w-md transform rounded-3xl bg-white/95 p-0 shadow-2xl shadow-black/30 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex flex-col items-center px-8 py-10 text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-forest/10">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center">
                 <img
                   src="/images/logo-fairways-forest.svg"
                   alt="Fairways.Tech"

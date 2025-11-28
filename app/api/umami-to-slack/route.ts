@@ -82,41 +82,38 @@ export async function POST(req: NextRequest) {
 
     const clientIp = getClientIp(req);
 
-    // --- 3. Optional IP enrichment via ipinfo.io ---
-    let ipinfoCity = "";
-    let ipinfoRegion = "";
-    let ipinfoCountry = "";
-    let ipinfoOrg = "";
-    let ipLat = "";
-    let ipLon = "";
+    // --- 3. Optional IP enrichment via ipapi.co (matches contact form) ---
+    let geoCity = "";
+    let geoRegion = "";
+    let geoCountry = "";
+    let geoOrg = "";
+    let geoLat = "";
+    let geoLon = "";
 
     try {
-      const ipinfoToken = process.env.IPINFO_TOKEN;
-      if (ipinfoToken && clientIp && clientIp !== "127.0.0.1") {
-        const ipinfoRes = await fetch(
-          `https://ipinfo.io/${clientIp}?token=${ipinfoToken}`,
-          { cache: "no-store" }
-        );
-        if (ipinfoRes.ok) {
-          const ipinfoData: any = await ipinfoRes.json();
-          ipinfoCity = ipinfoData.city || "";
-          ipinfoRegion = ipinfoData.region || "";
-          ipinfoCountry = ipinfoData.country || "";
-          ipinfoOrg = ipinfoData.org || "";
-          if (typeof ipinfoData.loc === "string") {
-            const [lat, lon] = ipinfoData.loc.split(",");
-            ipLat = lat || "";
-            ipLon = lon || "";
+      if (clientIp && clientIp !== "127.0.0.1") {
+        const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
+          cache: "no-store",
+        });
+        if (geoRes.ok) {
+          const geoData: any = await geoRes.json();
+          geoCity = geoData.city || "";
+          geoRegion = geoData.region || "";
+          geoCountry = geoData.country_name || "";
+          geoOrg = geoData.org || "";
+          if (geoData.latitude && geoData.longitude) {
+            geoLat = String(geoData.latitude);
+            geoLon = String(geoData.longitude);
           }
         } else {
           console.warn(
-            "[UMAMI_WEBHOOK] ipinfo lookup failed:",
-            await ipinfoRes.text()
+            "[UMAMI_WEBHOOK] ipapi.co lookup failed:",
+            await geoRes.text()
           );
         }
       }
     } catch (e) {
-      console.error("[UMAMI_WEBHOOK] ipinfo error:", e);
+      console.error("[UMAMI_WEBHOOK] ipapi.co error:", e);
     }
 
     const lines = [
@@ -133,13 +130,13 @@ export async function POST(req: NextRequest) {
       "",
       `*IP (proxy header):* ${clientIp || "-"}`,
       `*Country (Umami):* ${body.country || "-"}`,
-      `*Geo Country (ipinfo):* ${ipinfoCountry || "-"}`,
-      `*Geo Region (ipinfo):* ${ipinfoRegion || "-"}`,
-      `*Geo City (ipinfo):* ${ipinfoCity || "-"}`,
-      `*Network org (ipinfo):* ${ipinfoOrg || "-"}`,
-      ipLat && ipLon
-        ? `*Coordinates (ipinfo):* ${ipLat}, ${ipLon}`
-        : "*Coordinates (ipinfo):* -",
+      `*Geo Country (ipapi.co):* ${geoCountry || "-"}`,
+      `*Geo Region (ipapi.co):* ${geoRegion || "-"}`,
+      `*Geo City (ipapi.co):* ${geoCity || "-"}`,
+      `*Network org (ipapi.co):* ${geoOrg || "-"}`,
+      geoLat && geoLon
+        ? `*Coordinates (ipapi.co):* ${geoLat}, ${geoLon}`
+        : "*Coordinates (ipapi.co):* -",
     ];
 
     const text = lines.join("\n");
