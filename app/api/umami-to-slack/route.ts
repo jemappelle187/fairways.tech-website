@@ -134,40 +134,70 @@ export async function POST(req: NextRequest) {
       timeStyle: "short",
     });
 
-    const lines = [
-      `*${visitorTypeEmoji} New visitor on fairways.tech*`,
-      `_${visitorTypeText} • ${timestamp}_`,
-      "",
-      "*📄 Page Information*",
-      `• Title: ${body.title || "-"}`,
-      `• URL: ${body.url || "-"}`,
-      `• Referrer: ${body.referrer || "Direct visit"}`,
-      "",
-      "*🌍 Location & Network*",
-      `• Country: ${geoCountry || body.country || "-"}`,
-      `• Region: ${geoRegion || "-"}`,
-      `• City: ${geoCity || "-"}`,
-      `• Coordinates: ${coordinatesText}`,
-      `• Network: ${geoOrg || "-"}`,
-      "",
-      "*💻 Device & Browser*",
-      `• Browser: ${browser || "-"}`,
-      `• OS: ${os || "-"}`,
-      `• Device: ${device || "-"}`,
-      `• Screen: ${body.screen || "-"}`,
-      `• Language: ${body.language || "-"}`,
-      "",
-      `*🔍 Technical*`,
-      `• IP: ${clientIp || "-"}`,
-      `• Hostname: ${body.hostname || "-"}`,
+    // Build message using Slack's Block Kit format for proper emoji rendering
+    const blocks = [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: `${visitorTypeEmoji} New visitor on fairways.tech`,
+          emoji: true,
+        },
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: `_${visitorTypeText} • ${timestamp}_`,
+          },
+        ],
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*📄 Page Information*\n• Title: ${body.title || "-"}\n• URL: ${body.url || "-"}\n• Referrer: ${body.referrer || "Direct visit"}`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*🌍 Location & Network*\n• Country: ${geoCountry || body.country || "-"}\n• Region: ${geoRegion || "-"}\n• City: ${geoCity || "-"}\n• Coordinates: ${coordinatesText}\n• Network: ${geoOrg || "-"}`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*💻 Device & Browser*\n• Browser: ${browser || "-"}\n• OS: ${os || "-"}\n• Device: ${device || "-"}\n• Screen: ${body.screen || "-"}\n• Language: ${body.language || "-"}`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*🔍 Technical*\n• IP: ${clientIp || "-"}\n• Hostname: ${body.hostname || "-"}`,
+        },
+      },
     ];
 
-    const text = lines.join("\n");
+    // Include both text (fallback) and blocks (rich format with emojis)
+    const payload = {
+      text: `${visitorTypeEmoji} New visitor on fairways.tech`,
+      blocks,
+    };
 
     await fetch(slackWebhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(payload),
     });
 
     return NextResponse.json({ ok: true });
