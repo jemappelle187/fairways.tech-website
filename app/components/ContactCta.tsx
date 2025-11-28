@@ -1,130 +1,25 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { track } from "@/lib/umami";
-
-const TALLY_BASE_URL = "https://tally.so/r/2EjXOj";
-
-type TrackingState = {
-  ip: string;
-  country: string;
-  city: string;
-  device: string;
-  browser: string;
-  ua: string;
-  referrer: string;
-};
+import { ContactForm } from "./ContactForm";
 
 export function ContactCta() {
   const [open, setOpen] = useState(false);
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [tracking, setTracking] = useState<TrackingState>({
-    ip: "",
-    country: "",
-    city: "",
-    device: "",
-    browser: "",
-    ua: "",
-    referrer: "",
-  });
+  const [showToast, setShowToast] = useState(false);
 
-  // Success toast (after redirect from Tally)
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [showToast, setShowToast] = useState(
-    searchParams.get("contact") === "success"
-  );
-
-  useEffect(() => {
-    if (searchParams.get("contact") === "success") {
-      setShowToast(true);
-    }
-  }, [searchParams]);
+  const handleFormSuccess = () => {
+    setOpen(false);
+    setShowToast(true);
+  };
 
   useEffect(() => {
     if (!showToast) return;
     const timeout = setTimeout(() => {
       setShowToast(false);
-      // Clean query param from URL
-      if (typeof window !== "undefined") {
-        const url = new URL(window.location.href);
-        url.searchParams.delete("contact");
-        router.replace(url.pathname + (url.search || ""));
-      }
     }, 7000);
     return () => clearTimeout(timeout);
-  }, [showToast, router]);
-
-  // Fetch IP + geo + basic device info only when modal opens
-  useEffect(() => {
-    if (!open) return;
-
-    // Device + browser detection
-    if (typeof window !== "undefined") {
-      const ua = window.navigator.userAgent || "";
-      const lower = ua.toLowerCase();
-
-      let device = "desktop";
-      if (/ipad|tablet/.test(lower)) device = "tablet";
-      else if (/mobile|iphone|android/.test(lower)) device = "mobile";
-
-      let browser = "other";
-      if (/edg\//.test(lower)) browser = "edge";
-      else if (/chrome\//.test(lower)) browser = "chrome";
-      else if (/safari\//.test(lower) && !/chrome\//.test(lower))
-        browser = "safari";
-      else if (/firefox\//.test(lower)) browser = "firefox";
-      else if (/opr\//.test(lower)) browser = "opera";
-
-      setTracking((prev) => ({
-        ...prev,
-        device,
-        browser,
-        ua,
-        referrer: document.referrer || "",
-      }));
-    }
-
-    // IP + geo lookup
-    const fetchIp = async () => {
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        if (!res.ok) return;
-        const data = await res.json();
-
-        setTracking((prev) => ({
-          ...prev,
-          ip: data.ip ?? "",
-          country: data.country_name ?? "",
-          city: data.city ?? "",
-        }));
-      } catch {
-        // silently ignore
-      }
-    };
-
-    fetchIp();
-  }, [open]);
-
-  // Build Tally URL with tracking params
-  const iframeSrc = useMemo(() => {
-    const params = new URLSearchParams();
-
-    if (tracking.ip) params.set("ip_address", tracking.ip);
-    if (tracking.country) params.set("geo_country", tracking.country);
-    if (tracking.city) params.set("geo_city", tracking.city);
-    if (tracking.device) params.set("device", tracking.device);
-    if (tracking.browser) params.set("browser", tracking.browser);
-    if (tracking.ua) params.set("user_agent", tracking.ua);
-    if (tracking.referrer) params.set("referrer", tracking.referrer);
-
-    // Tally visual options
-    params.set("hideTitle", "1");
-    params.set("transparentBackground", "1");
-
-    return `${TALLY_BASE_URL}?${params.toString()}`;
-  }, [tracking]);
+  }, [showToast]);
 
   return (
     <section
@@ -160,7 +55,6 @@ export function ContactCta() {
             onClick={() => {
               track("cta_opened");
               setOpen(true);
-              setIframeLoaded(false);
             }}
             className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
           >
@@ -169,7 +63,7 @@ export function ContactCta() {
         </div>
       </div>
 
-      {/* Premium modal with Tally iframe */}
+      {/* Premium modal with contact form */}
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-sm px-4">
           <div className="relative w-full max-w-xl transform rounded-3xl bg-white/95 p-0 shadow-2xl shadow-black/30 transition-all duration-200">
@@ -192,35 +86,13 @@ export function ContactCta() {
                 Share a few details
               </h3>
               <p className="mt-1 text-xs text-slate-500 md:text-sm">
-                Tell us who you are and how you&apos;d like to collaborate. The
-                form is securely processed via Tally.
+                Tell us who you are and how you&apos;d like to collaborate.
               </p>
             </div>
 
-            {/* Body: Tally iframe with loading state */}
-            <div className="relative px-4 pb-5 pt-3 md:px-5 md:pb-6">
-              {!iframeLoaded && (
-                <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-2xl bg-white/80">
-                  <div className="h-9 w-9 rounded-full border-2 border-forest/20 border-t-forest/80 animate-spin" />
-                  <p className="text-xs font-medium text-slate-600">
-                    Loading secure contact form…
-                  </p>
-                  <p className="max-w-xs text-center text-[11px] text-slate-400">
-                    If this takes longer than a few seconds, please check your
-                    connection or try again.
-                  </p>
-                </div>
-              )}
-
-              <iframe
-                src={iframeSrc}
-                title="Contact Fairways.Tech"
-                onLoad={() => setIframeLoaded(true)}
-                className={`h-[460px] w-full rounded-2xl border border-slate-100 bg-transparent transition-opacity duration-300 ${
-                  iframeLoaded ? "opacity-100" : "opacity-0"
-                }`}
-                allow="clipboard-write; encrypted-media"
-              />
+            {/* Body: Custom contact form */}
+            <div className="px-6 pb-6 pt-4">
+              <ContactForm onSuccess={handleFormSuccess} onClose={() => setOpen(false)} />
             </div>
 
             {/* Footer hint */}
@@ -235,7 +107,7 @@ export function ContactCta() {
         </div>
       )}
 
-      {/* Success toast (after Tally redirect to ?contact=success) */}
+      {/* Success toast (after form submission) */}
       {showToast && (
         <div className="fixed bottom-6 left-1/2 z-40 w-[92%] max-w-md -translate-x-1/2">
           <div className="flex items-start gap-3 rounded-2xl bg-forest px-4 py-3 shadow-xl shadow-black/30">
