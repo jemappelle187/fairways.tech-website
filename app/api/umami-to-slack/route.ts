@@ -12,30 +12,38 @@ type UmamiEventPayload = {
 };
 
 function getClientIp(req: NextRequest): string | null {
-  // Vercel sets x-forwarded-for with the client IP
-  // Format: "client-ip, proxy1-ip, proxy2-ip"
+  const localhostCandidates = new Set(["127.0.0.1", "::1"]);
+
+  // 1) Try X-Forwarded-For (may contain multiple IPs)
   const xff = req.headers.get("x-forwarded-for");
   if (xff) {
-    // x-forwarded-for can contain multiple IPs, the first one is usually the original client
-    const ips = xff.split(",").map((ip) => ip.trim()).filter(Boolean);
-    // Take the first IP (original client), but skip localhost
-    const clientIp = ips.find((ip) => ip !== "127.0.0.1" && ip !== "::1") || ips[0];
-    if (clientIp && clientIp !== "127.0.0.1") {
-      return clientIp;
+    const ips = xff
+      .split(",")
+      .map((ip) => ip.trim())
+      .filter(Boolean);
+
+    // Prefer the first non-localhost IP
+    const realIp =
+      ips.find((ip) => !localhostCandidates.has(ip)) || ips[0];
+
+    if (realIp && !localhostCandidates.has(realIp)) {
+      return realIp;
     }
   }
-  
-  // Fallback headers
-  const realIp = req.headers.get("x-real-ip");
-  if (realIp && realIp !== "127.0.0.1") {
-    return realIp.trim();
+
+  // 2) Try X-Real-IP
+  const xRealIp = req.headers.get("x-real-ip");
+  if (xRealIp && !localhostCandidates.has(xRealIp.trim())) {
+    return xRealIp.trim();
   }
-  
-  const cfConnectingIp = req.headers.get("cf-connecting-ip"); // Cloudflare
-  if (cfConnectingIp && cfConnectingIp !== "127.0.0.1") {
-    return cfConnectingIp.trim();
+
+  // 3) Try CF-Connecting-IP (Cloudflare / some CDNs)
+  const cfIp = req.headers.get("cf-connecting-ip");
+  if (cfIp && !localhostCandidates.has(cfIp.trim())) {
+    return cfIp.trim();
   }
-  
+
+  // 4) If everything fails, return null
   return null;
 }
 
@@ -100,16 +108,13 @@ export async function POST(req: NextRequest) {
 
     const clientIp = getClientIp(req);
 
-    // Debug: log IP extraction
     if (!clientIp) {
       console.warn("[UMAMI_WEBHOOK] No client IP extracted from headers");
     } else {
       console.log(`[UMAMI_WEBHOOK] Extracted IP: ${clientIp}`);
     }
 
-    // --- 3. IP enrichment via ipapi.co (matches contact form) ---
-    // Only use ipapi.co - it gives correct city data (The Hague)
-    // Do NOT use ipinfo.io fallback as it gives incorrect data (Capelle aan den IJssel)
+    // ---- Geo enrichment via ipapi.co ----
     let geoCity = "";
     let geoRegion = "";
     let geoCountry = "";
@@ -117,7 +122,7 @@ export async function POST(req: NextRequest) {
     let geoLat = "";
     let geoLon = "";
 
-    if (clientIp && clientIp !== "127.0.0.1" && !clientIp.startsWith("::")) {
+    if (clientIp) {
       try {
         const geoRes = await fetch(`https://ipapi.co/${clientIp}/json/`, {
           cache: "no-store",
@@ -125,26 +130,25 @@ export async function POST(req: NextRequest) {
             "User-Agent": "Fairways.Tech-Webhook/1.0",
           },
         });
-        
+
         if (geoRes.ok) {
           const geoData: any = await geoRes.json();
-          
-          // Check if API returned an error (ipapi.co returns error field on rate limit)
+
           if (geoData.error) {
             console.warn(
               `[UMAMI_WEBHOOK] ipapi.co API error for ${clientIp}:`,
               geoData.reason || geoData.error
             );
           } else {
-            // Extract data from ipapi.co
             geoCity = geoData.city || "";
             geoRegion = geoData.region || "";
-            geoCountry = geoData.country_name || "";
+            geoCountry = geoData.country_name || geoData.country || "";
             geoOrg = geoData.org || "";
             if (geoData.latitude && geoData.longitude) {
               geoLat = String(geoData.latitude);
               geoLon = String(geoData.longitude);
             }
+
             console.log(
               `[UMAMI_WEBHOOK] Geo data from ipapi.co for ${clientIp}: ${geoCity}, ${geoCountry}`
             );
@@ -160,31 +164,23 @@ export async function POST(req: NextRequest) {
       } catch (e) {
         console.error(`[UMAMI_WEBHOOK] Geo lookup error for ${clientIp}:`, e);
       }
-    } else {
-      console.warn(
-        `[UMAMI_WEBHOOK] No valid client IP for geo lookup. IP: ${clientIp || "null"}`
-      );
     }
 
-    // Build coordinates link if available
     const coordinatesText =
       geoLat && geoLon
         ? `<https://www.google.com/maps?q=${geoLat},${geoLon}|${geoLat}, ${geoLon}>`
         : "-";
 
-    // Visitor type emoji and text
     const visitorTypeEmoji = body.visitorType === "returning" ? "🔄" : "🆕";
     const visitorTypeText =
       body.visitorType === "returning" ? "Returning visitor" : "First-time visitor";
 
-    // Format timestamp
     const timestamp = new Date().toLocaleString("en-US", {
       timeZone: "Europe/Amsterdam",
       dateStyle: "short",
       timeStyle: "short",
     });
 
-    // Build message using Slack's Block Kit format for proper emoji rendering
     const blocks = [
       {
         type: "header",
@@ -217,26 +213,40 @@ export async function POST(req: NextRequest) {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*🌍 Location & Network*\n• Country: ${geoCountry || body.country || "-"}\n• Region: ${geoRegion || "-"}\n• City: ${geoCity || "-"}\n• Coordinates: ${coordinatesText}\n• Network: ${geoOrg || "-"}`,
+          text:
+            `*🌍 Location & Network*` +
+            `\n• Country: ${geoCountry || body.country || "-"}` +
+            `\n• Region: ${geoRegion || "-"}` +
+            `\n• City: ${geoCity || "-"}` +
+            `\n• Coordinates: ${coordinatesText}` +
+            `\n• Network: ${geoOrg || "-"}`,
         },
       },
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*💻 Device & Browser*\n• Browser: ${browser || "-"}\n• OS: ${os || "-"}\n• Device: ${device || "-"}\n• Screen: ${body.screen || "-"}\n• Language: ${body.language || "-"}`,
+          text:
+            `*💻 Device & Browser*` +
+            `\n• Browser: ${browser || "-"}` +
+            `\n• OS: ${os || "-"}` +
+            `\n• Device: ${device || "-"}` +
+            `\n• Screen: ${body.screen || "-"}` +
+            `\n• Language: ${body.language || "-"}`,
         },
       },
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*🔍 Technical*\n• IP: ${clientIp || "-"}\n• Hostname: ${body.hostname || "-"}`,
+          text:
+            `*🔍 Technical*` +
+            `\n• IP: ${clientIp || "-"}` +
+            `\n• Hostname: ${body.hostname || "-"}`,
         },
       },
     ];
 
-    // Include both text (fallback) and blocks (rich format with emojis)
     const payload = {
       text: `${visitorTypeEmoji} New visitor on fairways.tech`,
       blocks,
