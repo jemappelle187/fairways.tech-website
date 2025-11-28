@@ -116,27 +116,31 @@ export async function POST(req: NextRequest) {
       console.error("[UMAMI_WEBHOOK] ipapi.co error:", e);
     }
 
-    const lines = [
-      "📊 New Umami event on Fairways.Tech",
-      "",
-      `*Title:* ${body.title || "-"}`,
-      `*URL:* ${body.url || "-"}`,
-      "",
-      `*Hostname:* ${body.hostname || "-"}`,
-      `*Language:* ${body.language || "-"}`,
-      `*Referrer:* ${body.referrer || "-"}`,
-      "",
-      `*Screen:* ${body.screen || "-"}`,
-      "",
-      `*IP (proxy header):* ${clientIp || "-"}`,
-      `*Country (Umami):* ${body.country || "-"}`,
-      `*Geo Country (ipapi.co):* ${geoCountry || "-"}`,
-      `*Geo Region (ipapi.co):* ${geoRegion || "-"}`,
-      `*Geo City (ipapi.co):* ${geoCity || "-"}`,
-      `*Network org (ipapi.co):* ${geoOrg || "-"}`,
+    // Build coordinates link if available
+    const coordinatesText =
       geoLat && geoLon
-        ? `*Coordinates (ipapi.co):* ${geoLat}, ${geoLon}`
-        : "*Coordinates (ipapi.co):* -",
+        ? `<https://www.google.com/maps?q=${geoLat},${geoLon}|${geoLat}, ${geoLon}>`
+        : "-";
+
+    const lines = [
+      "📊 *New Umami event on Fairways.Tech*",
+      "",
+      `📄 *Title:* ${body.title || "-"}`,
+      `🌐 *URL:* ${body.url || "-"}`,
+      "",
+      `🏠 *Hostname:* ${body.hostname || "-"}`,
+      `🗣️ *Language:* ${body.language || "-"}`,
+      `🔗 *Referrer:* ${body.referrer || "-"}`,
+      "",
+      `📱 *Screen:* ${body.screen || "-"}`,
+      "",
+      `🌍 *IP (proxy header):* ${clientIp || "-"}`,
+      `🌍 *Country (Umami):* ${body.country || "-"}`,
+      `🗺️ *Geo Country (ipapi.co):* ${geoCountry || "-"}`,
+      `🗺️ *Geo Region (ipapi.co):* ${geoRegion || "-"}`,
+      `🏙️ *Geo City (ipapi.co):* ${geoCity || "-"}`,
+      `🏢 *Network org (ipapi.co):* ${geoOrg || "-"}`,
+      `📍 *Coordinates (ipapi.co):* ${coordinatesText}`,
     ];
 
     const text = lines.join("\n");
