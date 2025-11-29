@@ -77,7 +77,7 @@ function Counter({ target, suffix = "+" }: { target: number; suffix?: string }) 
   );
 }
 
-function Header() {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
@@ -125,7 +125,7 @@ function Header() {
           isScrolled ? "h-16" : "h-20"
         }`}
       >
-        <div className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo-fairways-forest.svg"
@@ -141,7 +141,7 @@ function Header() {
           >
             Fairways.Tech
           </div>
-        </div>
+        </a>
         <nav className="hidden items-center gap-8 text-base font-medium tracking-wide md:flex">
           {navItems.map((item) => (
             <a
@@ -163,6 +163,13 @@ function Header() {
               )}
             </a>
           ))}
+          <a
+            href="/impact"
+            onClick={() => setIsMenuOpen(false)}
+            className="relative transition-all duration-300 hover:scale-105 text-stone-800 hover:text-forest"
+          >
+            Impact
+          </a>
           <a
             href="/team"
             onClick={() => setIsMenuOpen(false)}
@@ -230,6 +237,13 @@ function Header() {
                   {item.label}
                 </a>
               ))}
+              <a
+                href="/impact"
+                onClick={() => setIsMenuOpen(false)}
+                className="block rounded-lg px-4 py-3 text-base font-medium transition-all text-stone-800 hover:bg-stone-100 hover:text-forest"
+              >
+                Impact
+              </a>
               <a
                 href="/team"
                 onClick={() => setIsMenuOpen(false)}
@@ -400,7 +414,7 @@ function Hero() {
   );
 }
 
-function Footer() {
+export function Footer() {
   const year = new Date().getFullYear();
 
   return (
@@ -408,6 +422,12 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-4 text-xs text-slate-500 sm:flex-row">
         <span>© {year} Fairways.Tech. All rights reserved.</span>
         <div className="flex flex-wrap gap-4">
+          <a
+            href="/about"
+            className="hover:text-slate-700 hover:underline underline-offset-4"
+          >
+            About
+          </a>
           <a
             href="/terms"
             className="hover:text-slate-700 hover:underline underline-offset-4"
@@ -570,7 +590,7 @@ export default function HomePage() {
           </section>
 
           {/* OUR APPROACH */}
-<section
+        <section
   id="approach"
   className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-20"
 >
@@ -624,6 +644,17 @@ export default function HomePage() {
           and real fields.
         </p>
       </div>
+    </div>
+    <div className="mt-6 text-center text-xs text-white/80">
+      <p>
+        Want a deeper view on how this translates into governance, risk and data flows?
+      </p>
+      <a
+        href="/impact"
+        className="mt-1 inline-block font-semibold text-white underline underline-offset-4"
+      >
+        Explore our impact &amp; vision
+      </a>
     </div>
   </div>
 </section>
@@ -721,6 +752,18 @@ export default function HomePage() {
         We collaborate with the partners who make agricultural systems work on
         the ground.
       </p>
+      <div className="mt-2 text-xs text-white/80">
+        <p>
+          For a fuller view of how these partnerships connect into our governance and
+          data model,
+        </p>
+        <a
+          href="/about"
+          className="mt-1 inline-block font-semibold text-white underline underline-offset-4"
+        >
+          Learn more about Fairways.Tech
+        </a>
+      </div>
     </div>
 
     <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
