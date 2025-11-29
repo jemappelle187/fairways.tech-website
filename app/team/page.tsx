@@ -51,7 +51,10 @@ export default function TeamPage() {
           {/* Founders */}
           <div className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
             {/* Emmanuel */}
-            <article className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center">
+            <article
+              id="emmanuel-yeboah-martina"
+              className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center"
+            >
               {/* Avatar slot */}
               <div className="mx-auto flex-shrink-0 md:mx-0">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">
@@ -93,7 +96,10 @@ export default function TeamPage() {
             </article>
 
             {/* Kwan */}
-            <article className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center">
+            <article
+              id="kwan-yuk-li"
+              className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center"
+            >
               {/* Avatar slot */}
               <div className="mx-auto flex-shrink-0 md:mx-0">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">

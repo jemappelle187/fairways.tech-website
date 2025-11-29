@@ -53,6 +53,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const peopleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://fairways.tech/#emmanuel-yeboah-martina",
+        name: "Emmanuel Yeboah Martina",
+        jobTitle: "Co-Founder & CEO",
+        description:
+          "Financial expert with experience across AML, CTF, KYC, GDPR and digital-asset operations, shaping EU-aligned governance and compliant financial architectures for scalable fintech in frontier markets.",
+        worksFor: {
+          "@id": "https://fairways.tech/#organization",
+        },
+        sameAs: ["https://www.linkedin.com/in/eymartina/"],
+      },
+      {
+        "@type": "Person",
+        "@id": "https://fairways.tech/#kwan-yuk-li",
+        name: "Kwan Yuk Li",
+        jobTitle: "Co-Founder & COO",
+        description:
+          "Specialist across finance and IT regulation and risk — DORA, GDPR, IFRS 9 and 17, Solvency II, Basel III, SOX — and European IT infrastructure, designing secure digital architectures and regulatory-framework strategies for resilient financial services.",
+        worksFor: {
+          "@id": "https://fairways.tech/#organization",
+        },
+        sameAs: ["https://nl.linkedin.com/in/kwan-yuk-li-bb040b4"],
+      },
+    ],
+  };
+
   return (
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
@@ -68,6 +98,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://fairways.tech/#organization",
               name: "Fairways.Tech",
               url: "https://fairways.tech",
               logo: "https://fairways.tech/og-fairways-tech.png",
@@ -110,6 +141,15 @@ export default function RootLayout({
                 },
               },
             }),
+          }}
+        />
+        {/* People Schema */}
+        <Script
+          id="people-json-ld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(peopleJsonLd),
           }}
         />
       </body>
