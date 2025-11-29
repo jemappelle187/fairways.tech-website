@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
+import { Header, Footer } from "../components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Fairways.Tech – Compliance-first rails for rural finance",
   description:
-    "Learn about Fairways.Tech's mission to build compliance-first digital infrastructure for Africa's smallholder farmers.",
+    "Learn how Fairways.Tech builds compliance-first digital infrastructure that connects banks, cooperatives and buyers to Africa's smallholder farmers.",
 };
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-sand">
-      <section className="relative overflow-hidden pt-28 pb-24">
-        <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+    <>
+      <Header />
+      <main className="min-h-screen bg-sand">
+        <section className="relative overflow-hidden pt-28 pb-24">
+          <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <header className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
               About us
@@ -23,59 +26,19 @@ export default function AboutPage() {
           <div className="space-y-8 text-base leading-relaxed text-slate-800">
             <div>
               <p className="mb-4">
-                Fairways.Tech builds compliance-first digital infrastructure to unlock
-                fair finance for Africa&apos;s smallholder farmers. We provide the
-                identity, data, and liquidity rails that enable financial institutions,
-                cooperatives, and market partners to serve rural communities at scale.
+                Fairways.Tech designs and operates secure, compliance‑aligned digital infrastructure that enables financial institutions, cooperatives and market partners to serve Africa’s rural communities with confidence — without exposing proprietary models or sensitive operational details.
               </p>
               <p className="mb-4">
-                Founded in 2025, Fairways.Tech operates with a dual presence in the
-                Netherlands and Ghana. Our approach is grounded in regulatory compliance
-                from day one, aligning with frameworks including AMLR (Anti-Money
-                Laundering Regulation), FATF (Financial Action Task Force), DORA (Digital
-                Operational Resilience Act), GDPR, and Bank of Ghana requirements.
+                Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana) together
+                anchor a dual presence between Europe and West Africa. {`From day one we build to regulatory standard, aligning with frameworks such as AMLR, FATF, DORA, GDPR and Bank of Ghana supervisory expectations — ensuring institutional‑grade governance without disclosing internal methodologies.`}
               </p>
               <p>
-                We believe that smallholder farmers deserve the same access to
-                transparent, compliant financial services as any other business. By
-                building trusted digital infrastructure, we help bridge the liquidity gap
-                that prevents millions of farmers from scaling their operations and
-                improving their livelihoods.
+                We believe that smallholder farmers should have access to transparent,
+                compliant financial services on the same terms as any other business. By
+                creating trusted digital infrastructure, we help close the liquidity gap
+                that prevents millions of farmers from investing, growing and improving
+                their livelihoods.
               </p>
-            </div>
-
-            <div className="mt-12 border-t border-slate-200 pt-8">
-              <h2 className="mb-4 text-xl font-semibold text-slate-900">
-                Who we work with
-              </h2>
-              <p className="mb-4">
-                Fairways.Tech collaborates with a diverse ecosystem of partners:
-              </p>
-              <ul className="ml-6 list-disc space-y-2 text-slate-800">
-                <li>
-                  <strong>Banks and financial institutions:</strong> We provide
-                  risk-visible, compliant rails for rural finance that meet regulatory
-                  standards.
-                </li>
-                <li>
-                  <strong>Cooperatives and farmer groups:</strong> We enable community
-                  onboarding and structured workflows that help groups access finance
-                  collectively.
-                </li>
-                <li>
-                  <strong>Buyers and market partners:</strong> We facilitate transparent
-                  sourcing and reliable volumes through traceable value chains.
-                </li>
-                <li>
-                  <strong>Development partners:</strong> We deliver traceable impact data
-                  and align with development goals for food security and inclusion.
-                </li>
-                <li>
-                  <strong>Regulators:</strong> We support food security, financial
-                  inclusion, and resilient agricultural systems through compliant
-                  infrastructure.
-                </li>
-              </ul>
             </div>
 
             <div className="mt-12 border-t border-slate-200 pt-8">
@@ -103,15 +66,14 @@ export default function AboutPage() {
                 </li>
               </ul>
               <p className="mt-4">
-                Fairways.Tech addresses these challenges by building digital
-                infrastructure that creates trust, enables compliance, and unlocks
-                finance for smallholder farmers across Africa.
+                Fairways.Tech addresses these challenges by providing digital infrastructure that helps make rural production and financial activity visible in ways that banks and regulators can rely on — enabling compliant capital to flow to smallholder farmers without revealing sensitive internal processes.
               </p>
             </div>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
-

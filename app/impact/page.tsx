@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Header, Footer } from "../components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "Impact & Vision",
@@ -8,9 +9,11 @@ export const metadata: Metadata = {
 
 export default function ImpactPage() {
   return (
-    <main className="min-h-screen bg-sand">
-      <section className="relative overflow-hidden pt-28 pb-24">
-        <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+    <>
+      <Header />
+      <main className="min-h-screen bg-sand">
+        <section className="relative overflow-hidden pt-28 pb-24">
+          <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <header className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
               Our impact
@@ -26,18 +29,10 @@ export default function ImpactPage() {
                 For Farmers
               </h2>
               <p className="mb-4">
-                Fairways.Tech empowers smallholder farmers with better liquidity,
-                planning capabilities, and negotiation power. By providing digital
-                identity and verifiable production data, farmers can access working
-                capital when they need it, plan for seasonal cycles, and negotiate fair
-                prices with buyers.
+                Fairways.Tech strengthens smallholder farmers’ ability to operate with stability, predictability, and commercial dignity. Through trusted digital identity and verifiable production records, farmers obtain timely working capital, plan for seasonal cash-flow, and participate in value chains on transparent and equitable terms.
               </p>
               <p>
-                Our infrastructure enables farmers to build credit histories, access
-                structured finance, and participate in transparent value chains that
-                reward quality and reliability. This translates to improved livelihoods,
-                reduced vulnerability to price shocks, and greater agency in their
-                economic relationships.
+                By enabling farmers to build a financial track record and integrate into compliant value‑chain rails, we reduce vulnerability to price shocks, improve income stability, and expand opportunities for growth. This forms the foundation for scalable rural finance and durable livelihood improvement.
               </p>
             </div>
 
@@ -46,18 +41,10 @@ export default function ImpactPage() {
                 For Institutions
               </h2>
               <p className="mb-4">
-                Financial institutions, cooperatives, and market partners gain risk
-                visibility, compliant rails, and reliable data through Fairways.Tech.
-                Our infrastructure enables banks to serve rural markets profitably while
-                meeting regulatory requirements, reducing the cost and complexity of
-                rural finance.
+                Financial institutions, cooperatives, buyers, and development partners gain access to compliant, audit‑ready data flows and verifiable identity rails. Fairways.Tech reduces the operational friction of serving rural markets by providing structured, regulator‑aligned workflows for onboarding, monitoring, and risk assessment.
               </p>
               <p>
-                By providing verifiable identity, production data, and transaction
-                history, we help institutions make informed lending decisions, manage
-                risk effectively, and scale their rural finance operations. This creates
-                new market opportunities while supporting financial inclusion and food
-                security goals.
+                Our infrastructure delivers field‑level data integrity—production, transactions, repayment signals—allowing institutions to deploy capital with confidence, meet AML/CFT and supervisory expectations, and expand their rural footprint sustainably. The result is a lower cost‑to‑serve model and the ability to scale compliant finance at meaningful depth.
               </p>
             </div>
 
@@ -66,24 +53,17 @@ export default function ImpactPage() {
                 For Food Systems
               </h2>
               <p className="mb-4">
-                Fairways.Tech contributes to more resilient, efficient food systems by
-                reducing waste, enabling predictable supply, and supporting sustainable
-                agricultural practices. Transparent value chains help buyers source
-                reliably, while farmers can plan production and access finance aligned
-                with market demand.
+                Fairways.Tech contributes to resilient food systems by transforming fragmented, informal production environments into transparent, data‑driven supply networks. Predictable supply, authenticated origin data, and aligned financing enable buyers to source reliably and reduce operational uncertainty.
               </p>
               <p>
-                Our infrastructure supports traceability from farm to market, enabling
-                quality assurance, food safety compliance, and reduced post-harvest
-                losses. By connecting farmers to finance and markets through trusted
-                data, we help build food systems that are more inclusive, efficient, and
-                resilient to climate and economic shocks.
+                With traceability from farm to market and improved post‑harvest coordination, our infrastructure reduces waste, strengthens food safety compliance, and supports climate‑resilient value chains. Trusted data links farmers, markets, and finance in a way that promotes system‑wide efficiency and long‑term stability.
               </p>
             </div>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
-
