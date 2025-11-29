@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "About Fairways.Tech – Compliance-first rails for rural finance",
   description:
     "Learn how Fairways.Tech builds compliance-first digital infrastructure that connects banks, cooperatives and buyers to Africa's smallholder farmers.",
+  openGraph: {
+    title: "About Fairways.Tech – Compliance-first rails for rural finance",
+    description:
+      "Learn how Fairways.Tech builds compliance-first digital infrastructure that connects banks, cooperatives and buyers to Africa's smallholder farmers.",
+    url: "https://fairways.tech/about",
+  },
 };
 
 export default function AboutPage() {

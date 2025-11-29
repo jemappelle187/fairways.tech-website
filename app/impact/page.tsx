@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "Impact & Vision",
   description:
     "Learn about Fairways.Tech's impact on farmers, institutions, and food systems across Africa.",
+  openGraph: {
+    title: "Impact & Vision | Fairways.Tech",
+    description:
+      "Learn about Fairways.Tech's impact on farmers, institutions, and food systems across Africa.",
+    url: "https://fairways.tech/impact",
+  },
 };
 
 export default function ImpactPage() {

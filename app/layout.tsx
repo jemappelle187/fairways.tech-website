@@ -59,6 +59,7 @@ export default function RootLayout({
         {children}
         <VisitTracker />
         <UmamiLoader />
+        {/* Organization Schema */}
         <Script
           id="fairways-org-schema"
           type="application/ld+json"
@@ -76,8 +77,38 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 addressCountry: "NL",
               },
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "info@fairways.tech",
+                contactType: "General Inquiry",
+                areaServed: ["NL", "GH"],
+              },
               description:
                 "Fairways.Tech builds compliance-first digital infrastructure to unlock fair finance for Africa's smallholder farmers.",
+            }),
+          }}
+        />
+        {/* WebSite Schema with SearchAction */}
+        <Script
+          id="fairways-website-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Fairways.Tech",
+              url: "https://fairways.tech",
+              description:
+                "Digital infrastructure for smallholder farmers: identity, data, and compliant liquidity rails across Africa.",
+              publisher: {
+                "@type": "Organization",
+                name: "Fairways.Tech",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://fairways.tech/og-fairways-tech.png",
+                },
+              },
             }),
           }}
         />

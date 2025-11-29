@@ -1,7 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Linkedin } from "lucide-react";
 import { Header, Footer } from "../components/SiteChrome";
+
+export const metadata: Metadata = {
+  title: "Meet the Team | Fairways.Tech",
+  description:
+    "Meet the founders and team behind Fairways.Tech: experts in compliance, finance, and digital infrastructure for African smallholder farmers.",
+  openGraph: {
+    title: "Meet the Team | Fairways.Tech",
+    description:
+      "Meet the founders and team behind Fairways.Tech: experts in compliance, finance, and digital infrastructure for African smallholder farmers.",
+    url: "https://fairways.tech/team",
+  },
+};
 
 export default function TeamPage() {
   return (
