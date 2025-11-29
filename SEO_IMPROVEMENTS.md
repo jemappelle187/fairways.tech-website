@@ -80,6 +80,50 @@
 
 ---
 
-**Last Updated**: After implementing enhanced structured data and page metadata
-**Status**: Ready for Google re-crawl
+## 🔍 Search Engine Integration
+
+### Google Search Console (GSC)
+- **Domain verified**: `fairways.tech` verified via DNS (GoDaddy provider flow)
+- **Sitemap submitted**: `https://fairways.tech/sitemap.xml` created by Next.js and accepted in GSC
+- **URLs indexed**: All core pages force-indexed and showing "URL is geïndexeerd door Google":
+  - `/`, `/about`, `/impact`, `/team`, `/terms`, `/privacy`, `/cookies`, `/disclaimer`
+- **Structured data validated**: Homepage validated on `validator.schema.org` → 0 issues
+
+### Bing Webmaster Tools
+- **Ownership verified**: Imported from Google Search Console
+- **Sitemap**: Same sitemap (`/sitemap.xml`) available via GSC import
+- **Status**: Connected and ready for Bing indexing
+
+### IndexNow Integration
+IndexNow allows instant notification to multiple search engines (Bing, Yandex, etc.) when pages are updated.
+
+**Key File:**
+- **Location**: `public/indexnow-e16be45daf6dcb1ee5d62a216d90dc799411184e.txt`
+- **Content**: `e16be45daf6dcb1ee5d62a216d90dc799411184e` (40 hex characters, no newline)
+- **Production URL**: `https://fairways.tech/indexnow-e16be45daf6dcb1ee5d62a216d90dc799411184e.txt`
+- **Verification**: After each deploy, verify the key file returns 200 with exact key content
+
+**Helper Function:**
+- **Location**: `lib/indexnow.ts`
+- **Export**: `submitToIndexNow(urls: string[])`
+- **Usage**: Submits URLs to IndexNow API for instant search engine notification
+
+**API Route:**
+- **Endpoint**: `/api/indexnow-ping`
+- **GET**: Submits default core URLs (/, /about, /impact, /team, /terms, /privacy, /cookies, /disclaimer)
+- **POST**: Accepts custom URLs via `{ urls: string[] }` in request body
+- **Usage**: 
+  - Manual: Visit `https://fairways.tech/api/indexnow-ping` in browser
+  - Scripted: `curl https://fairways.tech/api/indexnow-ping` or POST with custom URLs
+- **Response**: `{ ok: true, submitted: [...] }` on success
+
+**Post-Deploy Checklist:**
+1. ✅ Verify key file is accessible: `https://fairways.tech/indexnow-e16be45daf6dcb1ee5d62a216d90dc799411184e.txt`
+2. ✅ Test ping route: `https://fairways.tech/api/indexnow-ping` returns `{"ok": true, ...}`
+3. ✅ Check logs for any IndexNow submission errors
+
+---
+
+**Last Updated**: After implementing IndexNow integration and search engine setup
+**Status**: GSC + Bing connected, IndexNow ready for instant notifications
 
