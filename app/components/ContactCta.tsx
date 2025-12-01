@@ -40,15 +40,14 @@ export function ContactCta() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
         <div className="relative flex flex-col items-center rounded-3xl border border-white/40 bg-white/80 px-6 py-10 text-center shadow-lg shadow-black/10 backdrop-blur-sm md:px-12 md:py-12">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
-            Let&apos;s scale farming communities together.
+            Unlock scalable rural finance.
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-slate-900 md:text-4xl">
             Partner with Fairways.Tech
           </h2>
           <p className="mb-8 max-w-2xl text-base text-slate-800 md:text-lg">
-            Whether you&apos;re a bank, buyer, regulator, cooperative or
-            development partner, we&apos;re ready to co-design compliant rails
-            for rural finance.
+            Join banks, cooperatives, buyers and development partners building
+            trusted, compliant rails for rural finance across Africa.
           </p>
           <button
             type="button"
@@ -58,7 +57,7 @@ export function ContactCta() {
             }}
             className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
           >
-            Contact us
+            Start a partnership
           </button>
         </div>
       </div>

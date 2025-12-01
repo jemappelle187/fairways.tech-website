@@ -72,32 +72,32 @@ function Counter({ target, suffix = "+" }: { target: number; suffix?: string }) 
 const partnershipCards = [
   {
     title: "Local financial institutions",
-    description: "Scalable, risk-aware rural finance.",
+    description: "Unlock scalable, risk-aware rural finance with trusted data.",
     icon: Landmark
   },
   {
     title: "Farmer groups",
-    description: "Community onboarding and structured workflows.",
+    description: "Enable community onboarding and structured workflows that scale.",
     icon: Users2
   },
   {
     title: "Market partners",
-    description: "Reliable volumes and transparent sourcing.",
+    description: "Access reliable volumes and transparent sourcing from verified farms.",
     icon: Store
   },
   {
     title: "Knowledge partners",
-    description: "Training, validation and field support.",
+    description: "Deliver training, validation and field support that builds capacity.",
     icon: GraduationCap
   },
   {
     title: "Development partners",
-    description: "Traceable impact data and aligned goals.",
+    description: "Generate traceable impact data and achieve aligned goals.",
     icon: Globe2
   },
   {
     title: "Government & regulators",
-    description: "Food security, inclusion and resilient systems.",
+    description: "Enable food security, inclusion and resilient systems at scale.",
     icon: ShieldCheck
   }
 ];
@@ -281,34 +281,35 @@ export default function HomePage() {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
         <h3 className="text-base font-semibold text-slate-900">
-          Data you can trust
+          Data that unlocks finance
         </h3>
         <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
-          Real farm and value-chain data that makes production and risk visible.
+          Trusted farm and value-chain data that makes production and risk
+          visible, enabling banks to serve rural communities with confidence.
         </p>
       </div>
       <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
         <h3 className="text-base font-semibold text-slate-900">
-          Compliance-first rails
+          Rails that reduce risk
         </h3>
         <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
-          Transparent, audit-ready flows that meet international regulatory
-          standards.
+          Transparent, audit-ready flows that meet international standards,
+          transforming how institutions assess and serve rural markets.
         </p>
       </div>
       <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
         <h3 className="text-base font-semibold text-slate-900">
-          Local delivery
+          Agents who connect real farms
         </h3>
         <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
-          Community agents and cooperatives who keep data tied to real farmers
-          and real fields.
+          Community agents and cooperatives ensuring data stays tied to real
+          farmers and real fields, building trust from the ground up.
         </p>
       </div>
     </div>
     <div className="mt-6 text-center text-xs text-white/80">
       <p>
-        Want a deeper view on how this translates into governance, risk and data flows?
+        See how this transforms governance, risk and data flows for rural finance.
       </p>
       <a
         href="/impact"
@@ -335,9 +336,9 @@ export default function HomePage() {
                   Where Fairways.Tech is active
                 </h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-700 sm:text-[15px]">
-                  We partner with farming communities, local financial institutions
-                  and market actors to turn trusted data into scalable
-                  opportunities.
+                  We partner with farming communities, financial institutions and
+                  market actors to transform trusted data into scalable finance and
+                  market access.
                 </p>
               </div>
 
@@ -350,8 +351,8 @@ export default function HomePage() {
                     <Counter target={statsInView ? 3 : 0} suffix="+" />
                   </p>
                   <p className="mt-2 text-sm text-slate-700">
-                    Building rails across Africa, Asia and Europe, with room to
-                    grow.
+                    Growing network across Africa, Asia and Europe, expanding
+                    trusted rails for rural finance.
                   </p>
                 </div>
 
@@ -363,8 +364,8 @@ export default function HomePage() {
                     <Counter target={statsInView ? 250 : 0} suffix="+" />
                   </p>
                   <p className="mt-2 text-sm text-slate-700">
-                    Smallholder and horticultural farmers we aim to support with
-                    fair, scalable finance.
+                    Smallholder and horticultural farmers unlocking fair,
+                    scalable finance through trusted data.
                   </p>
                 </div>
 
@@ -407,16 +408,15 @@ export default function HomePage() {
         Partnerships &amp; ecosystem
       </p>
       <h2 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
-        Built with local partners, for local communities.
+        Partners who transform rural finance.
       </h2>
       <p className="mt-3 text-white/90 leading-relaxed">
-        We collaborate with the partners who make agricultural systems work on
-        the ground.
+        We collaborate with partners who enable agricultural systems to scale,
+        turning local knowledge into trusted, compliant infrastructure.
       </p>
       <div className="mt-2 text-xs text-white/80">
         <p>
-          For a fuller view of how these partnerships connect into our governance and
-          data model,
+          See how these partnerships connect into our governance and data model.
         </p>
         <a
           href="/about"
@@ -464,12 +464,12 @@ export default function HomePage() {
 </div>
               <div className="space-y-4 rounded-3xl bg-forest/90 p-6 text-center text-sand shadow-lg sm:p-8">
                 <p>
-                  Fairways.Tech is built with and for farming communities. We
-                  empower them with trusted digital tools to grow responsibly.
+                  Fairways.Tech empowers farming communities with trusted digital
+                  tools that unlock finance and markets, enabling responsible growth.
                 </p>
                 <p>
-                  We bridge global regulatory integrity with local agricultural
-                  inclusion, enabling a transparent, scalable, community-first
+                  We bridge EU regulatory integrity with African agricultural
+                  inclusion, creating a transparent, scalable, community-first
                   agri-fintech ecosystem.
                 </p>
               </div>
