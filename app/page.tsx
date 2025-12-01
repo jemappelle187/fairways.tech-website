@@ -104,14 +104,14 @@ const partnershipCards = [
 
 function VideoHero() {
   return (
-    <section id="video-hero" className="relative overflow-hidden py-16 sm:py-20 min-h-[600px] sm:min-h-[700px]">
+    <section id="video-hero" className="relative overflow-hidden py-12 sm:py-16 md:py-20 min-h-[400px] sm:min-h-[500px] md:min-h-[700px]">
       {/* Video background */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 z-0 h-full w-full object-cover"
+        className="absolute inset-0 z-0 h-full w-full object-contain sm:object-cover"
       >
         <source src="/videos/FAIRWAYS.TECH _Hero.mp4" type="video/mp4" />
       </video>
