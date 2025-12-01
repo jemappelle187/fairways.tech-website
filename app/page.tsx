@@ -104,21 +104,23 @@ const partnershipCards = [
 
 function VideoHero() {
   return (
-    <section id="video-hero" className="relative overflow-hidden py-12 sm:py-16 md:py-20 min-h-[400px] sm:min-h-[500px] md:min-h-[700px]">
+    <section id="video-hero" className="relative overflow-hidden md:py-20 md:min-h-[700px]">
       {/* Video background */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 z-0 h-full w-full object-contain sm:object-cover"
+        className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:object-cover"
       >
         <source src="/videos/FAIRWAYS.TECH _Hero.mp4" type="video/mp4" />
       </video>
-      {/* Dark overlay */}
-      <div className="absolute inset-0 z-0 bg-black/30" />
-      {/* Bottom fade into sand */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-b from-transparent via-sand/10 to-sand" />
+      {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
+      <div className="absolute inset-0 z-0 bg-black/30 hidden md:block" />
+      {/* Top gradient fade */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-sand via-sand/40 to-transparent" />
+      {/* Bottom gradient fade */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-b from-transparent via-sand/10 to-sand" />
     </section>
   );
 }
