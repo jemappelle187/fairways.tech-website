@@ -102,115 +102,26 @@ const partnershipCards = [
   }
 ];
 
-function Hero() {
-  const [scrollY, setScrollY] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const parallaxOffset = scrollY * 0.5;
-
+function VideoHero() {
   return (
-    <section id="hero" className="relative overflow-hidden py-16 sm:py-20">
-      {/* Background image with parallax */}
-      <div
-        className="absolute inset-0 z-0 bg-[url('/hero-fairways.jpg')] bg-cover bg-center"
-        style={{ transform: `translateY(${parallaxOffset}px)` }}
-      />
+    <section id="video-hero" className="relative overflow-hidden py-16 sm:py-20 min-h-[600px] sm:min-h-[700px]">
+      {/* Video background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 z-0 h-full w-full object-cover"
+      >
+        <source src="/videos/FAIRWAYS.TECH _Hero.mp4" type="video/mp4" />
+      </video>
       {/* Dark overlay */}
       <div className="absolute inset-0 z-0 bg-black/30" />
       {/* Bottom fade into sand */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-b from-transparent via-sand/10 to-sand" />
-
-      <div className="relative z-10 mx-auto max-w-5xl px-4 pt-16 sm:px-6 sm:pt-24 lg:px-8">
-        {/* Gradient border wrapper */}
-        <div
-          className={`relative mx-auto max-w-3xl rounded-[36px] bg-gradient-to-r from-forest/45 via-leaf/35 to-amber-300/35 p-[1px] shadow-xl shadow-black/10 transition-all duration-1000 md:-mt-6 lg:-mt-10 ${
-            isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-          }`}
-        >
-          {/* Actual card */}
-          <div className="rounded-[32px] border border-white/40 bg-white/80 px-6 py-10 backdrop-blur sm:px-10 sm:py-12">
-            <div className="flex flex-col items-center gap-6 text-center lg:gap-8">
-              <p
-                className={`text-sm font-semibold uppercase tracking-[0.2em] text-leaf transition-all duration-700 delay-100 ${
-                  isLoaded
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-0"
-                }`}
-              >
-                Community-Driven Agri–Fintech
-              </p>
-              <h1
-                className={`text-3xl font-semibold leading-tight text-stone transition-all duration-700 delay-200 sm:text-4xl ${
-                  isLoaded
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-0"
-                }`}
-              >
-                Digital infrastructure empowering farmers to scale.
-              </h1>
-              <p
-                className={`mt-2 max-w-xl text-base text-stone/80 transition-all duration-700 delay-300 sm:text-lg ${
-                  isLoaded
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-0"
-                }`}
-              >
-                Fairways.Tech is a community-driven agri-fintech ecosystem helping
-                smallholder farmers and horticultural producers grow beyond survival
-                by unlocking fair, compliant, and scalable access to finance,
-                markets, and data.
-              </p>
-              <div
-                className={`mt-4 flex flex-wrap justify-center gap-3 text-sm font-medium text-stone transition-all duration-700 delay-400 ${
-                  isLoaded
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-0"
-                }`}
-              >
-                {[
-                  "Community-first",
-                  "Compliance-first",
-                  "Built for agri & horticulture"
-                ].map((quality) => (
-                  <span
-                    key={quality}
-                    className="rounded-full border border-stone-200/70 bg-white/70 px-4 py-1 backdrop-blur-sm"
-                  >
-                    {quality}
-                  </span>
-                ))}
-              </div>
-              <div
-                className={`mt-6 flex flex-wrap justify-center gap-3 transition-all duration-700 delay-500 ${
-                  isLoaded
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-2 opacity-0"
-                }`}
-              >
-                <a
-                  href="#cta"
-                  className="inline-flex items-center justify-center rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-sand shadow-md transition hover:bg-leaf"
-                >
-                  Partner With Us
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
-
 
 function ViaTracker() {
   const searchParams = useSearchParams();
@@ -254,7 +165,7 @@ export default function HomePage() {
       </Suspense>
       <Header />
       <main className="flex flex-col gap-20 pb-20">
-        <Hero />
+        <VideoHero />
         <div className="flex flex-col gap-20">
           {/* SOLUTION */}
           <section id="solution" className="bg-sand px-6 py-24 sm:py-28 lg:px-24">
@@ -270,14 +181,11 @@ export default function HomePage() {
                     for scalable farming.
                   </h2>
                   <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-700 sm:text-[15px]">
-                    Farming has the potential to scale — but farmers lack the tools
-                    and trust systems that financial institutions require.
-                  </p>
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone-700 sm:text-[15px]">
-                    Fairways.Tech turns fragmented farm activity into structured
-                    data that banks and partners can trust. We capture field, crop
-                    and transaction flows so farmers can access finance and markets
-                    at scale.
+                    Fairways.Tech is a community-driven agri-fintech ecosystem that
+                    transforms fragmented farm activity into trusted, structured data.
+                    We capture field, crop, and transaction flows to unlock finance
+                    and markets for smallholder farmers, enabling banks and partners
+                    to serve rural communities with confidence.
                   </p>
                   <ul className="mt-6 space-y-3 text-[15px] leading-relaxed text-slate-800">
                     <li className="flex items-start gap-3">

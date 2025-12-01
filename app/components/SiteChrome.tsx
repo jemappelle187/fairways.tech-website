@@ -50,7 +50,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/60 backdrop-blur-lg shadow-xl transition-all duration-300 ${
+      className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/80 backdrop-blur-lg shadow-xl transition-all duration-300 ${
         isScrolled ? "h-16 shadow-md" : "h-20"
       }`}
     >
@@ -76,55 +76,64 @@ export function Header() {
             Fairways.Tech
           </div>
         </a>
-        <nav className="hidden items-center gap-8 text-base font-medium tracking-wide md:flex">
-          {navItems.map((item) => (
+        <nav className="hidden items-center gap-6 text-base font-medium tracking-wide md:flex">
+          {/* Section anchors grouped together */}
+          <div className="flex items-center gap-6">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className={`relative transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded ${
+                  activeSection === item.id
+                    ? "font-semibold text-forest"
+                    : "text-stone-800 hover:text-forest"
+                }`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-forest transition-all" />
+                )}
+                {activeSection !== item.id && (
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-forest transition-all duration-300 hover:w-full" />
+                )}
+              </a>
+            ))}
+          </div>
+          {/* Visual separator */}
+          <div className="h-6 w-px bg-stone-300" aria-hidden="true" />
+          {/* Standalone pages */}
+          <div className="flex items-center gap-6">
             <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => handleNavClick(e, item.id)}
-              className={`relative transition-all duration-300 hover:scale-105 ${
-                activeSection === item.id
+              href="/impact"
+              onClick={() => setIsMenuOpen(false)}
+              className="relative transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded text-stone-800 hover:text-forest"
+            >
+              Impact
+            </a>
+            <a
+              href="/team"
+              onClick={() => setIsMenuOpen(false)}
+              className={`relative transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded ${
+                activeSection === "team"
                   ? "font-semibold text-forest"
                   : "text-stone-800 hover:text-forest"
               }`}
             >
-              {item.label}
-              {activeSection === item.id && (
+              Team
+              {activeSection === "team" && (
                 <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-forest transition-all" />
               )}
-              {activeSection !== item.id && (
+              {activeSection !== "team" && (
                 <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-forest transition-all duration-300 hover:w-full" />
               )}
             </a>
-          ))}
-          <a
-            href="/impact"
-            onClick={() => setIsMenuOpen(false)}
-            className="relative transition-all duration-300 hover:scale-105 text-stone-800 hover:text-forest"
-          >
-            Impact
-          </a>
-          <a
-            href="/team"
-            onClick={() => setIsMenuOpen(false)}
-            className={`relative transition-all duration-300 hover:scale-105 ${
-              activeSection === "team"
-                ? "font-semibold text-forest"
-                : "text-stone-800 hover:text-forest"
-            }`}
-          >
-            Team
-            {activeSection === "team" && (
-              <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-forest transition-all" />
-            )}
-            {activeSection !== "team" && (
-              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-forest transition-all duration-300 hover:w-full" />
-            )}
-          </a>
+          </div>
+          {/* CTA button */}
           <a
             href="#cta"
             onClick={(e) => handleNavClick(e, "cta")}
-            className="ml-2 inline-flex items-center justify-center rounded-full bg-forest px-5 py-2 text-sm font-semibold text-sand shadow-md transition-all hover:bg-forest/90 hover:shadow-lg hover:scale-105"
+            className="ml-2 inline-flex items-center justify-center rounded-full bg-forest px-5 py-2 text-sm font-semibold text-sand shadow-md transition-all hover:bg-forest/90 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
           >
             Contact us
           </a>
@@ -154,37 +163,41 @@ export function Header() {
         </button>
       </div>
       {isMenuOpen && (
-        <nav className="fixed inset-x-0 top-20 z-40 border-t border-white/40 bg-white/70 backdrop-blur-md md:hidden">
+        <nav className="fixed inset-x-0 top-20 z-40 border-t border-white/40 bg-white/95 backdrop-blur-md md:hidden">
           <div className="flex min-h-[calc(100vh-80px)] flex-col px-4 pb-6 pt-4">
             <nav className="flex-1 space-y-2 overflow-y-auto">
+              {/* Section anchors grouped */}
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className={`block rounded-lg px-4 py-3 text-base font-medium transition-all ${
+                  className={`block rounded-lg px-4 py-3 text-base font-medium transition-all focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
                     activeSection === item.id
                       ? "bg-forest/10 text-forest font-semibold"
-                      : "text-stone-800 hover:bg-stone-100 hover:text-forest"
+                      : "text-slate-900 hover:bg-slate-100 hover:text-forest"
                   }`}
                 >
                   {item.label}
                 </a>
               ))}
+              {/* Visual separator */}
+              <div className="my-3 border-t border-slate-200" aria-hidden="true" />
+              {/* Standalone pages */}
               <a
                 href="/impact"
                 onClick={() => setIsMenuOpen(false)}
-                className="block rounded-lg px-4 py-3 text-base font-medium transition-all text-stone-800 hover:bg-stone-100 hover:text-forest"
+                className="block rounded-lg px-4 py-3 text-base font-medium transition-all text-slate-900 hover:bg-slate-100 hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
               >
                 Impact
               </a>
               <a
                 href="/team"
                 onClick={() => setIsMenuOpen(false)}
-                className={`block rounded-lg px-4 py-3 text-base font-medium transition-all ${
+                className={`block rounded-lg px-4 py-3 text-base font-medium transition-all focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
                   activeSection === "team"
                     ? "bg-forest/10 text-forest font-semibold"
-                    : "text-stone-800 hover:bg-stone-100 hover:text-forest"
+                    : "text-slate-900 hover:bg-slate-100 hover:text-forest"
                 }`}
               >
                 Team
@@ -194,7 +207,7 @@ export function Header() {
               <a
                 href="#cta"
                 onClick={(e) => handleNavClick(e, "cta")}
-                className="block w-full rounded-full border-2 border-forest bg-forest px-4 py-3 text-center text-sm font-semibold text-sand transition-all hover:bg-forest/90 hover:shadow-lg"
+                className="block w-full rounded-full border-2 border-forest bg-forest px-4 py-3 text-center text-sm font-semibold text-sand transition-all hover:bg-forest/90 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
               >
                 Contact us
               </a>

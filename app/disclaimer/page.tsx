@@ -12,127 +12,138 @@ export default function DisclaimerPage() {
         </p>
 
         <div className="mt-10 space-y-6 text-sm leading-relaxed text-slate-800">
+
+          {/* 1. Informational Purpose */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              1. Informational purpose only
+              1. Informational Purpose Only
             </h2>
             <p className="mt-2">
-              The website <strong>www.fairways.tech</strong> (the &quot;Website&quot;) is
-              operated by Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd
-              (Ghana) (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;).
+              The website <strong>www.fairways.tech</strong> (the “Website”) is operated by
+              Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana)
+              (“Fairways.Tech”, “we”, “us”).
             </p>
             <p className="mt-2">
-              All content on this Website is provided solely for general
-              information purposes. It is not intended to provide financial,
-              investment, legal, tax, regulatory or technical advice, and should
-              not be relied upon as such.
+              All content on this Website is provided for general informational
+              purposes only. Nothing on this Website constitutes financial,
+              investment, legal, tax, compliance, engineering, or other
+              professional advice. You should not rely on any information on this
+              Website as a substitute for professional guidance.
             </p>
           </section>
 
+          {/* 2. No Offer / Solicitation */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              2. No offer, solicitation, or commitment
+              2. No Offer, Solicitation, or Commitment
             </h2>
             <p className="mt-2">
-              Nothing on this Website shall be construed as:
+              The Website does not constitute and shall not be interpreted as:
             </p>
             <ul className="mt-2 list-disc pl-5">
+              <li>An offer to sell or solicitation to buy any financial product or service</li>
+              <li>A commitment by Fairways.Tech or any partner to enter into any agreement</li>
               <li>
-                An offer or invitation to buy, sell or subscribe for any
-                financial product or service
-              </li>
-              <li>
-                A commitment by Fairways.Tech or any partner to enter into a
-                contract
-              </li>
-              <li>
-                A guarantee that any described model, product or partnership
-                will be launched, licensed or available in a particular
-                jurisdiction
+                A guarantee that any described model, technology, process, or
+                partnership will be launched, licensed, implemented, or made
+                available in any jurisdiction
               </li>
             </ul>
             <p className="mt-2">
-              Any future services are subject to regulatory approvals, commercial
-              agreements and internal governance decisions.
+              All future services are subject to regulatory approvals, partner
+              agreements, compliance assessments, market conditions, and internal
+              governance.
             </p>
           </section>
 
+          {/* 3. Forward-Looking Statements */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              3. Forward-looking statements
+              3. Forward-Looking Statements
             </h2>
             <p className="mt-2">
-              The Website may include statements about future plans, roadmaps,
-              growth ambitions, markets or farmer numbers. These are
-              forward-looking statements based on assumptions and information
-              available at the time of writing. Actual results may differ
-              materially due to factors such as:
+              Certain statements on this Website may describe anticipated
+              developments, future functionality, growth plans, operational
+              forecasts, or expected farmer and market engagement. These are
+              forward‑looking statements that inherently involve risks and
+              uncertainties.
             </p>
+            <p className="mt-2">Actual outcomes may differ materially due to factors such as:</p>
             <ul className="mt-2 list-disc pl-5">
-              <li>Market developments</li>
-              <li>Regulatory changes</li>
-              <li>Operational, technological or partner constraints</li>
+              <li>Changes in regulation or supervisory guidance</li>
+              <li>Financial sector requirements</li>
+              <li>Market, operational, or technological constraints</li>
+              <li>Partner dependencies and external conditions</li>
             </ul>
             <p className="mt-2">
-              Fairways.Tech has no obligation to update or revise any
-              forward-looking statements.
+              Fairways.Tech is under no obligation to update or revise
+              forward‑looking statements unless required to do so by law.
             </p>
           </section>
 
+          {/* 4. No Guarantee of Accuracy or Availability */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              4. No guarantee of availability
+              4. No Guarantee of Accuracy or Availability
             </h2>
             <p className="mt-2">
-              We do not guarantee that the Website or any content on it will be:
+              While we aim to keep the Website accurate and up to date, we make
+              no representations or warranties, express or implied, regarding the:
             </p>
             <ul className="mt-2 list-disc pl-5">
-              <li>Available at all times</li>
-              <li>Complete, current or error-free</li>
+              <li>Accuracy, completeness, or timeliness of the content</li>
+              <li>Availability or uninterrupted functioning of the Website</li>
               <li>
-                Implemented in the form, timeline or jurisdictions described
+                Implementation of any feature, product, process, or partnership
+                in the form or timeline described
               </li>
             </ul>
             <p className="mt-2">
-              We may modify, suspend or discontinue any part of the Website at
-              any time, without prior notice.
+              We may modify, update, or remove Website content at any time without
+              notice.
             </p>
           </section>
 
+          {/* 5. External Links */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              5. External links
+              5. External Links
             </h2>
             <p className="mt-2">
-              The Website may contain links to third-party websites. These links
-              are provided for convenience only. We do not endorse or control
-              those websites and are not responsible for their content, security
-              or data handling. Your use of third-party sites is at your own
-              risk.
+              The Website may include links to external third‑party websites or
+              resources. Such links are provided solely for convenience. We do not
+              endorse, control, or guarantee the accuracy, security, or practices
+              of these third‑party sites. Accessing them is at your own risk.
             </p>
           </section>
 
+          {/* 6. Limitation of Liability */}
           <section>
             <h2 className="text-lg font-semibold text-stone">
-              6. Limitation of liability
+              6. Limitation of Liability
             </h2>
             <p className="mt-2">
-              To the fullest extent permitted by law, Fairways.Tech shall not be
-              liable for any indirect, consequential, incidental, special or
-              punitive damages, or any loss of profit, data, business or
-              opportunity arising from or in connection with your use of, or
-              reliance on, the Website or its content.
+              To the fullest extent permitted under applicable law, Fairways.Tech
+              shall not be liable for any direct or indirect damages arising from
+              or related to:
             </p>
+            <ul className="mt-2 list-disc pl-5">
+              <li>Your use of or inability to use the Website</li>
+              <li>Reliance on any information provided on the Website</li>
+              <li>Errors, omissions, or interruptions in the Website’s operation</li>
+              <li>Any third‑party content or external links</li>
+            </ul>
             <p className="mt-2">
-              Nothing in this Disclaimer excludes or limits any liability that
-              cannot be excluded or limited under applicable law.
+              Nothing in this Disclaimer limits liability that cannot be limited
+              under Dutch, Ghanaian, or other applicable law.
             </p>
           </section>
 
+          {/* 7. Contact */}
           <section>
             <h2 className="text-lg font-semibold text-stone">7. Contact</h2>
             <p className="mt-2">
-              If you have any questions about this Disclaimer, please contact:
+              For questions regarding this Disclaimer, please contact:
             </p>
             <p className="mt-1">
               Email:{" "}
