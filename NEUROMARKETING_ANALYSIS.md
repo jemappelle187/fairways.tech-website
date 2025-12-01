@@ -223,3 +223,4 @@ For Fairways.Tech, this translates to:
 - Stronger positioning as a trusted, compliance-first platform
 - Clearer differentiation in the agri-fintech space
 
+

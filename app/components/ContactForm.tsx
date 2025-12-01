@@ -152,14 +152,14 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
       {error && (
         <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
           {error}
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label
             htmlFor="firstName"
@@ -174,7 +174,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.firstName}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2 sm:px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
 
@@ -192,7 +192,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.lastName}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2 sm:px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
       </div>
@@ -214,7 +214,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label
             htmlFor="email"
@@ -229,7 +229,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2 sm:px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
 
@@ -247,10 +247,12 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
             required
             value={formData.emailVerify}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2 sm:px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           />
         </div>
+      </div>
 
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <div>
           <label
             htmlFor="phone"
@@ -264,8 +266,8 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
               name="phoneCountryCode"
               value={formData.phoneCountryCode}
               onChange={handleChange}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 border-0 bg-transparent text-sm text-slate-600 focus:outline-none pr-2"
-              style={{ width: "auto", paddingRight: "8px" }}
+              className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-10 border-0 bg-transparent text-xs sm:text-sm text-slate-600 focus:outline-none appearance-none pr-6 sm:pr-8"
+              style={{ width: "auto" }}
             >
               <option value="+31">🇳🇱 +31</option>
               <option value="+233">🇬🇭 +233</option>
@@ -293,36 +295,36 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
               }}
               placeholder="123456789"
               maxLength={10}
-              className="w-full rounded-lg border border-slate-200 bg-white pl-24 pr-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+              className="w-full rounded-lg border border-slate-200 bg-white pl-20 sm:pl-24 pr-2 sm:pr-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
             />
           </div>
         </div>
-      </div>
 
-      <div>
-        <label
-          htmlFor="country"
-          className="block text-xs font-medium text-slate-700 mb-1.5"
-        >
-          Country
-        </label>
+        <div>
+          <label
+            htmlFor="country"
+            className="block text-xs font-medium text-slate-700 mb-1.5"
+          >
+            Country
+          </label>
           <select
             id="country"
             name="country"
             value={formData.country}
             onChange={handleChange}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2 sm:px-3 py-2 text-sm focus:border-forest focus:outline-none focus:ring-1 focus:ring-forest"
           >
-          <option value="">Select a country</option>
-          <option value="Ghana">Ghana</option>
-          <option value="Netherlands">Netherlands</option>
-          <option value="United Kingdom">United Kingdom</option>
-          <option value="United States">United States</option>
-          <option value="Germany">Germany</option>
-          <option value="France">France</option>
-          <option value="Italy">Italy</option>
-          <option value="Other">Other</option>
-        </select>
+            <option value="">Select a country</option>
+            <option value="Ghana">🇬🇭 Ghana</option>
+            <option value="Netherlands">🇳🇱 Netherlands</option>
+            <option value="United Kingdom">🇬🇧 United Kingdom</option>
+            <option value="United States">🇺🇸 United States</option>
+            <option value="Germany">🇩🇪 Germany</option>
+            <option value="France">🇫🇷 France</option>
+            <option value="Italy">🇮🇹 Italy</option>
+            <option value="Other">🌍 Other</option>
+          </select>
+        </div>
       </div>
 
       <div>

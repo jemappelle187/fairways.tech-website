@@ -1,15 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { track } from "@/lib/umami";
 import { ContactForm } from "./ContactForm";
 
-export function ContactCta() {
-  const [open, setOpen] = useState(false);
+type ContactModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [showToast, setShowToast] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure we're in the browser before rendering portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleFormSuccess = () => {
-    setOpen(false);
+    onClose();
     setShowToast(true);
   };
 
@@ -23,7 +34,7 @@ export function ContactCta() {
 
   // Prevent body scroll when modal is open
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -31,69 +42,41 @@ export function ContactCta() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [isOpen]);
 
   // Close on Escape key
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setOpen(false);
+        onClose();
       }
     };
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [open]);
+  }, [isOpen, onClose]);
 
-  return (
-    <section
-      id="cta"
-      className="relative scroll-mt-24 overflow-hidden py-16 sm:py-20"
-    >
-      {/* Background image (farmer holding crops) */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_hold_crop.png')] bg-cover bg-center" />
+  if (!mounted || typeof document === "undefined") return null;
+  if (!isOpen && !showToast) return null;
 
-      {/* Soft dark overlay */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-black/25" />
-
-      {/* Top + bottom fades into sand */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-16 bg-gradient-to-b from-[#f4efe5] via-[#f4efe5]/40 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-b from-transparent via-[#f4efe5]/35 to-[#f4efe5]" />
-
-      {/* Content card */}
-        <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="relative flex flex-col items-center rounded-3xl border border-white/40 bg-white/80 px-6 py-10 text-center shadow-lg shadow-black/10 backdrop-blur-sm md:px-12 md:py-12">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
-            Unlock scalable rural finance.
-          </p>
-          <h2 className="mb-4 text-3xl font-semibold text-slate-900 md:text-4xl">
-            Partner with Fairways.Tech
-          </h2>
-          <p className="mb-8 max-w-2xl text-base text-slate-800 md:text-lg">
-            Join banks, cooperatives, buyers and development partners building
-            trusted, compliant rails for rural finance across Africa.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              track("cta_opened");
-              setOpen(true);
-            }}
-            className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
-          >
-            Start a partnership
-          </button>
-        </div>
-      </div>
-
+  const modalContent = (
+    <>
       {/* Premium modal with contact form */}
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-sm p-3 sm:p-4">
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/45 backdrop-blur-sm p-3 sm:p-4"
+          onClick={(e) => {
+            // Close when clicking backdrop
+            if (e.target === e.currentTarget) {
+              onClose();
+            }
+          }}
+        >
           <div className="relative w-full max-w-xl max-h-[90vh] sm:max-h-[90vh] my-auto transform rounded-2xl sm:rounded-3xl bg-white/95 shadow-2xl shadow-black/30 transition-all duration-200 flex flex-col overflow-hidden">
             {/* Close button */}
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={onClose}
               className="absolute right-2 top-2 sm:right-3 sm:top-3 z-20 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-lg text-slate-500 shadow-sm transition hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
               aria-label="Close contact form"
             >
@@ -117,7 +100,7 @@ export function ContactCta() {
 
               {/* Body: Custom contact form */}
               <div className="px-4 pb-4 pt-3 sm:px-6 sm:pb-6 sm:pt-4">
-                <ContactForm onSuccess={handleFormSuccess} onClose={() => setOpen(false)} />
+                <ContactForm onSuccess={handleFormSuccess} onClose={onClose} />
               </div>
 
               {/* Footer hint */}
@@ -135,7 +118,7 @@ export function ContactCta() {
 
       {/* Premium success notification (after form submission) */}
       {showToast && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
           <div className="relative w-full max-w-md transform rounded-3xl bg-white/95 p-0 shadow-2xl shadow-black/30 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex flex-col items-center px-8 py-10 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center">
@@ -155,7 +138,7 @@ export function ContactCta() {
               <button
                 type="button"
                 onClick={() => setShowToast(false)}
-                className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
+                className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
               >
                 Close
               </button>
@@ -163,6 +146,11 @@ export function ContactCta() {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
+
+  // Render modal using portal to body level to avoid stacking context issues
+  // This ensures the modal appears above all other content, including the header
+  return document.body ? createPortal(modalContent, document.body) : null;
 }
+

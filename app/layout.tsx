@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { UmamiLoader } from "./components/UmamiLoader";
 import { VisitTracker } from "./components/VisitTracker";
+import { ContentProtection } from "./components/ContentProtection";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fairways.tech"),
@@ -86,6 +87,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
+        <ContentProtection />
         {children}
         <VisitTracker />
         <UmamiLoader />
