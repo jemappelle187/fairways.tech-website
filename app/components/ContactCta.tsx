@@ -140,7 +140,7 @@ export function ContactCta() {
             <div className="flex flex-col items-center px-8 py-10 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center">
                 <img
-                  src="/images/logo-fairways-forest.svg"
+                  src="/images/logo/logo-fairways-forest.svg"
                   alt="Fairways.Tech"
                   className="h-10 w-10"
                 />
