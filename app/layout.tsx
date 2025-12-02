@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Fairways.Tech",
     images: [
       {
-        url: "/og-fairways-tech.png?v=6",
+        url: "/og-fairways-tech.png?v=7",
         width: 1200,
         height: 630,
         alt: "Fairways.Tech: Community-driven digital infrastructure empowering African smallholder farmers with trusted data, compliant finance, and market access",
