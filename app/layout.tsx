@@ -87,7 +87,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-sand font-sans text-stone antialiased">
-        <ContentProtection />
+        {/* <ContentProtection /> */}
         {children}
         <VisitTracker />
         <UmamiLoader />

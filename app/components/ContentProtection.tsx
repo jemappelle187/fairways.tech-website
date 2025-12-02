@@ -31,8 +31,25 @@ export function ContentProtection() {
       return false;
     };
 
-    // Disable text selection
+    // Disable text selection (but allow on interactive elements)
     const handleSelectStart = (e: Event) => {
+      const target = e.target as HTMLElement;
+      // Allow selection in form elements, buttons, and links
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        target.tagName === "BUTTON" ||
+        target.tagName === "A" ||
+        target.isContentEditable ||
+        target.closest("button") ||
+        target.closest("a") ||
+        target.closest("input") ||
+        target.closest("textarea") ||
+        target.closest("select")
+      ) {
+        return; // Allow selection in interactive elements
+      }
       e.preventDefault();
       return false;
     };
@@ -43,8 +60,26 @@ export function ContentProtection() {
       return false;
     };
 
-    // Disable keyboard shortcuts
+    // Disable keyboard shortcuts (but allow interactions with form elements and buttons)
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Allow keyboard navigation and interactions with form elements, buttons, and links
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
+        target.tagName === "BUTTON" ||
+        target.tagName === "A" ||
+        target.isContentEditable ||
+        target.closest("button") ||
+        target.closest("a") ||
+        target.closest("input") ||
+        target.closest("textarea") ||
+        target.closest("select")
+      ) {
+        return; // Allow normal keyboard interaction with interactive elements
+      }
+
       // Disable F12 (DevTools)
       if (e.key === "F12") {
         e.preventDefault();
@@ -81,19 +116,19 @@ export function ContentProtection() {
         return false;
       }
 
-      // Disable Ctrl+A (Select All)
+      // Disable Ctrl+A (Select All) - but allow in form fields
       if (e.ctrlKey && e.key === "a") {
         e.preventDefault();
         return false;
       }
 
-      // Disable Ctrl+C (Copy)
+      // Disable Ctrl+C (Copy) - but allow in form fields
       if (e.ctrlKey && e.key === "c") {
         e.preventDefault();
         return false;
       }
 
-      // Disable Ctrl+X (Cut)
+      // Disable Ctrl+X (Cut) - but allow in form fields
       if (e.ctrlKey && e.key === "x") {
         e.preventDefault();
         return false;
