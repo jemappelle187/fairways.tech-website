@@ -223,30 +223,19 @@ export default function HomePage() {
                   </ul>
                 </div>
                 <div className="mt-10 flex flex-col items-center gap-8 text-center lg:mt-0 lg:items-end lg:gap-10 lg:text-left">
-                  {solutionVisualItems.map((item) => (
-                    <div
-                      key={item.alt}
-                      className="flex flex-wrap items-center justify-center gap-4 text-center lg:flex-nowrap lg:justify-start lg:gap-6 lg:text-left"
+                  {/* Video showcase */}
+                  <div className="relative w-full max-w-lg overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/5">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="h-full w-full object-cover"
                     >
-                      <div
-                        className={`relative ${item.sizeClass} overflow-hidden rounded-full shadow-xl ring-1 ring-black/5`}
-                      >
-                        <Image
-                          src={item.src}
-                          alt={item.alt}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <p className="text-[11px] font-medium uppercase leading-tight tracking-[0.18em] text-slate-500">
-                        {item.lines.map((line) => (
-                          <span key={line} className="block">
-                            {line}
-                          </span>
-                        ))}
-                      </p>
-                    </div>
-                  ))}
+                      <source src="/videos/Our Solution - Video.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 </div>
               </div>
             </div>
