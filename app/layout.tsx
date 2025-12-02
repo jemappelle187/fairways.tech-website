@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Fairways.Tech",
   },
   description:
-    "Fairways.Tech builds compliance-first digital rails, identity, and data infrastructure to unlock fair finance for Africa's smallholder farmers.",
+    "Transform farm data into trusted finance. Fairways.Tech is a community-driven agri-fintech ecosystem unlocking scalable, compliant access to finance and markets for African smallholder farmers.",
   icons: {
     icon: [
       { url: "/images/favicons/favicon.ico" },
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
+    title: "Fairways.Tech – Unlock Finance for African Farmers",
     description:
-      "Digital infrastructure for smallholder farmers: identity, data, and compliant liquidity rails across Africa.",
+      "Transform farm data into trusted finance. Community-driven agri-fintech ecosystem unlocking scalable, compliant access to finance and markets for smallholder farmers across Africa.",
     url: "https://fairways.tech",
     siteName: "Fairways.Tech",
     images: [
@@ -35,17 +35,17 @@ export const metadata: Metadata = {
         url: "/og-fairways-tech.png?v=6",
         width: 1200,
         height: 630,
-        alt: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
+        alt: "Fairways.Tech: Community-driven digital infrastructure empowering African smallholder farmers with trusted data, compliant finance, and market access",
       }
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
+    title: "Fairways.Tech – Unlock Finance for African Farmers",
     description:
-      "Compliance-first digital rails and data infrastructure for African smallholder farmers.",
-    images: ["/og-fairways-tech.png?v=5"],
+      "Transform farm data into trusted finance. Community-driven agri-fintech unlocking scalable, compliant access to markets and capital for smallholder farmers.",
+    images: ["/og-fairways-tech.png?v=6"],
   },
 };
 

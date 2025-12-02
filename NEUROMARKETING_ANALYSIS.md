@@ -224,3 +224,4 @@ For Fairways.Tech, this translates to:
 - Clearer differentiation in the agri-fintech space
 
 
+
