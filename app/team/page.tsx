@@ -20,7 +20,7 @@ export default function TeamPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-sand">
+      <main id="main-content" className="min-h-screen bg-sand">
         <section className="relative overflow-hidden pt-28 pb-24">
           {/* Leaf background */}
           <div className="pointer-events-none absolute inset-0 -z-20 bg-[url('/images/leaf_background.png')] bg-cover bg-center" />

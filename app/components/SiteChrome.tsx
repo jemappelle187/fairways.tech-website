@@ -155,11 +155,19 @@ export function Header() {
   };
 
   return (
-    <header
-      className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/80 backdrop-blur-lg shadow-xl transition-all duration-300 ${
-        isScrolled ? "h-16 shadow-md" : "h-20"
-      }`}
-    >
+    <>
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-forest focus:px-4 focus:py-2 focus:text-white focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
+      <header
+        className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/80 backdrop-blur-lg shadow-xl transition-all duration-300 ${
+          isScrolled ? "h-16 shadow-md" : "h-20"
+        }`}
+      >
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between gap-8 px-6 transition-all duration-300 ${
           isScrolled ? "h-16" : "h-20"
@@ -182,7 +190,7 @@ export function Header() {
             Fairways.Tech
           </div>
         </a>
-        <nav className="hidden items-center gap-6 text-base font-medium tracking-wide md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-6 text-base font-medium tracking-wide md:flex">
           {/* Section anchors grouped together */}
           <div className="flex items-center gap-6">
             {sectionLinks.map((item) => (
@@ -197,6 +205,9 @@ export function Header() {
                 }`}
               >
                 {item.label}
+                {activeSection === item.id && isHomePage && (
+                  <span className="sr-only">(current section)</span>
+                )}
                 {activeSection === item.id && isHomePage && (
                   <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-forest transition-all" />
                 )}
@@ -286,6 +297,7 @@ export function Header() {
       </div>
       {isMenuOpen && (
         <nav
+          aria-label="Mobile navigation"
           className={`fixed inset-x-0 z-40 border-t border-white/40 bg-white/95 backdrop-blur-md transition-all duration-300 md:hidden ${
             isScrolled ? "top-16" : "top-20"
           }`}
@@ -313,6 +325,9 @@ export function Header() {
                   }`}
                 >
                   {item.label}
+                  {activeSection === item.id && isHomePage && (
+                    <span className="sr-only">(current section)</span>
+                  )}
                 </a>
               ))}
 
@@ -372,6 +387,7 @@ export function Header() {
       )}
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </header>
+    </>
   );
 }
 

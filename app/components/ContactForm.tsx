@@ -154,7 +154,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
       {error && (
-        <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+        <div role="alert" aria-live="polite" className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
           {error}
         </div>
       )}
@@ -362,8 +362,9 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         >
           {isSubmitting ? (
             <>
-              <span className="mr-2 h-4 w-4 rounded-full border-2 border-white/20 border-t-white animate-spin" />
-              Sending...
+              <span className="mr-2 h-4 w-4 rounded-full border-2 border-white/20 border-t-white animate-spin" aria-hidden="true" />
+              <span>Sending...</span>
+              <span className="sr-only">Please wait, sending your message</span>
             </>
           ) : (
             "Send message"

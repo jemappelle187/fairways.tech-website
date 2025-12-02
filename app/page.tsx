@@ -111,9 +111,11 @@ function VideoHero() {
         loop
         muted
         playsInline
+        aria-label="Hero video showcasing Fairways.Tech digital infrastructure for smallholder farmers"
         className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:object-cover"
       >
         <source src="/videos/FAIRWAYS.TECH _Hero.mp4" type="video/mp4" />
+        <p>Video showing Fairways.Tech&apos;s mission to build digital infrastructure for African smallholder farmers.</p>
       </video>
       {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
       <div className="absolute inset-0 z-0 bg-black/30 hidden md:block" />
@@ -166,7 +168,7 @@ export default function HomePage() {
         <ViaTracker />
       </Suspense>
       <Header />
-      <main className="flex flex-col gap-20 pb-20">
+      <main id="main-content" className="flex flex-col gap-20 pb-20">
         <VideoHero />
         <div className="flex flex-col gap-20">
           {/* SOLUTION - ORIGINAL WITH CIRCLES (BACKUP - COMMENTED OUT)
@@ -315,11 +317,12 @@ export default function HomePage() {
                         loop
                         muted
                         playsInline
+                        aria-label="Video demonstrating digital farm profiles, value chain tracking, and compliance-first finance infrastructure"
                         className="absolute inset-0 h-full w-full object-cover rounded-2xl sm:rounded-3xl"
                         style={{ backgroundColor: 'transparent' }}
                       >
                         <source src="/videos/section2.mp4?v=3" type="video/mp4" />
-                        Your browser does not support the video tag.
+                        <p>Video showing how Fairways.Tech creates digital farm profiles, tracks value chains, and provides compliance-first financial infrastructure for smallholder farmers.</p>
                       </video>
                     </div>
                   </div>
@@ -330,11 +333,12 @@ export default function HomePage() {
                       loop
                       muted
                       playsInline
+                      aria-label="Video demonstrating digital farm profiles, value chain tracking, and compliance-first finance infrastructure"
                       className="h-full w-full object-cover rounded-3xl"
                       style={{ backgroundColor: 'transparent' }}
                     >
                       <source src="/videos/section2.mp4?v=3" type="video/mp4" />
-                      Your browser does not support the video tag.
+                      <p>Video showing how Fairways.Tech creates digital farm profiles, tracks value chains, and provides compliance-first financial infrastructure for smallholder farmers.</p>
                     </video>
                   </div>
                 </div>
@@ -347,8 +351,19 @@ export default function HomePage() {
   id="approach"
   className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-20"
 >
-  {/* Wet leaf background */}
-  <div className="pointer-events-none absolute inset-0 bg-[url('/images/wet_leaf.png')] bg-cover bg-center" />
+  {/* Wet leaf background video */}
+  <div className="pointer-events-none absolute inset-0">
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      aria-hidden="true"
+      className="h-full w-full object-cover"
+    >
+      <source src="/videos/wetleaf_backgroundvideo.mp4" type="video/mp4" />
+    </video>
+  </div>
 
   {/* Dark overlay similar to hero/CTA so text reads well */}
   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-transparent" />

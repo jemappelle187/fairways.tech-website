@@ -70,7 +70,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-sand">
+      <main id="main-content" className="min-h-screen bg-sand">
         <section className="relative overflow-hidden pt-28 pb-24">
           <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
           <header className="mb-12">

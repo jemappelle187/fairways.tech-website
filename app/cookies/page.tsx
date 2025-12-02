@@ -4,7 +4,7 @@ export default function CookiesPage() {
   return (
     <>
       <Header />
-      <main className="bg-sand min-h-screen pt-28 pb-20">
+      <main id="main-content" className="bg-sand min-h-screen pt-28 pb-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <h1 className="text-3xl font-semibold text-stone sm:text-4xl">
           Cookie & Local Storage Policy

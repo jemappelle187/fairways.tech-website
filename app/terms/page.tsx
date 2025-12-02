@@ -11,7 +11,7 @@ export default function TermsPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-sand pt-28 pb-20">
+      <main id="main-content" className="min-h-screen bg-sand pt-28 pb-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-forest">
           Legal
