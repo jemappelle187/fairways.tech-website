@@ -169,8 +169,8 @@ export default function HomePage() {
       <main className="flex flex-col gap-20 pb-20">
         <VideoHero />
         <div className="flex flex-col gap-20">
-          {/* SOLUTION */}
-          <section id="solution" className="bg-sand px-6 py-24 sm:py-28 lg:px-24">
+          {/* SOLUTION - ORIGINAL WITH CIRCLES (BACKUP - COMMENTED OUT)
+          <section id="solution-circles-backup" className="bg-sand px-6 py-24 sm:py-28 lg:px-24">
             <div className="mx-auto max-w-6xl">
               <div className="flex flex-col gap-y-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
                 <div className="max-w-xl lg:max-w-2xl">
@@ -223,16 +223,100 @@ export default function HomePage() {
                   </ul>
                 </div>
                 <div className="mt-10 flex flex-col items-center gap-8 text-center lg:mt-0 lg:items-end lg:gap-10 lg:text-left">
-                  {/* Video showcase */}
-                  <div className="relative w-full max-w-lg overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/5">
+                  {solutionVisualItems.map((item) => (
+                    <div
+                      key={item.alt}
+                      className="flex flex-wrap items-center justify-center gap-4 text-center lg:flex-nowrap lg:justify-start lg:gap-6 lg:text-left"
+                    >
+                      <div
+                        className={`relative ${item.sizeClass} overflow-hidden rounded-full shadow-xl ring-1 ring-black/5`}
+                      >
+                        <Image
+                          src={item.src}
+                          alt={item.alt}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="text-[11px] font-medium uppercase leading-tight tracking-[0.18em] text-slate-500">
+                        {item.lines.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+          END BACKUP */}
+
+          {/* SOLUTION - VIDEO VERSION (ACTIVE) */}
+          <section id="solution" className="bg-sand px-6 py-24 sm:py-28 lg:px-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="flex flex-col gap-y-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
+                <div className="max-w-xl lg:max-w-2xl">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                    Our solution
+                  </p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                    A shared digital infrastructure
+                    <br />
+                    for scalable farming.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-700 sm:text-[15px]">
+                    Fairways.Tech is a community-driven agri-fintech ecosystem that
+                    transforms fragmented farm activity into trusted, structured data.
+                    We capture field, crop, and transaction flows to unlock finance
+                    and markets for smallholder farmers, enabling banks and partners
+                    to serve rural communities with confidence.
+                  </p>
+                  <ul className="mt-6 space-y-3 text-[15px] leading-relaxed text-slate-800">
+                    <li className="flex items-start gap-3">
+                      <Leaf
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
+                        strokeWidth={2.4}
+                      />
+                      <span>
+                        <strong>Digital farm profiles</strong> linking fields,
+                        seasons, crops and performance.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Leaf
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
+                        strokeWidth={2.4}
+                      />
+                      <span>
+                        <strong>Transparent value-chain flows</strong> from input
+                        provision to harvest and sale.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Leaf
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
+                        strokeWidth={2.4}
+                      />
+                      <span>
+                        <strong>Compliance-first rails</strong> that make risk
+                        visible for local financial institutions.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-10 flex items-center justify-center lg:mt-0 lg:justify-end">
+                  <div className="relative overflow-hidden rounded-3xl" style={{ width: '800px', height: '332px', maxWidth: '100%' }}>
                     <video
                       autoPlay
                       loop
                       muted
                       playsInline
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover rounded-3xl"
+                      style={{ backgroundColor: 'transparent' }}
                     >
-                      <source src="/videos/Our Solution - Video.mp4" type="video/mp4" />
+                      <source src="/videos/section2.mp4?v=3" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
