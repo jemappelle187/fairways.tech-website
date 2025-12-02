@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   },
   description:
     "Transform farm data into trusted finance. Fairways.Tech is a community-driven agri-fintech ecosystem unlocking scalable, compliant access to finance and markets for African smallholder farmers.",
+  authors: [
+    { name: "Fairways.Tech" },
+    { name: "Emmanuel Yeboah Martina", url: "https://www.linkedin.com/in/eymartina/" },
+    { name: "Kwan Yuk Li", url: "https://nl.linkedin.com/in/kwan-yuk-li-bb040b4" }
+  ],
+  creator: "Fairways.Tech",
+  publisher: "Fairways.Tech",
   icons: {
     icon: [
       { url: "/images/favicons/favicon.ico" },
@@ -39,6 +46,8 @@ export const metadata: Metadata = {
       }
     ],
     type: "website",
+    publishedTime: "2025-01-01T00:00:00.000Z",
+    authors: ["Fairways.Tech", "Emmanuel Yeboah Martina", "Kwan Yuk Li"],
   },
   twitter: {
     card: "summary_large_image",
