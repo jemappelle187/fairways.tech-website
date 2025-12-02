@@ -307,7 +307,24 @@ export default function HomePage() {
                   </ul>
                 </div>
                 <div className="mt-10 flex items-center justify-center lg:mt-0 lg:justify-end">
-                  <div className="relative w-full max-w-[95vw] overflow-hidden rounded-3xl lg:w-[800px] lg:max-w-none" style={{ aspectRatio: '800/332' }}>
+                  {/* Mobile: Responsive with aspect ratio */}
+                  <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl lg:hidden">
+                    <div className="relative w-full" style={{ paddingBottom: '41.5%' }}>
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 h-full w-full object-cover rounded-2xl sm:rounded-3xl"
+                        style={{ backgroundColor: 'transparent' }}
+                      >
+                        <source src="/videos/section2.mp4?v=3" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                  {/* Desktop: Fixed 800x332px */}
+                  <div className="relative hidden overflow-hidden rounded-3xl lg:block" style={{ width: '800px', height: '332px' }}>
                     <video
                       autoPlay
                       loop
