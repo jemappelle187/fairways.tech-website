@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Fairways.Tech",
     images: [
       {
-        url: "/og-fairways-tech.png?v=2",
+        url: "/og-fairways-tech.png?v=3",
         width: 1200,
         height: 630,
         alt: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
     description:
       "Compliance-first digital rails and data infrastructure for African smallholder farmers.",
-    images: ["/og-fairways-tech.png?v=2"],
+    images: ["/og-fairways-tech.png?v=3"],
   },
 };
 
@@ -111,7 +111,7 @@ export default function RootLayout({
               "@id": "https://fairways.tech/#organization",
               name: "Fairways.Tech",
               url: "https://fairways.tech",
-              logo: "https://fairways.tech/og-fairways-tech.png?v=2",
+              logo: "https://fairways.tech/og-fairways-tech.png?v=3",
               sameAs: [],
               foundingDate: "2025",
               address: {
@@ -147,7 +147,7 @@ export default function RootLayout({
                 name: "Fairways.Tech",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://fairways.tech/og-fairways-tech.png?v=2",
+                  url: "https://fairways.tech/og-fairways-tech.png?v=3",
                 },
               },
             }),
