@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     "Fairways.Tech builds compliance-first digital rails, identity, and data infrastructure to unlock fair finance for Africa's smallholder farmers.",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/favicon-512x512.png", sizes: "512x512", type: "image/png" }
+      { url: "/images/favicons/favicon.ico" },
+      { url: "/images/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicons/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/favicons/favicon-512x512.png", sizes: "512x512", type: "image/png" }
     ],
-    apple: "/apple-touch-icon.png",
+    apple: "/images/favicons/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
   openGraph: {
