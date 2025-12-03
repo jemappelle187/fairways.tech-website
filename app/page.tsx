@@ -466,16 +466,16 @@ export default function HomePage() {
                     </video>
                   </div>
                   {/* Single glass gradient overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       COUNTRIES
                     </p>
-                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 3 : 0} suffix="+" />
                     </p>
-                    <p className="text-sm leading-relaxed text-slate-800">
+                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
                       Growing network across Africa, Asia and Europe, expanding
                       trusted rails for rural finance.
                     </p>
@@ -495,16 +495,16 @@ export default function HomePage() {
                     />
                   </div>
                   {/* Single glass gradient overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       FARMERS
                     </p>
-                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 250 : 0} suffix="+" />
                     </p>
-                    <p className="text-sm leading-relaxed text-slate-800">
+                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
                       Smallholder and horticultural farmers unlocking fair, scalable
                       finance through trusted data.
                     </p>
@@ -527,16 +527,16 @@ export default function HomePage() {
                     </video>
                   </div>
                   {/* Glass overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       COMMUNITY AGENTS
                     </p>
-                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 30 : 0} suffix="+" />
                     </p>
-                    <p className="text-sm leading-relaxed text-slate-800">
+                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
                       Local field agents and cooperatives connecting real farms to
                       digital rails.
                     </p>
