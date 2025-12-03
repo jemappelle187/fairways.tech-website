@@ -309,9 +309,9 @@ export default function HomePage() {
                   </ul>
                 </div>
                 <div className="mt-10 flex items-center justify-center lg:mt-0 lg:justify-end">
-                  {/* Mobile: Responsive with aspect ratio */}
+                  {/* Mobile: Full-width with taller aspect ratio */}
                   <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl lg:hidden">
-                    <div className="relative w-full" style={{ paddingBottom: '41.5%' }}>
+                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                       <video
                         autoPlay
                         loop
