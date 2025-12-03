@@ -102,7 +102,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
       </head>
       <body className="bg-sand font-sans text-stone antialiased">
-        {/* <ContentProtection /> */}
+        <ContentProtection />
         {children}
         <VisitTracker />
         <UmamiLoader />
