@@ -140,9 +140,39 @@ function ViaTracker() {
   return null;
 }
 
+// Custom hook for fade-in animations on scroll
+function useFadeInOnScroll() {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
 export default function HomePage() {
   const [statsInView, setStatsInView] = useState(false);
   const statsRef = useRef<HTMLDivElement | null>(null);
+  
+  // Fade-in hooks for each section
+  const reachCardsFade = useFadeInOnScroll();
+  const partnershipCardsFade = useFadeInOnScroll();
+  const approachCardsFade = useFadeInOnScroll();
 
   useEffect(() => {
     if (!statsRef.current) return;
@@ -385,8 +415,10 @@ export default function HomePage() {
       </h2>
     </div>
 
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={approachCardsFade.ref}>
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
+        approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}>
         <h3 className="text-base font-semibold text-slate-900">
           Data that unlocks finance
         </h3>
@@ -395,7 +427,9 @@ export default function HomePage() {
           visible, enabling banks to serve rural communities with confidence.
         </p>
       </div>
-      <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
+        approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`} style={{ transitionDelay: approachCardsFade.isVisible ? '150ms' : '0ms' }}>
         <h3 className="text-base font-semibold text-slate-900">
           Rails that reduce risk
         </h3>
@@ -404,7 +438,9 @@ export default function HomePage() {
           transforming how institutions assess and serve rural markets.
         </p>
       </div>
-      <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
+        approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`} style={{ transitionDelay: approachCardsFade.isVisible ? '300ms' : '0ms' }}>
         <h3 className="text-base font-semibold text-slate-900">
           Agents who connect real farms
         </h3>
@@ -449,9 +485,11 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="grid gap-6 sm:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-3" ref={reachCardsFade.ref}>
                 {/* COUNTRIES */}
-                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                  reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}>
                   {/* Background video */}
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <video
@@ -483,7 +521,9 @@ export default function HomePage() {
                 </div>
 
                 {/* FARMERS */}
-                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                  reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: reachCardsFade.isVisible ? '150ms' : '0ms' }}>
                   {/* Background image */}
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
@@ -512,7 +552,9 @@ export default function HomePage() {
                 </div>
 
                 {/* COMMUNITY AGENTS */}
-                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                  reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: reachCardsFade.isVisible ? '300ms' : '0ms' }}>
                   {/* Background video */}
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <video
@@ -588,13 +630,16 @@ export default function HomePage() {
       </div>
     </div>
 
-    <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {partnershipCards.map((card) => {
+    <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={partnershipCardsFade.ref}>
+      {partnershipCards.map((card, index) => {
         const Icon = card.icon;
         return (
           <div
             key={card.title}
-            className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm"
+            className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
+              partnershipCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            style={{ transitionDelay: partnershipCardsFade.isVisible ? `${index * 100}ms` : '0ms' }}
           >
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-forest/10">
               <Icon className="h-5 w-5 text-forest" strokeWidth={2.2} />
