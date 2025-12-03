@@ -450,43 +450,97 @@ export default function HomePage() {
               </div>
 
               <div className="grid gap-6 sm:grid-cols-3">
-                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                    Countries
-                  </p>
-                  <p className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
-                    <Counter target={statsInView ? 3 : 0} suffix="+" />
-                  </p>
-                  <p className="mt-2 text-sm text-slate-700">
-                    Growing network across Africa, Asia and Europe, expanding
-                    trusted rails for rural finance.
-                  </p>
+                {/* COUNTRIES */}
+                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                  {/* Background video */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      aria-hidden="true"
+                      className="h-full w-full object-cover opacity-90"
+                    >
+                      <source src="/videos/globe_video (400 x 400 px)2.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  {/* Single glass gradient overlay */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  {/* Content */}
+                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                      COUNTRIES
+                    </p>
+                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                      <Counter target={statsInView ? 3 : 0} suffix="+" />
+                    </p>
+                    <p className="text-sm leading-relaxed text-slate-800">
+                      Growing network across Africa, Asia and Europe, expanding
+                      trusted rails for rural finance.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                    Farmers
-                  </p>
-                  <p className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
-                    <Counter target={statsInView ? 250 : 0} suffix="+" />
-                  </p>
-                  <p className="mt-2 text-sm text-slate-700">
-                    Smallholder and horticultural farmers unlocking fair,
-                    scalable finance through trusted data.
-                  </p>
+                {/* FARMERS */}
+                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                  {/* Background image */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                    <Image
+                      src="/images/farmers_card.png"
+                      alt="Smallholder and horticultural farmers"
+                      fill
+                      className="h-full w-full object-cover opacity-90"
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                    />
+                  </div>
+                  {/* Single glass gradient overlay */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  {/* Content */}
+                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                      FARMERS
+                    </p>
+                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                      <Counter target={statsInView ? 250 : 0} suffix="+" />
+                    </p>
+                    <p className="text-sm leading-relaxed text-slate-800">
+                      Smallholder and horticultural farmers unlocking fair, scalable
+                      finance through trusted data.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                    Community agents
-                  </p>
-                  <p className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
-                    <Counter target={statsInView ? 30 : 0} suffix="+" />
-                  </p>
-                  <p className="mt-2 text-sm text-slate-700">
-                    Local field agents and cooperatives connecting real farms to
-                    digital rails.
-                  </p>
+                {/* COMMUNITY AGENTS */}
+                <div className="group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition duration-200 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)]">
+                  {/* Background video */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      aria-hidden="true"
+                      className="h-full w-full object-cover opacity-90"
+                    >
+                      <source src="/videos/farmer_agent_video.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  {/* Glass overlay */}
+                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-80 transition-opacity duration-200 ease-out group-hover:opacity-45" />
+                  {/* Content */}
+                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-slate-600">
+                      COMMUNITY AGENTS
+                    </p>
+                    <p className="mb-4 text-5xl font-semibold tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-slate-950">
+                      <Counter target={statsInView ? 30 : 0} suffix="+" />
+                    </p>
+                    <p className="text-sm leading-relaxed text-slate-800">
+                      Local field agents and cooperatives connecting real farms to
+                      digital rails.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
