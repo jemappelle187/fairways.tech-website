@@ -46,8 +46,6 @@ export const metadata: Metadata = {
       }
     ],
     type: "website",
-    publishedTime: "2025-01-01T00:00:00.000Z",
-    authors: ["Fairways.Tech", "Emmanuel Yeboah Martina", "Kwan Yuk Li"],
   },
   twitter: {
     card: "summary_large_image",
