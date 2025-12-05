@@ -129,10 +129,10 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
+                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
                   pathname === link.href
                     ? "bg-forest/10 text-forest"
-                    : "text-slate-700 hover:text-forest hover:bg-slate-50"
+                    : "text-slate-700 hover:text-forest hover:bg-gradient-to-b hover:from-forest/8 hover:to-forest/5 hover:shadow-sm hover:-translate-y-0.5 hover:scale-[1.02]"
                 }`}
               >
                 {link.label}
