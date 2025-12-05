@@ -221,82 +221,104 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <style>
                 body { 
-                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+                  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
                   line-height: 1.6; 
-                  color: #333; 
+                  color: #111827; 
                   margin: 0; 
                   padding: 0; 
-                  background-color: #f4efe5;
+                  background-color: #F4EFE7;
                 }
                 .email-container { 
                   max-width: 600px; 
-                  margin: 0 auto; 
+                  margin: 20px auto; 
                   background-color: #ffffff;
+                  border-radius: 8px;
+                  overflow: hidden;
+                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
                 }
                 .header { 
-                  background: linear-gradient(135deg, #1F4D36 0%, #2d6a4f 100%); 
+                  background: #1F4D36; 
                   color: white; 
-                  padding: 40px 30px; 
+                  padding: 48px 32px; 
                   text-align: center;
                 }
                 .header h1 { 
                   margin: 0; 
-                  font-size: 24px; 
+                  font-size: 28px; 
                   font-weight: 600;
+                  letter-spacing: -0.02em;
                 }
                 .content { 
-                  padding: 40px 30px; 
+                  padding: 48px 32px; 
+                  background-color: #ffffff;
                 }
                 .greeting {
-                  font-size: 18px;
+                  font-size: 20px;
                   color: #1F4D36;
                   font-weight: 600;
-                  margin-bottom: 16px;
+                  margin-bottom: 20px;
+                  letter-spacing: -0.01em;
                 }
                 .message {
-                  color: #4a5568;
+                  color: #111827;
                   font-size: 16px;
-                  line-height: 1.7;
+                  line-height: 1.75;
                   margin-bottom: 24px;
                 }
                 .highlight-box {
-                  background: #f0f9f4;
+                  background: #F4EFE7;
                   border-left: 4px solid #1F4D36;
-                  padding: 20px;
-                  margin: 24px 0;
-                  border-radius: 4px;
+                  padding: 24px;
+                  margin: 32px 0;
+                  border-radius: 6px;
                 }
                 .highlight-box p {
                   margin: 0;
-                  color: #2d6a4f;
-                  font-size: 15px;
+                  color: #111827;
+                  font-size: 16px;
+                  line-height: 1.75;
+                }
+                .highlight-box strong {
+                  color: #1F4D36;
+                  font-weight: 600;
+                  display: block;
+                  margin-bottom: 8px;
                 }
                 .cta-button {
                   display: inline-block;
                   background: #1F4D36;
                   color: white;
-                  padding: 14px 32px;
+                  padding: 16px 40px;
                   text-decoration: none;
-                  border-radius: 24px;
+                  border-radius: 32px;
                   font-weight: 600;
-                  font-size: 15px;
-                  margin: 24px 0;
+                  font-size: 16px;
+                  margin: 32px 0;
                   transition: background 0.2s;
+                  letter-spacing: -0.01em;
+                }
+                .cta-button:hover {
+                  background: #1F3B2C;
                 }
                 .footer { 
-                  background: #f9f9f9; 
-                  padding: 30px; 
+                  background: #F4EFE7; 
+                  padding: 32px; 
                   text-align: center; 
-                  border-top: 1px solid #e2e8f0;
+                  border-top: 1px solid #E8E0D4;
                 }
                 .footer p {
                   margin: 8px 0;
-                  font-size: 13px;
-                  color: #718096;
+                  font-size: 14px;
+                  color: #111827;
+                }
+                .footer strong {
+                  color: #1F4D36;
+                  font-weight: 600;
                 }
                 .footer a {
                   color: #1F4D36;
                   text-decoration: none;
+                  font-weight: 500;
                 }
                 .footer a:hover {
                   text-decoration: underline;
@@ -306,10 +328,33 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
                 }
                 .social-links a {
                   display: inline-block;
-                  margin: 0 8px;
+                  margin: 0 10px;
                   color: #1F4D36;
                   text-decoration: none;
-                  font-size: 13px;
+                  font-size: 14px;
+                  font-weight: 500;
+                }
+                .disclaimer {
+                  margin-top: 24px;
+                  font-size: 12px;
+                  color: #6B7280;
+                  line-height: 1.6;
+                }
+                @media only screen and (max-width: 600px) {
+                  .email-container {
+                    margin: 0;
+                    border-radius: 0;
+                  }
+                  .header, .content, .footer {
+                    padding-left: 24px;
+                    padding-right: 24px;
+                  }
+                  .header h1 {
+                    font-size: 24px;
+                  }
+                  .greeting {
+                    font-size: 18px;
+                  }
                 }
               </style>
             </head>
@@ -327,7 +372,7 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
                   </div>
                   <div class="highlight-box">
                     <p>
-                      <strong>What happens next?</strong><br>
+                      <strong>What happens next?</strong>
                       Our team will review your partnership inquiry and reach out to discuss how we can collaborate to unlock scalable, compliant finance for rural communities.
                     </p>
                   </div>
@@ -346,7 +391,7 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
                     <a href="https://x.com/FairwaysTech">X (Twitter)</a> •
                     <a href="https://www.instagram.com/fairways.tech/">Instagram</a>
                   </div>
-                  <p style="margin-top: 20px; font-size: 12px; color: #a0aec0;">
+                  <p class="disclaimer">
                     This is an automated confirmation email. If you have any urgent questions, please reply directly to this email.
                   </p>
                 </div>
