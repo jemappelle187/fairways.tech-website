@@ -27,7 +27,7 @@ export default function CookiesPage() {
                 Fairways.Tech uses a minimal, compliance‑aligned set of cookies and storage technologies. We do not use advertising cookies, tracking pixels, or any cross‑site profiling technologies. Our approach reflects our identity as a regulated, institutional‑grade platform.
               </p>
               <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 27 November 2025
+                Last updated: 27 January 2025
               </p>
             </div>
           </div>
