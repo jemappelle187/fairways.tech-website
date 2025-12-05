@@ -100,42 +100,53 @@ export function Header() {
         }`}
       >
         <div
-          className={`mx-auto flex max-w-6xl items-center justify-between gap-8 px-6 transition-all duration-300 ${
+          className={`mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
             isScrolled ? "h-16" : "h-20"
           }`}
         >
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          {/* Logo - Left aligned */}
+          <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo/logo-fairways-forest.svg"
               alt="Fairways.Tech"
               className={`transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "h-8 w-8" : "h-12 w-12 sm:h-14 sm:w-14"
+                isScrolled ? "h-8 w-8" : "h-10 w-10 sm:h-12 sm:w-12"
               }`}
             />
             <div
               className={`font-bold tracking-tight text-forest transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "text-xl" : "text-xl sm:text-2xl"
+                isScrolled ? "text-lg" : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
               Fairways.Tech
             </div>
           </a>
 
-          {/* Desktop: Contact button + Language + Hamburger */}
-          <div className="flex items-center gap-4">
-            {/* Contact CTA button */}
-            <a
-              href="#contact"
-              onClick={handleContactClick}
-              className="hidden sm:inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
-            >
-              Start a partnership
-            </a>
+          {/* Desktop: Menu items in navbar */}
+          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center" aria-label="Main navigation">
+            {menuLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
+                  pathname === link.href
+                    ? "bg-forest/10 text-forest"
+                    : "text-slate-700 hover:text-forest hover:bg-slate-50"
+                }`}
+              >
+                {link.label}
+                {pathname === link.href && (
+                  <span className="sr-only"> (current page)</span>
+                )}
+              </a>
+            ))}
+          </nav>
 
-            {/* Language selector dropdown */}
-            <div className="relative">
+          {/* Right side: Language selector + CTA button (desktop) / Hamburger (mobile) */}
+          <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+            {/* Language selector dropdown - Desktop only */}
+            <div className="relative hidden sm:block">
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                 className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-forest hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
@@ -207,13 +218,22 @@ export function Header() {
               )}
             </div>
 
-            {/* Hamburger menu button */}
+            {/* Contact CTA button - Desktop only */}
+            <a
+              href="#contact"
+              onClick={handleContactClick}
+              className="hidden lg:inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+            >
+              Start a partnership
+            </a>
+
+            {/* Hamburger menu button - Mobile only */}
             <button
               onClick={() => {
                 setIsMenuOpen(!isMenuOpen);
                 setIsLangDropdownOpen(false);
               }}
-              className="p-2 text-stone transition hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded-lg"
+              className="lg:hidden p-2 text-stone transition hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded-lg"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -238,15 +258,40 @@ export function Header() {
           </div>
         </div>
 
-        {/* Dropdown Menu */}
+        {/* Dropdown Menu - Mobile only */}
         {isMenuOpen && (
           <div
-            className="absolute left-0 right-0 top-full bg-white/95 backdrop-blur-lg border-b border-slate-200 shadow-lg"
+            className="lg:hidden absolute left-0 right-0 top-full bg-white/95 backdrop-blur-lg border-b border-slate-200 shadow-lg"
             style={{
               minHeight: `calc(100vh - ${isScrolled ? "64px" : "80px"})`,
             }}
           >
             <div className="mx-auto max-w-6xl px-6 py-8">
+              {/* Mobile Language selector */}
+              <div className="mb-6 sm:hidden">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">Language</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setCurrentLanguage(lang.code);
+                        setIsLangDropdownOpen(false);
+                        // TODO: Implement actual language switching logic
+                      }}
+                      className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
+                        currentLanguage === lang.code
+                          ? "border-forest bg-forest/10 text-forest"
+                          : "border-slate-200 bg-white text-slate-700 hover:border-forest hover:text-forest"
+                      }`}
+                    >
+                      <span className="text-base" aria-hidden="true">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <nav className="flex flex-col gap-2" aria-label="Main navigation">
                 {menuLinks.map((link) => (
                   <a
@@ -268,7 +313,7 @@ export function Header() {
               </nav>
 
               {/* Mobile Contact button */}
-              <div className="mt-6 sm:hidden">
+              <div className="mt-6">
                 <a
                   href="#contact"
                   onClick={handleContactClick}
