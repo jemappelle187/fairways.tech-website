@@ -228,92 +228,132 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
                   padding: 0; 
                   background-color: #F4EFE7;
                 }
+                .email-wrapper {
+                  padding: 24px 0;
+                }
                 .email-container { 
                   max-width: 600px; 
-                  margin: 20px auto; 
+                  margin: 0 auto; 
                   background-color: #ffffff;
-                  border-radius: 8px;
+                  border-radius: 12px;
                   overflow: hidden;
-                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                  box-shadow: 0 8px 24px rgba(31, 77, 54, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
                 }
                 .header { 
-                  background: #1F4D36; 
+                  background: linear-gradient(135deg, #1F4D36 0%, #1F3B2C 100%); 
                   color: white; 
-                  padding: 48px 32px; 
+                  padding: 56px 40px 48px; 
                   text-align: center;
+                  position: relative;
+                }
+                .header::after {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  height: 1px;
+                  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                }
+                .logo {
+                  display: block;
+                  margin: 0 auto 24px;
+                  height: 48px;
+                  width: auto;
                 }
                 .header h1 { 
                   margin: 0; 
-                  font-size: 28px; 
+                  font-size: 32px; 
                   font-weight: 600;
-                  letter-spacing: -0.02em;
+                  letter-spacing: -0.03em;
+                  line-height: 1.2;
                 }
                 .content { 
-                  padding: 48px 32px; 
+                  padding: 56px 40px; 
                   background-color: #ffffff;
                 }
                 .greeting {
-                  font-size: 20px;
+                  font-size: 22px;
                   color: #1F4D36;
                   font-weight: 600;
-                  margin-bottom: 20px;
-                  letter-spacing: -0.01em;
+                  margin-bottom: 24px;
+                  letter-spacing: -0.02em;
                 }
                 .message {
                   color: #111827;
-                  font-size: 16px;
-                  line-height: 1.75;
-                  margin-bottom: 24px;
+                  font-size: 17px;
+                  line-height: 1.8;
+                  margin-bottom: 28px;
                 }
                 .highlight-box {
-                  background: #F4EFE7;
-                  border-left: 4px solid #1F4D36;
-                  padding: 24px;
-                  margin: 32px 0;
-                  border-radius: 6px;
+                  background: linear-gradient(to right, #F4EFE7 0%, #F9F7F3 100%);
+                  border-left: 5px solid #1F4D36;
+                  padding: 28px;
+                  margin: 36px 0;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(31, 77, 54, 0.04);
                 }
                 .highlight-box p {
                   margin: 0;
                   color: #111827;
-                  font-size: 16px;
-                  line-height: 1.75;
+                  font-size: 17px;
+                  line-height: 1.8;
                 }
                 .highlight-box strong {
                   color: #1F4D36;
                   font-weight: 600;
                   display: block;
-                  margin-bottom: 8px;
+                  margin-bottom: 12px;
+                  font-size: 18px;
+                  letter-spacing: -0.01em;
+                }
+                .cta-wrapper {
+                  text-align: center;
+                  margin: 40px 0 32px;
                 }
                 .cta-button {
                   display: inline-block;
-                  background: #1F4D36;
+                  background: linear-gradient(135deg, #1F4D36 0%, #1F3B2C 100%);
                   color: white;
-                  padding: 16px 40px;
+                  padding: 18px 48px;
                   text-decoration: none;
                   border-radius: 32px;
                   font-weight: 600;
-                  font-size: 16px;
-                  margin: 32px 0;
-                  transition: background 0.2s;
+                  font-size: 17px;
                   letter-spacing: -0.01em;
+                  box-shadow: 0 4px 12px rgba(31, 77, 54, 0.25);
+                  transition: all 0.2s ease;
                 }
                 .cta-button:hover {
-                  background: #1F3B2C;
+                  background: linear-gradient(135deg, #1F3B2C 0%, #1F4D36 100%);
+                  box-shadow: 0 6px 16px rgba(31, 77, 54, 0.35);
+                  transform: translateY(-1px);
                 }
                 .footer { 
-                  background: #F4EFE7; 
-                  padding: 32px; 
+                  background: linear-gradient(to bottom, #F4EFE7 0%, #F9F7F3 100%); 
+                  padding: 40px 32px; 
                   text-align: center; 
                   border-top: 1px solid #E8E0D4;
+                }
+                .footer-brand {
+                  margin-bottom: 12px;
+                }
+                .footer-brand strong {
+                  color: #1F4D36;
+                  font-weight: 600;
+                  font-size: 16px;
+                  letter-spacing: -0.01em;
+                }
+                .footer-tagline {
+                  color: #4B5563;
+                  font-size: 15px;
+                  line-height: 1.6;
+                  margin-bottom: 24px;
                 }
                 .footer p {
                   margin: 8px 0;
                   font-size: 14px;
                   color: #111827;
-                }
-                .footer strong {
-                  color: #1F4D36;
-                  font-weight: 600;
                 }
                 .footer a {
                   color: #1F4D36;
@@ -324,76 +364,110 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
                   text-decoration: underline;
                 }
                 .social-links {
-                  margin-top: 20px;
+                  margin: 24px 0;
+                  padding-top: 24px;
+                  border-top: 1px solid rgba(31, 77, 54, 0.1);
                 }
                 .social-links a {
                   display: inline-block;
-                  margin: 0 10px;
+                  margin: 0 12px;
                   color: #1F4D36;
                   text-decoration: none;
                   font-size: 14px;
                   font-weight: 500;
+                  transition: color 0.2s;
+                }
+                .social-links a:hover {
+                  color: #1F3B2C;
+                  text-decoration: underline;
                 }
                 .disclaimer {
-                  margin-top: 24px;
+                  margin-top: 28px;
+                  padding-top: 24px;
+                  border-top: 1px solid rgba(31, 77, 54, 0.08);
                   font-size: 12px;
                   color: #6B7280;
                   line-height: 1.6;
                 }
                 @media only screen and (max-width: 600px) {
+                  .email-wrapper {
+                    padding: 0;
+                  }
                   .email-container {
                     margin: 0;
                     border-radius: 0;
                   }
-                  .header, .content, .footer {
-                    padding-left: 24px;
-                    padding-right: 24px;
+                  .header {
+                    padding: 40px 28px 36px;
+                  }
+                  .logo {
+                    height: 40px;
+                    margin-bottom: 20px;
                   }
                   .header h1 {
-                    font-size: 24px;
+                    font-size: 26px;
+                  }
+                  .content {
+                    padding: 40px 28px;
                   }
                   .greeting {
-                    font-size: 18px;
+                    font-size: 20px;
+                  }
+                  .message {
+                    font-size: 16px;
+                  }
+                  .highlight-box {
+                    padding: 24px;
+                  }
+                  .cta-button {
+                    padding: 16px 36px;
+                    font-size: 16px;
+                  }
+                  .footer {
+                    padding: 32px 24px;
                   }
                 }
               </style>
             </head>
             <body>
-              <div class="email-container">
-                <div class="header">
-                  <h1>Thank you for reaching out</h1>
-                </div>
-                <div class="content">
-                  <div class="greeting">
-                    Hi ${body.firstName},
+              <div class="email-wrapper">
+                <div class="email-container">
+                  <div class="header">
+                    <img src="https://fairways.tech/images/logo/logo-fairways-white.svg" alt="Fairways.Tech" class="logo" />
+                    <h1>Thank you for reaching out</h1>
                   </div>
-                  <div class="message">
-                    Thank you for your interest in Fairways.Tech. We've received your message and will get back to you as soon as possible—typically within 24–48 hours.
+                  <div class="content">
+                    <div class="greeting">
+                      Hi ${body.firstName},
+                    </div>
+                    <div class="message">
+                      Thank you for your interest in Fairways.Tech. We've received your message and will get back to you as soon as possible—typically within 24–48 hours.
+                    </div>
+                    <div class="highlight-box">
+                      <p>
+                        <strong>What happens next?</strong>
+                        Our team will review your partnership inquiry and reach out to discuss how we can collaborate to unlock scalable, compliant finance for rural communities.
+                      </p>
+                    </div>
+                    <div class="message">
+                      In the meantime, feel free to explore our website to learn more about our approach, impact, and the partners we work with.
+                    </div>
+                    <div class="cta-wrapper">
+                      <a href="https://fairways.tech" class="cta-button">Visit Fairways.Tech</a>
+                    </div>
                   </div>
-                  <div class="highlight-box">
-                    <p>
-                      <strong>What happens next?</strong>
-                      Our team will review your partnership inquiry and reach out to discuss how we can collaborate to unlock scalable, compliant finance for rural communities.
+                  <div class="footer">
+                    <p class="footer-brand"><strong>Fairways.Tech</strong></p>
+                    <p class="footer-tagline">Community-driven digital infrastructure for smallholder farmers</p>
+                    <div class="social-links">
+                      <a href="https://www.linkedin.com/company/fairways-tech/">LinkedIn</a> •
+                      <a href="https://x.com/FairwaysTech">X (Twitter)</a> •
+                      <a href="https://www.instagram.com/fairways.tech/">Instagram</a>
+                    </div>
+                    <p class="disclaimer">
+                      This is an automated confirmation email. If you have any urgent questions, please reply directly to this email.
                     </p>
                   </div>
-                  <div class="message">
-                    In the meantime, feel free to explore our website to learn more about our approach, impact, and the partners we work with.
-                  </div>
-                  <div style="text-align: center;">
-                    <a href="https://fairways.tech" class="cta-button">Visit Fairways.Tech</a>
-                  </div>
-                </div>
-                <div class="footer">
-                  <p><strong>Fairways.Tech</strong></p>
-                  <p>Community-driven digital infrastructure for smallholder farmers</p>
-                  <div class="social-links">
-                    <a href="https://www.linkedin.com/company/fairways-tech/">LinkedIn</a> •
-                    <a href="https://x.com/FairwaysTech">X (Twitter)</a> •
-                    <a href="https://www.instagram.com/fairways.tech/">Instagram</a>
-                  </div>
-                  <p class="disclaimer">
-                    This is an automated confirmation email. If you have any urgent questions, please reply directly to this email.
-                  </p>
                 </div>
               </div>
             </body>
