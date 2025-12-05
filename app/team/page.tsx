@@ -44,7 +44,7 @@ export default function TeamPage() {
               cooperatives and financial institutions.
             </p>
             <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
-              Based across Africa, Asia &amp; Europe
+              Based across Africa, Asia, Europe &amp; Latin America
             </p>
           </header>
 

@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resendApiKey = process.env.RESEND_API_KEY;
-if (!resendApiKey) {
-  console.error("[CONTACT_API] RESEND_API_KEY is not set");
+// Lazy initialization to avoid build-time errors when API key is missing
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend) {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      console.error("[CONTACT_API] RESEND_API_KEY is not set");
+      return null;
+    }
+    resend = new Resend(resendApiKey);
+  }
+  return resend;
 }
-const resend = new Resend(resendApiKey);
 
 type ContactFormData = {
   firstName: string;
@@ -100,7 +108,8 @@ export async function POST(req: NextRequest) {
     const recipientEmail = process.env.CONTACT_EMAIL || "emmanuel.martina@fairways.tech";
     const fromEmail = process.env.RESEND_FROM_EMAIL || "emmanuel.martina@fairways.tech";
 
-    if (!resendApiKey) {
+    const resendInstance = getResend();
+    if (!resendInstance) {
       return NextResponse.json(
         { error: "Email service not configured" },
         { status: 500 }
@@ -108,7 +117,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const emailResult = await resend.emails.send({
+      const emailResult = await resendInstance.emails.send({
         from: fromEmail,
         to: recipientEmail,
         replyTo: body.email,
@@ -209,7 +218,7 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
 
     // Send automated thank you email to visitor (non-blocking)
     try {
-      const thankYouEmailResult = await resend.emails.send({
+      const thankYouEmailResult = await resendInstance.emails.send({
         from: fromEmail,
         to: body.email,
         subject: "Thank you for reaching out to Fairways.Tech",
