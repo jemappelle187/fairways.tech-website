@@ -145,8 +145,8 @@ export function Header() {
 
           {/* Right side: Language selector + CTA button (desktop) / Hamburger (mobile) */}
           <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-            {/* Language selector dropdown - Desktop only */}
-            <div className="relative hidden sm:block">
+            {/* Language selector dropdown */}
+            <div className="relative">
               <button
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                 className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-forest hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
@@ -267,31 +267,6 @@ export function Header() {
             }}
           >
             <div className="mx-auto max-w-6xl px-6 py-8">
-              {/* Mobile Language selector */}
-              <div className="mb-6 sm:hidden">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">Language</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setCurrentLanguage(lang.code);
-                        setIsLangDropdownOpen(false);
-                        // TODO: Implement actual language switching logic
-                      }}
-                      className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
-                        currentLanguage === lang.code
-                          ? "border-forest bg-forest/10 text-forest"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-forest hover:text-forest"
-                      }`}
-                    >
-                      <span className="text-base" aria-hidden="true">{lang.flag}</span>
-                      <span>{lang.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <nav className="flex flex-col gap-2" aria-label="Main navigation">
                 {menuLinks.map((link) => (
                   <a
