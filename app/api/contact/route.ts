@@ -207,6 +207,190 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
       );
     }
 
+    // Send automated thank you email to visitor (non-blocking)
+    try {
+      const thankYouEmailResult = await resend.emails.send({
+        from: fromEmail,
+        to: body.email,
+        subject: "Thank you for reaching out to Fairways.Tech",
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body { 
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+                  line-height: 1.6; 
+                  color: #333; 
+                  margin: 0; 
+                  padding: 0; 
+                  background-color: #f4efe5;
+                }
+                .email-container { 
+                  max-width: 600px; 
+                  margin: 0 auto; 
+                  background-color: #ffffff;
+                }
+                .header { 
+                  background: linear-gradient(135deg, #1F4D36 0%, #2d6a4f 100%); 
+                  color: white; 
+                  padding: 40px 30px; 
+                  text-align: center;
+                }
+                .header h1 { 
+                  margin: 0; 
+                  font-size: 24px; 
+                  font-weight: 600;
+                }
+                .content { 
+                  padding: 40px 30px; 
+                }
+                .greeting {
+                  font-size: 18px;
+                  color: #1F4D36;
+                  font-weight: 600;
+                  margin-bottom: 16px;
+                }
+                .message {
+                  color: #4a5568;
+                  font-size: 16px;
+                  line-height: 1.7;
+                  margin-bottom: 24px;
+                }
+                .highlight-box {
+                  background: #f0f9f4;
+                  border-left: 4px solid #1F4D36;
+                  padding: 20px;
+                  margin: 24px 0;
+                  border-radius: 4px;
+                }
+                .highlight-box p {
+                  margin: 0;
+                  color: #2d6a4f;
+                  font-size: 15px;
+                }
+                .cta-button {
+                  display: inline-block;
+                  background: #1F4D36;
+                  color: white;
+                  padding: 14px 32px;
+                  text-decoration: none;
+                  border-radius: 24px;
+                  font-weight: 600;
+                  font-size: 15px;
+                  margin: 24px 0;
+                  transition: background 0.2s;
+                }
+                .footer { 
+                  background: #f9f9f9; 
+                  padding: 30px; 
+                  text-align: center; 
+                  border-top: 1px solid #e2e8f0;
+                }
+                .footer p {
+                  margin: 8px 0;
+                  font-size: 13px;
+                  color: #718096;
+                }
+                .footer a {
+                  color: #1F4D36;
+                  text-decoration: none;
+                }
+                .footer a:hover {
+                  text-decoration: underline;
+                }
+                .social-links {
+                  margin-top: 20px;
+                }
+                .social-links a {
+                  display: inline-block;
+                  margin: 0 8px;
+                  color: #1F4D36;
+                  text-decoration: none;
+                  font-size: 13px;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="email-container">
+                <div class="header">
+                  <h1>Thank you for reaching out</h1>
+                </div>
+                <div class="content">
+                  <div class="greeting">
+                    Hi ${body.firstName},
+                  </div>
+                  <div class="message">
+                    Thank you for your interest in Fairways.Tech. We've received your message and will get back to you as soon as possible—typically within 24–48 hours.
+                  </div>
+                  <div class="highlight-box">
+                    <p>
+                      <strong>What happens next?</strong><br>
+                      Our team will review your partnership inquiry and reach out to discuss how we can collaborate to unlock scalable, compliant finance for rural communities.
+                    </p>
+                  </div>
+                  <div class="message">
+                    In the meantime, feel free to explore our website to learn more about our approach, impact, and the partners we work with.
+                  </div>
+                  <div style="text-align: center;">
+                    <a href="https://fairways.tech" class="cta-button">Visit Fairways.Tech</a>
+                  </div>
+                </div>
+                <div class="footer">
+                  <p><strong>Fairways.Tech</strong></p>
+                  <p>Community-driven digital infrastructure for smallholder farmers</p>
+                  <div class="social-links">
+                    <a href="https://www.linkedin.com/company/fairways-tech/">LinkedIn</a> •
+                    <a href="https://x.com/FairwaysTech">X (Twitter)</a> •
+                    <a href="https://www.instagram.com/fairways.tech/">Instagram</a>
+                  </div>
+                  <p style="margin-top: 20px; font-size: 12px; color: #a0aec0;">
+                    This is an automated confirmation email. If you have any urgent questions, please reply directly to this email.
+                  </p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        text: `
+Thank you for reaching out to Fairways.Tech
+
+Hi ${body.firstName},
+
+Thank you for your interest in Fairways.Tech. We've received your message and will get back to you as soon as possible—typically within 24–48 hours.
+
+What happens next?
+Our team will review your partnership inquiry and reach out to discuss how we can collaborate to unlock scalable, compliant finance for rural communities.
+
+In the meantime, feel free to explore our website to learn more about our approach, impact, and the partners we work with.
+
+Visit Fairways.Tech: https://fairways.tech
+
+---
+Fairways.Tech
+Community-driven digital infrastructure for smallholder farmers
+
+LinkedIn: https://www.linkedin.com/company/fairways-tech/
+X (Twitter): https://x.com/FairwaysTech
+Instagram: https://www.instagram.com/fairways.tech/
+
+This is an automated confirmation email. If you have any urgent questions, please reply directly to this email.
+        `.trim(),
+      });
+
+      if (!thankYouEmailResult.data) {
+        console.error("[CONTACT_API] Failed to send thank you email:", thankYouEmailResult.error);
+        // Don't fail the request if thank you email fails
+      } else {
+        console.log("[CONTACT_API] Thank you email sent successfully to:", body.email);
+      }
+    } catch (thankYouError: any) {
+      console.error("[CONTACT_API] Thank you email error (non-blocking):", thankYouError);
+      // Don't fail the request if thank you email fails
+    }
+
     // Send Slack notification (non-blocking)
     const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
     if (slackWebhookUrl) {
