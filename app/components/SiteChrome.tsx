@@ -104,8 +104,8 @@ export function Header() {
             isScrolled ? "h-16" : "h-20"
           }`}
         >
-          {/* Logo - Left aligned */}
-          <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
+          {/* Logo - Far left aligned */}
+          <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo/logo-fairways-forest.svg"
