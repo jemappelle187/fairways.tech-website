@@ -11,11 +11,23 @@ const menuLinks = [
   { href: "/team", label: "Team" },
 ];
 
+const languages = [
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+];
+
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,17 +39,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on escape key
+  // Close menu and language dropdown on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isMenuOpen) {
-        setIsMenuOpen(false);
+      if (event.key === "Escape") {
+        if (isMenuOpen) setIsMenuOpen(false);
+        if (isLangDropdownOpen) setIsLangDropdownOpen(false);
       }
     };
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isLangDropdownOpen]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -50,6 +63,19 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isLangDropdownOpen && !target.closest('[aria-label="Select language"]') && !target.closest('.language-dropdown')) {
+        setIsLangDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isLangDropdownOpen]);
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -97,7 +123,7 @@ export function Header() {
             </div>
           </a>
 
-          {/* Desktop: Contact button + Hamburger */}
+          {/* Desktop: Contact button + Language + Hamburger */}
           <div className="flex items-center gap-4">
             {/* Contact CTA button */}
             <a
@@ -108,9 +134,85 @@ export function Header() {
               Start a partnership
             </a>
 
+            {/* Language selector dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-forest hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                aria-label="Select language"
+                aria-expanded={isLangDropdownOpen}
+              >
+                <span className="text-base" aria-hidden="true">{languages.find(l => l.code === currentLanguage)?.flag}</span>
+                <span className="uppercase">{currentLanguage}</span>
+                <svg
+                  className={`h-4 w-4 transition-transform ${
+                    isLangDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Language dropdown menu */}
+              {isLangDropdownOpen && (
+                <div className="language-dropdown absolute right-0 top-full mt-2 w-48 rounded-lg border border-slate-200 bg-white shadow-xl z-50" role="menu">
+                  <div className="py-2">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setCurrentLanguage(lang.code);
+                          setIsLangDropdownOpen(false);
+                          // TODO: Implement actual language switching logic
+                        }}
+                        className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-inset ${
+                          currentLanguage === lang.code
+                            ? "bg-forest/5 text-forest font-semibold"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-forest"
+                        }`}
+                        role="menuitem"
+                        aria-label={`Switch to ${lang.label}`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-base" aria-hidden="true">{lang.flag}</span>
+                          <span>{lang.label}</span>
+                        </span>
+                        {currentLanguage === lang.code && (
+                          <svg
+                            className="h-4 w-4 text-forest"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Hamburger menu button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen);
+                setIsLangDropdownOpen(false);
+              }}
               className="p-2 text-stone transition hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded-lg"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}

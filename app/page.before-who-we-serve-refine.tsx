@@ -72,51 +72,63 @@ function Counter({ target, suffix = "+" }: { target: number; suffix?: string }) 
 const partnershipCards = [
   {
     title: "Banks & lenders",
-    description: "Stop losing to rural risk. Verified records, AML/CFT-ready data, and controlled disbursements you can trust.",
-    link: "/about",
-    linkText: "See our compliance framework",
+    description: "Lend to rural customers with real data instead of guesswork.",
     icon: Landmark,
-    emoji: "🏦"
+    bullets: [
+      "See verified farmer profiles, crops, and repayment history",
+      "Use data that aligns with AML/CFT and local regulations",
+      "Your capital finances inputs and services through controlled disbursement channels — with a clear audit trail instead of informal cash flows"
+    ]
   },
   {
     title: "Farmer groups & cooperatives",
-    description: "Unlock group power. Digital records, tracked repayments, and fair finance as inputs — not cash.",
-    link: "/impact",
-    linkText: "See farmer impact",
+    description: "Help your members access finance and markets as a group.",
     icon: Users2,
-    emoji: "🤝"
+    bullets: [
+      "Register members digitally with agent support",
+      "Track loans and repayments at member and group level",
+      "Members access finance as inputs, services, and group purchases delivered through trusted partners — strengthening production without requiring cash disbursements"
+    ]
   },
   {
     title: "Buyers & off-takers",
-    description: "Reliable supply, guaranteed traceability. Know your farms, plan sourcing, meet standards effortlessly.",
-    link: "/about",
-    linkText: "Explore supply transparency",
+    description: "Secure reliable, traceable volumes from verified farms.",
     icon: Store,
-    emoji: "🧺"
+    bullets: [
+      "See who grows your produce and where",
+      "Use planting and harvest data to plan sourcing",
+      "Meet traceability and quality requirements more easily"
+    ]
   },
   {
     title: "Development & impact partners",
-    description: "Prove your impact. Real-time farmer outcomes, financial inclusion tracking, and ready-to-use SDG evidence.",
-    link: "/impact",
-    linkText: "See measurable outcomes",
+    description: "Turn funding into measurable, farmer-level outcomes.",
     icon: Globe2,
-    emoji: "🌍"
+    bullets: [
+      "Track funds from disbursement to on-farm results",
+      "Monitor financial inclusion and livelihood improvements",
+      "Access dashboards and exportable data for SDG reporting"
+    ]
   },
   {
     title: "Governments & regulators",
-    description: "See what&apos;s really happening. Anonymised flows, inclusion trends, and enforceable AML/CFT compliance.",
-    link: "/about",
-    linkText: "Explore governance tools",
+    description: "Gain visibility into rural finance and food security.",
     icon: ShieldCheck,
-    emoji: "🏛️"
+    bullets: [
+      "See anonymized trends in rural lending and repayment",
+      "Monitor inclusion and early stress signals in the system",
+      "Ensure rural finance follows AML/CFT and data rules"
+    ]
   },
   {
     title: "Knowledge partners",
-    description: "Prove training works. Real farmer behaviour, yield data, and validated outcomes — not surveys.",
-    link: "/impact",
-    linkText: "See training impact",
+    description: "Track training impact with measurable field-level data.",
     icon: GraduationCap,
-    emoji: "🎓"
+    bullets: [
+      "See behavior change and yield improvements after training",
+      "Link training programs to farmer outcomes and practices",
+      "Validate program effectiveness with real farm data"
+    ]
   }
 ];
 
@@ -144,6 +156,35 @@ function VideoHero() {
       </video>
       {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
       <div className="absolute inset-0 z-0 bg-black/30 hidden md:block" />
+      
+      {/* Hero Text Overlay */}
+      <div className="relative z-20 flex min-h-[500px] md:min-h-[700px] items-center justify-center px-6 py-20">
+        <div className="mx-auto max-w-4xl text-center">
+          {/* Dark background for better text contrast */}
+          <div className="rounded-3xl bg-black/40 backdrop-blur-sm px-8 py-12 sm:px-12 sm:py-16">
+            <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+              Finance that reaches real farmers.
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-white/95 sm:text-xl">
+              Fairways.Tech connects smallholder farmers, local agents, and banks so rural communities can access fair, compliant finance in the form of inputs and services.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <button
+                onClick={() => scrollToSection('cta')}
+                className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50"
+              >
+                Partner with us
+              </button>
+              <button
+                onClick={() => scrollToSection('solution')}
+                className="inline-flex items-center justify-center rounded-full border-2 border-white bg-transparent px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50"
+              >
+                See how it works
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Top gradient fade */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-sand via-sand/40 to-transparent" />
@@ -235,42 +276,16 @@ export default function HomePage() {
                 Why we exist
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
-                The gap between farmers and finance isn&apos;t ability – it&apos;s visibility.
+                The gap between farmers and finance
               </h2>
             </div>
             <div className="mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg">
-              <p className="mb-4">
-                Millions of smallholder farmers produce real value but remain invisible to formal finance. Banks and buyers often can&apos;t see who is reliable, which fields are productive, or where money actually goes.
+              <p>
+                Smallholder farmers grow much of Africa&apos;s food, but most can&apos;t access affordable loans. Banks want to serve rural communities, but don&apos;t have reliable data about farms, production, or repayment behaviour.
               </p>
-              <ul className="space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg">
-                <li className="flex items-start gap-3">
-                  <Leaf
-                    className="mt-1 h-5 w-5 shrink-0 text-forest"
-                    strokeWidth={2.4}
-                  />
-                  <span>
-                    <strong>Farmers struggle</strong> to secure inputs and services on fair terms, especially at the moments they need them most.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Leaf
-                    className="mt-1 h-5 w-5 shrink-0 text-forest"
-                    strokeWidth={2.4}
-                  />
-                  <span>
-                    <strong>Banks see rural lending</strong> as too risky and too expensive, because they lack clear, trusted records of performance.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Leaf
-                    className="mt-1 h-5 w-5 shrink-0 text-forest"
-                    strokeWidth={2.4}
-                  />
-                  <span>
-                    <strong>Value chains stay informal</strong>, with no shared record of who produced what, when, and under which conditions.
-                  </span>
-                </li>
-              </ul>
+              <p>
+                Fairways.Tech bridges this gap. Working with local agents and cooperatives, we turn real farm activity into verified digital records that licensed banks can trust. Farmers receive seeds, fertilizer, labour, and other essential services through our partner network, while banks provide the underlying liquidity through controlled, compliant fund flows.
+              </p>
             </div>
           </div>
         </section>
@@ -365,21 +380,24 @@ export default function HomePage() {
             <div className="mx-auto max-w-6xl">
               <div className="flex flex-col gap-y-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
                 <div className="max-w-xl lg:max-w-2xl">
-                  <div className="text-center lg:text-left">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-                      Our solution
-                    </p>
-                    <h2 className="mt-3 text-2xl font-semibold text-stone sm:text-3xl">
-                      From farm activity to trusted finance.
-                    </h2>
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-800 sm:text-lg">
-                      Digital infrastructure that turns farm activity into trusted records — so banks and partners can confidently finance inputs and services.
-                    </p>
-                  </div>
-                  <ul className="mt-6 space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                    Our solution
+                  </p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                    A shared digital infrastructure
+                    <br />
+                    for scalable farming.
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-700 sm:text-[15px]">
+                    Fairways.Tech is a digital platform that helps smallholder farmers access finance from licensed banks and financial institutions.
+                  </p>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone-700 sm:text-[15px]">
+                    We capture simple but powerful information — fields, crops, seasons, transactions, and repayments — through local agents and cooperatives. Licensed banks provide the liquidity, while our rails route funds directly to input suppliers and service providers. Farmers receive the support they need at the right moment, and banks see a clear, compliant flow of funds instead of cash leaking into the informal economy.
+                  </p>
+                  <ul className="mt-6 space-y-3 text-[15px] leading-relaxed text-slate-800">
                     <li className="flex items-start gap-3">
                       <Leaf
-                        className="mt-1 h-5 w-5 shrink-0 text-forest"
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
                         strokeWidth={2.4}
                       />
                       <span>
@@ -388,7 +406,7 @@ export default function HomePage() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Leaf
-                        className="mt-1 h-5 w-5 shrink-0 text-forest"
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
                         strokeWidth={2.4}
                       />
                       <span>
@@ -397,7 +415,7 @@ export default function HomePage() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Leaf
-                        className="mt-1 h-5 w-5 shrink-0 text-forest"
+                        className="mt-0.5 h-5 w-5 shrink-0 text-forest"
                         strokeWidth={2.4}
                       />
                       <span>
@@ -464,55 +482,59 @@ export default function HomePage() {
   <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-6 md:px-8">
     <div className="mx-auto max-w-3xl text-center text-white">
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
-        Partners across the food system
+        Who we serve
       </p>
       <h2 className="mt-2 text-xl font-semibold text-white sm:text-2xl">
-        Who we serve
+        Built for partners across the value chain
       </h2>
-      <p className="mt-3 max-w-2xl mx-auto text-sm sm:text-base text-white/85 leading-relaxed">
-        These partnerships strengthen our governance and data model, so every farmer connects into a system institutions can trust.
+      <p className="mt-3 text-white/90 leading-relaxed">
+        We collaborate with partners who enable agricultural systems to scale,
+        turning local knowledge into trusted, compliant infrastructure.
       </p>
+      <div className="mt-2 text-xs text-white/80">
+        <p>
+          See how these partnerships connect into our governance and data model.
+        </p>
+        <a
+          href="/about"
+          className="mt-1 inline-block font-semibold text-white underline underline-offset-4"
+        >
+          Learn more about Fairways.Tech
+        </a>
+      </div>
     </div>
 
-    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={partnershipCardsFade.ref}>
+    <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={partnershipCardsFade.ref}>
       {partnershipCards.map((card, index) => {
+        const Icon = card.icon;
         return (
           <div
             key={card.title}
-            className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+            className={`flex h-full flex-col items-start justify-start rounded-3xl border border-white/40 bg-white/80 p-6 shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
               partnershipCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: partnershipCardsFade.isVisible ? `${index * 100}ms` : '0ms' }}
           >
-            <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-forest/10">
+              <Icon className="h-5 w-5 text-forest" strokeWidth={2.2} />
+            </div>
+            <h3 className="text-base font-semibold text-slate-900">
               {card.title}
             </h3>
-            <p className="mt-2 text-sm text-white/85 leading-relaxed">
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
               {card.description}
             </p>
-            <a
-              href={card.link}
-              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-forest hover:text-forest/80 hover:underline underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
-            >
-              {card.linkText}
-              <span aria-hidden="true">→</span>
-            </a>
+            <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              {card.bullets.map((bullet, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-forest mt-0.5">✓</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         );
       })}
-    </div>
-
-    <div className="mt-8 text-center text-sm text-white/80">
-      <p className="mb-2">
-        See how this connects into our governance and data model.
-      </p>
-      <a
-        href="/about"
-        className="inline-flex items-center gap-1 font-medium text-white hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
-      >
-        Learn more about Fairways.Tech
-        <span aria-hidden="true">↗</span>
-      </a>
     </div>
   </div>
 </section>
@@ -520,7 +542,7 @@ export default function HomePage() {
           {/* OUR APPROACH */}
         <section
   id="approach"
-  className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-16 sm:py-20"
+  className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-20"
 >
   {/* Wet leaf background video */}
   <div className="pointer-events-none absolute inset-0">
@@ -557,47 +579,48 @@ export default function HomePage() {
     </div>
 
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={approachCardsFade.ref}>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
-        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Real activity, captured once
+        <h3 className="text-base font-semibold text-slate-900">
+          Data that unlocks finance
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Field agents capture farm activity in simple mobile workflows — creating one trusted history.
+        <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
+          Trusted farm and value-chain data that makes production and risk
+          visible, enabling banks to serve rural communities with confidence.
         </p>
       </div>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '150ms' : '0ms' }}>
-        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Infrastructure banks plug into
+        <h3 className="text-base font-semibold text-slate-900">
+          Systems banks can trust
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Structured, time-stamped records that banks and regulators review using their standard processes.
+        <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
+          Clear records of farm activity that banks and regulators can verify, transforming how institutions assess and serve rural markets.
         </p>
       </div>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`flex h-full flex-col items-center justify-start rounded-3xl border border-white/40 bg-white/80 p-6 text-center shadow-lg shadow-black/10 backdrop-blur-sm transition-all duration-700 ease-out ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '300ms' : '0ms' }}>
-        <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Local partners, trusted agents
+        <h3 className="text-base font-semibold text-slate-900">
+          Agents who connect real farms
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Community agents bridge paper-based farms to digital rails, helping farmers stay on track.
+        <p className="mx-auto mt-2 max-w-xs text-[15px] leading-relaxed text-slate-700">
+          Community agents and cooperatives ensuring data stays tied to real
+          farmers and real fields, building trust from the ground up.
         </p>
       </div>
     </div>
-    <div className="mt-8 text-center text-sm text-white/80">
-      <p className="mb-2">
+    <div className="mt-6 text-center text-xs text-white/80">
+      <p>
         See how this transforms governance, risk and data flows for rural finance.
       </p>
       <a
         href="/impact"
-        className="inline-flex items-center gap-1 font-medium text-white hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
+        className="mt-1 inline-block font-semibold text-white underline underline-offset-4"
       >
         Explore our impact &amp; vision
-        <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>
@@ -618,7 +641,7 @@ export default function HomePage() {
                   Where Fairways.Tech is active
                 </h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-700 sm:text-[15px]">
-                  We&apos;re building a network of verified farmers, local agents, and financial institutions across Africa, Asia, Europe and Latin America. Our platform makes rural lending safer and more affordable.
+                  We&apos;re building a network of verified farmers, local agents, and financial institutions across Africa, Asia, and Europe. Our platform makes rural lending safer and more affordable.
                 </p>
               </div>
 
@@ -644,14 +667,14 @@ export default function HomePage() {
                   <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       COUNTRIES
                     </p>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 3 : 0} suffix="+" />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Growing network across Africa, Asia, Europe and Latin America, expanding
+                      Growing network across Africa, Asia and Europe, expanding
                       trusted systems for rural finance – so farmers can access finance regardless of location.
                     </p>
                   </div>
@@ -675,14 +698,15 @@ export default function HomePage() {
                   <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       FARMERS
                     </p>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 250 : 0} suffix="+" />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Smallholder and horticultural farmers accessing fair, scalable finance through verified track records and transparent repayment history.
+                      Smallholder and horticultural farmers unlocking fair, scalable
+                      finance through verified profiles – each with verified profiles and transaction history.
                     </p>
                   </div>
                 </div>
@@ -708,14 +732,15 @@ export default function HomePage() {
                   <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
                   {/* Content */}
                   <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
+                    <p className="mb-4 text-sm font-bold tracking-[0.28em] text-black" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
                       COMMUNITY AGENTS
                     </p>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
                       <Counter target={statsInView ? 30 : 0} suffix="+" />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Local field agents and cooperatives connecting real farms to our digital platform – ensuring every farmer record is real, active and up to date.
+                      Local field agents and cooperatives connecting real farms to
+                      our digital platform – ensuring every farmer profile is real and up-to-date.
                     </p>
                   </div>
                 </div>
@@ -724,22 +749,25 @@ export default function HomePage() {
           </section>
 
           {/* MISSION */}
-          <section id="mission" className="bg-sand py-16 sm:py-20">
-            <div className="mx-auto max-w-4xl px-6 lg:px-8">
-              <div className="text-center">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-                  Our mission
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
-                  Building trust between farms and finance.
-                </h2>
-              </div>
-              <div className="mx-auto mt-8 max-w-2xl space-y-6 text-center text-base leading-relaxed text-slate-800 sm:text-lg">
+          <section id="mission" className="py-16 sm:py-20">
+            <div className="mx-auto max-w-6xl space-y-6 px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+    Community Philosophy
+  </p>
+  <h2 className="mt-2 text-xl font-semibold text-stone sm:text-2xl">
+    Mission & Philosophy
+  </h2>
+</div>
+              <div className="space-y-4 rounded-3xl bg-forest/90 p-6 text-center text-sand shadow-lg sm:p-8">
                 <p>
-                  We believe farmers deserve finance that respects their work, and institutions deserve data they can trust.
+                  Fairways.Tech empowers farming communities with trusted digital
+                  tools that unlock finance and markets, enabling responsible growth.
                 </p>
                 <p>
-                  By connecting verified farm activity to compliant rails, we&apos;re building a transparent system where rural communities access fair finance — and partners serve them with confidence.
+                  We bridge EU regulatory integrity with African agricultural
+                  inclusion, creating a transparent, scalable, community-first
+                  agri-fintech ecosystem.
                 </p>
               </div>
             </div>

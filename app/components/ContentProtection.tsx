@@ -34,6 +34,10 @@ export function ContentProtection() {
     // Disable text selection (but allow on interactive elements)
     const handleSelectStart = (e: Event) => {
       const target = e.target as HTMLElement;
+      // Check if target is an Element before using closest
+      if (!(target instanceof Element)) {
+        return;
+      }
       // Allow selection in form elements, buttons, and links
       if (
         target.tagName === "INPUT" ||

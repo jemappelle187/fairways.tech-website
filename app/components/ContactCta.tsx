@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { track } from "@/lib/umami";
 import { ContactForm } from "./ContactForm";
 
 export function ContactCta() {
   const [open, setOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
   const handleFormSuccess = () => {
     setOpen(false);
@@ -45,6 +47,25 @@ export function ContactCta() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [open]);
 
+  // Premium fade-in animation on scroll
+  useEffect(() => {
+    if (!cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Animate once
+        }
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(cardRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="cta"
@@ -62,14 +83,19 @@ export function ContactCta() {
 
       {/* Content card */}
         <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="relative flex flex-col items-center rounded-3xl border border-white/40 bg-white/80 px-6 py-10 text-center shadow-lg shadow-black/10 backdrop-blur-sm md:px-12 md:py-12">
+        <div 
+          ref={cardRef}
+          className={`group relative flex flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-6 py-10 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 md:px-12 md:py-12 ${
+            isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+          }`}
+        >
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
             Unlock scalable rural finance.
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-slate-900 md:text-4xl">
+          <h2 className="mb-4 text-3xl font-semibold text-white md:text-4xl">
             Partner with Fairways.Tech
           </h2>
-          <p className="mb-8 max-w-2xl text-base text-slate-800 md:text-lg">
+          <p className="mb-8 max-w-2xl text-base text-white/85 md:text-lg leading-relaxed">
             Join banks, cooperatives, buyers and development partners building
             trusted, compliant rails for rural finance across Africa.
           </p>
