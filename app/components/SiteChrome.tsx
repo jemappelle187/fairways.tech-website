@@ -144,7 +144,7 @@ export function Header() {
           </nav>
 
           {/* Right side: Language selector + CTA button (desktop) / Hamburger (mobile) */}
-          <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+          <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0 -mr-4 sm:-mr-6 lg:-mr-8">
             {/* Language selector dropdown */}
             <div className="relative">
               <button
