@@ -132,7 +132,7 @@ export function Header() {
                 className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
                   pathname === link.href
                     ? "bg-forest/10 text-forest"
-                    : "text-slate-700 hover:text-forest hover:bg-gradient-to-b hover:from-forest/8 hover:to-forest/5 hover:shadow-sm hover:-translate-y-0.5 hover:scale-[1.02]"
+                    : "text-slate-700 hover:text-forest hover:bg-gradient-to-b hover:from-forest/8 hover:to-forest/5 hover:shadow-[0_0_12px_rgba(31,75,44,0.3)] hover:-translate-y-0.5 hover:scale-[1.02] hover:tracking-wide after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-forest after:transition-all after:duration-300 after:ease-out hover:after:left-0 hover:after:w-full"
                 }`}
               >
                 {link.label}
