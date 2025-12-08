@@ -104,7 +104,7 @@ const partnershipCards = [
   },
   {
     title: "Governments & regulators",
-    description: "See what&apos;s really happening. Anonymised flows, inclusion trends, and enforceable AML/CFT compliance.",
+    description: "See what's really happening. Anonymised flows, inclusion trends, and enforceable AML/CFT compliance.",
     link: "/about",
     linkText: "Explore governance tools",
     icon: ShieldCheck,
@@ -172,7 +172,31 @@ function useFadeInOnScroll() {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     if (!ref.current) return;
+
+    // Check if element is already in view on mount (for SSR/hydration)
+    const checkInitialVisibility = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || 0;
+        const isInView = rect.top < viewportHeight * 0.9 && rect.bottom > -50;
+        if (isInView) {
+          // Small delay to ensure smooth animation even for in-view elements
+          setTimeout(() => setIsVisible(true), 100);
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // Immediate check for elements already in view
+    if (checkInitialVisibility()) {
+      return;
+    }
+
+    const element = ref.current;
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -181,10 +205,10 @@ function useFadeInOnScroll() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
     );
 
-    observer.observe(ref.current);
+    observer.observe(element);
     return () => observer.disconnect();
   }, []);
 
@@ -199,6 +223,9 @@ export default function HomePage() {
   const reachCardsFade = useFadeInOnScroll();
   const partnershipCardsFade = useFadeInOnScroll();
   const approachCardsFade = useFadeInOnScroll();
+  const whyWeExistFade = useFadeInOnScroll();
+  const ourSolutionFade = useFadeInOnScroll();
+  const ourMissionFade = useFadeInOnScroll();
 
   useEffect(() => {
     if (!statsRef.current) return;
@@ -229,8 +256,10 @@ export default function HomePage() {
         
         {/* WHY WE EXIST */}
         <section id="why" className="bg-sand px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-4xl">
-            <div className="text-center">
+          <div className="mx-auto max-w-4xl" ref={whyWeExistFade.ref}>
+            <div className={`text-center ${
+              whyWeExistFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
+            }`}>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
                 Why we exist
               </p>
@@ -238,12 +267,16 @@ export default function HomePage() {
                 The gap between farmers and finance isn&apos;t ability – it&apos;s visibility.
               </h2>
             </div>
-            <div className="mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg">
+            <div className={`mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg ${
+              whyWeExistFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
+            }`}>
               <p className="mb-4">
                 Millions of smallholder farmers produce real value but remain invisible to formal finance. Banks and buyers often can&apos;t see who is reliable, which fields are productive, or where money actually goes.
               </p>
               <ul className="space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg">
-                <li className="flex items-start gap-3">
+                <li className={`flex items-start gap-3 ${
+                  whyWeExistFade.isVisible ? 'fade-in-up-delay-2' : 'fade-in-hidden'
+                }`}>
                   <Leaf
                     className="mt-1 h-5 w-5 shrink-0 text-forest"
                     strokeWidth={2.4}
@@ -252,7 +285,9 @@ export default function HomePage() {
                     <strong>Farmers struggle</strong> to secure inputs and services on fair terms, especially at the moments they need them most.
                   </span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className={`flex items-start gap-3 ${
+                  whyWeExistFade.isVisible ? 'fade-in-up-delay-3' : 'fade-in-hidden'
+                }`}>
                   <Leaf
                     className="mt-1 h-5 w-5 shrink-0 text-forest"
                     strokeWidth={2.4}
@@ -261,7 +296,9 @@ export default function HomePage() {
                     <strong>Banks see rural lending</strong> as too risky and too expensive, because they lack clear, trusted records of performance.
                   </span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className={`flex items-start gap-3 ${
+                  whyWeExistFade.isVisible ? 'fade-in-up-delay-4' : 'fade-in-hidden'
+                }`}>
                   <Leaf
                     className="mt-1 h-5 w-5 shrink-0 text-forest"
                     strokeWidth={2.4}
@@ -362,10 +399,12 @@ export default function HomePage() {
 
           {/* SOLUTION - VIDEO VERSION (ACTIVE) */}
           <section id="solution" className="bg-sand px-6 py-24 sm:py-28 lg:px-24">
-            <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-6xl" ref={ourSolutionFade.ref}>
               <div className="flex flex-col gap-y-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
                 <div className="max-w-xl lg:max-w-2xl">
-                  <div className="text-center lg:text-left">
+                  <div className={`text-center lg:text-left ${
+                    ourSolutionFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
+                  }`}>
                     <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
                       Our solution
                     </p>
@@ -376,7 +415,9 @@ export default function HomePage() {
                       Digital infrastructure that turns farm activity into trusted records — so banks and partners can confidently finance inputs and services.
                     </p>
                   </div>
-                  <ul className="mt-6 space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg">
+                  <ul className={`mt-6 space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg ${
+                    ourSolutionFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
+                  }`}>
                     <li className="flex items-start gap-3">
                       <Leaf
                         className="mt-1 h-5 w-5 shrink-0 text-forest"
@@ -450,10 +491,10 @@ export default function HomePage() {
   className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-20"
 >
   {/* Vegetables background */}
-  <div className="pointer-events-none absolute inset-0 bg-[url('/images/farmer_holds_vegetables.png')] bg-cover bg-center" />
+  <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_holds_vegetables.png')] bg-cover bg-center" />
 
   {/* Dark overlay so text + cards stand out, similar to CTA */}
-  <div className="pointer-events-none absolute inset-0 bg-black/25" />
+  <div className="pointer-events-none absolute inset-0 z-0 bg-black/25" />
 
   {/* Top sand fade – smooth transition from page background */}
   <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#f4efe5] via-[#f4efe5]/40 to-transparent" />
@@ -523,7 +564,7 @@ export default function HomePage() {
   className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-16 sm:py-20"
 >
   {/* Wet leaf background video */}
-  <div className="pointer-events-none absolute inset-0">
+  <div className="pointer-events-none absolute inset-0 z-0">
     <video
       autoPlay
       loop
@@ -537,7 +578,7 @@ export default function HomePage() {
   </div>
 
   {/* Dark overlay similar to hero/CTA so text reads well */}
-  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-transparent" />
+  <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black/35 via-black/10 to-transparent" />
 
   {/* Top sand fade – soft roll-in from sand, like hero/CTA */}
   <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#f4efe5] via-[#f4efe5]/40 to-transparent" />
@@ -725,8 +766,10 @@ export default function HomePage() {
 
           {/* MISSION */}
           <section id="mission" className="bg-sand py-16 sm:py-20">
-            <div className="mx-auto max-w-4xl px-6 lg:px-8">
-              <div className="text-center">
+            <div className="mx-auto max-w-4xl px-6 lg:px-8" ref={ourMissionFade.ref}>
+              <div className={`text-center ${
+                ourMissionFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
+              }`}>
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
                   Our mission
                 </p>
@@ -734,7 +777,9 @@ export default function HomePage() {
                   Building trust between farms and finance.
                 </h2>
               </div>
-              <div className="mx-auto mt-8 max-w-2xl space-y-6 text-center text-base leading-relaxed text-slate-800 sm:text-lg">
+              <div className={`mx-auto mt-8 max-w-2xl space-y-6 text-center text-base leading-relaxed text-slate-800 sm:text-lg ${
+                ourMissionFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
+              }`}>
                 <p>
                   We believe farmers deserve finance that respects their work, and institutions deserve data they can trust.
                 </p>
