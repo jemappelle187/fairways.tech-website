@@ -59,10 +59,12 @@ export default function TeamPage() {
               <div className="mx-auto flex-shrink-0 md:mx-0">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">
                   <Image
-                    src="https://ui-avatars.com/api/?name=Emmanuel+Martina&background=16a34a&color=fff&size=80&bold=true"
-                    alt="Portrait of Emmanuel Martina"
-                    fill
-                    className="object-cover"
+                    src="/images/team/EYM.jpeg"
+                    alt="Portrait of Emmanuel Yeboah Martina"
+                    width={80}
+                    height={80}
+                    className="h-full w-full object-cover"
+                    priority
                   />
                 </div>
               </div>
@@ -104,10 +106,12 @@ export default function TeamPage() {
               <div className="mx-auto flex-shrink-0 md:mx-0">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">
                   <Image
-                    src="https://ui-avatars.com/api/?name=Kwan+Yuk+Li&background=16a34a&color=fff&size=80&bold=true"
+                    src="/images/team/KYL.jpeg"
                     alt="Portrait of Kwan Yuk Li"
-                    fill
-                    className="object-cover"
+                    width={80}
+                    height={80}
+                    className="h-full w-full object-cover"
+                    priority
                   />
                 </div>
               </div>
