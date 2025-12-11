@@ -96,11 +96,11 @@ export default function AboutPage() {
             <div className="mb-12 rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
               <div className="space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg">
                 <p>
-                  Fairways.Tech designs and operates secure, compliance‑aligned digital infrastructure that enables financial institutions, cooperatives and market partners to serve Africa&apos;s rural communities with confidence — without exposing proprietary models or sensitive operational details.
+                  Fairways.Tech designs and operates secure, compliance‑aligned digital infrastructure that enables financial institutions, cooperatives and market partners to serve Africa&apos;s rural communities with confidence, without exposing proprietary models or sensitive operational details.
                 </p>
                 <p>
                   Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana) together
-                  anchor a dual presence between Europe and West Africa. From day one we build to regulatory standard, aligning with frameworks such as AMLR, FATF, DORA, GDPR and Bank of Ghana supervisory expectations — ensuring institutional‑grade governance without disclosing internal methodologies.
+                  anchor a dual presence between Europe and West Africa. From day one we build to regulatory standard, aligning with frameworks such as AMLR, FATF, DORA, GDPR and Bank of Ghana supervisory expectations, ensuring institutional‑grade governance without disclosing internal methodologies.
                 </p>
                 <p>
                   We believe that smallholder farmers should have access to transparent,
@@ -153,7 +153,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <p className="mt-6 text-base leading-relaxed text-slate-800 sm:text-lg">
-                Fairways.Tech addresses these challenges by providing digital infrastructure that helps make rural production and financial activity visible in ways that banks and regulators can rely on — enabling compliant capital to flow to smallholder farmers without revealing sensitive internal processes.
+                Fairways.Tech addresses these challenges by providing digital infrastructure that helps make rural production and financial activity visible in ways that banks and regulators can rely on, enabling compliant capital to flow to smallholder farmers without revealing sensitive internal processes.
               </p>
             </div>
 

@@ -264,7 +264,7 @@ export default function HomePage() {
                 Why we exist
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
-                The gap between farmers and finance isn&apos;t ability – it&apos;s visibility.
+                The gap between farmers and finance isn&apos;t ability, it&apos;s visibility.
               </h2>
             </div>
             <div className={`mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg ${

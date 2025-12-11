@@ -85,7 +85,7 @@ export default function ImpactPage() {
                     Financial institutions, cooperatives, buyers, and development partners gain access to compliant, audit‑ready data flows and verifiable identity rails. Fairways.Tech reduces the operational friction of serving rural markets by providing structured, regulator‑aligned workflows for onboarding, monitoring, and risk assessment.
                   </p>
                   <p>
-                    Our infrastructure delivers field‑level data integrity—production, transactions, repayment signals—allowing institutions to deploy capital with confidence, meet AML/CFT and supervisory expectations, and expand their rural footprint sustainably. The result is a lower cost‑to‑serve model and the ability to scale compliant finance at meaningful depth.
+                    Our infrastructure delivers field‑level data integrity, production, transactions, repayment signals, allowing institutions to deploy capital with confidence, meet AML/CFT and supervisory expectations, and expand their rural footprint sustainably. The result is a lower cost‑to‑serve model and the ability to scale compliant finance at meaningful depth.
                   </p>
                 </div>
               </div>
