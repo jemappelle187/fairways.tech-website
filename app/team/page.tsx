@@ -21,48 +21,50 @@ export default function TeamPage() {
     <>
       <Header />
       <main id="main-content" className="min-h-screen bg-sand">
-        <section className="relative overflow-hidden pt-28 pb-24">
+        <section className="relative overflow-hidden bg-sand pt-28 pb-24">
           {/* Leaf background */}
-          <div className="pointer-events-none absolute inset-0 -z-20 bg-[url('/images/leaf_background.png')] bg-cover bg-center" />
-          {/* Darken + sand fade so text stays readable */}
-          <div className="pointer-events-none absolute inset-0 -z-10 bg-black/25" />
+          <div className="pointer-events-none absolute inset-0 -z-20 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-30" />
+          {/* Light overlay for subtle texture */}
+          <div className="pointer-events-none absolute inset-0 -z-10 bg-sand/60" />
           <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-20 bg-gradient-to-b from-sand via-sand/40 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-b from-transparent via-sand/30 to-sand" />
 
           <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
           {/* Page heading */}
-          <header className="mx-auto max-w-3xl text-center">
+          <header className="relative z-10 mx-auto max-w-3xl text-center">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
               Our team
             </p>
-            <h1 className="mb-4 text-3xl font-semibold text-slate-900 md:text-4xl">
+            <h1 className="mb-4 text-3xl font-semibold text-[#2E3A39] md:text-4xl">
               The people behind Fairways.Tech
             </h1>
-            <p className="mx-auto max-w-3xl text-sm text-slate-700 md:text-base">
+            <p className="mx-auto max-w-3xl text-sm text-[#2E3A39] md:text-base leading-relaxed">
               We combine expertise across agriculture, compliance, digital identity,
               product and emerging-markets finance to build trusted rails for farmers,
               cooperatives and financial institutions.
             </p>
-            <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
+            <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-[#2E3A39]/70">
               Based across Africa, Asia, Europe &amp; Latin America
             </p>
           </header>
 
           {/* Founders */}
-          <div className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+          <div className="relative z-10 mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
             {/* Emmanuel */}
             <article
               id="emmanuel-yeboah-martina"
-              className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center"
+              className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
             >
-              {/* Avatar slot */}
-              <div className="mx-auto flex-shrink-0 md:mx-0">
-                <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">
+              {/* Leaf background */}
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              {/* Prominent Avatar */}
+              <div className="relative z-10 mb-5 flex-shrink-0">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
                   <Image
                     src="/images/team/EYM.jpeg"
                     alt="Portrait of Emmanuel Yeboah Martina"
-                    width={80}
-                    height={80}
+                    width={128}
+                    height={128}
                     className="h-full w-full object-cover"
                     priority
                   />
@@ -70,25 +72,24 @@ export default function TeamPage() {
               </div>
 
               {/* Text */}
-              <div className="flex-1">
-                <h2 className="text-sm font-semibold text-slate-900">
+              <div className="relative z-10 flex flex-col items-center">
+                <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Emmanuel Yeboah Martina
                 </h2>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-forest">
+                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                   Co-founder &amp; CEO
                 </p>
-                <p className="mt-2 text-sm text-slate-700">
+                <p className="mt-4 text-sm text-white/85 leading-relaxed">
                   Financial expert with experience across AML, CTF, KYC, GDPR and
                   digital‑asset operations, shaping EU‑aligned governance and compliant
                   financial architectures for scalable fintech in frontier markets.
                 </p>
-                <div className="mt-3">
+                <div className="mt-5">
                   <a
                     href="https://www.linkedin.com/in/eymartina/"
-                    // TODO: replace "#" with Emmanuel's real LinkedIn URL
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] p-2.5 text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
                     aria-label="View Emmanuel's LinkedIn profile"
                   >
                     <Linkedin className="h-4 w-4" />
@@ -100,16 +101,18 @@ export default function TeamPage() {
             {/* Kwan */}
             <article
               id="kwan-yuk-li"
-              className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left shadow-md shadow-black/5 backdrop-blur-sm md:flex-row md:items-center"
+              className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
             >
-              {/* Avatar slot */}
-              <div className="mx-auto flex-shrink-0 md:mx-0">
-                <div className="relative h-20 w-20 overflow-hidden rounded-full bg-sand shadow-sm shadow-black/10 ring-1 ring-white/60">
+              {/* Leaf background */}
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              {/* Prominent Avatar */}
+              <div className="relative z-10 mb-5 flex-shrink-0">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
                   <Image
                     src="/images/team/KYL.jpeg"
                     alt="Portrait of Kwan Yuk Li"
-                    width={80}
-                    height={80}
+                    width={128}
+                    height={128}
                     className="h-full w-full object-cover"
                     priority
                   />
@@ -117,26 +120,25 @@ export default function TeamPage() {
               </div>
 
               {/* Text */}
-              <div className="flex-1">
-                <h2 className="text-sm font-semibold text-slate-900">
+              <div className="relative z-10 flex flex-col items-center">
+                <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Kwan Yuk Li
                 </h2>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-forest">
+                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                   Co-founder &amp; COO
                 </p>
-                <p className="mt-2 text-sm text-slate-700">
+                <p className="mt-4 text-sm text-white/85 leading-relaxed">
                   Specialist across finance and IT regulation and risk — DORA, GDPR,
                   IFRS 9 &amp; 17, Solvency II, Basel III, SOX — and European IT
                   infrastructure, designing secure digital architectures and
                   regulatory‑framework strategies for resilient financial services.
                 </p>
-                <div className="mt-3">
+                <div className="mt-5">
                   <a
                     href="https://nl.linkedin.com/in/kwan-yuk-li-bb040b4"
-                    // TODO: replace "#" with Kwan's real LinkedIn URL
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] p-2.5 text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
                     aria-label="View Kwan's LinkedIn profile"
                   >
                     <Linkedin className="h-4 w-4" />
@@ -147,17 +149,19 @@ export default function TeamPage() {
           </div>
 
           {/* Advisors & partners */}
-          <div className="mx-auto mt-10 max-w-4xl">
-            <article className="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/90 p-6 text-left text-slate-800 shadow-md shadow-black/5 backdrop-blur-sm sm:p-8">
-              <div>
-                <h2 className="text-sm font-semibold text-slate-900">
+          <div className="relative z-10 mx-auto mt-10 max-w-5xl">
+            <article className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden">
+              {/* Leaf background */}
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className="relative z-10">
+                <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Advisors &amp; Partners
                 </h2>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-forest">
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                   Banking · Horticulture · Impact
                 </p>
               </div>
-              <p className="text-sm text-slate-700">
+              <p className="relative z-10 mt-4 max-w-2xl text-sm text-white/85 leading-relaxed">
                 A collective of specialists supporting compliance, horticulture,
                 banking strategy and impact measurement. Profiles will be added as
                 formal partnerships are announced.
@@ -165,7 +169,7 @@ export default function TeamPage() {
             </article>
           </div>
 
-          <p className="mt-8 text-center text-xs text-slate-500">
+          <p className="relative z-10 mt-8 text-center text-xs text-slate-600">
             More profiles will be added as the team grows.
           </p>
         </div>
