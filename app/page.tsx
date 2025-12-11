@@ -80,7 +80,7 @@ const partnershipCards = [
   },
   {
     title: "Farmer groups & cooperatives",
-    description: "Unlock group power. Digital records, tracked repayments, and fair finance as inputs — not cash.",
+    description: "Unlock group power. Digital records, tracked repayments, and fair finance as inputs, not cash.",
     link: "/impact",
     linkText: "See farmer impact",
     icon: Users2,
@@ -112,7 +112,7 @@ const partnershipCards = [
   },
   {
     title: "Knowledge partners",
-    description: "Prove training works. Real farmer behaviour, yield data, and validated outcomes — not surveys.",
+    description: "Prove training works. Real farmer behaviour, yield data, and validated outcomes, not surveys.",
     link: "/impact",
     linkText: "See training impact",
     icon: GraduationCap,
@@ -412,7 +412,7 @@ export default function HomePage() {
                       From farm activity to trusted finance.
                     </h2>
                     <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-800 sm:text-lg">
-                      Digital infrastructure that turns farm activity into trusted records — so banks and partners can confidently finance inputs and services.
+                      Digital infrastructure that turns farm activity into trusted records, so banks and partners can confidently finance inputs and services.
                     </p>
                   </div>
                   <ul className={`mt-6 space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg ${
@@ -605,7 +605,7 @@ export default function HomePage() {
           Real activity, captured once
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Field agents capture farm activity in simple mobile workflows — creating one trusted history.
+          Field agents capture farm activity in simple mobile workflows, creating one trusted history.
         </p>
       </div>
       <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
@@ -689,11 +689,11 @@ export default function HomePage() {
                       COUNTRIES
                     </p>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
-                      <Counter target={statsInView ? 3 : 0} suffix="+" />
+                      <Counter target={statsInView ? 2 : 0} suffix="+" />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
                       Growing network across Africa, Asia, Europe and Latin America, expanding
-                      trusted systems for rural finance – so farmers can access finance regardless of location.
+                      trusted systems for rural finance, so farmers can access finance regardless of location.
                     </p>
                   </div>
                 </div>
@@ -756,7 +756,7 @@ export default function HomePage() {
                       <Counter target={statsInView ? 30 : 0} suffix="+" />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Local field agents and cooperatives connecting real farms to our digital platform – ensuring every farmer record is real, active and up to date.
+                      Local field agents and cooperatives connecting real farms to our digital platform, ensuring every farmer record is real, active and up to date.
                     </p>
                   </div>
                 </div>
@@ -784,7 +784,7 @@ export default function HomePage() {
                   We believe farmers deserve finance that respects their work, and institutions deserve data they can trust.
                 </p>
                 <p>
-                  By connecting verified farm activity to compliant rails, we&apos;re building a transparent system where rural communities access fair finance — and partners serve them with confidence.
+                  By connecting verified farm activity to compliant rails, we&apos;re building a transparent system where rural communities access fair finance, and partners serve them with confidence.
                 </p>
               </div>
             </div>
