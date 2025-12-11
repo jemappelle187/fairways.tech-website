@@ -72,9 +72,9 @@ export default function AboutPage() {
       <Header />
       <main id="main-content" className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted">
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-          <div className="absolute inset-0 bg-gradient-to-br from-forest/5 via-transparent to-leaf/5" />
-          <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
+        <section className="relative overflow-hidden bg-sand pt-32 pb-16 sm:pt-40 sm:pb-24">
+          <div className="absolute inset-0 bg-gradient-to-br from-forest/3 via-transparent to-leaf/3" />
+          <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
                 About us
@@ -90,7 +90,7 @@ export default function AboutPage() {
         </section>
 
         {/* Main Content */}
-        <section className="relative pb-24">
+        <section className="relative z-0 bg-sand pb-24">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             {/* Overview Card */}
             <div className="mb-12 rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">

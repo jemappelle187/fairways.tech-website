@@ -19,9 +19,9 @@ export default function ImpactPage() {
       <Header />
       <main id="main-content" className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted">
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-          <div className="absolute inset-0 bg-gradient-to-br from-forest/5 via-transparent to-leaf/5" />
-          <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
+        <section className="relative overflow-hidden bg-sand pt-32 pb-16 sm:pt-40 sm:pb-24">
+          <div className="absolute inset-0 bg-gradient-to-br from-forest/3 via-transparent to-leaf/3" />
+          <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
                 Our impact
@@ -37,17 +37,17 @@ export default function ImpactPage() {
         </section>
 
         {/* Main Content */}
-        <section className="relative pb-24">
+        <section className="relative z-0 bg-sand pb-24">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             {/* For Farmers Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
                 className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
                 style={{ backgroundImage: "url('/farmer_woman.jpg')" }}
               />
               {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/60 via-white/50 to-white/40" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
               
               {/* Content */}
               <div className="relative z-10">
@@ -66,14 +66,14 @@ export default function ImpactPage() {
             </div>
 
             {/* For Institutions Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-sand/50 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
                 className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
                 style={{ backgroundImage: "url('/regulations_compliance.jpg')" }}
               />
               {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/60 via-white/50 to-white/40" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
               
               {/* Content */}
               <div className="relative z-10">
@@ -92,14 +92,14 @@ export default function ImpactPage() {
             </div>
 
             {/* For Food Systems Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
                 className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
                 style={{ backgroundImage: "url('/vegetables_boxes.jpg')" }}
               />
               {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/60 via-white/50 to-white/40" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
               
               {/* Content */}
               <div className="relative z-10">
