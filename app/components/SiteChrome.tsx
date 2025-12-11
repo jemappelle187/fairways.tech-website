@@ -7,7 +7,7 @@ import { track } from "@/lib/umami";
 
 const menuLinks = [
   { href: "/about", label: "About" },
-  { href: "/impact", label: "Impact & vision" },
+  { href: "/impact", label: "Impact & Vision" },
   { href: "/team", label: "Team" },
 ];
 
