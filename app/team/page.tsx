@@ -92,7 +92,7 @@ export default function TeamPage() {
                     className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
                     aria-label="View Emmanuel's LinkedIn profile"
                   >
-                    <Linkedin className="h-4 w-4" />
+                    <Linkedin className="h-4 w-4" strokeWidth={2} />
                   </a>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function TeamPage() {
                     className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
                     aria-label="View Kwan's LinkedIn profile"
                   >
-                    <Linkedin className="h-4 w-4" />
+                    <Linkedin className="h-4 w-4" strokeWidth={2} />
                   </a>
                 </div>
               </div>
