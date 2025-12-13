@@ -23,7 +23,7 @@ export default function TeamPage() {
       <main id="main-content" className="min-h-screen bg-sand">
         <section className="relative overflow-hidden bg-sand pt-28 pb-24">
           {/* Leaf background */}
-          <div className="pointer-events-none absolute inset-0 -z-20 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-30" />
+          <div className="pointer-events-none absolute inset-0 -z-20 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-30" />
           {/* Light overlay for subtle texture */}
           <div className="pointer-events-none absolute inset-0 -z-10 bg-sand/60" />
           <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-20 bg-gradient-to-b from-sand via-sand/40 to-transparent" />
@@ -56,7 +56,7 @@ export default function TeamPage() {
               className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
             >
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
               {/* Prominent Avatar */}
               <div className="relative z-10 mb-5 flex-shrink-0">
                 <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
@@ -104,7 +104,7 @@ export default function TeamPage() {
               className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
             >
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
               {/* Prominent Avatar */}
               <div className="relative z-10 mb-5 flex-shrink-0">
                 <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
@@ -152,7 +152,7 @@ export default function TeamPage() {
           <div className="relative z-10 mx-auto mt-10 max-w-5xl">
             <article className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden">
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.png')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
               <div className="relative z-10">
                 <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Advisors &amp; Partners

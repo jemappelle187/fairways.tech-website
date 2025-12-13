@@ -491,7 +491,7 @@ export default function HomePage() {
   className="relative scroll-mt-24 overflow-hidden bg-[#f4efe5] py-20"
 >
   {/* Vegetables background */}
-  <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_holds_vegetables.png')] bg-cover bg-center" />
+  <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_holds_vegetables.webp')] bg-cover bg-center" />
 
   {/* Dark overlay so text + cards stand out, similar to CTA */}
   <div className="pointer-events-none absolute inset-0 z-0 bg-black/25" />

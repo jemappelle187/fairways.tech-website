@@ -72,7 +72,7 @@ export function ContactCta() {
       className="relative scroll-mt-24 overflow-hidden py-16 sm:py-20"
     >
       {/* Background image (farmer holding crops) */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_hold_crop.png')] bg-cover bg-center" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_hold_crop.webp')] bg-cover bg-center" />
 
       {/* Soft dark overlay */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-black/25" />
