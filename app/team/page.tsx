@@ -7,11 +7,11 @@ import { Header, Footer } from "../components/SiteChrome";
 export const metadata: Metadata = {
   title: "Meet the Team | Fairways.Tech",
   description:
-    "Meet the founders and team behind Fairways.Tech: experts in compliance, finance, and digital infrastructure for African smallholder farmers.",
+    "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
   openGraph: {
     title: "Meet the Team | Fairways.Tech",
     description:
-      "Meet the founders and team behind Fairways.Tech: experts in compliance, finance, and digital infrastructure for African smallholder farmers.",
+      "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
     url: "https://fairways.tech/team",
   },
 };

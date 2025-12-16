@@ -8,11 +8,11 @@ import { ContentProtection } from "./components/ContentProtection";
 export const metadata: Metadata = {
   metadataBase: new URL("https://fairways.tech"),
   title: {
-    default: "Fairways.Tech – Digital Infrastructure for Smallholder Farmers",
+    default: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     template: "%s | Fairways.Tech",
   },
   description:
-    "Transform farm data into trusted finance. Fairways.Tech is a community-driven agri-fintech ecosystem unlocking scalable, compliant access to finance and markets for African smallholder farmers.",
+    "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
   authors: [
     { name: "Fairways.Tech" },
     { name: "Emmanuel Yeboah Martina", url: "https://www.linkedin.com/in/eymartina/" },
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Fairways.Tech – Unlock Finance for African Farmers",
+    title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     description:
-      "Transform farm data into trusted finance. Community-driven agri-fintech ecosystem unlocking scalable, compliant access to finance and markets for smallholder farmers across Africa.",
+      "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
     url: "https://fairways.tech",
     siteName: "Fairways.Tech",
     images: [
@@ -42,16 +42,16 @@ export const metadata: Metadata = {
         url: "/og-fairways-tech.webp?v=9",
         width: 1200,
         height: 630,
-        alt: "Fairways.Tech: Community-driven digital infrastructure empowering African smallholder farmers with trusted data, compliant finance, and market access",
+        alt: "Fairways.Tech: Turning farm activity into trusted, finance-ready data for smallholder farmers.",
       }
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fairways.Tech – Unlock Finance for African Farmers",
+    title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     description:
-      "Transform farm data into trusted finance. Community-driven agri-fintech unlocking scalable, compliant access to markets and capital for smallholder farmers.",
+      "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
     images: ["/og-fairways-tech.webp?v=9"],
   },
 };
@@ -118,7 +118,7 @@ export default function RootLayout({
               "@id": "https://fairways.tech/#organization",
               name: "Fairways.Tech",
               url: "https://fairways.tech",
-              logo: "https://fairways.tech/og-fairways-tech.png?v=4",
+              logo: "https://fairways.tech/og-fairways-tech.webp?v=9",
               sameAs: [],
               foundingDate: "2025",
               address: {
@@ -132,7 +132,7 @@ export default function RootLayout({
                 areaServed: ["NL", "GH"],
               },
               description:
-                "Fairways.Tech builds compliance-first digital infrastructure to unlock fair finance for Africa's smallholder farmers.",
+                "Fairways.Tech builds compliance-first digital infrastructure, turning farm activity into trusted, finance-ready data for smallholder farmers.",
             }),
           }}
         />
@@ -148,13 +148,13 @@ export default function RootLayout({
               name: "Fairways.Tech",
               url: "https://fairways.tech",
               description:
-                "Digital infrastructure for smallholder farmers: identity, data, and compliant liquidity rails across Africa.",
+                "Digital infrastructure for smallholder farmers: identity, data, and compliant liquidity rails that turn farm activity into trusted, finance-ready data.",
               publisher: {
                 "@type": "Organization",
                 name: "Fairways.Tech",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://fairways.tech/og-fairways-tech.png?v=4",
+                  url: "https://fairways.tech/og-fairways-tech.webp?v=9",
                 },
               },
             }),

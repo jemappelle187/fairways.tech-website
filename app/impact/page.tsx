@@ -4,11 +4,11 @@ import { Header, Footer } from "../components/SiteChrome";
 export const metadata: Metadata = {
   title: "Impact & Vision",
   description:
-    "Learn about Fairways.Tech's impact on farmers, institutions, and food systems across Africa.",
+    "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
   openGraph: {
     title: "Impact & Vision | Fairways.Tech",
     description:
-      "Learn about Fairways.Tech's impact on farmers, institutions, and food systems across Africa.",
+      "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
     url: "https://fairways.tech/impact",
   },
 };
