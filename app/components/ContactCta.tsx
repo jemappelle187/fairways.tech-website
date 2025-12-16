@@ -96,8 +96,7 @@ export function ContactCta() {
             Partner with Fairways.Tech
           </h2>
           <p className="mb-8 max-w-2xl text-base text-white/85 md:text-lg leading-relaxed">
-            Join banks, cooperatives, buyers and development partners building
-            trusted, compliant rails for rural finance across Africa.
+          Join banks, cooperatives, buyers, and development partners building trusted, compliant digital rails for scalable rural finance.
           </p>
           <button
             type="button"
