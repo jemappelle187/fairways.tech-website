@@ -24,61 +24,6 @@ export function GoogleAnalytics() {
     console.log("[GoogleAnalytics] All NEXT_PUBLIC vars:", Object.keys(process.env).filter(k => k.startsWith('NEXT_PUBLIC_')));
   }, [gaMeasurementId]);
 
-  // Function to load GA4 scripts dynamically
-  const loadGA4 = () => {
-    if (typeof window === "undefined" || !gaMeasurementId) return;
-    
-    const win = window as any;
-    
-    // Check if already loaded
-    if (win.dataLayer && win.gtag) {
-      console.log("[GoogleAnalytics] GA4 already loaded");
-      return;
-    }
-
-    // Initialize dataLayer first (before script loads)
-    win.dataLayer = win.dataLayer || [];
-    function gtag(...args: any[]) {
-      win.dataLayer.push(args);
-    }
-    win.gtag = gtag;
-    gtag("js", new Date());
-    gtag("config", gaMeasurementId, {
-      page_path: window.location.pathname,
-      page_title: document.title,
-      anonymize_ip: true,
-      cookie_flags: "SameSite=None;Secure",
-    });
-    
-    console.log(`[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}`);
-    console.log(`[GoogleAnalytics] dataLayer initialized, loading gtag.js script...`);
-
-    // Load gtag.js script
-    const script1 = document.createElement("script");
-    script1.async = true;
-    script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
-    script1.onload = () => {
-      console.log("[GoogleAnalytics] ✅ gtag.js script loaded and ready");
-      
-      // Wait a moment for gtag to be fully initialized, then send page view
-      setTimeout(() => {
-        if (win.gtag) {
-          win.gtag("event", "page_view", {
-            page_path: window.location.pathname,
-            page_title: document.title,
-            page_location: window.location.href,
-          });
-          console.log(`[GoogleAnalytics] ✅ Page view event sent for: ${window.location.pathname}`);
-          console.log(`[GoogleAnalytics] Check Network tab for 'collect' requests`);
-        }
-      }, 200);
-    };
-    script1.onerror = () => {
-      console.error("[GoogleAnalytics] ❌ Failed to load gtag.js script");
-    };
-    document.head.appendChild(script1);
-  };
-
   useEffect(() => {
     console.log("[GoogleAnalytics] useEffect running, Measurement ID:", gaMeasurementId);
     
@@ -96,7 +41,6 @@ export function GoogleAnalytics() {
         if (consent === "accepted") {
           console.log("[GoogleAnalytics] Consent accepted, loading GA4");
           setShouldLoad(true);
-          loadGA4();
         } else if (consent === "rejected") {
           console.log("[GoogleAnalytics] Consent rejected, not loading GA4");
           setShouldLoad(false);
@@ -118,7 +62,6 @@ export function GoogleAnalytics() {
       console.log("[GoogleAnalytics] Consent changed to:", value);
       if (value === "accepted") {
         setShouldLoad(true);
-        loadGA4();
       } else {
         setShouldLoad(false);
       }
@@ -163,57 +106,61 @@ export function GoogleAnalytics() {
     checkAndSend();
   }, [pathname, shouldLoad, gaMeasurementId]);
 
-  // For initial page load with consent already accepted, use Next.js Script
-  if (shouldLoad && gaMeasurementId && typeof window !== "undefined") {
-    const win = window as any;
-    if (win.gtag) return null; // Already loaded
+  // Only render GA scripts if consent is accepted
+  if (!shouldLoad || !gaMeasurementId) {
     return (
-      <>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-          strategy="afterInteractive"
-          onLoad={() => {
-            console.log("[GoogleAnalytics] GA4 script loaded via Next.js Script");
-          }}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${gaMeasurementId}', {
-                page_path: window.location.pathname,
-                page_title: document.title,
-                anonymize_ip: true,
-                cookie_flags: 'SameSite=None;Secure',
-              });
-              console.log('[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}');
-              
-              // Send initial page view after a short delay to ensure script is ready
-              setTimeout(function() {
-                gtag('event', 'page_view', {
+      <div style={{ display: 'none' }} data-ga-component="mounted">
+        {/* Debug: GA Component rendered - waiting for consent */}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {/* Google Analytics 4 - Standard Implementation */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log("[GoogleAnalytics] ✅ gtag.js script loaded");
+        }}
+        onError={() => {
+          console.error("[GoogleAnalytics] ❌ Failed to load gtag.js script");
+        }}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaMeasurementId}', {
+              page_path: window.location.pathname,
+              page_title: document.title,
+              anonymize_ip: true,
+              cookie_flags: 'SameSite=None;Secure',
+            });
+            console.log('[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}');
+            console.log('[GoogleAnalytics] dataLayer:', window.dataLayer);
+            
+            // Note: gtag('config') automatically sends a page_view event
+            // But we'll also send one explicitly after script is ready
+            setTimeout(function() {
+              if (window.gtag) {
+                window.gtag('event', 'page_view', {
                   page_path: window.location.pathname,
                   page_title: document.title,
                   page_location: window.location.href,
                 });
-                console.log('[GoogleAnalytics] Page view sent for: ' + window.location.pathname);
-              }, 100);
-            `,
-          }}
-        />
-      </>
-    );
-  }
-
-  // Always render something to ensure component mounts (for debugging)
-  // This ensures React actually mounts the component so useEffect runs
-  return (
-    <div style={{ display: 'none' }} data-ga-component="mounted">
-      {/* Debug: GA Component rendered - check console for logs */}
-    </div>
+                console.log('[GoogleAnalytics] ✅ Explicit page_view sent for: ' + window.location.pathname);
+                console.log('[GoogleAnalytics] Final dataLayer:', window.dataLayer);
+              }
+            }, 1000);
+          `,
+        }}
+      />
+    </>
   );
 }
-
