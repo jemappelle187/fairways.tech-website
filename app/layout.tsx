@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { UmamiLoader } from "./components/UmamiLoader";
 import { VisitTracker } from "./components/VisitTracker";
+import { GoogleAnalytics } from "./components/GoogleAnalytics";
 import { ContentProtection } from "./components/ContentProtection";
 
 export const metadata: Metadata = {
@@ -106,6 +107,20 @@ export default function RootLayout({
         {children}
         <VisitTracker />
         <UmamiLoader />
+        <GoogleAnalytics />
+        {/* Debug: Test if env var is available at build time */}
+        <Script
+          id="ga-env-test"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              console.log('[ENV TEST] NEXT_PUBLIC_GA_MEASUREMENT_ID:', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'NOT_FOUND'}');
+              console.log('[ENV TEST] All NEXT_PUBLIC vars:', ${JSON.stringify(
+                Object.keys(process.env).filter(k => k.startsWith('NEXT_PUBLIC_'))
+              )});
+            `,
+          }}
+        />
         {/* Organization Schema */}
         <Script
           id="fairways-org-schema"
