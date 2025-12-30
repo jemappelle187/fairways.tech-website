@@ -36,16 +36,7 @@ export function GoogleAnalytics() {
       return;
     }
 
-    // Load gtag.js script
-    const script1 = document.createElement("script");
-    script1.async = true;
-    script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
-    script1.onload = () => {
-      console.log("[GoogleAnalytics] gtag.js script loaded");
-    };
-    document.head.appendChild(script1);
-
-    // Initialize GA4
+    // Initialize dataLayer first (before script loads)
     win.dataLayer = win.dataLayer || [];
     function gtag(...args: any[]) {
       win.dataLayer.push(args);
@@ -59,15 +50,33 @@ export function GoogleAnalytics() {
       cookie_flags: "SameSite=None;Secure",
     });
     
-    // Send initial page view
-    gtag("event", "page_view", {
-      page_path: window.location.pathname,
-      page_title: document.title,
-      page_location: window.location.href,
-    });
-    
     console.log(`[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}`);
-    console.log(`[GoogleAnalytics] Page view sent for: ${window.location.pathname}`);
+    console.log(`[GoogleAnalytics] dataLayer initialized, loading gtag.js script...`);
+
+    // Load gtag.js script
+    const script1 = document.createElement("script");
+    script1.async = true;
+    script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+    script1.onload = () => {
+      console.log("[GoogleAnalytics] ✅ gtag.js script loaded and ready");
+      
+      // Wait a moment for gtag to be fully initialized, then send page view
+      setTimeout(() => {
+        if (win.gtag) {
+          win.gtag("event", "page_view", {
+            page_path: window.location.pathname,
+            page_title: document.title,
+            page_location: window.location.href,
+          });
+          console.log(`[GoogleAnalytics] ✅ Page view event sent for: ${window.location.pathname}`);
+          console.log(`[GoogleAnalytics] Check Network tab for 'collect' requests`);
+        }
+      }, 200);
+    };
+    script1.onerror = () => {
+      console.error("[GoogleAnalytics] ❌ Failed to load gtag.js script");
+    };
+    document.head.appendChild(script1);
   };
 
   useEffect(() => {
@@ -134,16 +143,24 @@ export function GoogleAnalytics() {
     if (!shouldLoad || !gaMeasurementId || typeof window === "undefined") return;
     
     const win = window as any;
-    if (!win.gtag) return;
-
-    // Send page view event on route change
-    win.gtag("event", "page_view", {
-      page_path: pathname,
-      page_title: document.title,
-      page_location: window.location.href,
-    });
     
-    console.log(`[GoogleAnalytics] Page view tracked for route: ${pathname}`);
+    // Wait for gtag to be available (script might still be loading)
+    const checkAndSend = () => {
+      if (win.gtag && win.dataLayer) {
+        // Send page view event on route change
+        win.gtag("event", "page_view", {
+          page_path: pathname,
+          page_title: document.title,
+          page_location: window.location.href,
+        });
+        console.log(`[GoogleAnalytics] Page view tracked for route: ${pathname}`);
+      } else {
+        // Retry after a short delay if gtag isn't ready yet
+        setTimeout(checkAndSend, 100);
+      }
+    };
+    
+    checkAndSend();
   }, [pathname, shouldLoad, gaMeasurementId]);
 
   // For initial page load with consent already accepted, use Next.js Script
@@ -173,14 +190,17 @@ export function GoogleAnalytics() {
                 anonymize_ip: true,
                 cookie_flags: 'SameSite=None;Secure',
               });
-              // Send initial page view
-              gtag('event', 'page_view', {
-                page_path: window.location.pathname,
-                page_title: document.title,
-                page_location: window.location.href,
-              });
               console.log('[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}');
-              console.log('[GoogleAnalytics] Page view sent for: ' + window.location.pathname);
+              
+              // Send initial page view after a short delay to ensure script is ready
+              setTimeout(function() {
+                gtag('event', 'page_view', {
+                  page_path: window.location.pathname,
+                  page_title: document.title,
+                  page_location: window.location.href,
+                });
+                console.log('[GoogleAnalytics] Page view sent for: ' + window.location.pathname);
+              }, 100);
             `,
           }}
         />
