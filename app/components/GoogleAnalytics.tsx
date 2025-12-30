@@ -21,7 +21,8 @@ export function GoogleAnalytics() {
     if (typeof window === "undefined" || !gaMeasurementId) return;
     
     // Check if already loaded
-    if (window.dataLayer && (window as any).gtag) {
+    const win = window as any;
+    if (win.dataLayer && win.gtag) {
       console.log("[GoogleAnalytics] GA4 already loaded");
       return;
     }
@@ -36,11 +37,12 @@ export function GoogleAnalytics() {
     document.head.appendChild(script1);
 
     // Initialize GA4
-    window.dataLayer = window.dataLayer || [];
+    const win = window as any;
+    win.dataLayer = win.dataLayer || [];
     function gtag(...args: any[]) {
-      window.dataLayer.push(args);
+      win.dataLayer.push(args);
     }
-    (window as any).gtag = gtag;
+    win.gtag = gtag;
     gtag("js", new Date());
     gtag("config", gaMeasurementId, {
       page_path: window.location.pathname,
@@ -106,10 +108,12 @@ export function GoogleAnalytics() {
         handleConsentChange as EventListener
       );
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gaMeasurementId]);
 
   // For initial page load with consent already accepted, use Next.js Script
-  if (shouldLoad && gaMeasurementId && typeof window !== "undefined" && !(window as any).gtag) {
+  const win = typeof window !== "undefined" ? (window as any) : null;
+  if (shouldLoad && gaMeasurementId && win && !win.gtag) {
     return (
       <>
         <Script
