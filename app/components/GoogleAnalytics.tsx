@@ -20,8 +20,9 @@ export function GoogleAnalytics() {
   const loadGA4 = () => {
     if (typeof window === "undefined" || !gaMeasurementId) return;
     
-    // Check if already loaded
     const win = window as any;
+    
+    // Check if already loaded
     if (win.dataLayer && win.gtag) {
       console.log("[GoogleAnalytics] GA4 already loaded");
       return;
@@ -37,7 +38,6 @@ export function GoogleAnalytics() {
     document.head.appendChild(script1);
 
     // Initialize GA4
-    const win = window as any;
     win.dataLayer = win.dataLayer || [];
     function gtag(...args: any[]) {
       win.dataLayer.push(args);
@@ -112,8 +112,9 @@ export function GoogleAnalytics() {
   }, [gaMeasurementId]);
 
   // For initial page load with consent already accepted, use Next.js Script
-  const win = typeof window !== "undefined" ? (window as any) : null;
-  if (shouldLoad && gaMeasurementId && win && !win.gtag) {
+  if (shouldLoad && gaMeasurementId && typeof window !== "undefined") {
+    const win = window as any;
+    if (win.gtag) return null; // Already loaded
     return (
       <>
         <Script
