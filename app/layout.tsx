@@ -108,7 +108,7 @@ export default function RootLayout({
         <VisitTracker />
         <UmamiLoader />
         <GoogleAnalytics />
-        {/* Debug: Test if env var is available at build time */}
+        {/* Debug: Test if env var is available at build time - Fixed typo: O -> 0 */}
         <Script
           id="ga-env-test"
           strategy="afterInteractive"
