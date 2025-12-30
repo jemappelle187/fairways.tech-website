@@ -9,9 +9,15 @@ export function GoogleAnalytics() {
   const [shouldLoad, setShouldLoad] = useState<boolean | null>(null);
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   
+  // Immediate log when component function is called (before React renders)
+  if (typeof window !== "undefined") {
+    console.log("[GoogleAnalytics] 🔍 Component function called");
+    console.log("[GoogleAnalytics] Measurement ID from env:", gaMeasurementId || "❌ NOT FOUND");
+  }
+  
   // Debug logging - always log on mount
   useEffect(() => {
-    console.log("[GoogleAnalytics] ✅ Component mounted");
+    console.log("[GoogleAnalytics] ✅ Component mounted (useEffect)");
     console.log("[GoogleAnalytics] Measurement ID:", gaMeasurementId || "❌ NOT FOUND");
     console.log("[GoogleAnalytics] All NEXT_PUBLIC vars:", Object.keys(process.env).filter(k => k.startsWith('NEXT_PUBLIC_')));
   }, [gaMeasurementId]);
@@ -145,15 +151,12 @@ export function GoogleAnalytics() {
     );
   }
 
-  // Always render something for debugging (will be removed in production)
-  if (process.env.NODE_ENV === 'development') {
-    return (
-      <div style={{ display: 'none' }}>
-        {/* Debug: GA Component rendered */}
-      </div>
-    );
-  }
-  
-  return null;
+  // Always render something to ensure component mounts (for debugging)
+  // This ensures React actually mounts the component so useEffect runs
+  return (
+    <div style={{ display: 'none' }} data-ga-component="mounted">
+      {/* Debug: GA Component rendered - check console for logs */}
+    </div>
+  );
 }
 
