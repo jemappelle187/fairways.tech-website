@@ -2,12 +2,14 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "fw_cookie_consent_v1";
 
 export function GoogleAnalytics() {
   const [shouldLoad, setShouldLoad] = useState<boolean | null>(null);
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const pathname = usePathname();
   
   // Immediate log when component function is called (before React renders)
   if (typeof window !== "undefined") {
@@ -52,10 +54,20 @@ export function GoogleAnalytics() {
     gtag("js", new Date());
     gtag("config", gaMeasurementId, {
       page_path: window.location.pathname,
+      page_title: document.title,
       anonymize_ip: true,
       cookie_flags: "SameSite=None;Secure",
     });
+    
+    // Send initial page view
+    gtag("event", "page_view", {
+      page_path: window.location.pathname,
+      page_title: document.title,
+      page_location: window.location.href,
+    });
+    
     console.log(`[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}`);
+    console.log(`[GoogleAnalytics] Page view sent for: ${window.location.pathname}`);
   };
 
   useEffect(() => {
@@ -117,6 +129,23 @@ export function GoogleAnalytics() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gaMeasurementId]);
 
+  // Track page views on route changes (Next.js App Router)
+  useEffect(() => {
+    if (!shouldLoad || !gaMeasurementId || typeof window === "undefined") return;
+    
+    const win = window as any;
+    if (!win.gtag) return;
+
+    // Send page view event on route change
+    win.gtag("event", "page_view", {
+      page_path: pathname,
+      page_title: document.title,
+      page_location: window.location.href,
+    });
+    
+    console.log(`[GoogleAnalytics] Page view tracked for route: ${pathname}`);
+  }, [pathname, shouldLoad, gaMeasurementId]);
+
   // For initial page load with consent already accepted, use Next.js Script
   if (shouldLoad && gaMeasurementId && typeof window !== "undefined") {
     const win = window as any;
@@ -140,10 +169,18 @@ export function GoogleAnalytics() {
               gtag('js', new Date());
               gtag('config', '${gaMeasurementId}', {
                 page_path: window.location.pathname,
+                page_title: document.title,
                 anonymize_ip: true,
                 cookie_flags: 'SameSite=None;Secure',
               });
+              // Send initial page view
+              gtag('event', 'page_view', {
+                page_path: window.location.pathname,
+                page_title: document.title,
+                page_location: window.location.href,
+              });
               console.log('[GoogleAnalytics] GA4 initialized with ID: ${gaMeasurementId}');
+              console.log('[GoogleAnalytics] Page view sent for: ' + window.location.pathname);
             `,
           }}
         />
