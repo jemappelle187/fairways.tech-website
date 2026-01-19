@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "Fairways.Tech",
     images: [
       {
-        url: "/og-fairways-tech.webp?v=9",
+        url: "/og/og-fairways-tech.png",
         width: 1200,
         height: 630,
         alt: "Fairways.Tech: Turning farm activity into trusted, finance-ready data for smallholder farmers.",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     description:
       "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
-    images: ["/og-fairways-tech.webp?v=9"],
+    images: ["/og/og-fairways-tech.png"],
   },
 };
 
@@ -133,7 +133,7 @@ export default function RootLayout({
               "@id": "https://fairways.tech/#organization",
               name: "Fairways.Tech",
               url: "https://fairways.tech",
-              logo: "https://fairways.tech/og-fairways-tech.webp?v=9",
+              logo: "https://fairways.tech/og/og-fairways-tech.png",
               sameAs: [],
               foundingDate: "2025",
               address: {
@@ -167,10 +167,10 @@ export default function RootLayout({
               publisher: {
                 "@type": "Organization",
                 name: "Fairways.Tech",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://fairways.tech/og-fairways-tech.webp?v=9",
-                },
+              logo: {
+                "@type": "ImageObject",
+                url: "https://fairways.tech/og/og-fairways-tech.png",
+              },
               },
             }),
           }}
