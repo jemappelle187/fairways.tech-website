@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { track } from "@/lib/umami";
+import { analytics } from "@/lib/analytics";
 import { ContactForm } from "./ContactForm";
 
 export function ContactCta() {
@@ -101,7 +101,7 @@ export function ContactCta() {
           <button
             type="button"
             onClick={() => {
-              track("cta_opened");
+              analytics.contactFormOpened();
               setOpen(true);
             }}
             className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
@@ -165,7 +165,7 @@ export function ContactCta() {
             <div className="flex flex-col items-center px-8 py-10 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center">
                 <img
-                  src="/images/logo/logo-fairways-forest.svg"
+                  src="/images/logo/master/fairways-master-logo.png"
                   alt="Fairways.Tech"
                   className="h-10 w-10"
                 />

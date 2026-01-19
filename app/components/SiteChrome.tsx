@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ContactModal } from "./ContactModal";
-import { track } from "@/lib/umami";
+import { analytics } from "@/lib/analytics";
 
 const menuLinks = [
   { href: "/about", label: "About" },
@@ -80,7 +80,7 @@ export function Header() {
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    track("contact_modal_opened_from_header");
+    analytics.contactFormOpened();
     setIsContactModalOpen(true);
   };
 
@@ -108,7 +108,7 @@ export function Header() {
           <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo/logo-fairways-forest.svg"
+              src="/images/logo/master/fairways-master-logo.png"
               alt="Fairways.Tech"
               className={`transition-all duration-300 hover:scale-105 ${
                 isScrolled ? "h-8 w-8" : "h-10 w-10 sm:h-12 sm:w-12"

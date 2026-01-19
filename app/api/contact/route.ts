@@ -5,9 +5,9 @@ import { Resend } from "resend";
 let resend: Resend | null = null;
 function getResend() {
   if (!resend) {
-    const resendApiKey = process.env.RESEND_API_KEY;
-    if (!resendApiKey) {
-      console.error("[CONTACT_API] RESEND_API_KEY is not set");
+const resendApiKey = process.env.RESEND_API_KEY;
+if (!resendApiKey) {
+  console.error("[CONTACT_API] RESEND_API_KEY is not set");
       return null;
     }
     resend = new Resend(resendApiKey);
@@ -442,7 +442,7 @@ ${body.geoCountry || body.geoCity ? `\nTechnical Details:\n${body.geoCountry ? `
               <div class="email-wrapper">
                 <div class="email-container">
                   <div class="header">
-                    <img src="https://fairways.tech/images/logo/logo-fairways-white.svg" alt="Fairways.Tech" class="logo" />
+                    <img src="https://fairways.tech/images/logo/master/fairways-master-logo-glow-bg-black.png" alt="Fairways.Tech" class="logo" />
                     <h1>Thank you for reaching out</h1>
                   </div>
                   <div class="content">
