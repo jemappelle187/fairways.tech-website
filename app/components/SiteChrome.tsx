@@ -111,7 +111,7 @@ export function Header() {
               src="/images/logo/master/fairways-master-logo.png"
               alt="Fairways.Tech"
               className={`transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "h-10 w-10" : "h-12 w-12 sm:h-14 sm:w-14"
+                isScrolled ? "h-12 w-12" : "h-14 w-14 sm:h-16 sm:w-16"
               }`}
             />
             <div
