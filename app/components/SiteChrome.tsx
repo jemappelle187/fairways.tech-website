@@ -105,7 +105,7 @@ export function Header() {
           }`}
         >
           {/* Logo - Far left aligned */}
-          <a href="/" className="flex items-center flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
+          <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo/master/master-logo-text-drop-black.png"
@@ -114,6 +114,13 @@ export function Header() {
                 isScrolled ? "h-14" : "h-16 sm:h-20"
               }`}
             />
+            <div
+              className={`font-bold tracking-tight text-forest transition-all duration-300 hover:scale-105 ${
+                isScrolled ? "text-lg" : "text-lg sm:text-xl lg:text-2xl"
+              }`}
+            >
+              Fairways.Tech
+            </div>
           </a>
 
           {/* Desktop: Menu items in navbar */}
