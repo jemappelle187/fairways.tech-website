@@ -7,7 +7,7 @@ interface LazyVideoProps {
   className?: string;
   style?: React.CSSProperties;
   ariaLabel?: string;
-  "aria-hidden"?: string | boolean;
+  "aria-hidden"?: boolean;
   autoPlay?: boolean;
   loop?: boolean;
   muted?: boolean;
