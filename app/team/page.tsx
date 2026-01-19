@@ -154,7 +154,7 @@ export default function TeamPage() {
                 </div>
               </div>
             </article>
-            </div>
+          </div>
           </div>
 
           {/* Local team */}
@@ -174,8 +174,8 @@ export default function TeamPage() {
                 id="vinanda-addo"
                 className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden max-w-sm w-full"
               >
-                {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              {/* Leaf background */}
+              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
                   <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
@@ -218,7 +218,7 @@ export default function TeamPage() {
                 </div>
               </article>
             </div>
-          </div>
+              </div>
 
           {/* Advisors */}
           <div className="relative z-10 mx-auto mt-16 max-w-5xl">
@@ -478,7 +478,7 @@ export default function TeamPage() {
                     </a>
                   </div>
                 </div>
-              </article>
+            </article>
             </div>
           </div>
 

@@ -108,7 +108,7 @@ export function Header() {
           <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo/master-250x250-svg/master-logo-text-drop-black.svg"
+              src="/images/logo/master-250x250-svg/master-logo-drop-black.svg"
               alt="Fairways.Tech"
               className={`transition-all duration-300 hover:scale-105 ${
                 isScrolled ? "h-14" : "h-16 sm:h-20"
