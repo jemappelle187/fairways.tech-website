@@ -59,9 +59,9 @@ export function CookieBanner() {
               Cookies &amp; privacy
             </p>
             <p className="text-[13px] leading-relaxed text-sand/80">
-              This website uses essential cookies and limited, privacy-respectful
-              analytics to ensure security, reliability and to understand how our
-              site is used. For details, please see our{" "}
+              This website uses essential cookies and privacy-respectful analytics
+              (Google Analytics & Umami) to ensure security, reliability and to understand
+              how our site is used. For details, please see our{" "}
               <a
                 href="/cookies"
                 className="underline decoration-sand/70 underline-offset-4 hover:decoration-sand"

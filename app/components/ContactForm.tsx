@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { track } from "@/lib/umami";
+import { analytics } from "@/lib/analytics";
 
 type ContactFormData = {
   firstName: string;
@@ -134,7 +134,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         throw new Error(result.error || "Failed to submit form");
       }
 
-      track("contact_form_submitted");
+      analytics.contactFormSubmitted(true);
       onSuccess();
     } catch (err: any) {
       setError(err.message || "Something went wrong. Please try again.");

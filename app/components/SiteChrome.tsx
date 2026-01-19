@@ -108,7 +108,7 @@ export function Header() {
           <a href="/" className="flex items-center flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo/master/master-logo-text-drop-#000000.png"
+              src="/images/logo/master/master-logo-text-drop-black.png"
               alt="Fairways.Tech"
               className={`transition-all duration-300 hover:scale-105 ${
                 isScrolled ? "h-14" : "h-16 sm:h-20"
