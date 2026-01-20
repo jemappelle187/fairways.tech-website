@@ -139,7 +139,7 @@ function VideoHero() {
         aria-label="Hero video showcasing Fairways.Tech digital infrastructure for smallholder farmers"
         className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:object-cover"
       >
-        <source src="/videos/FAIRWAYS.TECH _Hero.mp4" type="video/mp4" />
+        <source src="/videos/fairways-hero-video.mp4" type="video/mp4" />
         <p>Video showing Fairways.Tech&apos;s mission to build digital infrastructure for African smallholder farmers.</p>
       </video>
       {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
