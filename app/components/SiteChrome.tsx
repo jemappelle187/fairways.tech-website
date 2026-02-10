@@ -416,7 +416,7 @@ export function Footer() {
             </a>
           </div>
           <span className="text-[11px] text-slate-500 sm:text-xs">
-            © {year} Fairways.Tech. All rights reserved.
+            © {year} Fairways.Tech B.V. All rights reserved.
           </span>
         </div>
       </div>

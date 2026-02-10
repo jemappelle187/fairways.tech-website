@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
+import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
 export const metadata: Metadata = {
   title: "Website Privacy Policy | Fairways.Tech",
@@ -24,7 +25,7 @@ export default function PrivacyPage() {
                 Website Privacy Policy
               </h1>
               <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 5 December 2025
+                Last updated: 4 February 2026
               </p>
             </div>
           </div>
@@ -39,19 +40,28 @@ export default function PrivacyPage() {
                 <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">1. Who we are</h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800">
                   <p>
-                    This Privacy Policy explains how Fairways.Tech B.V. (Netherlands) and
-                    Fairways.Tech Ltd (Ghana) (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;)
-                    process personal data when you visit <strong>www.fairways.tech</strong>
-                    (the &quot;Website&quot;) or submit information through the Website contact form.
+                    This Privacy Policy explains how <strong>Fairways Tech Operations B.V.</strong> (
+                    <strong>99720248</strong>) and <strong>Fairways.Tech Ltd</strong> (Republic of Ghana), together
+                    trading as &quot;Fairways.Tech&quot; (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;),
+                    process personal data when you visit <strong>www.fairways.tech</strong> (the &quot;Website&quot;) or submit
+                    information through the Website contact form.
                   </p>
                   <div className="rounded-2xl border-l-4 border-forest bg-sand/40 p-5">
-                    <p className="mb-2 font-semibold text-forest">For visitors in the EU/EEA, the primary data controller is:</p>
-                    <p className="text-slate-800"><strong>Fairways.Tech B.V.</strong> – The Netherlands</p>
+                    <p className="mb-2 font-semibold text-forest">
+                      For visitors in the EU/EEA, the data controller for this Website is:
+                    </p>
+                    <p className="text-slate-800">
+                      <strong>Fairways Tech Operations B.V.</strong> (<strong>99720248</strong>)
+                    </p>
+                    <p className="mt-2 text-sm text-slate-700">
+                      Where Website-related processing involves Fairways.Tech Ltd or other partners outside the
+                      EU/EEA, equivalent safeguards are applied.
+                    </p>
                   </div>
                   <p>
-                    All Website processing is governed by the <strong>EU General Data Protection Regulation (GDPR)</strong>.
-                    Where processing involves Fairways.Tech Ltd (Ghana), equivalent safeguards are applied to ensure an
-                    appropriate level of protection.
+                    All Website processing is governed by the <strong>EU General Data Protection Regulation (GDPR)</strong> where
+                    applicable. Where processing involves partners or service providers outside the EU/EEA, equivalent
+                    safeguards are applied to ensure an appropriate level of protection.
                   </p>
                   <div className="rounded-2xl border border-forest/20 bg-white/60 p-5">
                     <p className="mb-2 text-sm font-semibold text-forest">For privacy inquiries or to exercise data rights, contact:</p>
@@ -313,6 +323,8 @@ export default function PrivacyPage() {
                   </p>
                 </div>
               </div>
+
+              <LegalEntityBlock />
             </div>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
+import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
 export const metadata: Metadata = {
   title: "Website Terms & Conditions | Fairways.Tech",
@@ -24,7 +25,7 @@ export default function TermsPage() {
                 Website Terms &amp; Conditions
               </h1>
               <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 5 December 2025
+                Last updated: 4 February 2026
               </p>
             </div>
           </div>
@@ -45,12 +46,21 @@ export default function TermsPage() {
                   <div className="rounded-2xl border-l-4 border-forest bg-sand/40 p-5">
                     <p className="mb-3 font-semibold text-forest">The Website is operated by:</p>
                     <ul className="ml-6 space-y-2 list-disc text-slate-800">
-                      <li>Fairways.Tech B.V., incorporated in the Netherlands</li>
-                      <li>Fairways.Tech Ltd, incorporated in the Republic of Ghana</li>
+                      <li>
+                        <strong>Fairways Tech Operations B.V.</strong> (
+                        <strong>99720248</strong>)
+                      </li>
+                      <li>
+                        <strong>Fairways.Tech Ltd</strong>, incorporated in the Republic of Ghana
+                      </li>
                     </ul>
+                    <p className="mt-2 text-sm text-slate-700">
+                      Together trading as &quot;Fairways.Tech&quot;.
+                    </p>
                   </div>
                   <p>
-                    Together, &quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot; or &quot;our&quot;. The Website is an
+                    In these Terms, &quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot; or &quot;our&quot; refers to Fairways Tech
+                    Operations B.V. and Fairways.Tech Ltd, trading as &quot;Fairways.Tech&quot;, unless we state otherwise. The Website is an
                     informational, non-transactional site. It does not facilitate account
                     opening, onboarding, biometric capture, lending, or any other regulated
                     financial or identification process. Any such services, if and when
@@ -282,6 +292,8 @@ export default function TermsPage() {
                   </p>
                 </div>
               </div>
+
+              <LegalEntityBlock />
             </div>
           </div>
         </section>

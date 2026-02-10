@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
+import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
 export const metadata: Metadata = {
   title: "Cookie & Local Storage Policy | Fairways.Tech",
@@ -27,7 +28,7 @@ export default function CookiesPage() {
                 Fairways.Tech uses a minimal, compliance‑aligned set of cookies and storage technologies. We do not use advertising cookies, tracking pixels, or any cross‑site profiling technologies. Our approach reflects our identity as a regulated, institutional‑grade platform.
               </p>
               <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 5 December 2025
+                Last updated: 4 February 2026
               </p>
             </div>
           </div>
@@ -42,7 +43,11 @@ export default function CookiesPage() {
                 <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">1. Purpose of this Policy</h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800">
                   <p>
-                    This Policy applies to www.fairways.tech (the &quot;Website&quot;) operated by Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana). It describes the types of cookies and storage technologies we use, why we use them, and the choices available to Website visitors.
+                    This Policy applies to www.fairways.tech (the &quot;Website&quot;) operated by{" "}
+                    <strong>Fairways Tech Operations B.V.</strong> (<strong>99720248</strong>) and{" "}
+                    <strong>Fairways.Tech Ltd</strong> (Republic of Ghana), trading as &quot;Fairways.Tech&quot;. It describes the
+                    types of cookies and storage technologies we use, why we use them, and the choices available to
+                    Website visitors.
                   </p>
                   <div className="rounded-xl border-l-4 border-forest bg-sand/40 p-5">
                     <p>
@@ -178,6 +183,8 @@ export default function CookiesPage() {
                   </p>
                 </div>
               </div>
+
+              <LegalEntityBlock />
             </div>
           </div>
         </section>

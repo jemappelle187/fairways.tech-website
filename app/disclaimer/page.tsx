@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
+import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
 export const metadata: Metadata = {
   title: "Website Disclaimer | Fairways.Tech",
@@ -24,7 +25,7 @@ export default function DisclaimerPage() {
                 Website Disclaimer
               </h1>
               <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 5 December 2025
+                Last updated: 4 February 2026
               </p>
             </div>
           </div>
@@ -41,9 +42,9 @@ export default function DisclaimerPage() {
                 </h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800">
                   <p>
-                    The website <strong>www.fairways.tech</strong> (the &quot;Website&quot;) is operated by
-                    Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana)
-                    (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;).
+                    The website <strong>www.fairways.tech</strong> (the &quot;Website&quot;) is operated by{" "}
+                    <strong>Fairways Tech Operations B.V.</strong> (<strong>99720248</strong>) and{" "}
+                    <strong>Fairways.Tech Ltd</strong> (Republic of Ghana), trading as &quot;Fairways.Tech&quot; (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;).
                   </p>
                   <div className="rounded-xl border-l-4 border-forest bg-sand/40 p-5">
                     <p>
@@ -202,6 +203,8 @@ export default function DisclaimerPage() {
                   </p>
                 </div>
               </div>
+
+              <LegalEntityBlock />
             </div>
           </div>
         </section>
