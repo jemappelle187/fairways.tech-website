@@ -238,7 +238,7 @@
   "phase": "sdg-alt-tweak",
   "timestamp": "2026-02-15T21:00:00Z",
   "branch": "feature/sdg-alt-tweak-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/8",
   "build_log": "docs/sdg_alt_tweak_build.log",
   "lint_log": "docs/sdg_alt_tweak_lint.log",
   "notes": ["SdgGridAlt logos enlarged and hoverable", "captions placed below logos", "responsive size rules added"]
