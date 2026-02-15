@@ -135,7 +135,7 @@
   "phase": "sdg-style",
   "timestamp": "2026-02-15T17:00:00Z",
   "branch": "feature/sdg-style-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/4",
   "build_log": "docs/sdg_style_build.log",
   "lint_log": "docs/sdg_style_lint.log",
   "notes": ["glass styles added to app/globals.css", "SdgBadges updated", "footer sentence removed from SiteChrome"]
