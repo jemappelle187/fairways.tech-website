@@ -213,7 +213,7 @@
   "phase": "sdg-alt",
   "timestamp": "2026-02-15T20:00:00Z",
   "branch": "feature/sdg-alt-view-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/7",
   "build_log": "docs/sdg_alt_build.log",
   "lint_log": "docs/sdg_alt_lint.log",
   "notes": ["SdgGridAlt created and appended to impact page", "icon-first grid for A/B comparison", "kept existing layout intact"]
