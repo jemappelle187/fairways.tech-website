@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
 import SdgBadges from "@/app/components/SdgBadges";
-import SdgGridAlt from "@/app/components/SdgGridAlt";
 
 export const metadata: Metadata = {
   title: "Impact & Vision",
@@ -24,16 +23,6 @@ const supportingSdgs = [
   { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
   { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
   { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
-];
-
-/* Alternate SDG view (icon above caption) — kept for visual A/B comparison. */
-const allSdgsForAlt = [
-  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
-  { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
-  { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
-  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
-  { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
-  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
 ];
 
 export default function ImpactPage() {
@@ -177,9 +166,6 @@ export default function ImpactPage() {
                 </div>
               </div>
             </div>
-
-            {/* Alternate SDG view for A/B comparison */}
-            <SdgGridAlt list={allSdgsForAlt} />
           </div>
         </section>
       </main>
