@@ -162,7 +162,7 @@
   "phase": "sdg-refactor2",
   "timestamp": "2026-02-15T18:00:00Z",
   "branch": "feature/sdg-refactor2-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/5",
   "build_log": "docs/refactor2_build.log",
   "lint_log": "docs/refactor2_lint.log",
   "notes": ["download CTAs removed", "poultry paragraph folded into For Farmers", "PoultryCaseStudy archived under app/components/_archive", "SDG primary/supporting layout updated"]
