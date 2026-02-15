@@ -264,7 +264,7 @@
   "phase": "sdg-grouped",
   "timestamp": "2026-02-15T22:00:00Z",
   "branch": "feature/sdg-grouped-view-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/9",
   "build_log": "docs/sdg_grouped_build.log",
   "lint_log": "docs/sdg_grouped_lint.log",
   "notes": ["SdgGroupedAlt created (single glass container)", "icons arranged in compact grid inside one panel", "hover-on-logo enabled"]
