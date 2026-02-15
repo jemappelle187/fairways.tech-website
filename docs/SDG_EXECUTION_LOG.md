@@ -77,3 +77,44 @@
 ```
 
 ---
+
+## Phase 2 — Integration
+
+**Date/Time:** 15 February 2026
+
+**Branch:** feature/sdg-integrate-dev
+
+**PR:** https://github.com/jemappelle187/fairways.tech-website/pull/1
+
+**Modified Files:**
+- app/impact/page.tsx
+- app/page.tsx
+- app/components/SiteChrome.tsx
+- public/downloads/fairways-tech-one-pager-placeholder.pdf (created)
+- public/downloads/fairways-tech-investor-deck-placeholder.pdf (created)
+
+**Build:** PASS
+
+**Lint:** PASS (warnings only)
+
+**Image fallback:** regulations_compliance.jpg replaced with /images/value_chain_qr2.jpg (compliance_first2.jpg not in repo)
+
+**Build log:** docs/build_phase2.log
+
+**Lint log:** docs/lint_phase2.log
+
+```json
+{
+  "phase": 2,
+  "branch": "feature/sdg-integrate-dev",
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/1",
+  "preview_url": "https://fairways-tech-website-git-feature-sdg-integrate-dev-jemappelle187s-projects.vercel.app (check Vercel PR comment when deploy completes)",
+  "build_log": "docs/build_phase2.log",
+  "lint_log": "docs/lint_phase2.log",
+  "build_ok": true,
+  "lint_ok": true,
+  "notes": ["compliance_first2.jpg not in repo; used value_chain_qr2.jpg for Institutions card"]
+}
+```
+
+---
