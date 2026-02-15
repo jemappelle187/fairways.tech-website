@@ -244,3 +244,29 @@
   "notes": ["SdgGridAlt logos enlarged and hoverable", "captions placed below logos", "responsive size rules added"]
 }
 ```
+
+---
+
+## Phase: sdg-grouped-view — start 2026-02-15T22:00:00Z
+
+**Branch:** feature/sdg-grouped-view-dev
+
+**Changes:**
+- Created SdgGroupedAlt component (single glass container)
+- Icons + captions arranged in grid inside one panel; left sidebar "Our SDG focus"
+- Appended to Impact page after SdgGridAlt for A/B comparison
+- Hover-on-logo enabled for grouped view
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-grouped",
+  "timestamp": "2026-02-15T22:00:00Z",
+  "branch": "feature/sdg-grouped-view-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_grouped_build.log",
+  "lint_log": "docs/sdg_grouped_lint.log",
+  "notes": ["SdgGroupedAlt created (single glass container)", "icons arranged in compact grid inside one panel", "hover-on-logo enabled"]
+}
+```

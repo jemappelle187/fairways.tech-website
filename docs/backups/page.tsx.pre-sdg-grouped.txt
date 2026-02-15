@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
 import SdgBadges from "@/app/components/SdgBadges";
 import SdgGridAlt from "@/app/components/SdgGridAlt";
-import SdgGroupedAlt from "@/app/components/SdgGroupedAlt";
 
 export const metadata: Metadata = {
   title: "Impact & Vision",
@@ -181,9 +180,6 @@ export default function ImpactPage() {
 
             {/* Alternate SDG view for A/B comparison */}
             <SdgGridAlt list={allSdgsForAlt} />
-
-            {/* Grouped SDG view (single container) for A/B comparison */}
-            <SdgGroupedAlt list={allSdgsForAlt} />
           </div>
         </section>
       </main>
