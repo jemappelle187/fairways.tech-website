@@ -118,3 +118,29 @@
 ```
 
 ---
+
+## Phase: premium_poultry — start 2026-02-15T16:00:00Z
+
+**Branch:** feature/sdg-premium-poultry-dev
+
+**Changes:**
+- Neutralized briefing copy: "To request our briefing materials or discuss partnerships, please contact us."
+- Replaced downloads CTA with contact sentence
+- Premium PoultryCaseStudy: implementation-first layout with Scope/Objective/Engagement cards, optional poultry-bg.jpg
+- No background image at $HOME/Downloads/impact-poultry-bg.jpg (skipped)
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "premium_poultry",
+  "timestamp": "2026-02-15T16:00:00Z",
+  "branch": "feature/sdg-premium-poultry-dev",
+  "pr_url": null,
+  "build_log": "docs/build_premium_phase.log",
+  "lint_log": "docs/lint_premium_phase.log",
+  "background_image_added": false,
+  "build_ok": true,
+  "notes": []
+}
+```
