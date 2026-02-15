@@ -9,21 +9,44 @@ const supporting: SdgItem[] = [
 
 export default function PoultryCaseStudy() {
   return (
-    <section aria-labelledby="poultry-heading" className="py-6">
-      <div className="max-w-4xl mx-auto px-4 bg-white p-4 rounded-lg shadow-sm">
-        <h3 id="poultry-heading" className="text-lg font-semibold">Poultry Case Study — HACCP upgrade</h3>
-        <p className="text-sm text-gray-700 mt-2">
-          We are supporting a women-owned poultry farm to reach supermarket-grade processing by financing cold-chain and processing equipment,
-          improving hygiene standards and preparing for HACCP readiness. This work aims to increase market access while maintaining neutral language
-          about certification status.
-        </p>
+    <section aria-labelledby="implementation-heading" className="py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 id="implementation-heading" className="text-2xl font-semibold">Implementation example — Poultry HACCP upgrade</h3>
+              <p className="text-sm text-gray-700 mt-2">
+                Evidence: supporting a women-owned poultry farm to reach supermarket-grade processing by financing cold-chain and processing equipment,
+                improving hygiene standards, and preparing for HACCP readiness. This is a pilot-level intervention; certification and procurement outcomes
+                depend on external auditors and buyer contracts.
+              </p>
+            </div>
 
-        <div className="mt-4">
-          <SdgBadges list={supporting} compact={false} />
-        </div>
+            <div className="ml-6">
+              <SdgBadges list={supporting} compact />
+            </div>
+          </div>
 
-        <div className="mt-4">
-          <a href="/contact" className="inline-block px-4 py-2 bg-green-600 text-white rounded">Request support / Partner with us</a>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 border rounded">
+              <h4 className="font-semibold">Scope</h4>
+              <p className="text-sm text-gray-600 mt-1">Cold chain + processing; hygiene upgrades; operator training.</p>
+            </div>
+
+            <div className="p-4 border rounded">
+              <h4 className="font-semibold">Objective</h4>
+              <p className="text-sm text-gray-600 mt-1">Prepare the site for buyer procurement and HACCP audit readiness.</p>
+            </div>
+
+            <div className="p-4 border rounded">
+              <h4 className="font-semibold">Engagement</h4>
+              <p className="text-sm text-gray-600 mt-1">Financing equipment and technical assistance; procurement introductions to buyers.</p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <a href="/contact" className="inline-block px-5 py-2 bg-green-600 text-white rounded">Request support / Partner with us</a>
+          </div>
         </div>
       </div>
     </section>

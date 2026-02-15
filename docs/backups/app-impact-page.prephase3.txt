@@ -15,9 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
-const sdgFarmers = { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" };
-const sdgInstitutions = { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" };
-const sdgFoodSystems = { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" };
+const primarySdgs = [
+  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
+  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
+  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
+];
 
 export default function ImpactPage() {
   return (
@@ -38,9 +40,14 @@ export default function ImpactPage() {
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
                 Learn about Fairways.Tech&apos;s impact on farmers, institutions, and food systems across Africa.
               </p>
-              <p className="mt-6 text-sm text-gray-600">
-                To request our investor materials, please <a href="/contact" className="underline">contact us</a>.
-              </p>
+              <div className="mt-8">
+                <SdgBadges list={primarySdgs} />
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <a href="/downloads/fairways-tech-one-pager-placeholder.pdf" className="px-4 py-2 bg-green-600 text-white rounded">Download one-pager</a>
+                <a href="/downloads/fairways-tech-investor-deck-placeholder.pdf" className="px-4 py-2 border rounded">Download deck (PDF)</a>
+                <span className="text-sm text-slate-500">Or contact us to request the latest investor deck (pre-pilot).</span>
+              </div>
             </div>
           </div>
         </section>
@@ -60,12 +67,9 @@ export default function ImpactPage() {
               
               {/* Content */}
               <div className="relative z-10">
-                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
                   For Farmers
                 </h2>
-                <div className="mb-6">
-                  <SdgBadges list={[sdgFarmers]} compact />
-                </div>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
                     Fairways.Tech strengthens smallholder farmers&apos; ability to operate with stability, predictability, and commercial dignity. Through trusted digital identity and verifiable production records, farmers obtain timely working capital, plan for seasonal cash-flow, and participate in value chains on transparent and equitable terms.
@@ -89,12 +93,9 @@ export default function ImpactPage() {
               
               {/* Content */}
               <div className="relative z-10">
-                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
                   For Institutions
                 </h2>
-                <div className="mb-6">
-                  <SdgBadges list={[sdgInstitutions]} compact />
-                </div>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
                     Financial institutions, cooperatives, buyers, and development partners gain access to compliant, audit‑ready data flows and verifiable identity rails. Fairways.Tech reduces the operational friction of serving rural markets by providing structured, regulator‑aligned workflows for onboarding, monitoring, and risk assessment.
@@ -118,12 +119,9 @@ export default function ImpactPage() {
               
               {/* Content */}
               <div className="relative z-10">
-                <h2 className="mb-2 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
                   For Food Systems
                 </h2>
-                <div className="mb-6">
-                  <SdgBadges list={[sdgFoodSystems]} compact />
-                </div>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
                     Fairways.Tech contributes to resilient food systems by transforming fragmented, informal production environments into transparent, data‑driven supply networks. Predictable supply, authenticated origin data, and aligned financing enable buyers to source reliably and reduce operational uncertainty.
