@@ -5,11 +5,11 @@ import ProjectTiles from "./ProjectTiles";
 export const metadata: Metadata = {
   title: "Our Projects — Fairways.Tech",
   description:
-    "Active pilots and work-in-progress. Request a private briefing for more information.",
+    "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder farmers. Request a private briefing for details.",
   openGraph: {
     title: "Our Projects | Fairways.Tech",
     description:
-      "Active pilots and work-in-progress. Request a private briefing for more information.",
+      "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder farmers. Request a private briefing for details.",
     url: "https://fairways.tech/projects",
   },
 };
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
       <Header />
       <main
         id="main-content"
-        className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted"
+        className="min-h-screen scroll-mt-24 bg-gradient-to-b from-sand via-sand to-sand-muted"
       >
         <div className="mx-auto max-w-5xl px-6 py-16">
           <header className="mb-10 text-center">
@@ -34,6 +34,13 @@ export default function ProjectsPage() {
               We run field pilots and infrastructure upgrades to validate
               scalable solutions. Outcomes are shared after validation; request
               a private briefing for details.
+            </p>
+            <p className="mt-4 text-sm text-gray-600">
+              Learn more about our impact on the{" "}
+              <a href="/impact" className="underline hover:text-forest">
+                Impact page
+              </a>
+              .
             </p>
           </header>
 
@@ -72,14 +79,8 @@ export default function ProjectsPage() {
               <a href="/#cta" className="underline hover:text-forest">
                 contact us
               </a>
-              . Sensitive commercial details are shared in direct briefings
-              under appropriate confidentiality arrangements.
-            </p>
-            <p className="mt-4 text-sm text-gray-600">
-              Some commercial details and buyer agreements are confidential. For
-              an investor or partner briefing, please contact us and we will
-              arrange a private discussion under appropriate confidentiality
-              terms.
+              . Sensitive commercial details are shared in direct briefings under
+              appropriate confidentiality arrangements.
             </p>
           </section>
         </div>
