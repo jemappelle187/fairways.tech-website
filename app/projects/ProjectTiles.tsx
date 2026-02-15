@@ -19,8 +19,8 @@ const tiles: Tile[] = [
     title: "Project 1",
     status: "Pilot — active",
     sector: "agri / horticulture",
-    timeframe: "Q1–Q2 — active",
-    desc: "Active pilot work validating horticulture interventions and supply reliability. Outcomes shared after validation; sensitive details on request.",
+    timeframe: "Q1–Q2 (active)",
+    desc: "Active pilot validating scalable production & aggregation workflows; outcomes shared on request.",
     progressPercent: 45,
   },
   {
@@ -28,8 +28,8 @@ const tiles: Tile[] = [
     title: "Project 2",
     status: "Planning",
     sector: "agri / horticulture",
-    timeframe: "Planning",
-    desc: "Planning-stage pilot exploring agronomic and logistics solutions. Details available on request.",
+    timeframe: "planning",
+    desc: "Planning stage for horticulture yield & post-harvest loss reduction; details on request.",
     progressPercent: 15,
   },
   {
@@ -37,8 +37,8 @@ const tiles: Tile[] = [
     title: "Project 3",
     status: "Planning",
     sector: "poultry",
-    timeframe: "Planning",
-    desc: "Planning-stage pilot to strengthen poultry processing and cold-chain readiness. Details available on request.",
+    timeframe: "planning",
+    desc: "Processing & cold-chain pilot for poultry quality/HACCP readiness; details on request.",
     progressPercent: 10,
   },
 ];
@@ -49,8 +49,9 @@ export default function ProjectTiles() {
       {tiles.map((t) => (
         <div key={t.id} className="group tile text-center">
           <ProjectLogo
-            alt={`${t.title} logo (${t.sector})`}
+            alt={`${t.title} logo (${t.sector.replace(/ \/ /g, "/")})`}
             progressPercent={t.progressPercent}
+            projectLabel={t.title}
           />
           <div className="mb-2 inline-block rounded-full border border-forest/20 bg-white/80 px-3 py-1 text-xs font-semibold text-forest shadow-sm backdrop-blur-sm">
             {t.status}
@@ -60,13 +61,6 @@ export default function ProjectTiles() {
             Timeline: {t.timeframe}
           </p>
           <p className="mt-2 text-sm text-gray-600">{t.desc}</p>
-          <p className="mt-3 text-sm text-gray-600">
-            Private briefings available on request; please{" "}
-            <a href="/#cta" className="underline hover:text-forest">
-              contact us
-            </a>
-            .
-          </p>
         </div>
       ))}
     </div>

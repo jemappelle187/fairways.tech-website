@@ -5,11 +5,11 @@ import ProjectTiles from "./ProjectTiles";
 export const metadata: Metadata = {
   title: "Our Projects — Fairways.Tech",
   description:
-    "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder farmers. Request a private briefing for details.",
+    "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder markets. Private briefings available on request.",
   openGraph: {
     title: "Our Projects | Fairways.Tech",
     description:
-      "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder farmers. Request a private briefing for details.",
+      "Field pilots and infrastructure upgrades to validate scalable solutions for smallholder markets. Private briefings available on request.",
     url: "https://fairways.tech/projects",
   },
 };
@@ -62,6 +62,13 @@ export default function ProjectsPage() {
               processing—details shared on request.
             </p>
             <ProjectTiles />
+            <p className="mt-8 text-center text-sm text-gray-600">
+              Private briefings available on request; please{" "}
+              <a href="/#cta" className="underline hover:text-forest">
+                contact us
+              </a>
+              .
+            </p>
           </section>
 
           <section className="mb-12">

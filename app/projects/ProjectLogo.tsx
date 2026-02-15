@@ -6,6 +6,7 @@ type ProjectLogoProps = {
   src?: string | null;
   alt: string;
   progressPercent?: number;
+  projectLabel?: string;
 };
 
 const PLACEHOLDER_SRC = "/images/logo-placeholder.svg";
@@ -14,6 +15,7 @@ export default function ProjectLogo({
   src,
   alt,
   progressPercent,
+  projectLabel = "Project",
 }: ProjectLogoProps) {
   const imgSrc = src || PLACEHOLDER_SRC;
   const percent = progressPercent ?? 0;
@@ -37,14 +39,14 @@ export default function ProjectLogo({
             aria-valuenow={percent}
             aria-valuemin={0}
             aria-valuemax={100}
-            aria-label={`Project progress: ${percent} percent`}
+            aria-label={`${projectLabel} progress: ${percent} percent`}
           >
             <div
               className="h-full rounded-full bg-forest transition-all duration-500"
               style={{ width: `${percent}%` }}
             />
           </div>
-          <span className="sr-only">Progress: {percent}%</span>
+          <span className="sr-only">{percent}% complete</span>
           <p className="mt-1 text-[10px] text-gray-500 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden>
             Progress: {percent}%
           </p>
