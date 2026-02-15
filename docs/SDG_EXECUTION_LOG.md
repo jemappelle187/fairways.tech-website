@@ -270,3 +270,28 @@
   "notes": ["SdgGroupedAlt created (single glass container)", "icons arranged in compact grid inside one panel", "hover-on-logo enabled"]
 }
 ```
+
+---
+
+## Phase: sdg-logos-only — start 2026-02-15T23:00:00Z
+
+**Branch:** feature/sdg-logos-only-dev
+
+**Changes:**
+- SdgGroupedAlt replaced with logos-only grid (no glass container)
+- Plain grid; logos in button for hover/focus; captions below
+- Responsive sizes: 112px → 96px → 72px
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-logos-only",
+  "timestamp": "2026-02-15T23:00:00Z",
+  "branch": "feature/sdg-logos-only-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_logos_build.log",
+  "lint_log": "docs/sdg_logos_lint.log",
+  "notes": ["SdgGroupedAlt converted to logos-only grid (no glass container)", "logos hover and responsive sizes added"]
+}
+```
