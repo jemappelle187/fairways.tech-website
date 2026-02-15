@@ -7,19 +7,19 @@ const tiles: Tile[] = [
     id: 1,
     title: "Project 1",
     status: "Pilot",
-    desc: "Crop value-chain pilot — testing buyer connections and financing workflows.",
+    desc: "High-level pilot work — details available on request.",
   },
   {
     id: 2,
     title: "Project 2",
     status: "Planning",
-    desc: "Tree-crop resilience pilot — testing climate-adaptive agronomy and aggregation.",
+    desc: "High-level pilot work — details available on request.",
   },
   {
     id: 3,
     title: "Project 3",
     status: "Deployment",
-    desc: "Processing upgrade pilot — improving hygiene, cold-chain readiness, and market access.",
+    desc: "High-level pilot work — details available on request.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function ProjectTiles() {
               href="/#cta"
               className="inline-flex items-center justify-center rounded-lg border border-forest px-4 py-2 text-sm font-medium text-forest transition hover:bg-forest/5 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
             >
-              Request briefing
+              Request a private briefing
             </a>
           </div>
         </div>

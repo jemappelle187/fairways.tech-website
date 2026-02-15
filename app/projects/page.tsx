@@ -31,9 +31,9 @@ export default function ProjectsPage() {
               Our Projects
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-700">
-              We run pilots and infrastructure upgrades to validate scalable
-              solutions. Outcomes are shared after validation; request a
-              briefing to learn more.
+              We run field pilots and infrastructure upgrades to validate
+              scalable solutions. Outcomes are shared after validation; request
+              a private briefing for details.
             </p>
           </header>
 
@@ -74,6 +74,12 @@ export default function ProjectsPage() {
               </a>
               . Sensitive commercial details are shared in direct briefings
               under appropriate confidentiality arrangements.
+            </p>
+            <p className="mt-4 text-sm text-gray-600">
+              Some commercial details and buyer agreements are confidential. For
+              an investor or partner briefing, please contact us and we will
+              arrange a private discussion under appropriate confidentiality
+              terms.
             </p>
           </section>
         </div>
