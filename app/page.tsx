@@ -8,14 +8,7 @@ import { ContactCta } from "./components/ContactCta";
 import { CookieBanner } from "./components/CookieBanner";
 import { Leaf, Landmark, Users2, Store, GraduationCap, Globe2, ShieldCheck } from "lucide-react";
 import { Header, Footer } from "./components/SiteChrome";
-import SdgBadges from "@/app/components/SdgBadges";
 import SdgLogosOnly from "@/app/components/SdgLogosOnly";
-
-const primarySdgs = [
-  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
-  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
-  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
-];
 
 const solutionVisualItems = [
   {
@@ -274,9 +267,6 @@ export default function HomePage() {
               <h2 className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
                 The gap between farmers and finance isn&apos;t ability, it&apos;s visibility.
               </h2>
-              <div className="mt-4">
-                <SdgBadges list={primarySdgs} compact />
-              </div>
             </div>
             <div className={`mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg ${
               whyWeExistFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
@@ -569,7 +559,7 @@ export default function HomePage() {
   </div>
 </section>
 
-          {/* SDG logos-only section — Our focus: SDG alignment */}
+          {/* SDG logos-only section — Our focus */}
           <section aria-labelledby="home-sdg-logos" className="mt-12 bg-sand px-6 py-16">
             <div className="mx-auto max-w-6xl">
               <SdgLogosOnly
@@ -581,11 +571,11 @@ export default function HomePage() {
                   { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
                   { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
                 ]}
-                title="Our focus: SDG alignment"
+                title="Our focus"
                 subtitle="How our work connects to the Sustainable Development Goals."
               />
               <p className="text-sm text-center text-gray-600 mt-6">
-                Read more about our impact and implementation on the <a href="/impact" className="underline hover:text-forest">Impact page</a>.
+                Learn more about our impact on the <a href="/impact" className="underline hover:text-forest">Impact page</a>.
               </p>
             </div>
           </section>
