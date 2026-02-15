@@ -188,7 +188,7 @@
   "phase": "sdg-layout-refine",
   "timestamp": "2026-02-15T19:00:00Z",
   "branch": "feature/sdg-layout-refine-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/6",
   "build_log": "docs/sdg_layout_build.log",
   "lint_log": "docs/sdg_layout_lint.log",
   "notes": ["primary cards use sdg-glass + larger icons", "supporting row grid with sdg-9 centered", "SdgBadges updated with variant prop"]
