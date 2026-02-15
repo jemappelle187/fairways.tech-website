@@ -345,3 +345,7 @@
   "notes": ["removed glass containers for primary SDGs", "set uniform logo size for primary & supporting (128px desktop)", "hover intensity differs for primary vs supporting"]
 }
 ```
+## Phase: sdg-home-insert start 2026-02-15T17:35:04Z
+backed up app/page.tsx
+backed up app/components/SdgGroupedAlt.tsx
+created wrapper app/components/SdgLogosOnly.tsx
