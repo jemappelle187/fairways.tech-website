@@ -560,7 +560,7 @@ export default function HomePage() {
 </section>
 
           {/* SDG logos-only section — Our focus */}
-          <section aria-labelledby="home-sdg-logos" className="mt-12 bg-sand px-6 py-16">
+          <section aria-labelledby="home-sdg-logos" className="mt-4 bg-sand px-6 py-12">
             <div className="mx-auto max-w-6xl">
               <SdgLogosOnly
                 list={[
@@ -571,11 +571,17 @@ export default function HomePage() {
                   { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
                   { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
                 ]}
-                title="Our focus"
-                subtitle="How our work connects to the Sustainable Development Goals."
+                title="OUR FOCUS"
+                subtitle="Aligned with the UN Sustainable Development Goals."
               />
               <p className="text-sm text-center text-gray-600 mt-6">
-                Learn more about our impact on the <a href="/impact" className="underline hover:text-forest">Impact page</a>.
+                <a
+                  href="/impact"
+                  className="inline-flex items-center gap-1 font-medium text-forest hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
+                >
+                  Learn more about our impact
+                  <span aria-hidden="true">↗</span>
+                </a>
               </p>
             </div>
           </section>

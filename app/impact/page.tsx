@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
-import SdgBadges from "@/app/components/SdgBadges";
-import SdgGridAlt from "@/app/components/SdgGridAlt";
-import SdgGroupedAlt from "@/app/components/SdgGroupedAlt";
 
 export const metadata: Metadata = {
   title: "Impact & Vision",
@@ -15,27 +12,6 @@ export const metadata: Metadata = {
     url: "https://fairways.tech/impact",
   },
 };
-
-const primarySdgs = [
-  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
-  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
-  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
-];
-const supportingSdgs = [
-  { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
-  { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
-  { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
-];
-
-/* Alternate SDG view (icon above caption) — kept for visual A/B comparison. */
-const allSdgsForAlt = [
-  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
-  { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
-  { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
-  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
-  { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
-  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
-];
 
 export default function ImpactPage() {
   return (
@@ -55,41 +31,6 @@ export default function ImpactPage() {
               </h1>
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
                 Learn about Fairways.Tech&apos;s impact on farmers, institutions, and food systems across Africa.
-              </p>
-              <section aria-labelledby="sdg-heading" className="mt-8">
-                <h2 id="sdg-heading" className="text-2xl font-semibold text-center mb-6">Sustainable Development Goals</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {primarySdgs.map((s) => (
-                    <div key={s.id} className="sdg-glass sdg-primary-card">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img" width={72} height={72} role="img" />
-                      <div>
-                        <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
-                        <div className="sdg-card-desc">{s.short}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-10">
-                  <h3 className="text-xl font-semibold text-center">Supporting goals</h3>
-                  <div className="mt-6 sdg-support-row">
-                    {[supportingSdgs.find((x) => x.id === 3), supportingSdgs.find((x) => x.id === 9), supportingSdgs.find((x) => x.id === 5)]
-                      .filter((s): s is NonNullable<typeof s> => s != null)
-                      .map((s) => (
-                        <div key={s.id} className="sdg-glass sdg-support-item">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img sdg-badge-img-sm" width={56} height={56} role="img" />
-                          <div>
-                            <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
-                            <div className="sdg-card-desc">{s.short}</div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </section>
-              <p className="mt-6 text-sm text-gray-600">
-                To request our briefing materials or discuss partnerships, please <a href="/contact" className="underline">contact us</a>.
               </p>
             </div>
           </div>
@@ -120,7 +61,7 @@ export default function ImpactPage() {
                   <p>
                     By enabling farmers to build a financial track record and integrate into compliant value‑chain rails, we reduce vulnerability to price shocks, improve income stability, and expand opportunities for growth. This forms the foundation for scalable rural finance and durable livelihood improvement.
                   </p>
-                  <p className="mt-4 text-base text-gray-700 max-w-3xl">
+                  <p className="mt-4">
                     We are supporting a women-owned poultry producer to meet HACCP-aligned standards and supermarket procurement requirements by financing cold-chain and processing equipment, improving hygiene standards, and preparing for HACCP readiness. This work increases market access while maintaining neutral language about certification outcomes.
                   </p>
                 </div>
@@ -178,12 +119,6 @@ export default function ImpactPage() {
                 </div>
               </div>
             </div>
-
-            {/* Alternate SDG view for A/B comparison */}
-            <SdgGridAlt list={allSdgsForAlt} />
-
-            {/* Grouped SDG view (single container) for A/B comparison */}
-            <SdgGroupedAlt list={allSdgsForAlt} />
           </div>
         </section>
       </main>

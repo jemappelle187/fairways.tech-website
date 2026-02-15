@@ -17,12 +17,12 @@ export default function SdgGroupedAlt({ list, title = "Alternate SDG view — lo
 
   return (
     <section aria-labelledby="sdg-logos-groups-heading" className="mt-12">
-      <h2 id="sdg-logos-groups-heading" className="text-2xl font-semibold text-center">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest text-center">
         {title}
-      </h2>
-      <p className="text-sm text-center text-gray-600 mt-2">
-        {subtitle}
       </p>
+      <h2 id="sdg-logos-groups-heading" className="mt-2 text-xl font-semibold text-center text-stone sm:text-2xl">
+        {subtitle}
+      </h2>
 
       <div className="mt-8 px-4">
         <div className="mb-8">
