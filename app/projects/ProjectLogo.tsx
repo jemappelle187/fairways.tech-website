@@ -23,7 +23,7 @@ export default function ProjectLogo({
 
   return (
     <div className="group flex flex-col items-center">
-      <div className="mx-auto mb-3 flex h-28 w-28 items-center justify-center overflow-hidden rounded-lg bg-gray-50 shadow-sm">
+      <div className="mx-auto mb-3 flex h-28 w-28 items-center justify-center overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgSrc}

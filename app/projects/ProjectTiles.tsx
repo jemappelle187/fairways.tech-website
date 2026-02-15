@@ -20,7 +20,7 @@ const tiles: Tile[] = [
     status: "Pilot — active",
     sector: "agri / horticulture",
     timeframe: "Q1–Q2 (active)",
-    desc: "Active pilot validating scalable production & aggregation workflows; outcomes shared on request.",
+    desc: "Active pilot validating scalable production & aggregation workflows.",
     progressPercent: 45,
   },
   {
@@ -29,8 +29,8 @@ const tiles: Tile[] = [
     status: "Planning",
     sector: "agri / horticulture",
     timeframe: "planning",
-    desc: "Planning stage for horticulture yield & post-harvest loss reduction; details on request.",
-    progressPercent: 15,
+    desc: "Planning stage for horticulture yield & post-harvest loss reduction.",
+    progressPercent: 10,
   },
   {
     id: 3,
@@ -38,8 +38,8 @@ const tiles: Tile[] = [
     status: "Planning",
     sector: "poultry",
     timeframe: "planning",
-    desc: "Processing & cold-chain pilot for poultry quality/HACCP readiness; details on request.",
-    progressPercent: 10,
+    desc: "Processing & cold-chain pilot for poultry quality/HACCP readiness.",
+    progressPercent: 20,
   },
 ];
 
