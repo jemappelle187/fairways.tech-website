@@ -168,3 +168,29 @@
   "notes": ["download CTAs removed", "poultry paragraph folded into For Farmers", "PoultryCaseStudy archived under app/components/_archive", "SDG primary/supporting layout updated"]
 }
 ```
+
+---
+
+## Phase: sdg-layout-refine — start 2026-02-15T19:00:00Z
+
+**Branch:** feature/sdg-layout-refine-dev
+
+**Changes:**
+- Primary SDG cards use sdg-glass + sdg-primary-card (glassmorphism + hover)
+- Expanded icon size: 72px primary, 56px supporting
+- Supporting SDGs in horizontal grid with SDG-9 centered (order 3, 9, 5)
+- SdgBadges updated with variant prop (primary/supporting)
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-layout-refine",
+  "timestamp": "2026-02-15T19:00:00Z",
+  "branch": "feature/sdg-layout-refine-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_layout_build.log",
+  "lint_log": "docs/sdg_layout_lint.log",
+  "notes": ["primary cards use sdg-glass + larger icons", "supporting row grid with sdg-9 centered", "SdgBadges updated with variant prop"]
+}
+```

@@ -48,32 +48,21 @@ export default function ImpactPage() {
                 <h2 id="sdg-heading" className="text-2xl font-semibold text-center mb-6">Sustainable Development Goals</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {primarySdgs.map((s) => (
-                    <div key={s.id} className="sdg-glass sdg-primary-card">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img" width={72} height={72} role="img" />
-                      <div>
-                        <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
-                        <div className="sdg-card-desc">{s.short}</div>
+                    <div key={s.id} className="p-6 rounded-xl shadow-sm bg-white/90 backdrop-blur-sm">
+                      <div className="flex items-center gap-4">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} width={56} height={56} role="img" />
+                        <div>
+                          <div className="font-semibold">SDG {s.id} — {s.label}</div>
+                          <div className="text-sm text-gray-600 mt-1">{s.short}</div>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-10">
-                  <h3 className="text-xl font-semibold text-center">Supporting goals</h3>
-                  <div className="mt-6 sdg-support-row">
-                    {[supportingSdgs.find((x) => x.id === 3), supportingSdgs.find((x) => x.id === 9), supportingSdgs.find((x) => x.id === 5)]
-                      .filter((s): s is NonNullable<typeof s> => s != null)
-                      .map((s) => (
-                        <div key={s.id} className="sdg-glass sdg-support-item">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img sdg-badge-img-sm" width={56} height={56} role="img" />
-                          <div>
-                            <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
-                            <div className="sdg-card-desc">{s.short}</div>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold text-center mb-4">Supporting goals</h3>
+                  <SdgBadges list={supportingSdgs} compact />
                 </div>
               </section>
               <p className="mt-6 text-sm text-gray-600">

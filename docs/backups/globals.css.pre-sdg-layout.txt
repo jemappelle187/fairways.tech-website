@@ -147,31 +147,27 @@ a[href] {
   filter: blur(4px);
 }
 
-/* sdg layout refine styles */
+/* sdg glassmorphism styles */
 .sdg-glass {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
-  box-shadow: 0 8px 22px rgba(17, 24, 39, 0.08);
-  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 240ms ease, background 240ms ease;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms ease, background 220ms ease;
   will-change: transform;
 }
 .sdg-glass:hover {
-  transform: translateY(-8px) scale(1.025);
-  box-shadow: 0 20px 40px rgba(17, 24, 39, 0.14);
-  background: rgba(255, 255, 255, 0.78);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(17, 24, 39, 0.12);
+  background: rgba(255, 255, 255, 0.72);
 }
 .sdg-badge-img {
-  width: 72px;
-  height: 72px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   display: inline-block;
-}
-.sdg-badge-img-sm {
-  width: 56px;
-  height: 56px;
 }
 .sdg-card-title {
   font-weight: 600;
@@ -180,30 +176,5 @@ a[href] {
 .sdg-card-desc {
   font-size: 0.85rem;
   color: #4b5563;
-}
-.sdg-primary-card {
-  padding: 28px;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.sdg-support-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  align-items: start;
-}
-.sdg-support-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-}
-@media (max-width: 768px) {
-  .sdg-support-row { grid-template-columns: 1fr; }
-  .sdg-badge-img { width: 56px; height: 56px; }
-  .sdg-primary-card { padding: 18px; }
 }
 
