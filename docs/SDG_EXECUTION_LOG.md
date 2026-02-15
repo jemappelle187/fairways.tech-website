@@ -119,4 +119,35 @@
 
 ---
 
-## Phase 3 start: 2025-02-15T00:00:00Z
+## Phase 3 start: 2026-02-15T15:55:32Z
+
+**Branch:** feature/sdg-refactor-dev
+
+**PR:** https://github.com/jemappelle187/fairways.tech-website/pull/2
+
+**Changes:**
+- Inline SDG badges into For Farmers, For Institutions, For Food Systems sections
+- Removed global SdgBadges block and downloads CTA; replaced with contact sentence
+- PoultryCaseStudy restyled as evidence-first "Implementation example — Poultry HACCP upgrade"
+- Removed summit sentence from SiteChrome footer
+- Removed downloads placeholders (one-pager, investor deck PDFs)
+
+**Build:** PASS
+
+**Lint:** PASS (warnings only)
+
+**Backups:** docs/backups/app-impact-page.prephase3.txt, PoultryCaseStudy.prephase3.txt, SiteChrome.prephase3.txt
+
+```json
+{
+  "phase": 3,
+  "timestamp": "2026-02-15T15:55:32Z",
+  "branch": "feature/sdg-refactor-dev",
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/2",
+  "build_log": "docs/build_phase3.log",
+  "lint_log": "docs/lint_phase3.log",
+  "build_ok": true,
+  "lint_ok": true,
+  "notes": []
+}
+```
