@@ -43,9 +43,11 @@ export default function ImpactPage() {
               <div className="mt-8">
                 <SdgBadges list={primarySdgs} />
               </div>
-              <p className="mt-6 text-sm text-gray-600">
-                To request our briefing materials or discuss partnerships, please <a href="/contact" className="underline">contact us</a>.
-              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <a href="/downloads/fairways-tech-one-pager-placeholder.pdf" className="px-4 py-2 bg-green-600 text-white rounded">Download one-pager</a>
+                <a href="/downloads/fairways-tech-investor-deck-placeholder.pdf" className="px-4 py-2 border rounded">Download deck (PDF)</a>
+                <span className="text-sm text-slate-500">Or contact us to request the latest investor deck (pre-pilot).</span>
+              </div>
             </div>
           </div>
         </section>
