@@ -8,6 +8,13 @@ import { ContactCta } from "./components/ContactCta";
 import { CookieBanner } from "./components/CookieBanner";
 import { Leaf, Landmark, Users2, Store, GraduationCap, Globe2, ShieldCheck } from "lucide-react";
 import { Header, Footer } from "./components/SiteChrome";
+import SdgBadges from "@/app/components/SdgBadges";
+
+const primarySdgs = [
+  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
+  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
+  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
+];
 
 const solutionVisualItems = [
   {
@@ -266,6 +273,9 @@ export default function HomePage() {
               <h2 className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
                 The gap between farmers and finance isn&apos;t ability, it&apos;s visibility.
               </h2>
+              <div className="mt-4">
+                <SdgBadges list={primarySdgs} compact />
+              </div>
             </div>
             <div className={`mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg ${
               whyWeExistFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'

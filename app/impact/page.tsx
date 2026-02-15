@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "../components/SiteChrome";
+import SdgBadges from "@/app/components/SdgBadges";
+import PoultryCaseStudy from "@/app/components/PoultryCaseStudy";
 
 export const metadata: Metadata = {
   title: "Impact & Vision",
@@ -12,6 +14,12 @@ export const metadata: Metadata = {
     url: "https://fairways.tech/impact",
   },
 };
+
+const primarySdgs = [
+  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
+  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
+  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
+];
 
 export default function ImpactPage() {
   return (
@@ -32,6 +40,14 @@ export default function ImpactPage() {
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
                 Learn about Fairways.Tech&apos;s impact on farmers, institutions, and food systems across Africa.
               </p>
+              <div className="mt-8">
+                <SdgBadges list={primarySdgs} />
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <a href="/downloads/fairways-tech-one-pager-placeholder.pdf" className="px-4 py-2 bg-green-600 text-white rounded">Download one-pager</a>
+                <a href="/downloads/fairways-tech-investor-deck-placeholder.pdf" className="px-4 py-2 border rounded">Download deck (PDF)</a>
+                <span className="text-sm text-slate-500">Or contact us to request the latest investor deck (pre-pilot).</span>
+              </div>
             </div>
           </div>
         </section>
@@ -70,7 +86,7 @@ export default function ImpactPage() {
               {/* Background Image */}
               <div 
                 className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
-                style={{ backgroundImage: "url('/regulations_compliance.jpg')" }}
+                style={{ backgroundImage: "url('/images/value_chain_qr2.jpg')" }}
               />
               {/* Overlay for better text readability */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
@@ -116,6 +132,8 @@ export default function ImpactPage() {
                 </div>
               </div>
             </div>
+
+            <PoultryCaseStudy />
           </div>
         </section>
       </main>
