@@ -295,3 +295,28 @@
   "notes": ["SdgGroupedAlt converted to logos-only grid (no glass container)", "logos hover and responsive sizes added"]
 }
 ```
+
+---
+
+## Phase: sdg-distinguish-groups — start 2026-02-16T00:00:00Z
+
+**Branch:** feature/sdg-distinguish-groups-dev
+
+**Changes:**
+- Primary row (first 3): larger logos (128px), ring/gradient background, stronger hover
+- Supporting row (last 3): smaller logos (88px), muted styling
+- Responsive sizes for both groups
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-distinguish",
+  "timestamp": "2026-02-16T00:00:00Z",
+  "branch": "feature/sdg-distinguish-groups-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_distinguish_build.log",
+  "lint_log": "docs/sdg_distinguish_lint.log",
+  "notes": ["primary row emphasised (larger logos + ring + stronger hover)", "supporting row smaller & muted", "responsive sizes included"]
+}
+```

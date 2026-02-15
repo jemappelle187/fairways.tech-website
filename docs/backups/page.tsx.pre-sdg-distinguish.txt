@@ -1,0 +1,193 @@
+import type { Metadata } from "next";
+import { Header, Footer } from "../components/SiteChrome";
+import SdgBadges from "@/app/components/SdgBadges";
+import SdgGridAlt from "@/app/components/SdgGridAlt";
+import SdgGroupedAlt from "@/app/components/SdgGroupedAlt";
+
+export const metadata: Metadata = {
+  title: "Impact & Vision",
+  description:
+    "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+  openGraph: {
+    title: "Impact & Vision | Fairways.Tech",
+    description:
+      "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+    url: "https://fairways.tech/impact",
+  },
+};
+
+const primarySdgs = [
+  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
+  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
+  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
+];
+const supportingSdgs = [
+  { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
+  { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
+  { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
+];
+
+/* Alternate SDG view (icon above caption) — kept for visual A/B comparison. */
+const allSdgsForAlt = [
+  { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
+  { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
+  { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
+  { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
+  { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
+  { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
+];
+
+export default function ImpactPage() {
+  return (
+    <>
+      <Header />
+      <main id="main-content" className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-sand pt-32 pb-16 sm:pt-40 sm:pb-24">
+          <div className="absolute inset-0 bg-gradient-to-br from-forest/3 via-transparent to-leaf/3" />
+          <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8">
+            <div className="text-center">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
+                Our impact
+              </p>
+              <h1 className="mb-6 text-4xl font-semibold tracking-tight text-stone sm:text-5xl lg:text-6xl">
+                Impact & Vision
+              </h1>
+              <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
+                Learn about Fairways.Tech&apos;s impact on farmers, institutions, and food systems across Africa.
+              </p>
+              <section aria-labelledby="sdg-heading" className="mt-8">
+                <h2 id="sdg-heading" className="text-2xl font-semibold text-center mb-6">Sustainable Development Goals</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {primarySdgs.map((s) => (
+                    <div key={s.id} className="sdg-glass sdg-primary-card">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img" width={72} height={72} role="img" />
+                      <div>
+                        <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
+                        <div className="sdg-card-desc">{s.short}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-10">
+                  <h3 className="text-xl font-semibold text-center">Supporting goals</h3>
+                  <div className="mt-6 sdg-support-row">
+                    {[supportingSdgs.find((x) => x.id === 3), supportingSdgs.find((x) => x.id === 9), supportingSdgs.find((x) => x.id === 5)]
+                      .filter((s): s is NonNullable<typeof s> => s != null)
+                      .map((s) => (
+                        <div key={s.id} className="sdg-glass sdg-support-item">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={s.file} alt={`SDG ${s.id} — ${s.label}`} className="sdg-badge-img sdg-badge-img-sm" width={56} height={56} role="img" />
+                          <div>
+                            <div className="sdg-card-title">SDG {s.id} — {s.label}</div>
+                            <div className="sdg-card-desc">{s.short}</div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </section>
+              <p className="mt-6 text-sm text-gray-600">
+                To request our briefing materials or discuss partnerships, please <a href="/contact" className="underline">contact us</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content */}
+        <section className="relative z-0 bg-sand pb-24">
+          <div className="mx-auto max-w-5xl px-6 lg:px-8">
+            {/* For Farmers Card */}
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+              {/* Background Image */}
+              <div 
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
+                style={{ backgroundImage: "url('/farmer_woman.jpg')" }}
+              />
+              {/* Overlay for better text readability */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                  For Farmers
+                </h2>
+                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                  <p>
+                    Fairways.Tech strengthens smallholder farmers&apos; ability to operate with stability, predictability, and commercial dignity. Through trusted digital identity and verifiable production records, farmers obtain timely working capital, plan for seasonal cash-flow, and participate in value chains on transparent and equitable terms.
+                  </p>
+                  <p>
+                    By enabling farmers to build a financial track record and integrate into compliant value‑chain rails, we reduce vulnerability to price shocks, improve income stability, and expand opportunities for growth. This forms the foundation for scalable rural finance and durable livelihood improvement.
+                  </p>
+                  <p className="mt-4 text-base text-gray-700 max-w-3xl">
+                    We are supporting a women-owned poultry producer to meet HACCP-aligned standards and supermarket procurement requirements by financing cold-chain and processing equipment, improving hygiene standards, and preparing for HACCP readiness. This work increases market access while maintaining neutral language about certification outcomes.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* For Institutions Card */}
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+              {/* Background Image */}
+              <div 
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
+                style={{ backgroundImage: "url('/images/value_chain_qr2.jpg')" }}
+              />
+              {/* Overlay for better text readability */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                  For Institutions
+                </h2>
+                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                  <p>
+                    Financial institutions, cooperatives, buyers, and development partners gain access to compliant, audit‑ready data flows and verifiable identity rails. Fairways.Tech reduces the operational friction of serving rural markets by providing structured, regulator‑aligned workflows for onboarding, monitoring, and risk assessment.
+                  </p>
+                  <p>
+                    Our infrastructure delivers field‑level data integrity, production, transactions, repayment signals, allowing institutions to deploy capital with confidence, meet AML/CFT and supervisory expectations, and expand their rural footprint sustainably. The result is a lower cost‑to‑serve model and the ability to scale compliant finance at meaningful depth.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* For Food Systems Card */}
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+              {/* Background Image */}
+              <div 
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
+                style={{ backgroundImage: "url('/vegetables_boxes.jpg')" }}
+              />
+              {/* Overlay for better text readability */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                  For Food Systems
+                </h2>
+                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                  <p>
+                    Fairways.Tech contributes to resilient food systems by transforming fragmented, informal production environments into transparent, data‑driven supply networks. Predictable supply, authenticated origin data, and aligned financing enable buyers to source reliably and reduce operational uncertainty.
+                  </p>
+                  <p>
+                    With traceability from farm to market and improved post‑harvest coordination, our infrastructure reduces waste, strengthens food safety compliance, and supports climate‑resilient value chains. Trusted data links farmers, markets, and finance in a way that promotes system‑wide efficiency and long‑term stability.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Alternate SDG view for A/B comparison */}
+            <SdgGridAlt list={allSdgsForAlt} />
+
+            {/* Grouped SDG view (single container) for A/B comparison */}
+            <SdgGroupedAlt list={allSdgsForAlt} />
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
