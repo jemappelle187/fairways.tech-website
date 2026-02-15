@@ -42,6 +42,9 @@ export default function ProjectsPage() {
               </a>
               .
             </p>
+            <p className="mt-2 text-xs text-gray-500">
+              Current status: Pilot 1 active (Q1–Q2). Others in planning.
+            </p>
           </header>
 
           <section
