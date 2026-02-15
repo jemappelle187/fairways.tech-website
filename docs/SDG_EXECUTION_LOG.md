@@ -314,7 +314,7 @@
   "phase": "sdg-distinguish",
   "timestamp": "2026-02-16T00:00:00Z",
   "branch": "feature/sdg-distinguish-groups-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/11",
   "build_log": "docs/sdg_distinguish_build.log",
   "lint_log": "docs/sdg_distinguish_lint.log",
   "notes": ["primary row emphasised (larger logos + ring + stronger hover)", "supporting row smaller & muted", "responsive sizes included"]
