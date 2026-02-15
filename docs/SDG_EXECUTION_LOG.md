@@ -219,3 +219,28 @@
   "notes": ["SdgGridAlt created and appended to impact page", "icon-first grid for A/B comparison", "kept existing layout intact"]
 }
 ```
+
+---
+
+## Phase: sdg-alt-tweak — start 2026-02-15T21:00:00Z
+
+**Branch:** feature/sdg-alt-tweak-dev
+
+**Changes:**
+- SdgGridAlt logos enlarged (112px desktop, 96px tablet, 72px mobile)
+- Hover effect on logo: translateY(-6px) scale(1.08) + drop-shadow
+- Captions below logos; sdg-logo-wrap for hover target
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-alt-tweak",
+  "timestamp": "2026-02-15T21:00:00Z",
+  "branch": "feature/sdg-alt-tweak-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_alt_tweak_build.log",
+  "lint_log": "docs/sdg_alt_tweak_lint.log",
+  "notes": ["SdgGridAlt logos enlarged and hoverable", "captions placed below logos", "responsive size rules added"]
+}
+```
