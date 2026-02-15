@@ -349,3 +349,19 @@
 backed up app/page.tsx
 backed up app/components/SdgGroupedAlt.tsx
 created wrapper app/components/SdgLogosOnly.tsx
+running npm ci, build and lint
+PR created: https://github.com/jemappelle187/fairways.tech-website/pull/13
+
+```json
+{
+  "phase": "sdg-home-insert",
+  "timestamp": "2026-02-15T17:35:04Z",
+  "branch": "feature/sdg-home-insert-dev",
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/13",
+  "build_log": "docs/sdg_home_build.log",
+  "lint_log": "docs/sdg_home_lint.log",
+  "notes": ["Inserted logos-only SDG section into homepage between who-we-serve and our-approach","added impact referral link to /impact","kept logos-only component (uniform logos)","title 'Our focus: SDG alignment'","uses sdg-9-industry-infrastructure.svg"]
+}
+```
+
+**sdg-home-insert phase complete. STOP. Do not merge PR without review.**
