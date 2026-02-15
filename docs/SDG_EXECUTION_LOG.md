@@ -289,7 +289,7 @@
   "phase": "sdg-logos-only",
   "timestamp": "2026-02-15T23:00:00Z",
   "branch": "feature/sdg-logos-only-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/10",
   "build_log": "docs/sdg_logos_build.log",
   "lint_log": "docs/sdg_logos_lint.log",
   "notes": ["SdgGroupedAlt converted to logos-only grid (no glass container)", "logos hover and responsive sizes added"]
