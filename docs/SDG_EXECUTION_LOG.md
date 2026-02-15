@@ -141,3 +141,30 @@
   "notes": ["glass styles added to app/globals.css", "SdgBadges updated", "footer sentence removed from SiteChrome"]
 }
 ```
+
+---
+
+## Phase: sdg-refactor2 — start 2026-02-15T18:00:00Z
+
+**Branch:** feature/sdg-refactor2-dev
+
+**Changes:**
+- Removed download CTAs; replaced with contact sentence
+- Folded poultry support paragraph into For Farmers section
+- Archived PoultryCaseStudy to app/components/_archive/ (fixed import path for build)
+- Moved public/downloads placeholder PDFs to docs/backups/public_downloads/
+- Primary SDG cards (prominent) + supporting SDG glass tiles (SdgBadges compact) layout
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-refactor2",
+  "timestamp": "2026-02-15T18:00:00Z",
+  "branch": "feature/sdg-refactor2-dev",
+  "pr_url": null,
+  "build_log": "docs/refactor2_build.log",
+  "lint_log": "docs/refactor2_lint.log",
+  "notes": ["download CTAs removed", "poultry paragraph folded into For Farmers", "PoultryCaseStudy archived under app/components/_archive", "SDG primary/supporting layout updated"]
+}
+```
