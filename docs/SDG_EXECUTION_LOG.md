@@ -320,3 +320,28 @@
   "notes": ["primary row emphasised (larger logos + ring + stronger hover)", "supporting row smaller & muted", "responsive sizes included"]
 }
 ```
+
+---
+
+## Phase: sdg-uniform-logos — start 2026-02-16T01:00:00Z
+
+**Branch:** feature/sdg-uniform-logos-dev
+
+**Changes:**
+- Removed glass containers from primary SDG buttons
+- Uniform logo size (128px) for primary and supporting rows
+- Hover intensity differs: primary stronger, supporting gentler
+
+**Build:** PASS | **Lint:** PASS
+
+```json
+{
+  "phase": "sdg-uniform",
+  "timestamp": "2026-02-16T01:00:00Z",
+  "branch": "feature/sdg-uniform-logos-dev",
+  "pr_url": null,
+  "build_log": "docs/sdg_uniform_build.log",
+  "lint_log": "docs/sdg_uniform_lint.log",
+  "notes": ["removed glass containers for primary SDGs", "set uniform logo size for primary & supporting (128px desktop)", "hover intensity differs for primary vs supporting"]
+}
+```
