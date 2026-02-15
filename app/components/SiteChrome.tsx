@@ -8,6 +8,7 @@ import { analytics } from "@/lib/analytics";
 const menuLinks = [
   { href: "/about", label: "About" },
   { href: "/impact", label: "Impact & Vision" },
+  { href: "/projects", label: "Our Projects" },
   { href: "/team", label: "Team" },
 ];
 
