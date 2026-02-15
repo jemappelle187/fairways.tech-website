@@ -4,12 +4,12 @@ import React from "react";
 
 type ProjectLogoProps = {
   src?: string | null;
-  alt: string;
+  alt?: string;
   progressPercent?: number;
   projectLabel?: string;
 };
 
-const PLACEHOLDER_SRC = "/images/logo-placeholder.svg";
+const BRAND_LOGO_SRC = "/images/logo/master-250x250-svg/master-logo-drop-black.svg";
 
 export default function ProjectLogo({
   src,
@@ -17,7 +17,8 @@ export default function ProjectLogo({
   progressPercent,
   projectLabel = "Project",
 }: ProjectLogoProps) {
-  const imgSrc = src || PLACEHOLDER_SRC;
+  const imgSrc = src || BRAND_LOGO_SRC;
+  const imgAlt = src ? (alt ?? "") : "Fairways.Tech project placeholder logo";
   const percent = progressPercent ?? 0;
 
   return (
@@ -26,9 +27,10 @@ export default function ProjectLogo({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgSrc}
-          alt={alt}
+          alt={imgAlt}
           loading="lazy"
-          className="h-20 w-20 object-contain"
+          aria-hidden={!src}
+          className="h-12 w-12 max-h-[56px] max-w-[56px] object-contain opacity-65 md:h-14 md:w-14 pointer-events-none select-none"
         />
       </div>
       {percent >= 0 && percent <= 100 && (
