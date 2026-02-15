@@ -339,7 +339,7 @@
   "phase": "sdg-uniform",
   "timestamp": "2026-02-16T01:00:00Z",
   "branch": "feature/sdg-uniform-logos-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/12",
   "build_log": "docs/sdg_uniform_build.log",
   "lint_log": "docs/sdg_uniform_lint.log",
   "notes": ["removed glass containers for primary SDGs", "set uniform logo size for primary & supporting (128px desktop)", "hover intensity differs for primary vs supporting"]
