@@ -136,7 +136,7 @@
   "phase": "premium_poultry",
   "timestamp": "2026-02-15T16:00:00Z",
   "branch": "feature/sdg-premium-poultry-dev",
-  "pr_url": null,
+  "pr_url": "https://github.com/jemappelle187/fairways.tech-website/pull/3",
   "build_log": "docs/build_premium_phase.log",
   "lint_log": "docs/lint_premium_phase.log",
   "background_image_added": false,
