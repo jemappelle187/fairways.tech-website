@@ -18,7 +18,7 @@ export default function ProjectLogo({
   projectLabel = "Project",
 }: ProjectLogoProps) {
   const imgSrc = src || BRAND_LOGO_SRC;
-  const imgAlt = src ? (alt ?? "") : "Fairways.Tech project placeholder logo";
+  const imgAlt = alt ?? "Fairways.Tech project placeholder logo";
   const percent = progressPercent ?? 0;
 
   return (
