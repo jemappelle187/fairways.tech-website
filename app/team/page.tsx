@@ -407,7 +407,7 @@ export default function TeamPage() {
                     Rene Smit
                   </h3>
                   <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-                    Ret. Managing Director at NN Group
+                    Retired Managing Director at NN Group
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
                     Strategic and commercial finance executive with 35+ years of
