@@ -564,15 +564,15 @@ export default function HomePage() {
             <div className="mx-auto max-w-6xl">
               <SdgLogosOnly
                 list={[
+                  { id: 1, label: "No Poverty", file: "/images/sdg/sdg-1-no-poverty.svg", short: "Increase incomes and economic resilience for smallholder farmers" },
                   { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
                   { id: 3, label: "Good Health and Well-being", file: "/images/sdg/sdg-3-good-health.svg", short: "Improve food safety and reduce foodborne illness" },
                   { id: 5, label: "Gender Equality", file: "/images/sdg/sdg-5-gender-equality.svg", short: "Support women-led farm businesses to scale" },
                   { id: 8, label: "Decent Work & Economic Growth", file: "/images/sdg/sdg-8-decent-work.svg", short: "Formalize farm businesses & expand access to financial services" },
                   { id: 9, label: "Industry, Innovation & Infrastructure", file: "/images/sdg/sdg-9-industry-infrastructure.svg", short: "Finance cold-chain and processing infrastructure" },
+                  { id: 10, label: "Reduced Inequalities", file: "/images/sdg/sdg-10-reduced-inequalities.svg", short: "Reduce inequalities in market access and value distribution" },
                   { id: 12, label: "Responsible Consumption & Production", file: "/images/sdg/sdg-12-responsible-production.svg", short: "Cut food waste and improve supply-chain transparency" },
                 ]}
-                title="OUR FOCUS"
-                subtitle="Aligned with the UN Sustainable Development Goals."
               />
               <p className="text-sm text-center text-gray-600 mt-6">
                 <a
