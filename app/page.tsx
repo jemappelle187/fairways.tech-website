@@ -74,48 +74,36 @@ const partnershipCards = [
   {
     title: "Banks & lenders",
     description: "Stop losing to rural risk. Verified records, AML/CFT-ready data, and controlled disbursements you can trust.",
-    link: "/about",
-    linkText: "See our compliance framework",
     icon: Landmark,
     emoji: "🏦"
   },
   {
     title: "Farmer groups & cooperatives",
     description: "Unlock group power. Digital records, tracked repayments, and fair finance as inputs, not cash.",
-    link: "/impact",
-    linkText: "See farmer impact",
     icon: Users2,
     emoji: "🤝"
   },
   {
     title: "Buyers & off-takers",
     description: "Reliable supply, guaranteed traceability. Know your farms, plan sourcing, meet standards effortlessly.",
-    link: "/about",
-    linkText: "Explore supply transparency",
     icon: Store,
     emoji: "🧺"
   },
   {
     title: "Development & impact partners",
     description: "Prove your impact. Real-time farmer outcomes, financial inclusion tracking, and ready-to-use SDG evidence.",
-    link: "/impact",
-    linkText: "See measurable outcomes",
     icon: Globe2,
     emoji: "🌍"
   },
   {
     title: "Governments & regulators",
     description: "See what's really happening. Anonymised flows, inclusion trends, and enforceable AML/CFT compliance.",
-    link: "/about",
-    linkText: "Explore governance tools",
     icon: ShieldCheck,
     emoji: "🏛️"
   },
   {
     title: "Knowledge partners",
     description: "Prove training works. Real farmer behaviour, yield data, and validated outcomes, not surveys.",
-    link: "/impact",
-    linkText: "See training impact",
     icon: GraduationCap,
     emoji: "🎓"
   }
@@ -532,13 +520,6 @@ export default function HomePage() {
             <p className="mt-2 text-sm text-white/85 leading-relaxed">
               {card.description}
             </p>
-            <a
-              href={card.link}
-              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-forest hover:text-forest/80 hover:underline underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
-            >
-              {card.linkText}
-              <span aria-hidden="true">→</span>
-            </a>
           </div>
         );
       })}
@@ -563,6 +544,8 @@ export default function HomePage() {
           <section aria-labelledby="home-sdg-logos" className="mt-4 bg-sand px-6 py-12">
             <div className="mx-auto max-w-6xl">
               <SdgLogosOnly
+                title="8 Goals. 1 Mission."
+                subtitle="Our focus on eight UN Sustainable Development Goals."
                 list={[
                   { id: 1, label: "No Poverty", file: "/images/sdg/sdg-1-no-poverty.svg", short: "Increase incomes and economic resilience for smallholder farmers" },
                   { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },

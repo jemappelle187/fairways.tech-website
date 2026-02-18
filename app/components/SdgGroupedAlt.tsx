@@ -5,11 +5,25 @@ type Sdg = { id: number; label: string; file: string; short?: string };
 /**
  * SdgGroupedAlt — logos-only view, 4 per row.
  */
-type Props = { list: Sdg[] };
+type Props = { list: Sdg[]; title?: string; subtitle?: string };
 
-export default function SdgGroupedAlt({ list }: Props) {
+export default function SdgGroupedAlt({ list, title, subtitle }: Props) {
   return (
-    <section aria-label="Our focus SDGs" className="mt-12">
+    <section aria-labelledby={title ? "sdg-section-heading" : undefined} aria-label={!title ? "Our focus SDGs" : undefined} className="mt-12">
+      {(title || subtitle) && (
+        <div className="text-center mb-8">
+          {title && (
+            <h2 id="sdg-section-heading" className="text-xl font-semibold text-stone sm:text-2xl">
+              {title}
+            </h2>
+          )}
+          {subtitle && (
+            <p className="mt-2 text-sm text-gray-600 sm:text-base">
+              {subtitle}
+            </p>
+          )}
+        </div>
+      )}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center px-4">
         {list.map((s) => (
           <div
