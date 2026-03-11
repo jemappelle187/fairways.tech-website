@@ -124,15 +124,15 @@ export function Header() {
           </a>
 
           {/* Desktop: Menu items in navbar */}
-          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-2 flex-1 justify-center" aria-label="Main navigation">
             {menuLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
+                className={`relative px-5 py-2.5 text-[15px] font-medium tracking-[0.02em] rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
                   pathname === link.href
-                    ? "bg-forest/10 text-forest"
-                    : "text-slate-700 hover:text-forest hover:bg-gradient-to-b hover:from-forest/8 hover:to-forest/5 hover:shadow-[0_0_12px_rgba(31,75,44,0.3)] hover:-translate-y-0.5 hover:scale-[1.02] hover:tracking-wide after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:bg-forest after:transition-all after:duration-300 after:ease-out hover:after:left-0 hover:after:w-full"
+                    ? "text-forest after:absolute after:bottom-1 after:left-5 after:right-5 after:h-px after:bg-forest/70"
+                    : "text-slate-600 hover:text-forest hover:bg-forest/[0.06] after:absolute after:bottom-1 after:left-1/2 after:right-1/2 after:h-px after:w-0 after:bg-forest after:transition-all after:duration-200 after:ease-out hover:after:left-5 hover:after:right-5"
                 }`}
               >
                 {link.label}

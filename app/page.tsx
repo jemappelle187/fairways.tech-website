@@ -171,43 +171,50 @@ function useFadeInOnScroll() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!ref.current) return;
 
-    // Check if element is already in view on mount (for SSR/hydration)
-    const checkInitialVisibility = () => {
-      if (ref.current) {
-        const rect = ref.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight || 0;
-        const isInView = rect.top < viewportHeight * 0.9 && rect.bottom > -50;
-        if (isInView) {
-          // Small delay to ensure smooth animation even for in-view elements
-          setTimeout(() => setIsVisible(true), 100);
-          return true;
-        }
+    const checkInitialVisibility = (el: HTMLDivElement | null) => {
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 0;
+      const isInView = rect.top < viewportHeight * 0.9 && rect.bottom > -50;
+      if (isInView) {
+        setTimeout(() => setIsVisible(true), 100);
+        return true;
       }
       return false;
     };
 
-    // Immediate check for elements already in view
-    if (checkInitialVisibility()) {
-      return;
-    }
+    let teardown: (() => void) | undefined;
 
-    const element = ref.current;
-    if (!element) return;
+    const setup = () => {
+      const element = ref.current;
+      if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
-    );
+      if (checkInitialVisibility(element)) return;
 
-    observer.observe(element);
-    return () => observer.disconnect();
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
+      );
+
+      observer.observe(element);
+      teardown = () => observer.disconnect();
+    };
+
+    // Defer until after layout so refs are attached and getBoundingClientRect is accurate
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(setup);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      teardown?.();
+    };
   }, []);
 
   return { ref, isVisible };
