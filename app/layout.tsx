@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | Fairways.Tech",
   },
   description:
-    "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
+    "Fairways.Tech is a social-impact driven platform. Turning farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for scalable access to finance and markets for smallholder farmers.",
   authors: [
     { name: "Fairways.Tech" },
     { name: "Emmanuel Yeboah Martina", url: "https://www.linkedin.com/in/eymartina/" },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     description:
-      "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
+      "Fairways.Tech is a social-impact driven platform. Turning farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for scalable access to finance and markets for smallholder farmers.",
     url: "https://fairways.tech",
     siteName: "Fairways.Tech",
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
     description:
-      "Turning farm activity into trusted, finance-ready data. Fairways.Tech builds compliance-first digital infrastructure enabling scalable access to finance and markets for smallholder farmers.",
+      "Fairways.Tech is a social-impact driven platform. Turning farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for scalable access to finance and markets for smallholder farmers.",
     images: ["/og/og-fairways-tech.png"],
   },
 };

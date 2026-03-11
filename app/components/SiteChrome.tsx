@@ -8,7 +8,6 @@ import { analytics } from "@/lib/analytics";
 const menuLinks = [
   { href: "/about", label: "About" },
   { href: "/impact", label: "Impact & Vision" },
-  { href: "/projects", label: "Our Projects" },
   { href: "/team", label: "Team" },
 ];
 
@@ -417,7 +416,7 @@ export function Footer() {
             </a>
           </div>
           <span className="text-[11px] text-slate-500 sm:text-xs">
-            © {year} Fairways.Tech B.V. All rights reserved.
+            © {year} Fairways.Tech B.V. — A social-impact driven platform. All rights reserved.
           </span>
         </div>
       </div>

@@ -4,11 +4,11 @@ import { Header, Footer } from "../components/SiteChrome";
 export const metadata: Metadata = {
   title: "Impact & Vision",
   description:
-    "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+    "Fairways.Tech is a social-impact driven platform. Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
   openGraph: {
     title: "Impact & Vision | Fairways.Tech",
     description:
-      "Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+      "Fairways.Tech is a social-impact driven platform. Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
     url: "https://fairways.tech/impact",
   },
 };
@@ -30,7 +30,7 @@ export default function ImpactPage() {
                 Impact & Vision
               </h1>
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
-                Learn about Fairways.Tech&apos;s impact on farmers, institutions, and food systems across Africa.
+                As a social-impact driven platform, we measure our success by improved access to finance, stronger market fairness, and reduced food loss across Africa.
               </p>
             </div>
           </div>
@@ -44,7 +44,7 @@ export default function ImpactPage() {
               {/* Background Image */}
               <div 
                 className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
-                style={{ backgroundImage: "url('/farmer_woman.jpg')" }}
+                style={{ backgroundImage: "url('/images/farmers_card.png')" }}
               />
               {/* Overlay for better text readability */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />

@@ -5,11 +5,11 @@ import { Header, Footer } from "../components/SiteChrome";
 export const metadata: Metadata = {
   title: "About Fairways.Tech – Compliance-first rails for rural finance",
   description:
-    "Learn about Fairways.Tech and how we turn farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for smallholder farmers.",
+    "Fairways.Tech is a social-impact driven platform. Learn how we turn farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for smallholder farmers.",
   openGraph: {
     title: "About Fairways.Tech – Compliance-first rails for rural finance",
     description:
-      "Learn about Fairways.Tech and how we turn farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for smallholder farmers.",
+      "Fairways.Tech is a social-impact driven platform. Learn how we turn farm activity into trusted, finance-ready data—building compliance-first digital infrastructure for smallholder farmers.",
     url: "https://fairways.tech/about",
   },
 };
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 About Fairways.Tech
               </h1>
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
-                Building compliance-first digital infrastructure that connects banks, cooperatives and buyers to Africa&apos;s smallholder farmers.
+                As a social-impact driven platform, we build compliance-first digital infrastructure that connects banks, cooperatives and buyers to Africa&apos;s smallholder farmers.
               </p>
             </div>
           </div>

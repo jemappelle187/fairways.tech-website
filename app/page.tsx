@@ -119,18 +119,27 @@ function VideoHero() {
 
   return (
     <section id="video-hero" className="relative overflow-hidden md:py-20 md:min-h-[700px]">
-      {/* Video background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-label="Hero video showcasing Fairways.Tech digital infrastructure for smallholder farmers"
-        className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:object-cover"
+      {/* Hero image — Fairways.Tech with farmers in Upper West region, Ghana */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/hero-upper-west-farmers.png"
+        alt="Fairways.Tech team with farmers in Upper West region, Ghana"
+        className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:w-full md:object-cover"
+      />
+      {/* Centered logo watermark — deters copying/reuse */}
+      <div
+        className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none"
+        aria-hidden="true"
       >
-        <source src="/videos/fairways-hero-video.mp4" type="video/mp4" />
-        <p>Video showing Fairways.Tech&apos;s mission to build digital infrastructure for African smallholder farmers.</p>
-      </video>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/logo/master/fairways-master-logo-drop-bg-black.png"
+          alt=""
+          className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] opacity-40 select-none"
+          draggable={false}
+          style={{ userSelect: "none", WebkitUserDrag: "none" } as React.CSSProperties}
+        />
+      </div>
       {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
       <div className="absolute inset-0 z-0 bg-black/30 hidden md:block" />
 
@@ -670,7 +679,7 @@ export default function HomePage() {
                   Where Fairways.Tech is active
                 </h2>
                 <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-700 sm:text-[15px]">
-                  We&apos;re building a network of verified farmers, local agents, and financial institutions across Africa, Asia, Europe and Latin America. Our platform makes rural lending safer and more affordable.
+                  As a social-impact driven platform, we&apos;re building a network of verified farmers, local agents, and financial institutions across Africa, Asia, Europe and Latin America. Our platform makes rural lending safer and more affordable.
                 </p>
               </div>
 
@@ -716,10 +725,10 @@ export default function HomePage() {
                   {/* Background image */}
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
-                      src="/images/farmers_card.png"
+                      src="/farmer_woman.jpg"
                       alt="Smallholder and horticultural farmers"
                       fill
-                      className="h-full w-full object-cover opacity-90"
+                      className="h-full w-full object-cover object-[25%_center] opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
                     />
                   </div>
@@ -731,10 +740,10 @@ export default function HomePage() {
                       FARMERS
                     </p>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
-                      <Counter target={statsInView ? 250 : 0} suffix="+" />
+                      5.5K+
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Smallholder and horticultural farmers accessing fair, scalable finance through verified track records and transparent repayment history.
+                      Smallholder and horticultural farmers accessing fair, scalable finance through verified track records and transparent repayment history—proof that impact and inclusion scale together.
                     </p>
                   </div>
                 </div>
