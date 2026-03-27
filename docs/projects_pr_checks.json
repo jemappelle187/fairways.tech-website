@@ -1,0 +1,8 @@
+{
+  "build": "pass",
+  "lint": "pass",
+  "meta_title": "present",
+  "nav_entry": "present",
+  "cta_target": "contact_ok",
+  "h1": "present"
+}

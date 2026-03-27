@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111827;
+  background-color: #f4efe7;
+  --fw-logo-green: #41a65b;
+  --fw-logo-green-light: #6ecf87;
+  --fw-logo-green-dark: #2f7c44;
+  --fw-forest: #1f4d36;
+  --fw-leaf: #3c7a4a;
+  --fw-sand: #f4efe7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus,
+.sr-only:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .fade-in-up,
+  .fade-in-up-delay-1,
+  .fade-in-up-delay-2,
+  .fade-in-up-delay-3,
+  .fade-in-up-delay-4,
+  .fade-in-hidden {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background-color: #f4efe7;
+}
+
+/* Allow selection and interaction in interactive elements */
+button,
+a,
+input,
+textarea,
+select,
+[contenteditable="true"],
+[role="button"],
+[role="link"],
+summary {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: pointer;
+  pointer-events: auto !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure buttons and links are always clickable */
+button:not(:disabled),
+a[href] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+::selection {
+  background-color: #3c6e47;
+  color: #f4efe7;
+}
+
+/* Premium fade-in animation utilities */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Premium fade-in - safe initial state that doesn't break layout */
+.fade-in-up {
+  will-change: opacity, transform, filter;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-up-delay-1 {
+  will-change: opacity, transform, filter;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.fade-in-up-delay-2 {
+  will-change: opacity, transform, filter;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.fade-in-up-delay-3 {
+  will-change: opacity, transform, filter;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+}
+
+.fade-in-up-delay-4 {
+  will-change: opacity, transform, filter;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+/* Initial hidden state - only apply when animation hasn't started */
+.fade-in-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(4px);
+}
+
