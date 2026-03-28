@@ -1,0 +1,120 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { ContactModal } from "./ContactModal";
+import { analytics } from "@/lib/analytics";
+
+const menuLinks = [
+  { href: "/about", label: "About" },
+  { href: "/impact", label: "Impact & Vision" },
+  { href: "/team", label: "Team" },
+];
+
+const languages = [
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+];
+
+export function Header() {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close menu and language dropdown on escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (isMenuOpen) setIsMenuOpen(false);
+        if (isLangDropdownOpen) setIsLangDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isMenuOpen, isLangDropdownOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  // Close language dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isLangDropdownOpen && !target.closest('[aria-label="Select language"]') && !target.closest('.language-dropdown')) {
+        setIsLangDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isLangDropdownOpen]);
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    analytics.contactFormOpened();
+    setIsContactModalOpen(true);
+  };
+
+  return (
+    <>
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-forest focus:px-4 focus:py-2 focus:text-white focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
+      
+      <header
+        className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/80 backdrop-blur-lg shadow-xl transition-all duration-300 ${
+          isScrolled ? "h-16 shadow-md" : "h-20"
+        }`}
+      >
+        <div
+          className={`mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
+            isScrolled ? "h-16" : "h-20"
+          }`}
+        >
+          {/* Logo - Far left aligned */}
+          <a href="/" className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 -ml-4 sm:-ml-6 lg:-ml-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo/master-250x250-svg/master-logo-drop-black.svg"
+              alt="Fairways.Tech"
+              className={`transition-all duration-300 hover:scale-105 ${
+                isScrolled ? "h-14" : "h-16 sm:h-20"
+              }`}
+            />
+            <div
+              className={`font-bold tracking-tight text-forest transition-all duration-300 hover:scale-105 ${
+                isScrolled ? "text-lg" : "text-lg sm:text-xl lg:text-2xl"
+              }`}

@@ -382,7 +382,6 @@ export function Footer() {
 
       {/* Links and Copyright */}
       <div className="mx-auto max-w-6xl px-6 py-4">
-        <p className="text-xs text-slate-500 mb-1">Attended Africa Tech Summit Nairobi 2026 — investor follow-ups ongoing.</p>
         <div className="flex flex-col items-center gap-3 text-xs text-slate-500 sm:flex-row sm:justify-between">
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 sm:justify-start">
             <a
