@@ -71,8 +71,8 @@ export function ContactCta() {
       id="cta"
       className="relative scroll-mt-24 overflow-hidden py-16 sm:py-20"
     >
-      {/* Background image (farmer holding crops) */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/farmer_hold_crop.webp')] bg-cover bg-center" />
+      {/* Background image (female farmer harvest) */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/cta-farmers-harvest.png')] bg-cover bg-center" />
 
       {/* Soft dark overlay */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-black/25" />
@@ -85,7 +85,7 @@ export function ContactCta() {
         <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
         <div 
           ref={cardRef}
-          className={`group relative flex flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-6 py-10 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 md:px-12 md:py-12 ${
+          className={`group relative flex flex-col items-center text-center rounded-3xl border border-white/15 bg-white/[0.03] bg-gradient-to-b from-white/[0.06] via-white/[0.03] to-white/[0.08] px-6 py-10 backdrop-blur-lg shadow-[0_18px_45px_rgba(15,23,42,0.38)] transition-all duration-700 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.55)] hover:border-white/30 md:px-12 md:py-12 ${
             isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
           }`}
         >

@@ -108,19 +108,6 @@ export default function RootLayout({
         <VisitTracker />
         <UmamiLoader />
         <GoogleAnalytics />
-        {/* Debug: Test if env var is available at build time - Fixed typo: O -> 0 */}
-        <Script
-          id="ga-env-test"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              console.log('[ENV TEST] NEXT_PUBLIC_GA_MEASUREMENT_ID:', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'NOT_FOUND'}');
-              console.log('[ENV TEST] All NEXT_PUBLIC vars:', ${JSON.stringify(
-                Object.keys(process.env).filter(k => k.startsWith('NEXT_PUBLIC_'))
-              )});
-            `,
-          }}
-        />
         {/* Organization Schema */}
         <Script
           id="fairways-org-schema"
@@ -134,7 +121,13 @@ export default function RootLayout({
               name: "Fairways.Tech",
               url: "https://fairways.tech",
               logo: "https://fairways.tech/og/og-fairways-tech.png",
-              sameAs: [],
+              sameAs: [
+                "https://www.linkedin.com/company/fairways-tech",
+                "https://www.instagram.com/fairways.tech/",
+                "https://x.com/FairwaysTech",
+                "https://www.facebook.com/profile.php?id=61584711954996",
+                "https://www.youtube.com/@fairways.tech",
+              ],
               foundingDate: "2025",
               address: {
                 "@type": "PostalAddress",
@@ -146,6 +139,19 @@ export default function RootLayout({
                 contactType: "General Inquiry",
                 areaServed: ["NL", "GH"],
               },
+              areaServed: ["NL", "GH"],
+              knowsAbout: [
+                "Agricultural finance",
+                "Smallholder farmers",
+                "Financial inclusion",
+                "Agricultural data",
+                "Digital infrastructure",
+                "Rural finance",
+                "Emerging markets",
+                "Ghana agriculture",
+                "Compliance infrastructure",
+                "Fintech infrastructure",
+              ],
               description:
                 "Fairways.Tech builds compliance-first digital infrastructure, turning farm activity into trusted, finance-ready data for smallholder farmers.",
             }),

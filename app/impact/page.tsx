@@ -1,16 +1,57 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Header, Footer } from "../components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "Impact & Vision",
+  title: "Impact | Agricultural finance, smallholder farmers and rural economic development",
   description:
-    "Fairways.Tech is a social-impact driven platform. Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+    "How Fairways.Tech improves agricultural financing for smallholder farmers and institutions: verified farm data, lower perceived risk for banks, and stronger local economies in Ghana and other emerging markets.",
+  alternates: {
+    canonical: "/impact",
+  },
   openGraph: {
     title: "Impact & Vision | Fairways.Tech",
     description:
-      "Fairways.Tech is a social-impact driven platform. Our impact: improved access to finance, stronger market fairness, and reduced food loss—powered by trusted farm data and compliance-first digital infrastructure.",
+      "How Fairways.Tech improves agricultural financing for smallholder farmers and institutions: verified farm data, lower perceived risk for banks, and stronger local economies in Ghana and other emerging markets.",
     url: "https://fairways.tech/impact",
   },
+};
+
+const impactWebPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://fairways.tech/impact#webpage",
+  url: "https://fairways.tech/impact",
+  name: "Impact & Vision",
+  description:
+    "How Fairways.Tech improves agricultural financing for smallholder farmers and institutions: verified farm data, lower perceived risk for banks, and stronger local economies in Ghana and other emerging markets.",
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://fairways.tech",
+    name: "Fairways.Tech",
+  },
+  about: {
+    "@id": "https://fairways.tech/#organization",
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://fairways.tech/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Impact",
+      item: "https://fairways.tech/impact",
+    },
+  ],
 };
 
 export default function ImpactPage() {
@@ -30,7 +71,7 @@ export default function ImpactPage() {
                 Impact & Vision
               </h1>
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
-                As a social-impact driven platform, we measure our success by improved access to finance, stronger market fairness, and reduced food loss across Africa.
+                Fairways.Tech is digital infrastructure for agricultural financing. We measure progress by better access to finance for smallholder farmers, fairer markets, and less food loss—supported by verified farm data and compliance-aligned rails in Africa and other regions where we operate.
               </p>
             </div>
           </div>
@@ -39,6 +80,24 @@ export default function ImpactPage() {
         {/* Main Content */}
         <section className="relative z-0 bg-sand pb-24">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
+            {/* Short context for impact sections */}
+            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-white/85 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+                Why reliable agricultural finance matters
+              </h2>
+              <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                <p>
+                  Agricultural finance is foundational to rural prosperity: when farmers and value-chain actors can participate in formal finance, productivity, market continuity, and household stability all improve.
+                </p>
+                <p>
+                  Trusted infrastructure and verifiable records help institutions, buyers, and public stakeholders participate with greater confidence, enabling broader and more sustainable engagement in agricultural markets.
+                </p>
+                <p>
+                  The impact is systemic: stronger access to finance for farmers, more reliable market participation, and deeper resilience for local economies over the long term.
+                </p>
+              </div>
+            </div>
+
             {/* For Farmers Card */}
             <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
               {/* Background Image */}
@@ -56,13 +115,13 @@ export default function ImpactPage() {
                 </h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
-                    Fairways.Tech strengthens smallholder farmers&apos; ability to operate with stability, predictability, and commercial dignity. Through trusted digital identity and verifiable production records, farmers obtain timely working capital, plan for seasonal cash-flow, and participate in value chains on transparent and equitable terms.
+                    Fairways.Tech supports smallholder farmers in building more stable and predictable livelihoods. With stronger participation records and trusted market linkages, farmers are better positioned to access finance, plan across seasons, and operate with greater confidence.
                   </p>
                   <p>
-                    By enabling farmers to build a financial track record and integrate into compliant value‑chain rails, we reduce vulnerability to price shocks, improve income stability, and expand opportunities for growth. This forms the foundation for scalable rural finance and durable livelihood improvement.
+                    The long-term outcome is greater resilience: improved income stability, broader access to formal markets, and stronger capacity to absorb shocks while continuing to grow.
                   </p>
                   <p className="mt-4">
-                    We are supporting a women-owned poultry producer to meet HACCP-aligned standards and supermarket procurement requirements by financing cold-chain and processing equipment, improving hygiene standards, and preparing for HACCP readiness. This work increases market access while maintaining neutral language about certification outcomes.
+                    Over time, this contributes to rural development by helping farming households and producer groups strengthen continuity, expand opportunity, and participate in value chains on fairer terms.
                   </p>
                 </div>
               </div>
@@ -85,10 +144,10 @@ export default function ImpactPage() {
                 </h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
-                    Financial institutions, cooperatives, buyers, and development partners gain access to compliant, audit‑ready data flows and verifiable identity rails. Fairways.Tech reduces the operational friction of serving rural markets by providing structured, regulator‑aligned workflows for onboarding, monitoring, and risk assessment.
+                    Financial institutions, cooperatives, buyers, and development partners gain clearer visibility into agricultural participation and portfolio context. This improves transparency and supports more informed engagement in rural markets.
                   </p>
                   <p>
-                    Our infrastructure delivers field‑level data integrity, production, transactions, repayment signals, allowing institutions to deploy capital with confidence, meet AML/CFT and supervisory expectations, and expand their rural footprint sustainably. The result is a lower cost‑to‑serve model and the ability to scale compliant finance at meaningful depth.
+                    With stronger risk visibility and compliance-aligned participation, institutions can reduce uncertainty, lower the cost to serve rural segments, and expand agricultural finance more sustainably over time.
                   </p>
                 </div>
               </div>
@@ -111,10 +170,10 @@ export default function ImpactPage() {
                 </h2>
                 <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
                   <p>
-                    Fairways.Tech contributes to resilient food systems by transforming fragmented, informal production environments into transparent, data‑driven supply networks. Predictable supply, authenticated origin data, and aligned financing enable buyers to source reliably and reduce operational uncertainty.
+                    Fairways.Tech contributes to more stable food systems by strengthening continuity between production, trade, and finance. Better traceability and clearer origin records support consistent sourcing and stronger supply chain reliability.
                   </p>
                   <p>
-                    With traceability from farm to market and improved post‑harvest coordination, our infrastructure reduces waste, strengthens food safety compliance, and supports climate‑resilient value chains. Trusted data links farmers, markets, and finance in a way that promotes system‑wide efficiency and long‑term stability.
+                    Over time, this helps reduce waste, reinforce food safety, and improve resilience across the chain from farm to market. The broader effect is a more durable food system with stronger long-term development potential.
                   </p>
                 </div>
               </div>
@@ -122,6 +181,16 @@ export default function ImpactPage() {
           </div>
         </section>
       </main>
+      <Script
+        id="impact-webpage-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(impactWebPageJsonLd) }}
+      />
+      <Script
+        id="impact-breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Footer />
     </>
   );

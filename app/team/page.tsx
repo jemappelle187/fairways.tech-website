@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Meet the Team | Fairways.Tech",
   description:
     "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
+  alternates: {
+    canonical: "/team",
+  },
   openGraph: {
     title: "Meet the Team | Fairways.Tech",
     description:
