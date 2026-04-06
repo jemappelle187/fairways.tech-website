@@ -5,7 +5,7 @@ import { Linkedin } from "lucide-react";
 import { Header, Footer } from "../components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "Meet the Team | Fairways.Tech",
+  title: "Meet the Team",
   description:
     "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
   alternates: {
