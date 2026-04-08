@@ -21,6 +21,9 @@ const languages = [
   { code: "zh", label: "中文", flag: "🇨🇳" },
 ];
 
+// Temporary product decision: hide language UI until translations are implemented.
+const showLanguageSelector = false;
+
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -145,78 +148,81 @@ export function Header() {
 
           {/* Right side: Language selector + CTA button (desktop) / Hamburger (mobile) */}
           <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0 -mr-4 sm:-mr-6 lg:-mr-8">
-            {/* Language selector dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-forest hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
-                aria-label="Select language"
-                aria-expanded={isLangDropdownOpen}
-              >
-                <span className="text-base" aria-hidden="true">{languages.find(l => l.code === currentLanguage)?.flag}</span>
-                <span className="uppercase">{currentLanguage}</span>
-                <svg
-                  className={`h-4 w-4 transition-transform ${
-                    isLangDropdownOpen ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {showLanguageSelector ? (
+              <div className="relative">
+                <button
+                  onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                  className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-forest hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                  aria-label="Select language"
+                  aria-expanded={isLangDropdownOpen}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
+                  <span className="text-base" aria-hidden="true">{languages.find(l => l.code === currentLanguage)?.flag}</span>
+                  <span className="uppercase">{currentLanguage}</span>
+                  <svg
+                    className={`h-4 w-4 transition-transform ${
+                      isLangDropdownOpen ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
 
-              {/* Language dropdown menu */}
-              {isLangDropdownOpen && (
-                <div className="language-dropdown absolute right-0 top-full mt-2 w-48 rounded-lg border border-slate-200 bg-white shadow-xl z-50" role="menu">
-                  <div className="py-2">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setCurrentLanguage(lang.code);
-                          setIsLangDropdownOpen(false);
-                          // TODO: Implement actual language switching logic
-                        }}
-                        className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-inset ${
-                          currentLanguage === lang.code
-                            ? "bg-forest/5 text-forest font-semibold"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-forest"
-                        }`}
-                        role="menuitem"
-                        aria-label={`Switch to ${lang.label}`}
-                      >
-                        <span className="flex items-center gap-2">
-                          <span className="text-base" aria-hidden="true">{lang.flag}</span>
-                          <span>{lang.label}</span>
-                        </span>
-                        {currentLanguage === lang.code && (
-                          <svg
-                            className="h-4 w-4 text-forest"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                        )}
-                      </button>
-                    ))}
+                {/* Language dropdown menu */}
+                {isLangDropdownOpen && (
+                  <div className="language-dropdown absolute right-0 top-full mt-2 w-48 rounded-lg border border-slate-200 bg-white shadow-xl z-50" role="menu">
+                    <div className="py-2">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setCurrentLanguage(lang.code);
+                            setIsLangDropdownOpen(false);
+                            // TODO: Implement actual language switching logic
+                          }}
+                          className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-forest focus:ring-inset ${
+                            currentLanguage === lang.code
+                              ? "bg-forest/5 text-forest font-semibold"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-forest"
+                          }`}
+                          role="menuitem"
+                          aria-label={`Switch to ${lang.label}`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className="text-base" aria-hidden="true">{lang.flag}</span>
+                            <span>{lang.label}</span>
+                          </span>
+                          {currentLanguage === lang.code && (
+                            <svg
+                              className="h-4 w-4 text-forest"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          )}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            ) : (
+              <div className="hidden lg:block w-[84px]" aria-hidden="true" />
+            )}
 
             {/* Contact CTA button - Desktop only */}
             <a
@@ -224,7 +230,7 @@ export function Header() {
               onClick={handleContactClick}
               className="hidden lg:inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
             >
-              Start a partnership
+              Talk to us
             </a>
 
             {/* Hamburger menu button - Mobile only */}
@@ -294,7 +300,7 @@ export function Header() {
                   onClick={handleContactClick}
                   className="flex w-full items-center justify-center rounded-full bg-forest px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
                 >
-                  Start a partnership
+                  Talk to us
                 </a>
               </div>
             </div>
@@ -389,18 +395,6 @@ export function Footer() {
               className="inline-flex hover:text-slate-700 hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded"
             >
               Home
-            </a>
-            <a
-              href="/about"
-              className="inline-flex hover:text-slate-700 hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded"
-            >
-              About
-            </a>
-            <a
-              href="/impact"
-              className="inline-flex hover:text-slate-700 hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded"
-            >
-              Impact
             </a>
             <a
               href="/terms"
