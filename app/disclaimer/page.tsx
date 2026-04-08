@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
-export const metadata: Metadata = {
-  title: "Website Disclaimer | Fairways.Tech",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Website Disclaimer",
   description:
     "Website disclaimer for Fairways.Tech corporate website.",
-};
+  path: "/disclaimer",
+  ogTitle: "Website Disclaimer | Fairways.Tech",
+});
 
 export default function DisclaimerPage() {
   return (

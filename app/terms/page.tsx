@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
-export const metadata: Metadata = {
-  title: "Website Terms & Conditions | Fairways.Tech",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Website Terms & Conditions",
   description:
     "Terms and conditions governing the use of the Fairways.Tech corporate website.",
-};
+  path: "/terms",
+  ogTitle: "Website Terms & Conditions | Fairways.Tech",
+});
 
 export default function TermsPage() {
   return (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import HomePageClient from "./HomePageClient";
+import { buildPageMetadata } from "../lib/seo";
 
 const homeWebPageJsonLd = {
   "@context": "https://schema.org",
@@ -9,7 +10,7 @@ const homeWebPageJsonLd = {
   url: "https://fairways.tech/",
   name: "Fairways.Tech",
   description:
-    "Fairways.Tech is digital infrastructure for agricultural financing. Banks and financial institutions use verified farm data and compliance-aligned rails to serve smallholder farmers, with operations in Ghana, the Netherlands, and other emerging markets.",
+    "Fairways.Tech is an impact-driven digital infrastructure for agricultural financing. Banks and financial institutions use verified farm data and compliance-aligned rails to serve smallholder farmers, with operations in Ghana, the Netherlands, and other emerging markets.",
   isPartOf: {
     "@type": "WebSite",
     url: "https://fairways.tech",
@@ -20,21 +21,15 @@ const homeWebPageJsonLd = {
   },
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Fairways.Tech | Digital infrastructure for agricultural finance and smallholder farmers",
-  alternates: {
-    canonical: "/",
-  },
   description:
+    "Fairways.Tech is an impact-driven digital infrastructure for agricultural financing: verified farm data and rails so banks can serve smallholder farmers in Ghana, the Netherlands, and emerging markets.",
+  path: "/",
+  ogTitle: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
+  ogDescription:
     "Fairways.Tech is digital infrastructure for agricultural financing: verified farm data and rails so banks can serve smallholder farmers in Ghana, the Netherlands, and emerging markets.",
-  openGraph: {
-    siteName: "Fairways.Tech",
-    title: "Fairways.Tech — Turning farm activity into trusted, finance-ready data",
-    description:
-      "Fairways.Tech is digital infrastructure for agricultural financing: verified farm data and rails so banks can serve smallholder farmers in Ghana, the Netherlands, and emerging markets.",
-    url: "https://fairways.tech",
-  },
-};
+});
 
 export default function HomePage() {
   return (

@@ -3,21 +3,15 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Linkedin } from "lucide-react";
 import { Header, Footer } from "../components/SiteChrome";
+import { buildPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Meet the Team",
   description:
     "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
-  alternates: {
-    canonical: "/team",
-  },
-  openGraph: {
-    title: "Meet the Team | Fairways.Tech",
-    description:
-      "Meet the team building Fairways.Tech—turning farm activity into trusted, finance-ready data to enable inclusive agricultural finance at scale.",
-    url: "https://fairways.tech/team",
-  },
-};
+  path: "/team",
+  ogTitle: "Meet the Team | Fairways.Tech",
+});
 
 export default function TeamPage() {
   return (

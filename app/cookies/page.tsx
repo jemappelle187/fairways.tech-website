@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
-export const metadata: Metadata = {
-  title: "Cookie & Local Storage Policy | Fairways.Tech",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Cookie & Local Storage Policy",
   description:
     "Learn how Fairways.Tech uses cookies and local storage technologies in a transparent and proportionate manner.",
-};
+  path: "/cookies",
+  ogTitle: "Cookie & Local Storage Policy | Fairways.Tech",
+});
 
 export default function CookiesPage() {
   return (

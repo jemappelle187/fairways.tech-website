@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 
-export const metadata: Metadata = {
-  title: "Website Privacy Policy | Fairways.Tech",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Website Privacy Policy",
   description:
     "Learn how Fairways.Tech processes personal data when visitors use www.fairways.tech or submit the contact form. GDPR-aligned, institutional-grade privacy practices.",
-};
+  path: "/privacy",
+  ogTitle: "Website Privacy Policy | Fairways.Tech",
+});
 
 export default function PrivacyPage() {
   return (

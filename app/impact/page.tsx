@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Header, Footer } from "../components/SiteChrome";
+import { buildPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Impact | Agricultural finance, smallholder farmers and rural economic development",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Impact | Smallholder finance and rural economic development",
   description:
     "How Fairways.Tech improves agricultural financing for smallholder farmers and institutions: verified farm data, lower perceived risk for banks, and stronger local economies in Ghana and other emerging markets.",
-  alternates: {
-    canonical: "/impact",
-  },
-  openGraph: {
-    title: "Impact & Vision | Fairways.Tech",
-    description:
-      "How Fairways.Tech improves agricultural financing for smallholder farmers and institutions: verified farm data, lower perceived risk for banks, and stronger local economies in Ghana and other emerging markets.",
-    url: "https://fairways.tech/impact",
-  },
-};
+  path: "/impact",
+  ogTitle: "Impact & Vision | Fairways.Tech",
+});
 
 const impactWebPageJsonLd = {
   "@context": "https://schema.org",
@@ -71,7 +65,7 @@ export default function ImpactPage() {
                 Impact & Vision
               </h1>
               <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
-                Fairways.Tech is digital infrastructure for agricultural financing. We measure progress by better access to finance for smallholder farmers, fairer markets, and less food loss—supported by verified farm data and compliance-aligned rails in Africa and other regions where we operate.
+                Fairways.Tech is an impact-driven digital infrastructure for agricultural financing. We measure progress by better access to finance for smallholder farmers, fairer markets, and less food loss. Supported by verified farm data and compliance-aligned rails regardless of where we operate.
               </p>
             </div>
           </div>
@@ -81,39 +75,62 @@ export default function ImpactPage() {
         <section className="relative z-0 bg-sand pb-24">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             {/* Short context for impact sections */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-white/85 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
-                Why reliable agricultural finance matters
-              </h2>
-              <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
-                <p>
-                  Agricultural finance is foundational to rural prosperity: when farmers and value-chain actors can participate in formal finance, productivity, market continuity, and household stability all improve.
-                </p>
-                <p>
-                  Trusted infrastructure and verifiable records help institutions, buyers, and public stakeholders participate with greater confidence, enabling broader and more sustainable engagement in agricultural markets.
-                </p>
-                <p>
-                  The impact is systemic: stronger access to finance for farmers, more reliable market participation, and deeper resilience for local economies over the long term.
-                </p>
+            <div className="group relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-white/85 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12">
+              {/* Background Image */}
+              <div
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url('/images/impact-context-card.png')" }}
+              />
+              {/* Dark overlay for text contrast (aligned with home reach cards) */}
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
+                style={{
+                  background:
+                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                }}
+                aria-hidden="true"
+              />
+              <div className="relative z-10 text-center">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-3xl">
+                  Why reliable agricultural finance matters
+                </h2>
+                <div className="space-y-4 text-base leading-relaxed text-white/95 drop-shadow-sm sm:text-lg">
+                  <p>
+                    Agricultural finance is foundational to rural prosperity: when farmers and value-chain actors can participate in formal finance, productivity, market continuity, and household stability all improve.
+                  </p>
+                  <p>
+                    Trusted infrastructure and verifiable records help institutions, buyers, and public stakeholders participate with greater confidence, enabling broader and more sustainable engagement in agricultural markets.
+                  </p>
+                  <p>
+                    The impact is systemic: stronger access to finance for farmers, more reliable market participation, and deeper resilience for local economies over the long term.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* For Farmers Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="group relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
-                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
-                style={{ backgroundImage: "url('/images/farmers_card.png')" }}
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-85 transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url('/images/impact-farmers.png')" }}
               />
-              {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
-              
+              {/* Dark overlay for text contrast (aligned with home reach cards) */}
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
+                style={{
+                  background:
+                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                }}
+                aria-hidden="true"
+              />
+
               {/* Content */}
-              <div className="relative z-10">
-                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+              <div className="relative z-10 text-center">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-3xl">
                   For Farmers
                 </h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                <div className="space-y-4 text-base leading-relaxed text-white/95 drop-shadow-sm sm:text-lg">
                   <p>
                     Fairways.Tech supports smallholder farmers in building more stable and predictable livelihoods. With stronger participation records and trusted market linkages, farmers are better positioned to access finance, plan across seasons, and operate with greater confidence.
                   </p>
@@ -128,21 +145,28 @@ export default function ImpactPage() {
             </div>
 
             {/* For Institutions Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="group relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
-                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
-                style={{ backgroundImage: "url('/images/value_chain_qr2.jpg')" }}
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-85 transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url('/images/impact-institutions.png')" }}
               />
-              {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
-              
+              {/* Dark overlay for text contrast (aligned with home reach cards) */}
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
+                style={{
+                  background:
+                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                }}
+                aria-hidden="true"
+              />
+
               {/* Content */}
-              <div className="relative z-10">
-                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+              <div className="relative z-10 text-center">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-3xl">
                   For Institutions
                 </h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                <div className="space-y-4 text-base leading-relaxed text-white/95 drop-shadow-sm sm:text-lg">
                   <p>
                     Financial institutions, cooperatives, buyers, and development partners gain clearer visibility into agricultural participation and portfolio context. This improves transparency and supports more informed engagement in rural markets.
                   </p>
@@ -154,21 +178,28 @@ export default function ImpactPage() {
             </div>
 
             {/* For Food Systems Card */}
-            <div className="relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10 lg:p-12">
+            <div className="group relative mb-12 overflow-hidden rounded-3xl border border-white/60 bg-sand/30 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12">
               {/* Background Image */}
               <div 
-                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-50"
-                style={{ backgroundImage: "url('/vegetables_boxes.jpg')" }}
+                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-85 transition-transform duration-500 ease-out group-hover:scale-105"
+                style={{ backgroundImage: "url('/images/impact-food-systems.png')" }}
               />
-              {/* Overlay for better text readability */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-white/60 to-white/50" />
-              
+              {/* Dark overlay for text contrast (aligned with home reach cards) */}
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
+                style={{
+                  background:
+                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                }}
+                aria-hidden="true"
+              />
+
               {/* Content */}
-              <div className="relative z-10">
-                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-stone sm:text-3xl">
+              <div className="relative z-10 text-center">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-3xl">
                   For Food Systems
                 </h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg">
+                <div className="space-y-4 text-base leading-relaxed text-white/95 drop-shadow-sm sm:text-lg">
                   <p>
                     Fairways.Tech contributes to more stable food systems by strengthening continuity between production, trade, and finance. Better traceability and clearer origin records support consistent sourcing and stronger supply chain reliability.
                   </p>
