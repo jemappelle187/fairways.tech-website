@@ -96,7 +96,7 @@ export function ContactCta() {
             Partner with Fairways.Tech
           </h2>
           <p className="mb-8 max-w-2xl text-base text-white/85 md:text-lg leading-relaxed">
-          Join banks, cooperatives, buyers, and development partners building trusted, compliant digital rails for scalable rural finance.
+            The season won&apos;t wait, neither will the partners already building the shared record. Why would you?
           </p>
           <button
             type="button"
@@ -106,7 +106,7 @@ export function ContactCta() {
             }}
             className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
           >
-            Start a partnership
+            Talk to us
           </button>
         </div>
       </div>
