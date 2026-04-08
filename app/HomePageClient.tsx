@@ -261,18 +261,25 @@ export default function HomePageClient() {
           className="border-t border-stone-200/40 bg-sand px-6 py-12 sm:py-16"
           aria-labelledby="platform-overview-heading"
         >
-          <div className="mx-auto max-w-3xl space-y-4 text-center text-base leading-relaxed text-slate-800 sm:text-lg">
-            <h2 id="platform-overview-heading" className="sr-only">
-              What Fairways.Tech is
+          <div className="mx-auto max-w-3xl text-center text-base leading-relaxed text-slate-800 sm:text-lg">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+              At a glance
+            </p>
+            <h2
+              id="platform-overview-heading"
+              className="mt-2 text-xl font-semibold text-stone sm:text-2xl"
+            >
+              Trusted rails between farms and finance
             </h2>
+            <div className="mt-6 space-y-4">
             <p>
-              <strong>Fairways.Tech</strong> is a digital infrastructure platform for agricultural financing.
+              <strong>Fairways.Tech</strong> is an impact-driven digital infrastructure platform for agricultural financing.
             </p>
             <p>
               We help banks, cooperatives, and market partners work with smallholder farmers through trusted, structured visibility across agricultural value chains.
             </p>
             <p>
-              Fairways.Tech operates in Ghana and other emerging markets, with a dual presence in Ghana and the Netherlands.
+              Built in emerging markets, on local field and market realities, where the work is hardest.
             </p>
             <p className="pt-1 text-sm text-slate-700 sm:text-base">
               <a
@@ -283,6 +290,7 @@ export default function HomePageClient() {
                 <span aria-hidden="true">↗</span>
               </a>
             </p>
+            </div>
           </div>
         </section>
         
@@ -334,7 +342,7 @@ export default function HomePageClient() {
                     <strong>Farmers struggle</strong>
                   </div>
                   <p className="mt-1">
-                    to secure inputs and services on fair terms, especially at the moments they need them most.
+                    To secure inputs and services on fair terms, especially at the moments they need them most.
                   </p>
                 </li>
                 <li className={`text-center ${
@@ -348,7 +356,7 @@ export default function HomePageClient() {
                     <strong>Banks see rural lending</strong>
                   </div>
                   <p className="mt-1">
-                    as too risky and too expensive, because they lack clear, trusted records of performance.
+                    As too risky and too expensive, because they lack clear, trusted records of performance.
                   </p>
                 </li>
                 <li className={`text-center ${
@@ -362,7 +370,7 @@ export default function HomePageClient() {
                     <strong>Value chains stay informal</strong>
                   </div>
                   <p className="mt-1">
-                    with no shared record of who produced what, when, and under which conditions.
+                    With no shared record of who produced what, when, and under which conditions.
                   </p>
                 </li>
               </ul>
@@ -655,17 +663,17 @@ export default function HomePageClient() {
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Real activity, captured once
+          Real activity
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Real activity is captured consistently, building a trusted history over time.
+          Captured consistently, building a trusted history over time.
         </p>
       </div>
       <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '150ms' : '0ms' }}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Infrastructure banks plug into
+          Infrastructure
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-white/85">
           Structured records that institutions can use within their existing standards.
@@ -675,24 +683,17 @@ export default function HomePageClient() {
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '300ms' : '0ms' }}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
-          Local partners, trusted agents
+          Local partners
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-white/85">
-          Local partners help farmers stay connected to transparent, reliable systems.
+          Guiding farmers to stay connected to transparent, reliable systems.
         </p>
       </div>
     </div>
     <div className="mt-8 text-center text-sm text-white/80">
-      <p className="mb-2">
+      <p>
         See the outcomes this approach makes possible for farmers, institutions, and food systems.
       </p>
-      <a
-        href="/impact"
-        className="inline-flex items-center gap-1 font-medium text-white hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
-      >
-        Explore our impact &amp; vision
-        <span aria-hidden="true">↗</span>
-      </a>
     </div>
   </div>
 </section>
@@ -717,40 +718,49 @@ export default function HomePageClient() {
                 </p>
               </div>
 
-              <div className="grid gap-6 sm:grid-cols-3" ref={reachCardsFade.ref}>
+              <div className="grid items-stretch gap-6 sm:grid-cols-3" ref={reachCardsFade.ref}>
                 {/* COUNTRIES */}
-                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}>
                   {/* Background image */}
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
-                      src="/images/reach-countries-card.png"
+                      src="/images/reach-countries-card-v2.png"
                       alt="Rural landscape across active regions"
                       fill
                       className="h-full w-full object-cover opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
                     />
                   </div>
-                  {/* Single glass gradient overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
+                  {/* Dark overlay for text contrast */}
+                  <div
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
+                    style={{
+                      background:
+                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                    }}
+                    aria-hidden="true"
+                  />
                   {/* Content */}
-                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
-                      COUNTRIES
-                    </p>
-                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
+                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-start px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <div className="mb-4 flex min-h-[4.5rem] w-full items-center justify-center sm:min-h-[5rem]">
+                      <p className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase drop-shadow-sm">
+                        COUNTRIES
+                      </p>
+                    </div>
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
                       <Counter target={statsInView ? 2 : 0} suffix="+" />
                     </p>
-                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
+                    <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
                       Growing network across Africa, Asia, Europe and Latin America, expanding
-                      trusted systems for rural finance, so farmers can access finance regardless of location.
+                      trusted systems, so farmers can access finance regardless of location.
                     </p>
                   </div>
                 </div>
 
                 {/* FARMERS */}
-                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`} style={{ transitionDelay: reachCardsFade.isVisible ? '150ms' : '0ms' }}>
                   {/* Background image */}
@@ -763,24 +773,33 @@ export default function HomePageClient() {
                       sizes="(min-width: 1024px) 33vw, 100vw"
                     />
                   </div>
-                  {/* Single glass gradient overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
+                  {/* Dark overlay for text contrast */}
+                  <div
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
+                    style={{
+                      background:
+                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                    }}
+                    aria-hidden="true"
+                  />
                   {/* Content */}
-                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
-                      FARMERS
-                    </p>
-                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
+                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-start px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <div className="mb-4 flex min-h-[4.5rem] w-full items-center justify-center sm:min-h-[5rem]">
+                      <p className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase drop-shadow-sm">
+                        FARMERS
+                      </p>
+                    </div>
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
                       5.5K+
                     </p>
-                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Smallholder and horticultural farmers accessing fair, scalable finance through verified track records and transparent repayment history—proof that impact and inclusion scale together.
+                    <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
+                      We widen inclusion by reaching more farmers as our network scales.
                     </p>
                   </div>
                 </div>
 
                 {/* COMMUNITY AGENTS */}
-                <div className={`group relative overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`} style={{ transitionDelay: reachCardsFade.isVisible ? '300ms' : '0ms' }}>
                   {/* Background image */}
@@ -793,18 +812,27 @@ export default function HomePageClient() {
                       sizes="(min-width: 1024px) 33vw, 100vw"
                     />
                   </div>
-                  {/* Glass overlay */}
-                  <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/20 via-white/30 to-white/50 opacity-85 transition-opacity duration-200 ease-out group-hover:opacity-60" />
+                  {/* Dark overlay for text contrast */}
+                  <div
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
+                    style={{
+                      background:
+                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
+                    }}
+                    aria-hidden="true"
+                  />
                   {/* Content */}
-                  <div className="relative z-10 flex h-full flex-col items-center justify-center px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
-                    <p className="mb-4 text-lg sm:text-xl font-semibold tracking-tight text-black uppercase" style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.3)" }}>
-                      COMMUNITY AGENTS
-                    </p>
-                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-black" style={{ textShadow: "0 2px 6px rgba(0, 0, 0, 0.4)" }}>
+                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-start px-8 py-10 text-center transition-transform duration-200 ease-out group-hover:-translate-y-0.5">
+                    <div className="mb-4 flex min-h-[4.5rem] w-full items-center justify-center sm:min-h-[5rem]">
+                      <p className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase drop-shadow-sm">
+                        COMMUNITY AGENTS
+                      </p>
+                    </div>
+                    <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
                       <Counter target={statsInView ? 30 : 0} suffix="+" />
                     </p>
-                    <p className="text-base font-semibold leading-relaxed text-black" style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}>
-                      Local field agents and cooperatives connecting real farms to our digital platform, ensuring every farmer record is real, active and up to date.
+                    <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
+                      Cooperatives and local field agents connecting farms to our digital platform, ensuring every farmer record is real, active and up to date.
                     </p>
                   </div>
                 </div>
@@ -832,7 +860,7 @@ export default function HomePageClient() {
                   We believe farmers deserve finance that respects their work, and institutions deserve data they can trust.
                 </p>
                 <p>
-                  By connecting verified farm activity to trusted rails, we&apos;re helping rural communities access fair finance while partners serve with confidence.
+                  That is why we bridge the field and formal standards: visibility where rural communities need it, evidence where institutions need it, without guesswork.
                 </p>
               </div>
             </div>
