@@ -223,6 +223,8 @@ export default function HomePageClient() {
   const approachCardsFade = useFadeInOnScroll();
   const whyWeExistFade = useFadeInOnScroll();
   const ourSolutionFade = useFadeInOnScroll();
+  const atGlanceFade = useFadeInOnScroll();
+  const sdgFade = useFadeInOnScroll();
   const ourMissionFade = useFadeInOnScroll();
 
   useEffect(() => {
@@ -261,7 +263,12 @@ export default function HomePageClient() {
           className="border-t border-stone-200/40 bg-sand px-6 py-12 sm:py-16"
           aria-labelledby="platform-overview-heading"
         >
-          <div className="mx-auto max-w-3xl text-center text-base leading-relaxed text-slate-800 sm:text-lg">
+          <div
+            ref={atGlanceFade.ref}
+            className={`mx-auto max-w-3xl text-center text-base leading-relaxed text-slate-800 transition-all duration-700 ease-out sm:text-lg ${
+              atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
               At a glance
             </p>
@@ -272,16 +279,36 @@ export default function HomePageClient() {
               Trusted rails between farms and finance
             </h2>
             <div className="mt-6 space-y-4">
-            <p>
+            <p
+              className={`transition-all duration-700 ease-out ${
+                atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: atGlanceFade.isVisible ? "120ms" : "0ms" }}
+            >
               <strong>Fairways.Tech</strong> is an impact-driven digital infrastructure platform for agricultural financing.
             </p>
-            <p>
+            <p
+              className={`transition-all duration-700 ease-out ${
+                atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: atGlanceFade.isVisible ? "240ms" : "0ms" }}
+            >
               We help banks, cooperatives, and market partners work with smallholder farmers through trusted, structured visibility across agricultural value chains.
             </p>
-            <p>
+            <p
+              className={`transition-all duration-700 ease-out ${
+                atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: atGlanceFade.isVisible ? "360ms" : "0ms" }}
+            >
               Built in emerging markets, on local field and market realities, where the work is hardest.
             </p>
-            <p className="pt-1 text-sm text-slate-700 sm:text-base">
+            <p
+              className={`pt-1 text-sm text-slate-700 transition-all duration-700 ease-out sm:text-base ${
+                atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: atGlanceFade.isVisible ? "480ms" : "0ms" }}
+            >
               <a
                 href="/about"
                 className="inline-flex items-center justify-center gap-1 font-medium text-forest hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest/60 focus:ring-offset-2"
@@ -482,7 +509,12 @@ export default function HomePageClient() {
               <ul className={`mx-auto mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-slate-800 sm:text-lg ${
                 ourSolutionFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
               }`}>
-                <li className="text-center">
+                <li
+                  className={`text-center transition-all duration-700 ease-out ${
+                    ourSolutionFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: ourSolutionFade.isVisible ? "220ms" : "0ms" }}
+                >
                   <div className="flex items-center justify-center gap-2">
                     <Leaf
                       className="h-5 w-5 shrink-0 text-forest"
@@ -494,7 +526,12 @@ export default function HomePageClient() {
                     Trusted profiles that make farmer identity and production history visible over time.
                   </p>
                 </li>
-                <li className="text-center">
+                <li
+                  className={`text-center transition-all duration-700 ease-out ${
+                    ourSolutionFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: ourSolutionFade.isVisible ? "340ms" : "0ms" }}
+                >
                   <div className="flex items-center justify-center gap-2">
                     <Leaf
                       className="h-5 w-5 shrink-0 text-forest"
@@ -506,7 +543,12 @@ export default function HomePageClient() {
                     Clear value-chain visibility from production to market activity.
                   </p>
                 </li>
-                <li className="text-center">
+                <li
+                  className={`text-center transition-all duration-700 ease-out ${
+                    ourSolutionFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: ourSolutionFade.isVisible ? "460ms" : "0ms" }}
+                >
                   <div className="flex items-center justify-center gap-2">
                     <Leaf
                       className="h-5 w-5 shrink-0 text-forest"
@@ -591,10 +633,16 @@ export default function HomePageClient() {
 
           {/* SDG logos-only section — Our focus */}
           <section aria-labelledby="home-sdg-logos" className="mt-4 bg-sand px-6 py-12">
-            <div className="mx-auto max-w-6xl">
+            <div
+              ref={sdgFade.ref}
+              className={`mx-auto max-w-6xl transition-all duration-700 ease-out ${
+                sdgFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
               <SdgLogosOnly
                 title="8 Goals. 1 Mission."
                 subtitle="Our focus on eight UN Sustainable Development Goals."
+                animateIn={sdgFade.isVisible}
                 list={[
                   { id: 1, label: "No Poverty", file: "/images/sdg/sdg-1-no-poverty.svg", short: "Increase incomes and economic resilience for smallholder farmers" },
                   { id: 2, label: "Zero Hunger", file: "/images/sdg/sdg-2-zero-hunger.svg", short: "Increase productivity & incomes for smallholder farmers" },
@@ -853,13 +901,21 @@ export default function HomePageClient() {
                   Building trust between farms and finance.
                 </h2>
               </div>
-              <div className={`mx-auto mt-8 max-w-2xl space-y-6 text-center text-base leading-relaxed text-slate-800 sm:text-lg ${
-                ourMissionFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
-              }`}>
-                <p>
+              <div className="mx-auto mt-8 max-w-2xl space-y-6 text-center text-base leading-relaxed text-slate-800 sm:text-lg">
+                <p
+                  className={`transition-all duration-700 ease-out ${
+                    ourMissionFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: ourMissionFade.isVisible ? "180ms" : "0ms" }}
+                >
                   We believe farmers deserve finance that respects their work, and institutions deserve data they can trust.
                 </p>
-                <p>
+                <p
+                  className={`transition-all duration-700 ease-out ${
+                    ourMissionFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: ourMissionFade.isVisible ? "320ms" : "0ms" }}
+                >
                   That is why we bridge the field and formal standards: visibility where rural communities need it, evidence where institutions need it, without guesswork.
                 </p>
               </div>

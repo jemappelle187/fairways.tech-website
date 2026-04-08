@@ -5,9 +5,9 @@ type Sdg = { id: number; label: string; file: string; short?: string };
 /**
  * SdgGroupedAlt — logos-only view, 4 per row.
  */
-type Props = { list: Sdg[]; title?: string; subtitle?: string };
+type Props = { list: Sdg[]; title?: string; subtitle?: string; animateIn?: boolean };
 
-export default function SdgGroupedAlt({ list, title, subtitle }: Props) {
+export default function SdgGroupedAlt({ list, title, subtitle, animateIn = false }: Props) {
   return (
     <section aria-labelledby={title ? "sdg-section-heading" : undefined} aria-label={!title ? "Our focus SDGs" : undefined} className="mt-12">
       {(title || subtitle) && (
@@ -25,10 +25,13 @@ export default function SdgGroupedAlt({ list, title, subtitle }: Props) {
         </div>
       )}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center px-4">
-        {list.map((s) => (
+        {list.map((s, index) => (
           <div
             key={s.id}
-            className="flex flex-col items-center p-2 transition-transform duration-200 ease-out hover:scale-110"
+            className={`flex flex-col items-center p-2 transition-all duration-700 ease-out hover:scale-110 ${
+              animateIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+            style={{ transitionDelay: animateIn ? `${index * 110}ms` : "0ms" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

@@ -391,12 +391,6 @@ export function Footer() {
         <div className="flex flex-col items-center gap-3 text-xs text-slate-500 sm:flex-row sm:justify-between">
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 sm:justify-start">
             <a
-              href="/"
-              className="inline-flex hover:text-slate-700 hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded"
-            >
-              Home
-            </a>
-            <a
               href="/terms"
               className="inline-flex hover:text-slate-700 hover:underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 focus:rounded"
             >
