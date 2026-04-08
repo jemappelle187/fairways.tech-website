@@ -102,7 +102,10 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/favicon-192x192.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
       </head>
-      <body className="bg-sand font-sans text-stone antialiased">
+      <body
+        className="bg-sand font-sans text-stone antialiased"
+        style={{ backgroundColor: "#F4EFE7", color: "#111827" }}
+      >
         <ContentProtection />
         {children}
         <VisitTracker />
@@ -173,10 +176,10 @@ export default function RootLayout({
               publisher: {
                 "@type": "Organization",
                 name: "Fairways.Tech",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://fairways.tech/og/og-fairways-tech.png",
-              },
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://fairways.tech/og/og-fairways-tech.png",
+                },
               },
             }),
           }}
