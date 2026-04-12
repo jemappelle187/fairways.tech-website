@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.fairways.tech" }],
+      "destination": "https://fairways.tech/:path*",
+      "permanent": true
+    }
+  ]
+}
