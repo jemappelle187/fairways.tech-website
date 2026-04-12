@@ -31,7 +31,26 @@ export function VisitTracker() {
       // localStorage may be disabled; ignore
     }
 
+    var visitCorrelationId = null;
+    try {
+      var corrKey = "fw_visit_correlation_id";
+      if (typeof crypto !== "undefined" && crypto.randomUUID) {
+        visitCorrelationId = crypto.randomUUID();
+      } else {
+        visitCorrelationId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+          var r = (Math.random() * 16) | 0;
+          var v = c === "x" ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        });
+      }
+      window.localStorage.setItem(corrKey, visitCorrelationId);
+    } catch (e) {
+      // localStorage may be disabled; ignore
+    }
+
     var payload = {
+      kind: "visit",
+      visitCorrelationId: visitCorrelationId,
       title: document.title || null,
       url: window.location.href,
       hostname: window.location.hostname,

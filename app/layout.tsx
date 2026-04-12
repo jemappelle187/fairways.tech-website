@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { UmamiLoader } from "./components/UmamiLoader";
 import { VisitTracker } from "./components/VisitTracker";
+import { LocationShareCta } from "./components/LocationShareCta";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
 import { ContentProtection } from "./components/ContentProtection";
 
@@ -110,6 +111,7 @@ export default function RootLayout({
         <ContentProtection />
         {children}
         <VisitTracker />
+        <LocationShareCta />
         <UmamiLoader />
         <GoogleAnalytics />
         {/* Organization Schema */}
