@@ -775,10 +775,11 @@ export default function HomePageClient() {
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
                       src="/images/reach-countries-card-v2.png"
-                      alt="Rural landscape across active regions"
+                      alt=""
                       fill
                       className="h-full w-full object-cover opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
@@ -815,10 +816,11 @@ export default function HomePageClient() {
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
                       src="/images/reach-farmers-card.png"
-                      alt="Smallholder and horticultural farmers"
+                      alt=""
                       fill
                       className="h-full w-full object-cover object-[25%_center] opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
@@ -854,10 +856,11 @@ export default function HomePageClient() {
                   <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
                     <Image
                       src="/images/community-agents-field.png"
-                      alt="Community agents in the field"
+                      alt=""
                       fill
                       className="h-full w-full object-cover opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
