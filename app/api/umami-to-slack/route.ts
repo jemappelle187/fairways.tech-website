@@ -225,7 +225,11 @@ export async function POST(req: NextRequest) {
         ? slackEscape(formattedAddress)
         : "-";
 
-      const mapsLink = `<https://www.google.com/maps?q=${lat},${lon}|${lat}, ${lon}>`;
+      const addressMapsLink =
+        formattedAddress != null && formattedAddress !== ""
+          ? `<https://www.google.com/maps?q=${encodeURIComponent(formattedAddress)}|${addressLine}>`
+          : "-";
+
       const accuracyText =
         typeof body.accuracyMeters === "number" &&
         !Number.isNaN(body.accuracyMeters)
@@ -270,11 +274,8 @@ export async function POST(req: NextRequest) {
             type: "mrkdwn",
             text:
               `*🌍 Location (browser GPS)*` +
-              `\n• Latitude: ${lat}` +
-              `\n• Longitude: ${lon}` +
-              `\n• Accuracy: ${accuracyText}` +
-              `\n• Coordinates: ${mapsLink}` +
-              `\n• Address: ${addressLine}`,
+              `\n• Address: ${addressMapsLink}` +
+              `\n• Accuracy: ${accuracyText}`,
           },
         },
         {
