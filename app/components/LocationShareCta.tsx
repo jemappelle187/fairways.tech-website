@@ -2,10 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-const COOKIE_CONSENT_KEY = "fw_cookie_consent_v1";
 const LOCATION_SHARED_KEY = "fw_browser_location_shared_v1";
 const LOCATION_DISMISSED_KEY = "fw_browser_location_dismissed_v1";
 const CORRELATION_KEY = "fw_visit_correlation_id";
+
+function notifyLocationCtaResolved() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("fw-location-cta-resolved"));
+}
 
 function readCorrelationId(): string | null {
   try {
@@ -23,30 +27,37 @@ export function LocationShareCta() {
 
   const refreshEligibility = useCallback(() => {
     try {
-      const consent = window.localStorage.getItem(COOKIE_CONSENT_KEY);
       const shared = window.localStorage.getItem(LOCATION_SHARED_KEY);
       const dismissed = window.localStorage.getItem(LOCATION_DISMISSED_KEY);
       const ok =
-        consent === "accepted" &&
         shared !== "1" &&
         dismissed !== "1" &&
         typeof navigator !== "undefined" &&
         !!navigator.geolocation;
       setEligible(ok);
       setVisible(ok);
+      if (!ok) {
+        notifyLocationCtaResolved();
+      }
     } catch {
       setEligible(false);
       setVisible(false);
+      notifyLocationCtaResolved();
     }
   }, []);
 
   useEffect(() => {
     refreshEligibility();
-    const onConsent = () => refreshEligibility();
-    window.addEventListener("fw-cookie-consent-updated", onConsent);
-    return () =>
-      window.removeEventListener("fw-cookie-consent-updated", onConsent);
   }, [refreshEligibility]);
+
+  useEffect(() => {
+    if (!eligible || !visible) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [eligible, visible]);
 
   const dismiss = () => {
     try {
@@ -55,6 +66,7 @@ export function LocationShareCta() {
       // ignore
     }
     setVisible(false);
+    notifyLocationCtaResolved();
   };
 
   const shareLocation = () => {
@@ -110,6 +122,7 @@ export function LocationShareCta() {
               // ignore
             }
             setVisible(false);
+            notifyLocationCtaResolved();
           })
           .catch(() => {
             setError("Could not send location. Please try again.");
@@ -133,34 +146,62 @@ export function LocationShareCta() {
   }
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-4">
-      <div className="pointer-events-auto mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-stone/15 bg-sand/95 px-4 py-3 text-sm text-stone shadow-lg backdrop-blur-sm sm:flex sm:items-center sm:justify-between sm:gap-4 sm:px-5">
-          <p className="text-[13px] leading-relaxed">
-            Optional: share your approximate location to help us understand
-            where visitors find us. You can decline anytime.
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+      role="presentation"
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-stone-900/35 backdrop-blur-[2px] transition-opacity"
+        aria-label="Close location prompt"
+        onClick={dismiss}
+      />
+      <div
+        className="relative z-10 w-full max-w-md rounded-[28px] border border-white/50 bg-white/55 px-6 py-7 text-center shadow-[0_24px_80px_rgba(15,23,42,0.18)] backdrop-blur-2xl ring-1 ring-stone-900/5 sm:px-8 sm:py-8"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="location-share-title"
+        aria-describedby="location-share-desc"
+      >
+        <p
+          id="location-share-title"
+          className="text-xs font-semibold uppercase tracking-[0.2em] text-forest"
+        >
+          Optional
+        </p>
+        <h2 className="mt-2 text-lg font-semibold tracking-tight text-stone sm:text-xl">
+          Share approximate location?
+        </h2>
+        <p
+          id="location-share-desc"
+          className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-[15px]"
+        >
+          We&apos;re building from the field up. A rough idea of which country
+          you&apos;re visiting from helps us see whether our message lands where
+          it matters most.
+        </p>
+        {error ? (
+          <p className="mt-3 text-xs font-medium text-red-800" role="alert">
+            {error}
           </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2 sm:mt-0 sm:shrink-0">
-            {error ? (
-              <span className="text-xs text-red-800">{error}</span>
-            ) : null}
-            <button
-              type="button"
-              onClick={dismiss}
-              disabled={busy}
-              className="inline-flex items-center justify-center rounded-full border border-stone/25 px-3 py-1.5 text-xs font-medium text-stone hover:bg-stone/10 disabled:opacity-50"
-            >
-              Not now
-            </button>
-            <button
-              type="button"
-              onClick={shareLocation}
-              disabled={busy}
-              className="inline-flex items-center justify-center rounded-full bg-forest px-4 py-1.5 text-xs font-semibold text-sand shadow-sm hover:bg-forest/90 disabled:opacity-50"
-            >
-              {busy ? "Sharing…" : "Share location"}
-            </button>
-          </div>
+        ) : null}
+        <div className="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center sm:gap-3">
+          <button
+            type="button"
+            onClick={dismiss}
+            disabled={busy}
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-stone/25 bg-white/40 px-5 py-2.5 text-sm font-medium text-stone backdrop-blur-sm transition hover:bg-white/60 disabled:opacity-50 sm:w-auto"
+          >
+            Not now
+          </button>
+          <button
+            type="button"
+            onClick={shareLocation}
+            disabled={busy}
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-sand shadow-md transition hover:bg-forest/90 disabled:opacity-50 sm:w-auto"
+          >
+            {busy ? "Sharing…" : "Share location"}
+          </button>
         </div>
       </div>
     </div>

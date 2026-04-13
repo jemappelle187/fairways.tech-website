@@ -354,7 +354,7 @@ export default function HomePageClient() {
             <div className={`mt-8 space-y-6 text-base leading-relaxed text-slate-800 sm:text-lg ${
               whyWeExistFade.isVisible ? 'fade-in-up-delay-1' : 'fade-in-hidden'
             }`}>
-              <p className="mb-4">
+              <p className="mx-auto mb-4 max-w-3xl text-center">
                 Millions of smallholder farmers produce real value but remain invisible to formal finance. Banks and buyers often can&apos;t see who is reliable, which fields are productive, or where money actually goes.
               </p>
               <ul className="space-y-3 text-base leading-relaxed text-slate-800 sm:text-lg">

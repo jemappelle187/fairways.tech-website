@@ -3,8 +3,28 @@
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "fw_cookie_consent_v1";
+const LOCATION_SHARED_KEY = "fw_browser_location_shared_v1";
+const LOCATION_DISMISSED_KEY = "fw_browser_location_dismissed_v1";
 
 type ConsentValue = "accepted" | "rejected";
+
+/** True while the optional location CTA may still be shown (same rules as LocationShareCta). */
+function locationShareCtaPending(): boolean {
+  try {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      return false;
+    }
+    if (window.localStorage.getItem(LOCATION_SHARED_KEY) === "1") {
+      return false;
+    }
+    if (window.localStorage.getItem(LOCATION_DISMISSED_KEY) === "1") {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export function CookieBanner() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -12,15 +32,19 @@ export function CookieBanner() {
 
   useEffect(() => {
     setHasMounted(true);
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) {
-        setVisible(true);
+    const syncVisible = () => {
+      try {
+        const stored = window.localStorage.getItem(STORAGE_KEY);
+        const pending = locationShareCtaPending();
+        setVisible(!stored && !pending);
+      } catch {
+        setVisible(false);
       }
-    } catch {
-      // If localStorage is not available, show nothing (fail-safe)
-      setVisible(false);
-    }
+    };
+    syncVisible();
+    window.addEventListener("fw-location-cta-resolved", syncVisible);
+    return () =>
+      window.removeEventListener("fw-location-cta-resolved", syncVisible);
   }, []);
 
   if (!hasMounted || !visible) {
