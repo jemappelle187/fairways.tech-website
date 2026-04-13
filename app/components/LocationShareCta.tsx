@@ -52,10 +52,25 @@ export function LocationShareCta() {
 
   useEffect(() => {
     if (!eligible || !visible) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+
+    const preventWheel = (e: WheelEvent) => e.preventDefault();
+    const preventTouchMove = (e: TouchEvent) => e.preventDefault();
+    document.addEventListener("wheel", preventWheel, { passive: false });
+    document.addEventListener("touchmove", preventTouchMove, {
+      passive: false,
+    });
+
     return () => {
-      document.body.style.overflow = prev;
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+      document.removeEventListener("wheel", preventWheel);
+      document.removeEventListener("touchmove", preventTouchMove);
     };
   }, [eligible, visible]);
 
@@ -147,17 +162,15 @@ export function LocationShareCta() {
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[60] flex items-center justify-center overflow-hidden overscroll-none p-4 sm:p-6"
       role="presentation"
     >
-      <button
-        type="button"
-        className="absolute inset-0 bg-stone-900/35 backdrop-blur-[2px] transition-opacity"
-        aria-label="Close location prompt"
-        onClick={dismiss}
+      <div
+        className="absolute inset-0 bg-black/25 backdrop-blur-sm"
+        aria-hidden="true"
       />
       <div
-        className="relative z-10 w-full max-w-md rounded-[28px] border border-white/50 bg-white/55 px-6 py-7 text-center shadow-[0_24px_80px_rgba(15,23,42,0.18)] backdrop-blur-2xl ring-1 ring-stone-900/5 sm:px-8 sm:py-8"
+        className="relative z-10 w-full max-w-md rounded-3xl border border-white/15 bg-white/[0.03] bg-gradient-to-b from-white/[0.06] via-white/[0.03] to-white/[0.08] px-6 py-10 text-center shadow-[0_18px_45px_rgba(15,23,42,0.38)] backdrop-blur-lg md:px-12 md:py-12"
         role="dialog"
         aria-modal="true"
         aria-labelledby="location-share-title"
@@ -165,32 +178,32 @@ export function LocationShareCta() {
       >
         <p
           id="location-share-title"
-          className="text-xs font-semibold uppercase tracking-[0.2em] text-forest"
+          className="text-xs font-semibold uppercase tracking-[0.28em] text-forest"
         >
           Optional
         </p>
-        <h2 className="mt-2 text-lg font-semibold tracking-tight text-stone sm:text-xl">
+        <h2 className="mt-3 text-lg font-semibold tracking-tight text-white sm:text-xl">
           Share approximate location?
         </h2>
         <p
           id="location-share-desc"
-          className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-[15px]"
+          className="mt-3 text-sm leading-relaxed text-white/85 sm:text-[15px]"
         >
           We&apos;re building from the field up. A rough idea of which country
           you&apos;re visiting from helps us see whether our message lands where
           it matters most.
         </p>
         {error ? (
-          <p className="mt-3 text-xs font-medium text-red-800" role="alert">
+          <p className="mt-3 text-xs font-medium text-red-300" role="alert">
             {error}
           </p>
         ) : null}
-        <div className="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center sm:gap-3">
+        <div className="mt-8 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center sm:gap-3">
           <button
             type="button"
             onClick={dismiss}
             disabled={busy}
-            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-stone/25 bg-white/40 px-5 py-2.5 text-sm font-medium text-stone backdrop-blur-sm transition hover:bg-white/60 disabled:opacity-50 sm:w-auto"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full border border-white/40 bg-white/[0.06] px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition hover:border-white/55 hover:bg-white/10 disabled:opacity-50 sm:w-auto"
           >
             Not now
           </button>
@@ -198,7 +211,7 @@ export function LocationShareCta() {
             type="button"
             onClick={shareLocation}
             disabled={busy}
-            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-sand shadow-md transition hover:bg-forest/90 disabled:opacity-50 sm:w-auto"
+            className="inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 disabled:opacity-50 sm:w-auto"
           >
             {busy ? "Sharing…" : "Share location"}
           </button>
