@@ -327,10 +327,3 @@ a[href] {
   .sdg-logo-uniform-img { width: 88px; height: 88px; }
 }
 
-/* Policy pages: document column (app/components/legal) */
-@layer components {
-  .legal-doc {
-    @apply text-slate-800;
-  }
-}
-
