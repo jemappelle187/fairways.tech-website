@@ -189,7 +189,7 @@ export default function AboutPage() {
                     We design and operate compliance‑aligned digital infrastructure for agricultural financing: a shared layer between field activity and finance‑ready records. Licensed partners deliver regulated services; we provide the rails and coordination they plug into.
                   </p>
                   <p>
-                    Fairways Tech Operations B.V. (Netherlands) and Fairways.Tech Operations Ghana Ltd (Ghana) together operate under the Fairways.Tech trading name. We build to supervisory and market standards, including alignment with expectations under AMLR, FATF, DORA, GDPR and regulatory oversight.
+                    Fairways.Tech B.V. (Netherlands) and Fairways.Tech Ltd (Ghana) anchor our presence between Europe and West Africa. We build to supervisory and market standards, including alignment with expectations under AMLR, FATF, DORA, GDPR and regulatory oversight.
                   </p>
                 </div>
               </div>
