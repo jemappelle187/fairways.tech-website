@@ -36,7 +36,7 @@ The new entity wording is exactly as specified; the second sentence (AMLR, FATF,
 
 ## 6. PR link
 
-Set after `gh pr create` — see repository PRs for `feature/about-entity-alignment`, or the URL printed by the GitHub CLI.
+- https://github.com/jemappelle187/fairways.tech-website/pull/16
 
 ## Backup
 
