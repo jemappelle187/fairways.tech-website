@@ -54,8 +54,7 @@
 
 ## 8. PR
 
-- **PR link:** _Created via `gh pr create` — see terminal output or repository PR list._  
-- If the link was not available in the agent environment, open GitHub and select branch `feature/legal-pages-rebuild` to open or copy the PR URL.
+- **PR:** https://github.com/jemappelle187/fairways.tech-website/pull/15
 
 ## Search summary (instructed patterns in `*.{ts,tsx}`)
 
