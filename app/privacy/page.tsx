@@ -1,12 +1,31 @@
 import type { Metadata } from "next";
+import {
+  LEGAL_CONFIG,
+  LEGAL_MAILTO_PRIVACY,
+  LEGAL_PAGES_LAST_UPDATED,
+} from "@/config/legal";
 import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
+import { LegalPageTemplate, LegalSection, legalPageLinkClass } from "../components/legal";
+
+const PRIVACY_TOC = [
+  { id: "who-we-are", label: "1. Who we are" },
+  { id: "data-we-collect", label: "2. Personal data we collect" },
+  { id: "legal-bases", label: "3. Legal bases" },
+  { id: "how-we-use", label: "4. How we use data" },
+  { id: "retention", label: "5. Retention" },
+  { id: "sharing", label: "6. Sharing" },
+  { id: "rights", label: "7. Your rights" },
+  { id: "children", label: "8. Children" },
+  { id: "changes", label: "9. Changes" },
+  { id: "contact", label: "10. Contact" },
+];
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Website Privacy Policy",
   description:
-    "Learn how Fairways.Tech processes personal data when visitors use www.fairways.tech or submit the contact form. GDPR-aligned, institutional-grade privacy practices.",
+    "How Fairways.Tech processes personal data when you use www.fairways.tech or the contact form. GDPR where applicable.",
   path: "/privacy",
   ogTitle: "Website Privacy Policy | Fairways.Tech",
 });
@@ -15,323 +34,249 @@ export default function PrivacyPage() {
   return (
     <>
       <Header />
-      <main id="main-content" className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-          <div className="absolute inset-0 bg-gradient-to-br from-forest/5 via-transparent to-leaf/5" />
-          <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-            <div className="text-center">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
-                Legal
-              </p>
-              <h1 className="mb-6 text-4xl font-semibold tracking-tight text-stone sm:text-5xl lg:text-6xl">
-                Website Privacy Policy
-              </h1>
-              <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-                Last updated: 4 February 2026
-              </p>
-            </div>
-          </div>
-        </section>
+      <LegalPageTemplate
+        title="Website Privacy Policy"
+        lastUpdated={LEGAL_PAGES_LAST_UPDATED}
+        showToc
+        tocItems={PRIVACY_TOC}
+      >
+        <div className="space-y-0">
+          <LegalSection id="who-we-are" title="1. Who we are" isFirst>
+            <p>
+              This Privacy Policy explains how {LEGAL_CONFIG.netherlandsEntityName}{" "}
+              (KvK {LEGAL_CONFIG.netherlandsRegistrationNumber}) and{" "}
+              {LEGAL_CONFIG.ghanaEntityName} (Republic of Ghana), together trading
+              as &quot;{LEGAL_CONFIG.tradingName}&quot; (
+              {LEGAL_CONFIG.tradingName}, &quot;we&quot;, &quot;us&quot;,
+              &quot;our&quot;), process personal data when you visit{" "}
+              <strong>www.fairways.tech</strong> (the &quot;Website&quot;) or submit
+              information through the Website contact form.
+            </p>
+            <p>
+              For visitors in the EU/EEA, the data controller for this Website is{" "}
+              <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK{" "}
+              {LEGAL_CONFIG.netherlandsRegistrationNumber}). Where Website-related
+              processing involves {LEGAL_CONFIG.ghanaEntityName} or other partners
+              outside the EU/EEA, we apply appropriate safeguards.
+            </p>
+            <p>
+              All Website processing is governed by the{" "}
+              <strong>EU General Data Protection Regulation (GDPR)</strong> where
+              applicable. Where processing involves partners or service providers
+              outside the EU/EEA, we apply appropriate safeguards to ensure a
+              suitable level of protection.
+            </p>
+          </LegalSection>
 
-        {/* Main Content */}
-        <section className="relative pb-24">
-          <div className="mx-auto max-w-4xl px-6 lg:px-8">
-            <div className="space-y-8">
-              {/* Section 1 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">1. Who we are</h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800">
-                  <p>
-                    This Privacy Policy explains how <strong>Fairways Tech Operations B.V.</strong> (
-                    <strong>99720248</strong>) and <strong>Fairways.Tech Ltd</strong> (Republic of Ghana), together
-                    trading as &quot;Fairways.Tech&quot; (&quot;Fairways.Tech&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;),
-                    process personal data when you visit <strong>www.fairways.tech</strong> (the &quot;Website&quot;) or submit
-                    information through the Website contact form.
-                  </p>
-                  <div className="rounded-2xl border-l-4 border-forest bg-sand/40 p-5">
-                    <p className="mb-2 font-semibold text-forest">
-                      For visitors in the EU/EEA, the data controller for this Website is:
-                    </p>
-                    <p className="text-slate-800">
-                      <strong>Fairways Tech Operations B.V.</strong> (<strong>99720248</strong>)
-                    </p>
-                    <p className="mt-2 text-sm text-slate-700">
-                      Where Website-related processing involves Fairways.Tech Ltd or other partners outside the
-                      EU/EEA, equivalent safeguards are applied.
-                    </p>
-                  </div>
-                  <p>
-                    All Website processing is governed by the <strong>EU General Data Protection Regulation (GDPR)</strong> where
-                    applicable. Where processing involves partners or service providers outside the EU/EEA, equivalent
-                    safeguards are applied to ensure an appropriate level of protection.
-                  </p>
-                  <div className="rounded-2xl border border-forest/20 bg-white/60 p-5">
-                    <p className="mb-2 text-sm font-semibold text-forest">For privacy inquiries or to exercise data rights, contact:</p>
-                    <p className="text-slate-800">
-                      Email:{" "}
-                      <a
-                        href="mailto:privacy@fairways.tech"
-                        className="font-medium text-forest underline underline-offset-4 hover:text-forest/80 transition-colors"
-                      >
-                        privacy@fairways.tech
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <LegalSection
+            id="data-we-collect"
+            title="2. Personal data we collect"
+          >
+            <p>
+              The Website collects only limited, non‑sensitive personal data. We do
+              not process on this Website: biometric identifiers, identity documents,
+              selfies, liveness checks, financial profiles, or regulated onboarding
+              data.
+            </p>
+            <p>
+              {LEGAL_CONFIG.tradingName}&apos;s <strong>mobile application</strong>,
+              used by farmers, agents and field partners, processes additional
+              categories of personal data, including biometrics, national identity
+              numbers (e.g., Ghana Card), GPS-based farm mapping, and production or
+              repayment data. That processing is covered by product‑level privacy
+              notices, contracts with cooperatives and institutions, and applicable
+              compliance requirements, and is not part of this Website Privacy
+              Policy.
+            </p>
+            <h3 className="text-base font-semibold text-stone sm:text-lg">
+              2.1 Information you provide via the Website contact form
+            </h3>
+            <p>When you contact us, we collect the information you provide:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>First name and last name</li>
+              <li>Company or organisation</li>
+              <li>Email address</li>
+              <li>Phone number (with country code)</li>
+              <li>Country</li>
+              <li>Your message or inquiry</li>
+            </ul>
+            <p>
+              The Website does not perform identity verification, biometric capture,
+              or any regulated onboarding. Those processes, where they apply, occur
+              in the {LEGAL_CONFIG.tradingName} mobile application and are described
+              in separate notices and agreements.
+            </p>
+            <h3 className="mt-6 text-base font-semibold text-stone sm:text-lg">
+              2.2 Technical and usage data (analytics)
+            </h3>
+            <p>
+              To understand how the Website is used and to support security and
+              performance, we may collect limited technical data such as:
+            </p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>IP address (stored only briefly in minimised form)</li>
+              <li>Browser, operating system and device type</li>
+              <li>Screen size and language settings</li>
+              <li>Pages visited, visit duration and referrer URL</li>
+              <li>Aggregate usage trends</li>
+            </ul>
+            <p>
+              We do <strong>not</strong> use this information for advertising,
+              profiling, or commercial resale.
+            </p>
+            <h3 className="mt-6 text-base font-semibold text-stone sm:text-lg">
+              2.3 System logs and security events
+            </h3>
+            <p>Our hosting environment may automatically record:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>Requests to our servers</li>
+              <li>Error messages and performance diagnostics</li>
+              <li>IP address and basic request metadata</li>
+            </ul>
+            <p>These records support uptime, abuse detection, and site security.</p>
+            <h3 className="mt-6 text-base font-semibold text-stone sm:text-lg">
+              2.4 Technical context added to contact submissions
+            </h3>
+            <p>When you open or submit the contact form, we may add:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>Approximate country or city (IP-derived)</li>
+              <li>Browser and device information</li>
+              <li>Referrer URL</li>
+              <li>Timestamp of submission</li>
+            </ul>
+            <p>This context helps us respond to your request.</p>
+          </LegalSection>
 
-              {/* Section 2 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">2. Personal data we collect</h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800">
-                  <p>
-                    The Website collects only limited, non‑sensitive personal data. No biometric identifiers, identity documents, selfies, liveness checks, financial profiles, or regulated onboarding data are processed on this Website.
-                  </p>
-                  <p>
-                    Fairways.Tech&apos;s <strong>mobile application</strong>, used by farmers, agents and field partners, <em>does</em> process additional categories of personal data — including biometrics, national identity numbers (e.g., Ghana Card), GPS-based farm mapping, and production or repayment data. That processing is governed separately under product‑level privacy notices, contractual agreements with cooperatives and institutions, and Fairways.Tech&apos;s regulated compliance framework. It does not form part of this Website Privacy Policy.
-                  </p>
+          <LegalSection id="legal-bases" title="3. Legal bases for processing">
+            <p>We process personal data under the following GDPR bases:</p>
+            <ul className="ml-5 list-disc space-y-2">
+              <li>
+                <strong>Legitimate interests (Art. 6(1)(f))</strong> — operating,
+                securing and improving the Website; performing analytics; preventing
+                fraud and misuse.
+              </li>
+              <li>
+                <strong>Pre-contractual steps (Art. 6(1)(b))</strong> — responding
+                to contact requests and exploring potential partnerships.
+              </li>
+              <li>
+                <strong>Consent (Art. 6(1)(a))</strong> — where required for certain
+                analytics or cookies, as set out in the{" "}
+                <a href="/cookies" className={legalPageLinkClass}>
+                  Cookie Policy
+                </a>
+                .
+              </li>
+            </ul>
+          </LegalSection>
 
-                  <div className="mt-6 space-y-6">
-                    <div className="rounded-2xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-6">
-                      <h3 className="mb-3 text-lg font-semibold text-stone">
-                        2.1 Information you provide via the Website contact form
-                      </h3>
-                      <p className="mb-3">When you choose to contact us, we collect the information you provide:</p>
-                      <ul className="ml-6 space-y-2 list-disc text-slate-700">
-                        <li>First name and last name</li>
-                        <li>Company or organisation</li>
-                        <li>Email address</li>
-                        <li>Phone number (with country code)</li>
-                        <li>Country</li>
-                        <li>Your message or inquiry</li>
-                      </ul>
-                      <p className="mt-3 text-sm text-slate-600">
-                        The Website does not perform identity verification, biometric capture, or any regulated onboarding. 
-                        These processes occur only within the Fairways.Tech mobile application and are governed by separate 
-                        product-level privacy notices and contracts.
-                      </p>
-                    </div>
+          <LegalSection id="how-we-use" title="4. How we use personal data">
+            <p>We may use personal data to:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>Respond to your inquiries and manage follow-up</li>
+              <li>Assess or initiate collaborations and partnerships</li>
+              <li>Support Website stability, reliability and performance</li>
+              <li>Analyse aggregate usage patterns (not individual profiles)</li>
+              <li>Protect the Website against abuse and security threats</li>
+              <li>Meet applicable legal and regulatory obligations</li>
+            </ul>
+            <p>
+              We do <strong>not</strong> sell personal data and do{" "}
+              <strong>not</strong> use Website analytics for targeted advertising.
+            </p>
+          </LegalSection>
 
-                    <div className="rounded-2xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-6">
-                      <h3 className="mb-3 text-lg font-semibold text-stone">
-                        2.2 Technical and usage data (analytics)
-                      </h3>
-                      <p className="mb-3">
-                        To understand how the Website is used and to maintain security and performance,
-                        we collect limited technical data such as:
-                      </p>
-                      <ul className="ml-6 space-y-2 list-disc text-slate-700">
-                        <li>IP address (stored only briefly in minimised form)</li>
-                        <li>Browser, operating system and device type</li>
-                        <li>Screen size and language settings</li>
-                        <li>Pages visited, visit duration and referrer URL</li>
-                        <li>Aggregate usage trends</li>
-                      </ul>
-                      <p className="mt-3 font-medium text-forest">
-                        We do <strong>not</strong> use this information for advertising, profiling or commercial resale.
-                      </p>
-                    </div>
+          <LegalSection id="retention" title="5. Retention periods">
+            <p>We retain personal data only as long as necessary:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>
+                <strong>Contact form data</strong> — for a reasonable period for
+                follow-up and relationship management;
+              </li>
+              <li>
+                <strong>Analytics data</strong> — as aggregate or pseudonymised
+                trends, as applicable;
+              </li>
+              <li>
+                <strong>Security logs</strong> — for a short period, unless
+                longer retention is required to investigate an incident.
+              </li>
+            </ul>
+          </LegalSection>
 
-                    <div className="rounded-2xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-6">
-                      <h3 className="mb-3 text-lg font-semibold text-stone">2.3 System logs and security events</h3>
-                      <p className="mb-3">Our hosting environment may automatically record:</p>
-                      <ul className="ml-6 space-y-2 list-disc text-slate-700">
-                        <li>Requests to our servers</li>
-                        <li>Error messages and performance diagnostics</li>
-                        <li>IP address and basic request metadata</li>
-                      </ul>
-                      <p className="mt-3 text-sm text-slate-600">
-                        These logs help us monitor uptime, detect abuse and maintain a secure Website.
-                      </p>
-                    </div>
+          <LegalSection
+            id="sharing"
+            title="6. Sharing and international transfers"
+          >
+            <p>
+              We use a small number of service providers for hosting, analytics,
+              secure form handling, and internal notifications. They process data on
+              our instructions and with appropriate safeguards.
+            </p>
+            <p>
+              Website analytics and form submissions are handled with
+              privacy‑respecting tools. These processors do not receive biometric
+              data, identity documents, or the sensitive categories described for the
+              mobile app. Data about farmers, agents, cooperatives, or identity
+              workflows in the app is handled under separate arrangements and
+              outside the scope of this Policy.
+            </p>
+            <p>
+              Personal data may be processed in the EU/EEA or in other
+              jurisdictions. Where we transfer data internationally, we use
+              GDPR-compliant tools such as Standard Contractual Clauses where
+              required.
+            </p>
+            <p>
+              We may share data with regulators or authorities when required by law.
+              We do not share Website data with third parties for their marketing.
+            </p>
+          </LegalSection>
 
-                    <div className="rounded-2xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-6">
-                      <h3 className="mb-3 text-lg font-semibold text-stone">
-                        2.4 Technical context added to contact submissions
-                      </h3>
-                      <p className="mb-3">
-                        When you open or submit the contact form, we may include contextual
-                        information such as:
-                      </p>
-                      <ul className="ml-6 space-y-2 list-disc text-slate-700">
-                        <li>Approximate country or city (IP-derived)</li>
-                        <li>Browser and device information</li>
-                        <li>Referrer URL</li>
-                        <li>Timestamp of submission</li>
-                      </ul>
-                      <p className="mt-3 text-sm text-slate-600">
-                        This helps us understand the origin of interest and respond appropriately.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <LegalSection id="rights" title="7. Your rights">
+            <p>Depending on your location, you may have the right to:</p>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>Access your personal data</li>
+              <li>Rectify inaccuracies</li>
+              <li>Request erasure (&quot;right to be forgotten&quot;)</li>
+              <li>Restrict processing</li>
+              <li>Object to processing</li>
+              <li>Request data portability</li>
+            </ul>
+            <p>
+              You may also lodge a complaint with an EU supervisory authority where
+              applicable.
+            </p>
+          </LegalSection>
 
-              {/* Section 3 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">3. Legal bases for processing</h2>
-                <p className="mb-4 text-base leading-relaxed text-slate-800">We process personal data under the following GDPR bases:</p>
-                <div className="space-y-3">
-                  <div className="rounded-xl border-l-4 border-forest bg-sand/40 p-4">
-                    <p className="font-semibold text-forest mb-1">Legitimate interests (Art. 6(1)(f))</p>
-                    <p className="text-sm text-slate-700">operating, securing and improving the Website; performing analytics; preventing fraud and misuse.</p>
-                  </div>
-                  <div className="rounded-xl border-l-4 border-leaf bg-sand/40 p-4">
-                    <p className="font-semibold text-leaf mb-1">Pre-contractual steps (Art. 6(1)(b))</p>
-                    <p className="text-sm text-slate-700">responding to contact requests and exploring potential partnerships.</p>
-                  </div>
-                  <div className="rounded-xl border-l-4 border-forest bg-sand/40 p-4">
-                    <p className="font-semibold text-forest mb-1">Consent (Art. 6(1)(a))</p>
-                    <p className="text-sm text-slate-700">where required for certain analytics or cookies, as described in the Cookie Policy.</p>
-                  </div>
-                </div>
-              </div>
+          <LegalSection id="children" title="8. Children">
+            <p>
+              The Website is intended for professional audiences and is not
+              directed at children. We do not knowingly collect data from children
+              on the Website.
+            </p>
+          </LegalSection>
 
-              {/* Section 4 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">4. How we use personal data</h2>
-                <p className="mb-4 text-base leading-relaxed text-slate-800">We may use personal data to:</p>
-                <ul className="ml-6 space-y-2 list-disc text-base leading-relaxed text-slate-800">
-                  <li>Respond to your inquiries and manage follow-up</li>
-                  <li>Assess or initiate collaborations and partnerships</li>
-                  <li>Ensure Website stability, reliability and performance</li>
-                  <li>Analyse aggregate usage patterns (not individual profiles)</li>
-                  <li>Protect the Website against abuse and security threats</li>
-                  <li>Meet applicable legal and regulatory obligations</li>
-                </ul>
-                <p className="mt-4 font-medium text-forest">
-                  We do <strong>not</strong> sell personal data and do <strong>not</strong> use Website analytics for targeted advertising.
-                </p>
-              </div>
+          <LegalSection id="changes" title="9. Changes to this Policy">
+            <p>
+              We may update this Policy to reflect changes in our Website, our
+              operations, or applicable law. The &quot;Last updated&quot; date will
+              be revised when we do.
+            </p>
+          </LegalSection>
 
-              {/* Section 5 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">5. Retention periods</h2>
-                <p className="mb-4 text-base leading-relaxed text-slate-800">We retain personal data only as long as necessary:</p>
-                <div className="space-y-3">
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="font-semibold text-stone mb-1">Contact form data</p>
-                    <p className="text-sm text-slate-700">kept for a reasonable period for follow-up and partner management.</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="font-semibold text-stone mb-1">Analytics data</p>
-                    <p className="text-sm text-slate-700">kept only as aggregate or pseudonymised trends.</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="font-semibold text-stone mb-1">Security logs</p>
-                    <p className="text-sm text-slate-700">retained briefly unless needed to investigate incidents.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Section 6 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">6. Sharing and international transfers</h2>
-                <div className="space-y-4 text-base leading-relaxed text-slate-800">
-                  <p>
-                    We use a small number of trusted service providers for hosting, analytics,
-                    secure form handling and internal notifications. These processors act under
-                    our instructions and appropriate safeguards.
-                  </p>
-                  <p>
-                    Website analytics and form submissions are processed using privacy‑respecting tools. These processors 
-                    do not receive biometric data, identity documents, or any sensitive categories of information. 
-                    All operational data related to farmers, agents, cooperatives or identity workflows is handled 
-                    exclusively within the Fairways.Tech app ecosystem and remains outside the scope of this Website Policy.
-                  </p>
-                  <p>
-                    Personal data may be processed in the EU/EEA or in other jurisdictions.
-                    Where international transfers occur, we apply GDPR-compliant safeguards
-                    such as Standard Contractual Clauses.
-                  </p>
-                  <p>
-                    We may share data with regulators or authorities when legally required.
-                    We do not share Website data with third parties for marketing purposes.
-                  </p>
-                </div>
-              </div>
-
-              {/* Section 7 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">7. Your rights</h2>
-                <p className="mb-4 text-base leading-relaxed text-slate-800">Depending on your location, you may have the right to:</p>
-                <div className="grid gap-3 sm:grid-cols-2 mb-6">
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Access your personal data</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Rectify inaccuracies</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Request erasure (&quot;right to be forgotten&quot;)</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Restrict processing</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Object to processing</p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200/60 bg-gradient-to-br from-white to-sand/30 p-4">
-                    <p className="text-sm font-medium text-slate-800">Request data portability</p>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-forest/20 bg-white/60 p-5">
-                  <p className="mb-2 text-sm font-semibold text-forest">To exercise your rights, contact:</p>
-                  <p className="text-slate-800">
-                    <a
-                      href="mailto:privacy@fairways.tech"
-                      className="font-medium text-forest underline underline-offset-4 hover:text-forest/80 transition-colors"
-                    >
-                      privacy@fairways.tech
-                    </a>
-                  </p>
-                  <p className="mt-3 text-sm text-slate-600">
-                    You may also lodge a complaint with an EU supervisory authority.
-                  </p>
-                </div>
-              </div>
-
-              {/* Section 8 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">8. Children</h2>
-                <p className="text-base leading-relaxed text-slate-800">
-                  The Website is intended for professional audiences and is not directed at
-                  children. We do not knowingly collect data from children.
-                </p>
-              </div>
-
-              {/* Section 9 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">9. Changes to this Policy</h2>
-                <p className="text-base leading-relaxed text-slate-800">
-                  We may update this Policy to reflect changes in our Website, operations
-                  or applicable laws. The &quot;Last updated&quot; date will be revised accordingly.
-                </p>
-              </div>
-
-              {/* Section 10 */}
-              <div className="rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm sm:p-10">
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight text-stone">10. Contact</h2>
-                <div className="rounded-2xl border border-forest/20 bg-white/60 p-5">
-                  <p className="mb-2 text-sm font-semibold text-forest">For any privacy-related questions, contact:</p>
-                  <p className="text-slate-800">
-                    Email:{" "}
-                    <a
-                      href="mailto:privacy@fairways.tech"
-                      className="font-medium text-forest underline underline-offset-4 hover:text-forest/80 transition-colors"
-                    >
-                      privacy@fairways.tech
-                    </a>
-                  </p>
-                </div>
-              </div>
-
-              <LegalEntityBlock />
-            </div>
-          </div>
-        </section>
-      </main>
+          <LegalSection id="contact" title="10. Contact">
+            <p>For privacy requests or any privacy-related questions:</p>
+            <p>
+              Email:{" "}
+              <a href={LEGAL_MAILTO_PRIVACY} className={legalPageLinkClass}>
+                {LEGAL_CONFIG.privacyEmail}
+              </a>
+            </p>
+          </LegalSection>
+        </div>
+        <LegalEntityBlock />
+      </LegalPageTemplate>
       <Footer />
     </>
   );

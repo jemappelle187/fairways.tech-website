@@ -1,32 +1,45 @@
+import { LEGAL_CONFIG, LEGAL_MAILTO_PRIVACY } from "@/config/legal";
+
 /**
- * Reusable legal entity block for Privacy, Terms, Cookies, and Disclaimer pages.
- * Lists operating companies (NL + Ghana) and address placeholders only.
+ * Company and contact details for the legal index pages. Copy is sourced from
+ * config/legal.ts only.
  */
 export function LegalEntityBlock() {
   return (
-    <div className="rounded-2xl border border-slate-200/60 bg-white/80 p-6">
-      <h2 className="mb-3 text-lg font-semibold tracking-tight text-stone">
+    <section
+      className="mt-10 border border-stone-200/90 bg-slate-50/80 p-5 sm:p-6"
+      aria-labelledby="legal-entity-heading"
+    >
+      <h2
+        id="legal-entity-heading"
+        className="text-base font-semibold text-stone sm:text-lg"
+      >
         Legal entity information
       </h2>
-      <p className="mb-2 text-sm text-slate-800">
-        The <strong>Fairways.Tech</strong> website and brand are operated by:
+      <p className="mt-2 text-sm text-slate-800">
+        The <strong>{LEGAL_CONFIG.tradingName}</strong> website and brand are
+        operated by:
       </p>
-      <ul className="mb-4 ml-5 list-disc space-y-1 text-sm text-slate-800">
+      <ul className="ml-5 mt-2 list-disc space-y-1.5 text-sm text-slate-800">
         <li>
-          <strong>Fairways Tech Operations B.V.</strong> (
-          <strong>99720248</strong>)
+          <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK:{" "}
+          <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>)
         </li>
         <li>
-          <strong>Fairways.Tech Ltd</strong> (Republic of Ghana)
+          <strong>{LEGAL_CONFIG.ghanaEntityName}</strong> (Republic of Ghana)
         </li>
       </ul>
-      <p className="text-xs text-slate-600">
-        Registered office address:{" "}
-        <span className="italic">
-          [insert registered address of Fairways Tech Operations B.V.]
-        </span>
-        . Ghana: <span className="italic">[insert if required]</span>.
+      <p className="mt-3 text-sm text-slate-800">
+        Together trading as &quot;{LEGAL_CONFIG.tradingName}&quot;. Privacy
+        contact:{" "}
+        <a
+          className="text-forest underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded"
+          href={LEGAL_MAILTO_PRIVACY}
+        >
+          {LEGAL_CONFIG.privacyEmail}
+        </a>
+        .
       </p>
-    </div>
+    </section>
   );
 }

@@ -318,6 +318,8 @@ export function Header() {
 }
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-sand/95">
       {/* Social Media Icons - Above divider */}
@@ -414,7 +416,7 @@ export function Footer() {
             </a>
           </div>
           <span className="text-[11px] text-slate-500 sm:text-xs">
-            © 2026 Fairways.Tech. All rights reserved.
+            © {year} Fairways.Tech B.V. — A social-impact driven platform. All rights reserved.
           </span>
         </div>
       </div>
