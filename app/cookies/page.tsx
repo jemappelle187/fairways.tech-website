@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { LEGAL_CONFIG, LEGAL_MAILTO_PRIVACY } from "@/config/legal";
+import {
+  LEGAL_CONFIG,
+  LEGAL_MAILTO_PRIVACY,
+  LEGAL_PAGES_LAST_UPDATED,
+} from "@/config/legal";
 import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 import { LegalPageTemplate, LegalSection, legalPageLinkClass } from "../components/legal";
-
-const LAST_UPDATED = "4 February 2026";
 
 const COOKIES_TOC = [
   { id: "purpose", label: "1. Purpose" },
@@ -31,7 +33,7 @@ export default function CookiesPage() {
       <Header />
       <LegalPageTemplate
         title="Cookie & Local Storage Policy"
-        lastUpdated={LAST_UPDATED}
+        lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         intro="This Policy describes the cookies and storage technologies used on www.fairways.tech, the purposes of such use, and the choices you have. We do not use advertising cookies, cross-site tracking pixels, or profiling for marketing."
         showToc
         tocItems={COOKIES_TOC}

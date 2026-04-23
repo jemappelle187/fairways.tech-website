@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { LEGAL_CONFIG, LEGAL_MAILTO_PRIVACY } from "@/config/legal";
+import {
+  LEGAL_CONFIG,
+  LEGAL_MAILTO_PRIVACY,
+  LEGAL_PAGES_LAST_UPDATED,
+} from "@/config/legal";
 import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 import { LegalPageTemplate, LegalSection, legalPageLinkClass } from "../components/legal";
-
-const LAST_UPDATED = "4 February 2026";
 
 const PRIVACY_TOC = [
   { id: "who-we-are", label: "1. Who we are" },
@@ -34,7 +36,7 @@ export default function PrivacyPage() {
       <Header />
       <LegalPageTemplate
         title="Website Privacy Policy"
-        lastUpdated={LAST_UPDATED}
+        lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         showToc
         tocItems={PRIVACY_TOC}
       >

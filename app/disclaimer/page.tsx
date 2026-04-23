@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { LEGAL_CONFIG, LEGAL_MAILTO_PRIVACY } from "@/config/legal";
+import {
+  LEGAL_CONFIG,
+  LEGAL_MAILTO_PRIVACY,
+  LEGAL_PAGES_LAST_UPDATED,
+} from "@/config/legal";
 import { buildPageMetadata } from "../../lib/seo";
 import { Header, Footer } from "../components/SiteChrome";
 import { LegalEntityBlock } from "../components/LegalEntityBlock";
 import { LegalPageTemplate, LegalSection } from "../components/legal";
-
-const LAST_UPDATED = "4 February 2026";
 
 const DISCLAIMER_TOC = [
   { id: "informational", label: "1. Informational only" },
@@ -30,7 +32,7 @@ export default function DisclaimerPage() {
       <Header />
       <LegalPageTemplate
         title="Website Disclaimer"
-        lastUpdated={LAST_UPDATED}
+        lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         showToc
         tocItems={DISCLAIMER_TOC}
       >
