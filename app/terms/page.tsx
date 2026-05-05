@@ -24,11 +24,11 @@ const TERMS_TOC = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Website Terms & Conditions",
+  title: "Terms & Conditions",
   description:
     "Terms and conditions governing the use of the Fairways.Tech corporate website.",
   path: "/terms",
-  ogTitle: "Website Terms & Conditions | Fairways.Tech",
+  ogTitle: "Terms & Conditions | Fairways.Tech",
 });
 
 export default function TermsPage() {
@@ -36,7 +36,7 @@ export default function TermsPage() {
     <>
       <Header />
       <LegalPageTemplate
-        title="Website Terms & Conditions"
+        title="Terms & Conditions"
         lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         showToc
         tocItems={TERMS_TOC}
@@ -49,14 +49,17 @@ export default function TermsPage() {
               &quot;Website&quot;).
             </p>
             <p className="font-medium text-slate-900">The Website is operated by:</p>
-            <ul className="ml-5 list-disc space-y-1">
+            <ul className="ml-5 list-disc space-y-2">
               <li>
-                <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK{" "}
-                <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>)
+                <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong>, registered in
+                the Netherlands with the Dutch Chamber of Commerce under KvK number{" "}
+                <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>.
               </li>
               <li>
-                <strong>{LEGAL_CONFIG.ghanaEntityName}</strong> (incorporated in the
-                Republic of Ghana)
+                <strong>{LEGAL_CONFIG.ghanaEntityName}</strong>, incorporated in{" "}
+                {LEGAL_CONFIG.ghanaJurisdiction} with company registration number{" "}
+                <strong>{LEGAL_CONFIG.ghanaRegistrationNumber}</strong> and
+                registered address at {LEGAL_CONFIG.ghanaRegisteredAddress}.
               </li>
             </ul>
             <p>

@@ -16,30 +16,41 @@ export function LegalEntityBlock() {
       >
         Legal entity information
       </h2>
-      <p className="mt-2 text-sm text-slate-800">
-        The <strong>{LEGAL_CONFIG.tradingName}</strong> website and brand are
-        operated by:
-      </p>
-      <ul className="ml-5 mt-2 list-disc space-y-1.5 text-sm text-slate-800">
-        <li>
-          <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK:{" "}
-          <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>)
-        </li>
-        <li>
-          <strong>{LEGAL_CONFIG.ghanaEntityName}</strong> (Republic of Ghana)
-        </li>
-      </ul>
-      <p className="mt-3 text-sm text-slate-800">
-        Together trading as &quot;{LEGAL_CONFIG.tradingName}&quot;. Privacy
-        contact:{" "}
-        <a
-          className="text-forest underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded"
-          href={LEGAL_MAILTO_PRIVACY}
-        >
-          {LEGAL_CONFIG.privacyEmail}
-        </a>
-        .
-      </p>
+      <div className="mt-3 space-y-4 text-sm leading-relaxed text-slate-800">
+        <div>
+          <p className="font-semibold text-slate-900">
+            {LEGAL_CONFIG.netherlandsEntityName}
+          </p>
+          <p>
+            Dutch Chamber of Commerce (KvK):{" "}
+            <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>
+          </p>
+          <p>
+            Jurisdiction: {LEGAL_CONFIG.netherlandsJurisdiction}
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-slate-900">
+            {LEGAL_CONFIG.ghanaEntityName}
+          </p>
+          <p>
+            Ghana company registration number:{" "}
+            <strong>{LEGAL_CONFIG.ghanaRegistrationNumber}</strong>
+          </p>
+          <p>
+            Registered address: {LEGAL_CONFIG.ghanaRegisteredAddress}
+          </p>
+        </div>
+        <p>
+          Privacy contact:{" "}
+          <a
+            className="text-forest underline underline-offset-2 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded"
+            href={LEGAL_MAILTO_PRIVACY}
+          >
+            {LEGAL_CONFIG.privacyEmail}
+          </a>
+        </p>
+      </div>
     </section>
   );
 }
