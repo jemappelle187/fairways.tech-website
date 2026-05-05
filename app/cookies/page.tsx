@@ -20,11 +20,11 @@ const COOKIES_TOC = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Cookie & Local Storage Policy",
+  title: "Cookie Policy",
   description:
     "How the Fairways.Tech website uses cookies and local storage in a proportionate, non-advertising manner.",
   path: "/cookies",
-  ogTitle: "Cookie & Local Storage Policy | Fairways.Tech",
+  ogTitle: "Cookie Policy | Fairways.Tech",
 });
 
 export default function CookiesPage() {
@@ -32,7 +32,7 @@ export default function CookiesPage() {
     <>
       <Header />
       <LegalPageTemplate
-        title="Cookie & Local Storage Policy"
+        title="Cookie Policy"
         lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         intro="This Policy describes the cookies and storage technologies used on www.fairways.tech, the purposes of such use, and the choices you have. We do not use advertising cookies, cross-site tracking pixels, or profiling for marketing."
         showToc
@@ -41,13 +41,16 @@ export default function CookiesPage() {
         <div className="space-y-0">
           <LegalSection id="purpose" title="1. Purpose of this Policy" isFirst>
             <p>
-              This Policy applies to www.fairways.tech (the &quot;Website&quot;)
-              operated by {LEGAL_CONFIG.netherlandsEntityName} (KvK{" "}
-              {LEGAL_CONFIG.netherlandsRegistrationNumber}) and{" "}
-              {LEGAL_CONFIG.ghanaEntityName} (Republic of Ghana), trading as
-              &quot;{LEGAL_CONFIG.tradingName}&quot;. It describes the types of
-              cookies and storage we use, why we use them, and the options available
-              to visitors. The Website is intended to work with a small set of
+              This Cookie Policy applies to www.fairways.tech, operated by{" "}
+              {LEGAL_CONFIG.netherlandsEntityName} (KvK{" "}
+              {LEGAL_CONFIG.netherlandsRegistrationNumber},{" "}
+              {LEGAL_CONFIG.netherlandsJurisdiction}) and{" "}
+              {LEGAL_CONFIG.ghanaEntityName} (Ghana company registration number{" "}
+              {LEGAL_CONFIG.ghanaRegistrationNumber}, registered address:{" "}
+              {LEGAL_CONFIG.ghanaRegisteredAddress}), together trading as &quot;
+              {LEGAL_CONFIG.tradingName}&quot;. It describes the types of cookies and
+              storage we use, why we use them, and the options available to
+              visitors. The Website is intended to work with a small set of
               client-side tools: where we use storage, it supports security, basic
               operation, and aggregated analytics, not third-party advertising
               networks.

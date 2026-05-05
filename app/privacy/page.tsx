@@ -23,11 +23,11 @@ const PRIVACY_TOC = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Website Privacy Policy",
+  title: "Privacy Policy",
   description:
     "How Fairways.Tech processes personal data when you use www.fairways.tech or the contact form. GDPR where applicable.",
   path: "/privacy",
-  ogTitle: "Website Privacy Policy | Fairways.Tech",
+  ogTitle: "Privacy Policy | Fairways.Tech",
 });
 
 export default function PrivacyPage() {
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
     <>
       <Header />
       <LegalPageTemplate
-        title="Website Privacy Policy"
+        title="Privacy Policy"
         lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         showToc
         tocItems={PRIVACY_TOC}
@@ -44,20 +44,50 @@ export default function PrivacyPage() {
           <LegalSection id="who-we-are" title="1. Who we are" isFirst>
             <p>
               This Privacy Policy explains how {LEGAL_CONFIG.netherlandsEntityName}{" "}
-              (KvK {LEGAL_CONFIG.netherlandsRegistrationNumber}) and{" "}
-              {LEGAL_CONFIG.ghanaEntityName} (Republic of Ghana), together trading
-              as &quot;{LEGAL_CONFIG.tradingName}&quot; (
-              {LEGAL_CONFIG.tradingName}, &quot;we&quot;, &quot;us&quot;,
-              &quot;our&quot;), process personal data when you visit{" "}
-              <strong>www.fairways.tech</strong> (the &quot;Website&quot;) or submit
-              information through the Website contact form.
+              (KvK {LEGAL_CONFIG.netherlandsRegistrationNumber},{" "}
+              {LEGAL_CONFIG.netherlandsJurisdiction}), as{" "}
+              <strong>data controller for this Website</strong>, processes personal
+              data when you visit <strong>www.fairways.tech</strong> (the
+              &quot;Website&quot;) or submit information through the Website contact
+              form.
             </p>
             <p>
-              For visitors in the EU/EEA, the data controller for this Website is{" "}
-              <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK{" "}
-              {LEGAL_CONFIG.netherlandsRegistrationNumber}). Where Website-related
-              processing involves {LEGAL_CONFIG.ghanaEntityName} or other partners
-              outside the EU/EEA, we apply appropriate safeguards.
+              {LEGAL_CONFIG.ghanaEntityName} (Ghana company registration number{" "}
+              {LEGAL_CONFIG.ghanaRegistrationNumber}, registered address:{" "}
+              {LEGAL_CONFIG.ghanaRegisteredAddress}) is part of the{" "}
+              {LEGAL_CONFIG.tradingName} operating structure but is{" "}
+              <strong>not</strong> the data controller for this Website unless
+              expressly stated otherwise.
+            </p>
+            <p>
+              Unless we state otherwise in this Policy, &quot;we&quot;, &quot;us&quot;
+              and &quot;our&quot; refer to {LEGAL_CONFIG.netherlandsEntityName} in its
+              capacity as data controller for this Website.
+            </p>
+            <div className="mt-4 space-y-1 text-sm text-slate-800">
+              <p className="font-medium text-slate-900">
+                For visitors in the EU/EEA, the data controller for this Website is:
+              </p>
+              <p className="font-semibold text-slate-900">
+                {LEGAL_CONFIG.netherlandsEntityName}
+              </p>
+              <p>
+                KvK: <strong>{LEGAL_CONFIG.netherlandsRegistrationNumber}</strong>
+              </p>
+              <p>{LEGAL_CONFIG.netherlandsJurisdiction}</p>
+              <p>
+                Email:{" "}
+                <a
+                  href={LEGAL_MAILTO_PRIVACY}
+                  className={legalPageLinkClass}
+                >
+                  {LEGAL_CONFIG.privacyEmail}
+                </a>
+              </p>
+            </div>
+            <p className="mt-4">
+              Where Website-related processing involves {LEGAL_CONFIG.ghanaEntityName}{" "}
+              or other partners outside the EU/EEA, we apply appropriate safeguards.
             </p>
             <p>
               All Website processing is governed by the{" "}

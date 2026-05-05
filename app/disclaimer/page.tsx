@@ -20,10 +20,10 @@ const DISCLAIMER_TOC = [
 ];
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Website Disclaimer",
+  title: "Disclaimer",
   description: "General disclaimer for the Fairways.Tech corporate website.",
   path: "/disclaimer",
-  ogTitle: "Website Disclaimer | Fairways.Tech",
+  ogTitle: "Disclaimer | Fairways.Tech",
 });
 
 export default function DisclaimerPage() {
@@ -31,7 +31,7 @@ export default function DisclaimerPage() {
     <>
       <Header />
       <LegalPageTemplate
-        title="Website Disclaimer"
+        title="Disclaimer"
         lastUpdated={LEGAL_PAGES_LAST_UPDATED}
         showToc
         tocItems={DISCLAIMER_TOC}
@@ -43,13 +43,15 @@ export default function DisclaimerPage() {
             isFirst
           >
             <p>
-              The website <strong>www.fairways.tech</strong> (the
-              &quot;Website&quot;) is operated by{" "}
-              <strong>{LEGAL_CONFIG.netherlandsEntityName}</strong> (KvK{" "}
-              {LEGAL_CONFIG.netherlandsRegistrationNumber}) and{" "}
-              <strong>{LEGAL_CONFIG.ghanaEntityName}</strong> (Republic of Ghana),
-              trading as &quot;{LEGAL_CONFIG.tradingName}&quot; (
-              {LEGAL_CONFIG.tradingName}, &quot;we&quot;, &quot;us&quot;).
+              This Disclaimer applies to the website www.fairways.tech, operated by{" "}
+              {LEGAL_CONFIG.netherlandsEntityName} (KvK{" "}
+              {LEGAL_CONFIG.netherlandsRegistrationNumber},{" "}
+              {LEGAL_CONFIG.netherlandsJurisdiction}) and{" "}
+              {LEGAL_CONFIG.ghanaEntityName} (Ghana company registration number{" "}
+              {LEGAL_CONFIG.ghanaRegistrationNumber}, registered address:{" "}
+              {LEGAL_CONFIG.ghanaRegisteredAddress}), together trading as &quot;
+              {LEGAL_CONFIG.tradingName}&quot; ({LEGAL_CONFIG.tradingName}, &quot;we&quot;,
+              &quot;us&quot;).
             </p>
             <p>
               All content on the Website is provided for general information only.

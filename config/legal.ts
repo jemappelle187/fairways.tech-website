@@ -1,7 +1,12 @@
 export const LEGAL_CONFIG = {
   ghanaEntityName: "Fairways.Tech Operations Ghana Ltd",
-  netherlandsEntityName: "Fairways Tech Operations B.V.",
+  ghanaRegistrationNumber: "CS084430426",
+  ghanaRegisteredAddress:
+    "F146/2, Lokko Road, 2nd Floor Christian Council Building, Osu, Accra, Republic of Ghana",
+  ghanaJurisdiction: "Republic of Ghana",
+  netherlandsEntityName: "Fairways.Tech Operations B.V.",
   netherlandsRegistrationNumber: "99720248",
+  netherlandsJurisdiction: "Netherlands",
   tradingName: "Fairways.Tech",
   governingLaw: "Netherlands",
   privacyEmail: "privacy@fairways.tech",
@@ -13,4 +18,4 @@ export const LEGAL_MAILTO_PRIVACY = `mailto:${LEGAL_CONFIG.privacyEmail}` as con
 export const LEGAL_MAILTO_LEGAL = `mailto:${LEGAL_CONFIG.legalEmail}` as const;
 
 /** Shown on /terms, /privacy, /cookies, /disclaimer (static display string). */
-export const LEGAL_PAGES_LAST_UPDATED = "23 April 2026" as const;
+export const LEGAL_PAGES_LAST_UPDATED = "5 May 2026" as const;

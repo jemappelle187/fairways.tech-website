@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { LEGAL_CONFIG } from "@/config/legal";
 import { AboutFaqAccordion } from "../components/AboutFaqAccordion";
 import { Header, Footer } from "../components/SiteChrome";
 import { buildPageMetadata } from "../../lib/seo";
@@ -189,7 +190,11 @@ export default function AboutPage() {
                     We design and operate compliance‑aligned digital infrastructure for agricultural financing: a shared layer between field activity and finance‑ready records. Licensed partners deliver regulated services; we provide the rails and coordination they plug into.
                   </p>
                   <p>
-                    Fairways Tech Operations B.V. (Netherlands) and Fairways.Tech Operations Ghana Ltd (Ghana) together operate under the Fairways.Tech trading name. We build to supervisory and market standards, including alignment with expectations under AMLR, FATF, DORA, GDPR and regulatory oversight.
+                    {LEGAL_CONFIG.netherlandsEntityName} (Netherlands) and{" "}
+                    {LEGAL_CONFIG.ghanaEntityName} (Ghana) together operate under the
+                    Fairways.Tech trading name. We build to supervisory and market
+                    standards, including alignment with expectations under AMLR, FATF,
+                    DORA, GDPR and regulatory oversight.
                   </p>
                 </div>
               </div>
