@@ -840,7 +840,7 @@ export default function HomePageClient() {
                       </p>
                     </div>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
-                      5.5K+
+                      21K
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
                       We widen inclusion by reaching more farmers as our network scales.
