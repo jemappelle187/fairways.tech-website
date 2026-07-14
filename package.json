@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/jemappelle187/fairways.tech-website#readme",
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@types/node": "^20.16.10",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.20",
