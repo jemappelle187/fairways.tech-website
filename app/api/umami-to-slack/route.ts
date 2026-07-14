@@ -303,7 +303,7 @@ export async function POST(req: NextRequest) {
         },
       ];
 
-      await fetch(slackWebhookUrl, {
+      const slackResponse = await fetch(slackWebhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -313,6 +313,17 @@ export async function POST(req: NextRequest) {
           blocks,
         }),
       });
+
+      if (!slackResponse.ok) {
+        const responseBody = await slackResponse.text();
+        console.error(
+          `[UMAMI_WEBHOOK] Slack rejected browser GPS notification: status=${slackResponse.status} body=${responseBody.substring(0, 200)}`
+        );
+        return NextResponse.json(
+          { error: "Slack rejected notification" },
+          { status: 502 }
+        );
+      }
 
       return NextResponse.json({ ok: true });
     }
@@ -403,7 +414,7 @@ export async function POST(req: NextRequest) {
       },
     ];
 
-    await fetch(slackWebhookUrl, {
+    const slackResponse = await fetch(slackWebhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -413,6 +424,17 @@ export async function POST(req: NextRequest) {
         blocks,
       }),
     });
+
+    if (!slackResponse.ok) {
+      const responseBody = await slackResponse.text();
+      console.error(
+        `[UMAMI_WEBHOOK] Slack rejected visit notification: status=${slackResponse.status} body=${responseBody.substring(0, 200)}`
+      );
+      return NextResponse.json(
+        { error: "Slack rejected notification" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err: unknown) {

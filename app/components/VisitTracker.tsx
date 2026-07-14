@@ -1,85 +1,80 @@
 "use client";
 
-import Script from "next/script";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 /**
- * VisitTracker - Always tracks visits and sends to Slack, regardless of cookie consent.
- * This is separate from Umami analytics which requires consent.
+ * Sends an internal Slack notification for the initial visit and every
+ * client-side page navigation.
  */
 export function VisitTracker() {
-  return (
-    <Script
-      id="visit-tracker-slack"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
-(function () {
-  if (typeof window === "undefined" || !window.fetch) return;
+  const pathname = usePathname();
+  const lastTrackedUrlRef = useRef<string | null>(null);
 
-  try {
-    // Simple, privacy-friendly first-time vs returning flag
-    var visitorType = "first-time";
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.fetch) return;
+
+    const url = window.location.href;
+    if (lastTrackedUrlRef.current === url) return;
+    lastTrackedUrlRef.current = url;
+
+    let visitorType = "first-time";
     try {
-      var key = "fw_visit_seen";
-      var stored = window.localStorage.getItem(key);
-      if (stored === "1") {
+      const key = "fw_visit_seen";
+      if (window.localStorage.getItem(key) === "1") {
         visitorType = "returning";
       } else {
         window.localStorage.setItem(key, "1");
       }
-    } catch (e) {
-      // localStorage may be disabled; ignore
+    } catch {
+      // localStorage may be disabled; continue without persistence.
     }
 
-    var visitCorrelationId = null;
+    let visitCorrelationId: string | null = null;
     try {
-      var corrKey = "fw_visit_correlation_id";
-      if (typeof crypto !== "undefined" && crypto.randomUUID) {
-        visitCorrelationId = crypto.randomUUID();
-      } else {
-        visitCorrelationId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-          var r = (Math.random() * 16) | 0;
-          var v = c === "x" ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        });
-      }
-      window.localStorage.setItem(corrKey, visitCorrelationId);
-    } catch (e) {
-      // localStorage may be disabled; ignore
+      visitCorrelationId =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (char) => {
+              const random = (Math.random() * 16) | 0;
+              const value = char === "x" ? random : (random & 0x3) | 0x8;
+              return value.toString(16);
+            });
+      window.localStorage.setItem(
+        "fw_visit_correlation_id",
+        visitCorrelationId
+      );
+    } catch {
+      // localStorage may be disabled; continue without a correlation id.
     }
 
-    var payload = {
-      kind: "visit",
-      visitCorrelationId: visitCorrelationId,
-      title: document.title || null,
-      url: window.location.href,
-      hostname: window.location.hostname,
-      language: navigator.language || null,
-      referrer: document.referrer || null,
-      screen: window.innerWidth + "x" + window.innerHeight,
-      visitorType: visitorType
-    };
-
-    fetch("/api/umami-to-slack", {
+    void fetch("/api/umami-to-slack", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true
-    }).catch(function () {
-      // swallow client-side errors
-    });
+      body: JSON.stringify({
+        kind: "visit",
+        visitCorrelationId,
+        title: document.title || null,
+        url,
+        hostname: window.location.hostname,
+        language: navigator.language || null,
+        referrer: document.referrer || null,
+        screen: `${window.innerWidth}x${window.innerHeight}`,
+        visitorType,
+      }),
+      keepalive: true,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(
+            `[VISIT_TRACKER] notification failed with status ${response.status}`
+          );
+        }
+      })
+      .catch((error: unknown) => {
+        console.error("[VISIT_TRACKER] notification request failed", error);
+      });
+  }, [pathname]);
 
-  } catch (e) {
-    console.error("[VISIT_TRACKER] client error", e);
-  }
-})();
-        `,
-      }}
-    />
-  );
+  return null;
 }
-
-
-
-
-
