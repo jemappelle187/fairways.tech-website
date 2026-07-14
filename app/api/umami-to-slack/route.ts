@@ -371,25 +371,41 @@ async function handleSessionEvent(req: NextRequest, body: SessionEventPayload) {
     .join("\n") || "-";
   const priorBrowser = browserHistory;
   const priorProbable = probableHistory;
-  const historyLine = priorBrowser.length
-    ? `${priorBrowser.length} eerdere sessie(s) in deze browser • laatst ${amsterdamTime(priorBrowser[0].last_seen_at)}`
-    : "Geen eerdere sessies in deze browser";
-  const probableLine = priorProbable.length
-    ? `${priorProbable.length} mogelijke eerdere sessie(s) op hetzelfde IP/toestel`
-    : "Geen aanvullende match op hetzelfde IP/toestel";
   const status = visitorBefore.length === 0 ? "Nieuw in deze browser" : "Terugkerend in deze browser";
   const eventLabel = body.eventType === "page_view" ? "Pagina bekeken"
     : body.eventType === "form_submit" ? "Formulier verzonden" : "CTA aangeklikt";
   const titleEmoji = conversion ? "🎯" : isBot ? "🤖" : "👤";
+  const deviceEmoji = isBot ? "🤖" : /iPhone|iPad|Android/.test(device) ? "📱" : "💻";
+  const title = conversion ? "High-intent actie" : isNewSession ? "Nieuwe bezoeksessie" : "Bezoeksessie";
   const source = text(body.referrer, 2000) || "Direct bezoek";
+  const duration = durationText(session.started_at, session.last_seen_at);
+  const location = [geo.city, geo.region, geo.country].filter(Boolean).join(", ") || "Locatie onbekend";
+  const locationDetails = [
+    "IP-gebaseerde schatting",
+    clientIp ? `IP: ${clientIp}` : "",
+    slackEscape(geo.network),
+  ].filter(Boolean).join(" • ");
+  const sourceDetails = [
+    Object.keys(utm).length ? utmText(utm) : "",
+    body.actionLabel ? `Actie: ${slackEscape(text(body.actionLabel, 160))}` : "",
+    body.targetUrl ? `Doel: ${slackEscape(text(body.targetUrl, 500))}` : "",
+  ].filter(Boolean).join("\n");
+  const history = [
+    priorBrowser.length
+      ? `🔁 ${priorBrowser.length} eerdere sessie(s) in deze browser • laatst ${amsterdamTime(priorBrowser[0].last_seen_at)}`
+      : "",
+    priorProbable.length
+      ? `🔎 ${priorProbable.length} mogelijke eerdere sessie(s) op hetzelfde IP/toestel`
+      : "",
+  ].filter(Boolean).join("\n");
   const blocks = [
-    { type: "header", text: { type: "plain_text", text: `${titleEmoji} ${environment.badge} • Bezoeksessie`, emoji: true } },
-    { type: "context", elements: [{ type: "mrkdwn", text: `*${eventLabel}* • ${status} • sessie #${sessionNumber} • ${amsterdamTime(body.occurredAt)}` }] },
-    { type: "section", text: { type: "mrkdwn", text: `*Sessie-overzicht*\n• Route (${session.page_view_count}):\n${route}\n• Duur tot nu toe: ${durationText(session.started_at, session.last_seen_at)}\n• Status: ${isBot ? "Waarschijnlijke bot" : "Menselijke bezoeker"}${session.converted ? " • High intent" : ""}` } },
-    { type: "section", text: { type: "mrkdwn", text: `*Bron & campagne*\n• Referrer: ${slackEscape(source)}\n• UTM: ${utmText(utm)}${body.actionLabel ? `\n• Actie: ${slackEscape(text(body.actionLabel, 160))}` : ""}${body.targetUrl ? `\n• Doel: ${slackEscape(text(body.targetUrl, 500))}` : ""}` } },
-    { type: "section", text: { type: "mrkdwn", text: `*Bezoekhistorie*\n• ${historyLine}\n• ${probableLine}` } },
-    { type: "section", text: { type: "mrkdwn", text: `*Locatie & toestel*\n• IP: ${clientIp || "-"}\n• Locatie: ${[geo.city, geo.region, geo.country].filter(Boolean).join(", ") || "-"} _(schatting op basis van IP)_\n• Netwerk: ${slackEscape(geo.network || "-")}\n• Toestel: ${device} • ${os} • ${browser}\n• Scherm/taal: ${text(body.screen, 60) || "-"} • ${text(body.language, 40) || "-"}` } },
-    { type: "context", elements: [{ type: "mrkdwn", text: `_Sessie-ID: ${body.sessionId} • Event-ID: ${body.eventId}_` }] },
+    { type: "header", text: { type: "plain_text", text: `${titleEmoji} ${title}`, emoji: true } },
+    { type: "context", elements: [{ type: "mrkdwn", text: `${environment.badge} • ${deviceEmoji} ${device} • ${browser} • ${amsterdamTime(body.occurredAt)} • ${status} • sessie #${sessionNumber}` }] },
+    { type: "section", text: { type: "mrkdwn", text: `*🧭 Route*\n${route}${duration !== "0s" ? `\n⏱️ ${duration}` : ""}${isBot ? "\n🤖 Waarschijnlijke bot" : ""}${session.converted ? "\n🎯 High intent" : ""}` } },
+    { type: "section", text: { type: "mrkdwn", text: `*📍 ${slackEscape(location)}*\n${locationDetails}` } },
+    { type: "section", text: { type: "mrkdwn", text: `*🌐 ${slackEscape(source)}*${sourceDetails ? `\n${sourceDetails}` : ""}` } },
+    ...(history ? [{ type: "section", text: { type: "mrkdwn", text: `*🕘 Eerdere bezoeken*\n${history}` } }] : []),
+    { type: "context", elements: [{ type: "mrkdwn", text: `⚙️ ${os} • ${text(body.screen, 60) || "Scherm onbekend"} • ${text(body.language, 40) || "Taal onbekend"} • ${eventLabel}\n_Sessie: \`${body.sessionId.slice(0, 8)}…\` • Event: \`${body.eventId.slice(0, 8)}…\`_` }] },
   ];
 
   const slack = await sendSlack(blocks, `${environment.badge} Bezoeksessie op fairways.tech`);
