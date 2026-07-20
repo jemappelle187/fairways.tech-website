@@ -11,6 +11,13 @@ const menuLinks = [
   { href: "/team", label: "Team" },
 ];
 
+const mastheadCopyByPath: Record<string, string> = {
+  "/": "Turning farm activity into trusted, finance-ready data.",
+  "/about": "Built for visibility across real agricultural value chains.",
+  "/impact": "Infrastructure for measurable farmer and finance outcomes.",
+  "/team": "The people building trusted agricultural finance rails.",
+};
+
 const languages = [
   { code: "de", label: "Deutsch", flag: "🇩🇪" },
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -37,7 +44,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -87,6 +94,11 @@ export function Header() {
     setIsContactModalOpen(true);
   };
 
+  const showScrollMasthead = isScrolled;
+  const mastheadCopy =
+    mastheadCopyByPath[pathname] ??
+    "Turning farm activity into trusted, finance-ready data.";
+
   return (
     <>
       {/* Skip to main content link */}
@@ -98,13 +110,29 @@ export function Header() {
       </a>
       
       <header
-        className={`sticky top-0 z-40 rounded-b-lg border-b border-white/40 bg-white/80 backdrop-blur-lg shadow-xl transition-all duration-300 ${
-          isScrolled ? "h-16 shadow-md" : "h-20"
+        className={`sticky top-0 z-40 ${isMenuOpen ? "overflow-visible" : "overflow-hidden"} rounded-b-lg border-b backdrop-blur-lg transition-all duration-500 ${
+          showScrollMasthead
+            ? "h-20 border-white/20 bg-forest/90 shadow-2xl shadow-forest/20"
+            : `border-white/40 bg-white/80 shadow-xl ${isScrolled ? "h-16 shadow-md" : "h-20"}`
         }`}
       >
         <div
-          className={`mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
-            isScrolled ? "h-16" : "h-20"
+          aria-hidden="true"
+          className={`absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center mix-blend-overlay transition-opacity duration-700 ${
+            showScrollMasthead ? "opacity-55" : "opacity-0"
+          }`}
+        />
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            showScrollMasthead
+              ? "opacity-100 bg-[linear-gradient(90deg,rgba(31,59,44,0.96),rgba(31,59,44,0.78)_44%,rgba(17,24,39,0.84))]"
+              : "opacity-0"
+          }`}
+        />
+        <div
+          className={`relative mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-500 ${
+            showScrollMasthead ? "h-14" : isScrolled ? "h-16" : "h-20"
           }`}
         >
           {/* Logo - Far left aligned */}
@@ -113,13 +141,14 @@ export function Header() {
             <img
               src="/images/logo/master-250x250-svg/master-logo-drop-black.svg"
               alt="Fairways.Tech"
-              className={`transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "h-14" : "h-16 sm:h-20"
+              className={`transition-all duration-300 hover:scale-[1.025] ${
+                showScrollMasthead ? "h-11" : isScrolled ? "h-14" : "h-16 sm:h-20"
               }`}
             />
             <div
-              className={`font-bold tracking-tight text-forest transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "text-lg" : "text-lg sm:text-xl lg:text-2xl"
+              className={`font-bold tracking-tight transition-all duration-300 hover:scale-[1.015] ${
+                showScrollMasthead ? "text-lg text-white" : "text-forest"
+              } ${isScrolled ? "text-lg" : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
               Fairways.Tech
@@ -133,7 +162,11 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={`relative px-5 py-2.5 text-[15px] font-medium tracking-[0.02em] rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 ${
-                  pathname === link.href
+                  showScrollMasthead
+                    ? pathname === link.href
+                      ? "text-white after:absolute after:bottom-1 after:left-5 after:right-5 after:h-px after:bg-white/80"
+                      : "text-white/80 hover:bg-white/10 hover:text-white after:absolute after:bottom-1 after:left-1/2 after:right-1/2 after:h-px after:w-0 after:bg-white after:transition-all after:duration-200 after:ease-out hover:after:left-5 hover:after:right-5"
+                    : pathname === link.href
                     ? "text-forest after:absolute after:bottom-1 after:left-5 after:right-5 after:h-px after:bg-forest/70"
                     : "text-slate-600 hover:text-forest hover:bg-forest/[0.06] after:absolute after:bottom-1 after:left-1/2 after:right-1/2 after:h-px after:w-0 after:bg-forest after:transition-all after:duration-200 after:ease-out hover:after:left-5 hover:after:right-5"
                 }`}
@@ -226,9 +259,13 @@ export function Header() {
 
             {/* Contact CTA button - Desktop only */}
             <a
-              href="#contact"
+              href="#cta"
               onClick={handleContactClick}
-              className="hidden lg:inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+              className={`hidden lg:inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold shadow-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                showScrollMasthead
+                  ? "bg-white text-forest hover:bg-sand focus:ring-white focus:ring-offset-forest"
+                  : "bg-forest text-white hover:bg-forest/90 focus:ring-forest focus:ring-offset-2"
+              }`}
             >
               Talk to us
             </a>
@@ -239,7 +276,11 @@ export function Header() {
                 setIsMenuOpen(!isMenuOpen);
                 setIsLangDropdownOpen(false);
               }}
-              className="lg:hidden p-2 text-stone transition hover:text-forest focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded-lg"
+              className={`lg:hidden rounded-lg p-2 transition focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                showScrollMasthead
+                  ? "text-white hover:text-sand focus:ring-white focus:ring-offset-forest"
+                  : "text-stone hover:text-forest focus:ring-forest focus:ring-offset-2"
+              }`}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -262,6 +303,15 @@ export function Header() {
               </div>
             </button>
           </div>
+        </div>
+
+        <div
+          className={`pointer-events-none absolute inset-x-0 bottom-0 hidden h-6 items-center justify-center px-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-sand transition-all duration-500 lg:flex ${
+            showScrollMasthead ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+          }`}
+          aria-hidden={!showScrollMasthead}
+        >
+          {mastheadCopy}
         </div>
 
         {/* Dropdown Menu - Mobile only */}
@@ -296,9 +346,9 @@ export function Header() {
               {/* Mobile Contact button */}
               <div className="mt-6">
                 <a
-                  href="#contact"
+                  href="#cta"
                   onClick={handleContactClick}
-                  className="flex w-full items-center justify-center rounded-full bg-forest px-6 py-3 text-base font-semibold text-white shadow-md transition hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                  className="flex w-full items-center justify-center rounded-full bg-forest px-6 py-3 text-base font-semibold text-white shadow-[0_10px_24px_rgba(31,59,44,0.22)] transition hover:-translate-y-0.5 hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
                 >
                   Talk to us
                 </a>
