@@ -141,23 +141,34 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const editorialCardClass =
+  "group relative overflow-hidden rounded-2xl border border-white/55 bg-white/80 p-8 shadow-[0_12px_34px_rgba(31,77,54,0.08)] ring-1 ring-forest/5 backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-white/80 hover:shadow-[0_18px_44px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12";
+
+const editorialImageClass =
+  "pointer-events-none absolute inset-0 bg-cover bg-center opacity-80 saturate-[0.94] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.025]";
+
+const editorialOverlayStyle = {
+  background:
+    "linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52))",
+};
+
 export default function AboutPage() {
   return (
     <>
       <Header />
       <main id="main-content" className="min-h-screen bg-gradient-to-b from-sand via-sand to-sand-muted">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-sand pt-32 pb-16 sm:pt-40 sm:pb-24">
+        <section className="relative overflow-hidden bg-sand pt-32 pb-14 sm:pt-40 sm:pb-20">
           <div className="absolute inset-0 bg-gradient-to-br from-forest/3 via-transparent to-leaf/3" />
           <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-forest/85">
                 People · purpose · presence
               </p>
-              <h1 className="mb-6 text-4xl font-semibold tracking-tight text-stone sm:text-5xl lg:text-6xl">
+              <h1 className="mb-6 text-4xl font-semibold tracking-tight text-stone sm:text-5xl">
                 Fairways.Tech in depth
               </h1>
-              <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-700 sm:text-xl">
+              <p className="mx-auto max-w-2xl text-lg leading-[1.75] text-slate-700 sm:text-xl">
                 We build compliance-aligned infrastructure for agricultural financing, so partners can see real activity clearly and act with confidence.
               </p>
             </div>
@@ -165,27 +176,25 @@ export default function AboutPage() {
         </section>
 
         {/* Main Content */}
-        <section className="relative z-0 bg-sand pb-24 pt-6 sm:pt-8">
+        <section className="relative z-0 bg-sand pb-24 pt-4 sm:pt-6">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-sand via-sand/80 to-transparent" />
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             {/* Narrative anchor: legal/regulatory framing (detail lives in FAQ) */}
-            <div className="group relative mb-14 overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:mb-16 sm:p-10 lg:p-12">
+            <div className={`${editorialCardClass} mb-14 sm:mb-16`}>
               <div
-                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-500 ease-out group-hover:scale-105"
+                className={editorialImageClass}
                 style={{ backgroundImage: "url('/images/about-overview-card.png')" }}
               />
               <div
-                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
-                style={{
-                  background:
-                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
-                }}
+                className="pointer-events-none absolute inset-0 z-[1] rounded-2xl"
+                style={editorialOverlayStyle}
                 aria-hidden="true"
               />
               <div className="relative z-10 text-center">
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-white drop-shadow-sm sm:text-3xl">
                   What is Fairways.Tech?
                 </h2>
-                <div className="mx-auto max-w-3xl space-y-5 text-base leading-relaxed text-white/95 drop-shadow-sm sm:text-lg">
+                <div className="mx-auto max-w-3xl space-y-5 text-base leading-[1.75] text-white/95 drop-shadow-sm sm:text-lg">
                   <p>
                     We design and operate compliance‑aligned digital infrastructure for agricultural financing: a shared layer between field activity and finance‑ready records. Licensed partners deliver regulated services; we provide the rails and coordination they plug into.
                   </p>
@@ -201,17 +210,14 @@ export default function AboutPage() {
             </div>
 
             {/* FAQ Section */}
-            <div className="group relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_8px_32px_rgba(31,77,54,0.08)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/75 hover:shadow-[0_14px_36px_rgba(31,77,54,0.12)] sm:p-10 lg:p-12">
+            <div className={editorialCardClass}>
               <div
-                className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-500 ease-out group-hover:scale-105"
+                className={editorialImageClass}
                 style={{ backgroundImage: "url('/images/about-why-we-exist-card.png')" }}
               />
               <div
-                className="pointer-events-none absolute inset-0 z-[1] rounded-3xl"
-                style={{
-                  background:
-                    "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
-                }}
+                className="pointer-events-none absolute inset-0 z-[1] rounded-2xl"
+                style={editorialOverlayStyle}
                 aria-hidden="true"
               />
               <div className="relative z-10 text-center">
