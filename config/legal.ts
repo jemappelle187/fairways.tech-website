@@ -17,5 +17,5 @@ export type LegalConfig = typeof LEGAL_CONFIG;
 export const LEGAL_MAILTO_PRIVACY = `mailto:${LEGAL_CONFIG.privacyEmail}` as const;
 export const LEGAL_MAILTO_LEGAL = `mailto:${LEGAL_CONFIG.legalEmail}` as const;
 
-/** Shown on /terms, /privacy, /cookies, /disclaimer (static display string). */
-export const LEGAL_PAGES_LAST_UPDATED = "5 May 2026" as const;
+/** Shown on /terms, /privacy, /cookies, /disclaimer — derived from config/site-dates.ts */
+export { LEGAL_PAGES_LAST_UPDATED } from "./site-dates";

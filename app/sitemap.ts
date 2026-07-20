@@ -1,24 +1,20 @@
 import type { MetadataRoute } from "next";
-
-/** Site-wide recrawl hint for updated legal routes (rebuild / content refresh). */
-const LEGAL_PAGES_LASTMOD = new Date("2026-04-23T00:00:00.000Z");
+import {
+  LEGAL_PAGES_LAST_MODIFIED,
+  MARKETING_PAGES_LAST_MODIFIED,
+} from "@/config/site-dates";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://fairways.tech";
 
   return [
-    { url: `${baseUrl}/`, lastModified: new Date() },
-    { url: `${baseUrl}/team`, lastModified: new Date() },
-    { url: `${baseUrl}/about`, lastModified: new Date() },
-    { url: `${baseUrl}/impact`, lastModified: new Date() },
-    { url: `${baseUrl}/terms`, lastModified: LEGAL_PAGES_LASTMOD },
-    { url: `${baseUrl}/privacy`, lastModified: LEGAL_PAGES_LASTMOD },
-    { url: `${baseUrl}/cookies`, lastModified: LEGAL_PAGES_LASTMOD },
-    { url: `${baseUrl}/disclaimer`, lastModified: LEGAL_PAGES_LASTMOD },
+    { url: `${baseUrl}/`, lastModified: MARKETING_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/team`, lastModified: MARKETING_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/about`, lastModified: MARKETING_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/impact`, lastModified: MARKETING_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/terms`, lastModified: LEGAL_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/privacy`, lastModified: LEGAL_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/cookies`, lastModified: LEGAL_PAGES_LAST_MODIFIED },
+    { url: `${baseUrl}/disclaimer`, lastModified: LEGAL_PAGES_LAST_MODIFIED },
   ];
 }
-
-
-
-
-
