@@ -13,6 +13,21 @@ export const metadata: Metadata = buildPageMetadata({
   ogTitle: "Meet the Team | Fairways.Tech",
 });
 
+const teamCardClass =
+  "group relative flex flex-col items-center overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(31,59,44,0.98),rgba(25,48,36,0.96)_52%,rgba(15,28,22,0.98))] px-6 py-8 text-center shadow-[0_16px_38px_rgba(31,59,44,0.22)] ring-1 ring-white/5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-[0_22px_48px_rgba(31,59,44,0.28)]";
+
+const teamCardTextureClass =
+  "pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-[0.18] mix-blend-overlay";
+
+const teamAvatarFrameClass =
+  "relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-[0_10px_28px_rgba(0,0,0,0.24)] ring-2 ring-white/45 transition-transform duration-300 group-hover:scale-[1.025]";
+
+const teamLinkedInClass =
+  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-white/70 focus:ring-offset-2 focus:ring-offset-forest";
+
+const teamPortraitClass =
+  "relative h-full w-full rounded-full object-cover saturate-[0.92] contrast-[1.04]";
+
 export default function TeamPage() {
   return (
     <>
@@ -29,7 +44,7 @@ export default function TeamPage() {
           <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
           {/* Page heading */}
           <header className="relative z-10 mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-forest">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-forest">
               Our team
             </p>
             <h1 className="mb-4 text-3xl font-semibold text-[#2E3A39] md:text-4xl">
@@ -40,7 +55,7 @@ export default function TeamPage() {
               product and emerging-markets finance to build trusted rails for farmers,
               cooperatives and financial institutions.
             </p>
-            <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-[#2E3A39]/70">
+            <p className="mt-3 text-xs font-medium uppercase tracking-[0.16em] text-[#2E3A39]/70">
               Based across Africa, Asia, Europe &amp; Latin America
             </p>
           </header>
@@ -56,20 +71,20 @@ export default function TeamPage() {
             {/* Emmanuel */}
             <article
               id="emmanuel-yeboah-martina"
-              className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+              className={teamCardClass}
             >
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className={teamCardTextureClass} />
               {/* Prominent Avatar */}
               <div className="relative z-10 mb-5 flex-shrink-0">
-                <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                <div className={teamAvatarFrameClass}>
                   <div className="absolute inset-1 rounded-full bg-sand" />
                   <Image
                     src="/images/team/EYM.jpeg"
                     alt="Portrait of Emmanuel Yeboah Martina"
                     width={128}
                     height={128}
-                    className="relative h-full w-full object-cover rounded-full"
+                    className={teamPortraitClass}
                     priority
                   />
                 </div>
@@ -80,7 +95,7 @@ export default function TeamPage() {
                 <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Emmanuel Yeboah Martina
                 </h2>
-                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                   Co-founder &amp; CEO
                 </p>
                 <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -93,7 +108,7 @@ export default function TeamPage() {
                     href="https://www.linkedin.com/in/eymartina/"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                    className={teamLinkedInClass}
                     aria-label="View Emmanuel's LinkedIn profile"
                   >
                     <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -105,20 +120,20 @@ export default function TeamPage() {
             {/* Kwan */}
             <article
               id="kwan-yuk-li"
-              className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+              className={teamCardClass}
             >
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className={teamCardTextureClass} />
               {/* Prominent Avatar */}
               <div className="relative z-10 mb-5 flex-shrink-0">
-                <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                <div className={teamAvatarFrameClass}>
                   <div className="absolute inset-1 rounded-full bg-sand" />
                   <Image
                     src="/images/team/KYL.jpeg"
                     alt="Portrait of Kwan Yuk Li"
                     width={128}
                     height={128}
-                    className="relative h-full w-full object-cover rounded-full"
+                    className={teamPortraitClass}
                     priority
                   />
                 </div>
@@ -129,7 +144,7 @@ export default function TeamPage() {
                 <h2 className="text-lg font-semibold tracking-tight text-white uppercase">
                   Kwan Yuk Li
                 </h2>
-                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                   Co-founder &amp; COO
                 </p>
                 <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -143,7 +158,7 @@ export default function TeamPage() {
                     href="https://nl.linkedin.com/in/kwan-yuk-li-bb040b4"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                    className={teamLinkedInClass}
                     aria-label="View Kwan's LinkedIn profile"
                   >
                     <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -160,7 +175,7 @@ export default function TeamPage() {
               <h2 className="text-lg font-semibold tracking-tight text-[#2E3A39] uppercase">
                 Local team
               </h2>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#2E3A39]/70">
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#2E3A39]/70">
                 Ghana
               </p>
             </header>
@@ -169,20 +184,20 @@ export default function TeamPage() {
               {/* Country CEO */}
               <article
                 id="vinanda-addo"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden max-w-sm w-full"
+                className={`${teamCardClass} w-full max-w-sm`}
               >
               {/* Leaf background */}
-              <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+              <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/CEO-GH (VA).jpg"
                       alt="Portrait of Vinanda Addo"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -192,7 +207,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Vinanda Addo
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Country CEO, Ghana
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -206,7 +221,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/vinanda-addo-2774a1b1/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Vinanda Addo's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -223,7 +238,7 @@ export default function TeamPage() {
               <h2 className="text-lg font-semibold tracking-tight text-[#2E3A39] uppercase">
                 Advisors
               </h2>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#2E3A39]/70">
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#2E3A39]/70">
                 Banking · Technology · Impact
               </p>
             </header>
@@ -232,20 +247,20 @@ export default function TeamPage() {
               {/* Aad van Gent */}
               <article
                 id="aad-van-gent"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+                className={teamCardClass}
               >
                 {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/aad-van-gent.jpeg.png"
                       alt="Portrait of Aad van Gent"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -255,7 +270,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Aad van Gent
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Retired Enterprise Architecture for BI and Application Architecture
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -268,7 +283,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/aadvangent/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Aad van Gent's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -280,20 +295,20 @@ export default function TeamPage() {
               {/* Gerard Bergsma */}
               <article
                 id="gerard-bergsma"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+                className={teamCardClass}
               >
                 {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/gerard-bergsma.jpeg.png"
                       alt="Portrait of Gerard Bergsma"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -303,7 +318,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Gerard Bergsma
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Advisor to the board of People&apos;s Pension Ghana
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -318,7 +333,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/gerard-bergsma-7387473/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Gerard Bergsma's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -330,20 +345,20 @@ export default function TeamPage() {
               {/* Michel van der Kleij */}
               <article
                 id="michel-van-der-kleij"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+                className={teamCardClass}
               >
                 {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/michel-van-der-kleij.png"
                       alt="Portrait of Michel van der Kleij"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -353,7 +368,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Michel van der Kleij
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Chief Information Security/Risk Officer (CISSP, CISA, CEH)
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -368,7 +383,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/michel-v-d-kleij/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Michel van der Kleij's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -380,20 +395,20 @@ export default function TeamPage() {
               {/* Rene Smit */}
               <article
                 id="rene-smit"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+                className={teamCardClass}
               >
                 {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/rene-smit.png"
                       alt="Portrait of Rene Smit"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -403,7 +418,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Rene Smit
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Retired Managing Director at NN Group
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -418,7 +433,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/renehsmit/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Rene Smit's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
@@ -430,20 +445,20 @@ export default function TeamPage() {
               {/* Thea Fierens */}
               <article
                 id="thea-fierens"
-                className="group relative flex flex-col items-center text-center rounded-3xl border border-forest/20 bg-gradient-to-b from-forest via-forest to-[#1a3326] px-6 py-8 shadow-[0_18px_45px_rgba(31,59,44,0.3)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(31,59,44,0.4)] hover:border-forest/40 overflow-hidden"
+                className={teamCardClass}
               >
                 {/* Leaf background */}
-                <div className="pointer-events-none absolute inset-0 bg-[url('/images/leaf_background.webp')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+                <div className={teamCardTextureClass} />
                 {/* Prominent Avatar */}
                 <div className="relative z-10 mb-5 flex-shrink-0">
-                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-sand shadow-lg shadow-black/30 ring-4 ring-white/40 transition-transform duration-300 group-hover:scale-105">
+                  <div className={teamAvatarFrameClass}>
                     <div className="absolute inset-1 rounded-full bg-sand" />
                     <Image
                       src="/images/team/thea-fierens.png"
                       alt="Portrait of Thea Fierens"
                       width={128}
                       height={128}
-                      className="relative h-full w-full object-cover rounded-full"
+                      className={teamPortraitClass}
                     />
                   </div>
                 </div>
@@ -453,7 +468,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold tracking-tight text-white uppercase">
                     Thea Fierens
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
                     Development &amp; Impact Advisor
                   </p>
                   <p className="mt-4 text-sm text-white/85 leading-relaxed">
@@ -468,7 +483,7 @@ export default function TeamPage() {
                       href="https://www.linkedin.com/in/thea-fierens-b79a104/"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#0077B5]/20 transition-all hover:bg-[#005885] hover:shadow-lg hover:shadow-[#0077B5]/30 hover:-translate-y-0.5"
+                      className={teamLinkedInClass}
                       aria-label="View Thea Fierens's LinkedIn profile"
                     >
                       <Linkedin className="h-4 w-4" strokeWidth={2} />
