@@ -5,6 +5,7 @@ import { UmamiLoader } from "./components/UmamiLoader";
 import { VisitTracker } from "./components/VisitTracker";
 import { LocationShareNativeTrigger } from "./components/LocationShareNativeTrigger";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
+import { ClarityLoader } from "./components/ClarityLoader";
 import { ContentProtection } from "./components/ContentProtection";
 
 export const metadata: Metadata = {
@@ -112,6 +113,7 @@ export default function RootLayout({
         {children}
         <VisitTracker />
         <LocationShareNativeTrigger />
+        <ClarityLoader />
         <UmamiLoader />
         <GoogleAnalytics />
         {/* Organization Schema */}

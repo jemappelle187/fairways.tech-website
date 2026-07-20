@@ -109,9 +109,23 @@ export default function CookiesPage() {
             <p>
               We use analytics only in aggregate form, for example to review page
               load times, general navigation, and high-level referrer information.
-              These metrics are not used to show targeted ads to you on other sites
-              and are not resold. They support reliable operation, monitoring, and
-              improvement of the Website.
+              We may also send a minimal internal visit notification to support
+              reliability monitoring and follow-up on Website usage. These metrics
+              are not used to show targeted ads to you on other sites and are not
+              resold. They support reliable operation, monitoring, and improvement
+              of the Website.
+            </p>
+            <h3 className="mt-6 text-base font-semibold text-stone sm:text-lg">
+              3.3 Behavioural insights (Microsoft Clarity)
+            </h3>
+            <p>
+              We use Microsoft Clarity to understand how visitors interact with the
+              Website (for example anonymised session replays, heatmaps, and
+              frustration signals such as repeated clicks). Clarity is used for
+              product and UX improvement only, not for advertising. We configure
+              Clarity in cookieless mode where available so it does not rely on
+              Clarity cookies. Sensitive form fields are masked by default in
+              Clarity&apos;s privacy settings.
             </p>
           </LegalSection>
 
@@ -119,14 +133,17 @@ export default function CookiesPage() {
             <p>
               When you first visit, you will see a cookie notice that explains our
               use of storage. Where required, you can choose to allow only what is
-              needed for the site to work, or to allow analytics in line with
-              applicable ePrivacy and GDPR requirements.
+              needed for the site to work, or to allow optional analytics (such as
+              Umami or Google Analytics) in line with applicable ePrivacy and GDPR
+              requirements.
             </p>
             <p>
               Strictly necessary / functional storage may load as needed for the
-              site to function. Any optional analytics or similar tools that require
-              consent are loaded in line with your choice and the law that applies
-              in your situation.
+              site to function. Internal visit monitoring and Microsoft Clarity
+              behavioural insights may load as part of site operation and
+              improvement. Optional analytics tools that require consent are loaded
+              only in line with your choice and the law that applies in your
+              situation.
             </p>
             <p>
               For more information about your rights, see the{" "}

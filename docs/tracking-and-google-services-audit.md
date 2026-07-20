@@ -81,10 +81,16 @@ _First-time visitor • 12/30/2025, 10:47 AM_
 - **Purpose**: Visual location reference in Slack notifications
 - **No tracking**: Just a link, no Google Analytics or tracking
 
-### ❌ Google Analytics
-- **Status**: ❌ **NOT configured**
-- **Current Analytics**: Using Umami Analytics instead
-- **Umami**: Privacy-focused, self-hosted analytics (only loads if user accepts cookies)
+### ✅ Google Analytics 4
+- **Status**: Configured when `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set
+- **Consent**: Only loads if user accepts cookies (same gate as Umami)
+- **Also**: Umami Analytics (privacy-focused; only if user accepts cookies)
+
+### ✅ Microsoft Clarity
+- **Status**: Configured via `NEXT_PUBLIC_CLARITY_PROJECT_ID`
+- **Consent**: Loads for all visitors (not gated by cookie banner), similar to VisitTracker
+- **Dashboard action**: Turn **Cookies** Off under Clarity project Settings for cookieless mode
+- **Purpose**: Session replays, heatmaps, frustration signals (UX), not advertising
 
 ### ❌ Google Tag Manager (GTM)
 - **Status**: ❌ **NOT configured**
@@ -109,11 +115,12 @@ _First-time visitor • 12/30/2025, 10:47 AM_
 
 ### What's Tracked:
 - ✅ **VisitTracker** → Slack (runs always, no cookies)
+- ✅ **Microsoft Clarity** → session replays / heatmaps (runs always; prefer Cookies Off in Clarity project settings; env: `NEXT_PUBLIC_CLARITY_PROJECT_ID`)
 - ✅ **Umami Analytics** → Umami dashboard (only if user accepts cookies)
+- ✅ **Google Analytics 4** → if `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set (only if user accepts cookies)
 - ✅ **Google Search Console** → SEO monitoring (server-side, no cookies)
 
 ### What's NOT Tracked:
-- ❌ Google Analytics (not configured)
 - ❌ Google Tag Manager (not configured)
 - ❌ Google Ads (not configured)
 - ❌ Cookie data in Slack (only localStorage)

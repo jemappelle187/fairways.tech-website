@@ -149,6 +149,10 @@ export default function PrivacyPage() {
               <li>Screen size and language settings</li>
               <li>Pages visited, visit duration and referrer URL</li>
               <li>Aggregate usage trends</li>
+              <li>
+                Interaction patterns via Microsoft Clarity (session replays and
+                heatmaps), with sensitive inputs masked
+              </li>
             </ul>
             <p>
               We do <strong>not</strong> use this information for advertising,
