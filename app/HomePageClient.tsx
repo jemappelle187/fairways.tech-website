@@ -1,12 +1,28 @@
 "use client";
 
-import { useState, useEffect, useRef, Suspense } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  Suspense,
+  type TouchEvent,
+} from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/umami";
 import { ContactCta } from "./components/ContactCta";
 import { CookieBanner } from "./components/CookieBanner";
-import { Leaf, Landmark, Users2, Store, GraduationCap, Globe2, ShieldCheck } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Leaf,
+  Landmark,
+  Users2,
+  Store,
+  GraduationCap,
+  Globe2,
+  ShieldCheck,
+} from "lucide-react";
 import { Header, Footer } from "./components/SiteChrome";
 import SdgLogosOnly from "@/app/components/SdgLogosOnly";
 
@@ -31,14 +47,23 @@ const solutionVisualItems = [
   }
 ];
 
-// Simple animated counter for “3+ / 250+ / 30+”
-function Counter({ target, suffix = "+" }: { target: number; suffix?: string }) {
-  const [value, setValue] = useState(0);
+// Keeps the real metric in the DOM, then animates only once the card is visible.
+function Counter({
+  target,
+  suffix = "+",
+  prefix = "",
+  animate = false,
+}: {
+  target: number;
+  suffix?: string;
+  prefix?: string;
+  animate?: boolean;
+}) {
+  const [value, setValue] = useState(target);
 
   useEffect(() => {
-    // If target is 0 (not yet in view), reset and skip animation
-    if (target === 0) {
-      setValue(0);
+    if (!animate) {
+      setValue(target);
       return;
     }
 
@@ -60,10 +85,11 @@ function Counter({ target, suffix = "+" }: { target: number; suffix?: string }) 
     }, duration / frames);
 
     return () => clearInterval(interval);
-  }, [target]);
+  }, [animate, target]);
 
   return (
     <>
+      {prefix}
       {value}
       {suffix}
     </>
@@ -109,17 +135,124 @@ const partnershipCards = [
   }
 ];
 
+const photoStorySlides = [
+  {
+    src: "/images/slideshow/last-mile-field-access.jpg",
+    alt: "Fairways.Tech team walking along a rural field path",
+    label: "Last-mile access",
+    title: "We follow the road until the road ends.",
+    caption:
+      "Reaching remote production areas gives us context that spreadsheets alone cannot reveal.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/farmer-dialogue-on-site.jpg",
+    alt: "Fairways.Tech team speaking with a farmer at his rural home",
+    label: "Farmer dialogue",
+    title: "Local knowledge leads the conversation.",
+    caption:
+      "We listen first, so each record reflects real livelihoods, constraints, and ambitions.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/community-field-day.jpg",
+    alt: "Farmers and field partners gathered for a community field day",
+    label: "Community alignment",
+    title: "Impact grows when communities shape the process.",
+    caption:
+      "Farmers, field partners, and local leaders build shared understanding before systems are introduced.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/rural-production-landscape.jpg",
+    alt: "Remote rural production landscape during the dry season",
+    label: "Ground realities",
+    title: "Every season changes what is possible.",
+    caption:
+      "Climate, distance, and infrastructure directly influence production and access to finance.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/water-access-assessment.jpg",
+    alt: "Fairways.Tech assessing a dry water structure in a rural farming area",
+    label: "Water access",
+    title: "Constraints become visible when you stand beside them.",
+    caption:
+      "Field evidence turns hidden barriers into practical priorities for partners and investment.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/plot-level-field-review.jpg",
+    alt: "Field partners reviewing conditions at an agricultural plot",
+    label: "Plot validation",
+    title: "Each field tells a different financing story.",
+    caption:
+      "Plot-level observation connects local conditions with more responsible, informed decisions.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/field-assessment-active-farmland.jpg",
+    alt: "Fairways.Tech team assessing active farmland in a remote growing area",
+    label: "Field intelligence",
+    title: "Observation becomes evidence institutions can use.",
+    caption:
+      "Real activity is translated into trusted signals without losing the realities behind the data.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/mechanisation-readiness.jpg",
+    alt: "Fairways.Tech reviewing agricultural machinery with local partners",
+    label: "Production readiness",
+    title: "We identify what can unlock the next stage of growth.",
+    caption:
+      "Capacity, equipment, and operating conditions reveal where well-placed support can create momentum.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/rural-site-visit-logistics.jpg",
+    alt: "Field team beside a vehicle during a remote rural site visit",
+    label: "Operational commitment",
+    title: "Reliable insight requires real presence.",
+    caption:
+      "The work includes the distance, the difficult access, and the practical effort behind every verified record.",
+    position: "center",
+  },
+  {
+    src: "/images/slideshow/walking-the-value-chain.jpg",
+    alt: "Fairways.Tech and local partners walking through a remote agricultural landscape",
+    label: "Forward together",
+    title: "Local insight becomes a path to scalable rural finance.",
+    caption:
+      "When communities and institutions share a trusted view of reality, progress can travel further.",
+    position: "50% 68%",
+  },
+];
+
+const homeGlassCardClass =
+  "group flex h-full flex-col items-center rounded-2xl border border-white/15 bg-white/[0.06] bg-gradient-to-b from-white/[0.10] via-white/[0.04] to-white/[0.12] px-5 py-5 text-center shadow-[0_14px_34px_rgba(15,23,42,0.30)] ring-1 ring-white/5 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-white/30 hover:shadow-[0_20px_44px_rgba(15,23,42,0.38)] sm:px-6 sm:py-6";
+
+const homeReachCardClass =
+  "group relative flex h-full min-h-[280px] overflow-hidden rounded-2xl border border-white/35 bg-white/5 shadow-[0_14px_34px_rgba(15,23,42,0.16)] ring-1 ring-white/5 backdrop-blur-xl transition-all duration-700 ease-out will-change-transform hover:-translate-y-0.5 hover:shadow-[0_20px_48px_rgba(15,23,42,0.24)]";
+
+const homeReachImageShellClass =
+  "pointer-events-none absolute inset-0 overflow-hidden rounded-2xl will-change-transform transition-transform duration-700 ease-out group-hover:scale-[1.025] group-hover:brightness-105";
+
+const homeDarkOverlayStyle = {
+  background:
+    "linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52))",
+};
+
 function VideoHero() {
   return (
     <section id="video-hero" className="relative overflow-hidden md:py-20 md:min-h-[700px]">
-      {/* Hero image — Fairways.Tech with farmers in Upper West region, Ghana */}
+      {/* Hero image - Fairways.Tech with farmers in Upper West region, Ghana */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/hero-upper-west-farmers.png"
         alt="Fairways.Tech team with farmers in Upper West region, Ghana"
         className="relative z-0 w-full h-auto object-contain md:absolute md:inset-0 md:h-full md:w-full md:object-cover"
       />
-      {/* Centered logo watermark — deters copying/reuse */}
+      {/* Centered logo watermark - deters copying/reuse */}
       <div
         className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none"
         aria-hidden="true"
@@ -130,7 +263,7 @@ function VideoHero() {
           alt=""
           className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] opacity-40 select-none"
           draggable={false}
-          style={{ userSelect: "none", WebkitUserDrag: "none" } as React.CSSProperties}
+          style={{ userSelect: "none" }}
         />
       </div>
       {/* Dark overlay - hidden on mobile/tablet, visible on desktop */}
@@ -144,6 +277,197 @@ function VideoHero() {
   );
 }
 
+function PhotoStorySlideshow() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [autoplayCycle, setAutoplayCycle] = useState(0);
+  const swipeStartX = useRef<number | null>(null);
+  const slide = photoStorySlides[activeSlide];
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % photoStorySlides.length);
+    }, 7200);
+
+    return () => clearInterval(interval);
+  }, [autoplayCycle]);
+
+  const restartAutoplayCycle = () => {
+    setAutoplayCycle((current) => current + 1);
+  };
+
+  const showPrevious = () => {
+    restartAutoplayCycle();
+    setActiveSlide((current) =>
+      current === 0 ? photoStorySlides.length - 1 : current - 1
+    );
+  };
+
+  const showNext = () => {
+    restartAutoplayCycle();
+    setActiveSlide((current) => (current + 1) % photoStorySlides.length);
+  };
+
+  const showSlide = (index: number) => {
+    restartAutoplayCycle();
+    setActiveSlide(index);
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    swipeStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (swipeStartX.current === null) return;
+
+    const swipeDistance = event.changedTouches[0].clientX - swipeStartX.current;
+    swipeStartX.current = null;
+
+    if (Math.abs(swipeDistance) < 48) return;
+    if (swipeDistance > 0) {
+      showPrevious();
+    } else {
+      showNext();
+    }
+  };
+
+  return (
+    <section
+      id="field-stories"
+      aria-labelledby="field-stories-heading"
+      className="relative isolate scroll-mt-20 overflow-hidden bg-sand px-6 py-16 text-stone sm:py-20 lg:px-8"
+    >
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-sand via-sand/80 to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent via-sand/80 to-sand"
+        aria-hidden="true"
+      />
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mx-auto mb-8 max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
+            Field stories
+          </p>
+          <h2
+            id="field-stories-heading"
+            className="mx-auto mt-3 max-w-2xl text-2xl font-semibold leading-tight text-stone sm:text-3xl"
+          >
+            Where trust is built before finance begins.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700">
+            Follow the work from remote access and first conversations to field
+            evidence that helps institutions act with confidence.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          <div
+            className="relative min-h-[28rem] touch-pan-y select-none overflow-hidden rounded-xl bg-forest shadow-[0_24px_70px_rgba(31,41,55,0.18)] ring-1 ring-black/5 sm:min-h-[34rem]"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={() => {
+              swipeStartX.current = null;
+            }}
+          >
+            {photoStorySlides.map((item, index) => (
+              <Image
+                key={item.src}
+                src={item.src}
+                alt={index === activeSlide ? item.alt : ""}
+                fill
+                sizes="(min-width: 1024px) 68vw, 100vw"
+                priority={index === 0}
+                quality={82}
+                className={`object-cover transition-all duration-700 ease-out ${
+                  index === activeSlide
+                    ? "scale-100 opacity-100"
+                    : "scale-[1.025] opacity-0"
+                }`}
+                style={{ objectPosition: item.position }}
+                aria-hidden={index !== activeSlide}
+              />
+            ))}
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/10 to-transparent"
+              aria-hidden="true"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sand">
+                  {slide.label}
+                </p>
+                <h3 className="mt-2 text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                  {slide.title}
+                </h3>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
+                  {slide.caption}
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={showPrevious}
+              className="absolute left-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-white/18 text-white shadow-[0_12px_30px_rgba(0,0,0,0.20)] backdrop-blur-md transition hover:bg-white/28 focus:outline-none focus:ring-2 focus:ring-white/70 sm:inline-flex"
+              aria-label="Previous photo"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              className="absolute right-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-white/18 text-white shadow-[0_12px_30px_rgba(0,0,0,0.20)] backdrop-blur-md transition hover:bg-white/28 focus:outline-none focus:ring-2 focus:ring-white/70 sm:inline-flex"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-[2.75rem_1fr_2.75rem] items-center gap-3 sm:flex sm:justify-center">
+            <button
+              type="button"
+              onClick={showPrevious}
+              className="inline-flex h-11 w-11 items-center justify-center text-forest/70 transition-colors hover:text-forest focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-forest/35 sm:hidden"
+              aria-label="Previous photo"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+
+            <div className="flex items-center justify-center gap-1.5">
+              {photoStorySlides.map((item, index) => (
+                <button
+                  key={item.src}
+                  type="button"
+                  onClick={() => showSlide(index)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    index === activeSlide
+                      ? "w-8 bg-forest"
+                      : "w-3 bg-stone/20 hover:bg-stone/40"
+                  }`}
+                  aria-label={`Show ${item.label}`}
+                  aria-current={index === activeSlide ? "true" : undefined}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={showNext}
+              className="inline-flex h-11 w-11 items-center justify-center text-forest/70 transition-colors hover:text-forest focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-forest/35 sm:hidden"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 function ViaTracker() {
   const searchParams = useSearchParams();
   const via = searchParams.get("via");
@@ -252,9 +576,6 @@ export default function HomePageClient() {
       </Suspense>
       <Header />
       <main id="main-content" className="flex flex-col gap-20 pb-20">
-        <h1 className="sr-only">
-          Fairways.Tech — Turning farm activity into trusted, finance-ready data
-        </h1>
         <VideoHero />
 
         {/* Plain-language overview for visitors, search, and AI systems */}
@@ -269,7 +590,7 @@ export default function HomePageClient() {
               atGlanceFade.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
               At a glance
             </p>
             <h2
@@ -320,6 +641,8 @@ export default function HomePageClient() {
             </div>
           </div>
         </section>
+
+        <PhotoStorySlideshow />
         
         {/* WHY WE EXIST */}
         <section id="why" aria-labelledby="why-heading" className="relative overflow-hidden bg-sand px-6 py-16 sm:py-20">
@@ -344,7 +667,7 @@ export default function HomePageClient() {
             <div className={`text-center ${
               whyWeExistFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
             }`}>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
                 Why we exist
               </p>
               <h2 id="why-heading" className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
@@ -411,7 +734,7 @@ export default function HomePageClient() {
             <div className="mx-auto max-w-6xl">
               <div className="flex flex-col gap-y-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
                 <div className="max-w-xl lg:max-w-2xl">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                  <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
                     Our solution
                   </p>
                   <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
@@ -475,7 +798,7 @@ export default function HomePageClient() {
                           className="object-cover"
                         />
                       </div>
-                      <p className="text-[11px] font-medium uppercase leading-tight tracking-[0.18em] text-slate-500">
+                      <p className="text-[11px] font-medium uppercase leading-tight tracking-[0.16em] text-slate-500">
                         {item.lines.map((line) => (
                           <span key={line} className="block">
                             {line}
@@ -496,7 +819,7 @@ export default function HomePageClient() {
               <div className={`text-center ${
                 ourSolutionFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
               }`}>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
                   Our solution
                 </p>
                 <h2 id="solution-heading" className="mt-3 text-2xl font-semibold text-stone sm:text-3xl">
@@ -584,7 +907,7 @@ export default function HomePageClient() {
 
   <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-6 md:px-8">
     <div className="mx-auto max-w-3xl text-center text-white">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white">
         Partners across the food system
       </p>
       <h2 id="partnerships-heading" className="mt-2 text-xl font-semibold text-white sm:text-2xl">
@@ -600,7 +923,7 @@ export default function HomePageClient() {
         return (
           <div
             key={card.title}
-            className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+            className={`${homeGlassCardClass} ${
               partnershipCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
             style={{ transitionDelay: partnershipCardsFade.isVisible ? `${index * 100}ms` : '0ms' }}
@@ -698,7 +1021,7 @@ export default function HomePageClient() {
   <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-10 px-6 md:px-8">
     {/* centered heading */}
     <div className="mx-auto max-w-3xl text-center text-white">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white">
         Our approach
       </p>
       <h2 id="approach-heading" className="mt-2 text-xl font-semibold text-white sm:text-2xl">
@@ -707,7 +1030,7 @@ export default function HomePageClient() {
     </div>
 
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" ref={approachCardsFade.ref}>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`${homeGlassCardClass} ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
@@ -717,7 +1040,7 @@ export default function HomePageClient() {
           Captured consistently, building a trusted history over time.
         </p>
       </div>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`${homeGlassCardClass} ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '150ms' : '0ms' }}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
@@ -727,7 +1050,7 @@ export default function HomePageClient() {
           Structured records that institutions can use within their existing standards.
         </p>
       </div>
-      <div className={`group flex h-full flex-col items-center text-center rounded-3xl border border-white/20 bg-white/5 bg-gradient-to-b from-white/10 via-white/5 to-white/15 px-5 py-5 sm:px-6 sm:py-6 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.45)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(15,23,42,0.65)] hover:border-white/40 ${
+      <div className={`${homeGlassCardClass} ${
         approachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`} style={{ transitionDelay: approachCardsFade.isVisible ? '300ms' : '0ms' }}>
         <h3 className="text-lg sm:text-xl font-semibold tracking-tight text-white uppercase">
@@ -755,7 +1078,7 @@ export default function HomePageClient() {
           >
             <div className="mx-auto max-w-6xl space-y-8 px-6 lg:px-8">
               <div className="text-center">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
                   Reach
                 </p>
                 <h2 id="reach-heading" className="mt-2 text-xl font-semibold text-stone sm:text-2xl">
@@ -768,27 +1091,26 @@ export default function HomePageClient() {
 
               <div className="grid items-stretch gap-6 sm:grid-cols-3" ref={reachCardsFade.ref}>
                 {/* COUNTRIES */}
-                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`${homeReachCardClass} ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}>
                   {/* Background image */}
-                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                  <div className={homeReachImageShellClass}>
                     <Image
                       src="/images/reach-countries-card-v2.png"
                       alt=""
                       fill
                       className="h-full w-full object-cover opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      priority
+                      unoptimized
                       aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
                   <div
-                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
-                    }}
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-2xl"
+                    style={homeDarkOverlayStyle}
                     aria-hidden="true"
                   />
                   {/* Content */}
@@ -799,7 +1121,7 @@ export default function HomePageClient() {
                       </p>
                     </div>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
-                      <Counter target={statsInView ? 2 : 0} suffix="+" />
+                      <Counter target={2} suffix="+" animate={statsInView} />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
                       Growing network across Africa, Asia, Europe and Latin America, expanding
@@ -809,27 +1131,26 @@ export default function HomePageClient() {
                 </div>
 
                 {/* FARMERS */}
-                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`${homeReachCardClass} ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`} style={{ transitionDelay: reachCardsFade.isVisible ? '150ms' : '0ms' }}>
                   {/* Background image */}
-                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                  <div className={homeReachImageShellClass}>
                     <Image
                       src="/images/reach-farmers-card.png"
                       alt=""
                       fill
                       className="h-full w-full object-cover object-[25%_center] opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      priority
+                      unoptimized
                       aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
                   <div
-                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
-                    }}
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-2xl"
+                    style={homeDarkOverlayStyle}
                     aria-hidden="true"
                   />
                   {/* Content */}
@@ -840,7 +1161,7 @@ export default function HomePageClient() {
                       </p>
                     </div>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
-                      21K
+                      <Counter target={21} suffix="K" animate={statsInView} />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
                       We widen inclusion by reaching more farmers as our network scales.
@@ -849,27 +1170,26 @@ export default function HomePageClient() {
                 </div>
 
                 {/* COMMUNITY AGENTS */}
-                <div className={`group relative flex h-full min-h-[280px] overflow-hidden rounded-[32px] border border-white/45 bg-white/5 backdrop-blur-xl shadow-[0_18px_45px_rgba(15,23,42,0.18)] transition-all duration-700 ease-out will-change-transform hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.28)] ${
+                <div className={`${homeReachCardClass} ${
                   reachCardsFade.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`} style={{ transitionDelay: reachCardsFade.isVisible ? '300ms' : '0ms' }}>
                   {/* Background image */}
-                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] will-change-transform transition-transform duration-300 ease-out group-hover:scale-110 group-hover:brightness-110">
+                  <div className={homeReachImageShellClass}>
                     <Image
                       src="/images/community-agents-field.png"
                       alt=""
                       fill
                       className="h-full w-full object-cover opacity-90"
                       sizes="(min-width: 1024px) 33vw, 100vw"
+                      priority
+                      unoptimized
                       aria-hidden
                     />
                   </div>
                   {/* Dark overlay for text contrast */}
                   <div
-                    className="pointer-events-none absolute inset-0 z-[1] rounded-[32px]"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55))",
-                    }}
+                    className="pointer-events-none absolute inset-0 z-[1] rounded-2xl"
+                    style={homeDarkOverlayStyle}
                     aria-hidden="true"
                   />
                   {/* Content */}
@@ -880,7 +1200,7 @@ export default function HomePageClient() {
                       </p>
                     </div>
                     <p className="mb-5 text-6xl sm:text-7xl font-bold tracking-tight text-white drop-shadow-md">
-                      <Counter target={statsInView ? 30 : 0} suffix="+" />
+                      <Counter target={30} suffix="+" animate={statsInView} />
                     </p>
                     <p className="text-base font-semibold leading-relaxed text-white/95 drop-shadow-sm">
                       Cooperatives and local field agents connecting farms to our digital platform, ensuring every farmer record is real, active and up to date.
@@ -897,7 +1217,7 @@ export default function HomePageClient() {
               <div className={`text-center ${
                 ourMissionFade.isVisible ? 'fade-in-up' : 'fade-in-hidden'
               }`}>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
                   Our mission
                 </p>
                 <h2 id="mission-heading" className="mt-2 text-2xl font-semibold text-stone sm:text-3xl">
