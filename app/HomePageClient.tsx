@@ -5,7 +5,6 @@ import {
   useEffect,
   useRef,
   Suspense,
-  type RefObject,
   type TouchEvent,
 } from "react";
 import Image from "next/image";
@@ -257,13 +256,7 @@ function VideoHero() {
   );
 }
 
-function PhotoStorySlideshow({
-  sectionRef,
-  isVisible,
-}: {
-  sectionRef: RefObject<HTMLDivElement | null>;
-  isVisible: boolean;
-}) {
+function PhotoStorySlideshow({ isVisible }: { isVisible: boolean }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [autoplayCycle, setAutoplayCycle] = useState(0);
   const swipeStartX = useRef<number | null>(null);
@@ -334,7 +327,7 @@ function PhotoStorySlideshow({
         className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent via-sand/80 to-sand"
         aria-hidden="true"
       />
-      <div className="relative z-10 mx-auto max-w-7xl" ref={sectionRef}>
+      <div className="relative z-10 mx-auto max-w-7xl">
         <div
           className={`mx-auto mb-8 max-w-3xl text-center ${
             isVisible ? "fade-in-up" : "fade-in-hidden"
@@ -637,10 +630,9 @@ export default function HomePageClient() {
           </div>
         </section>
 
-        <PhotoStorySlideshow
-          sectionRef={fieldStoriesFade.ref}
-          isVisible={fieldStoriesFade.isVisible}
-        />
+        <div ref={fieldStoriesFade.ref}>
+          <PhotoStorySlideshow isVisible={fieldStoriesFade.isVisible} />
+        </div>
         
         {/* WHY WE EXIST */}
         <section id="why" aria-labelledby="why-heading" className="relative overflow-hidden bg-sand px-6 py-16 sm:py-20">
