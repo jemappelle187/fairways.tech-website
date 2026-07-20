@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   Suspense,
+  type RefObject,
   type TouchEvent,
 } from "react";
 import Image from "next/image";
@@ -256,7 +257,13 @@ function VideoHero() {
   );
 }
 
-function PhotoStorySlideshow() {
+function PhotoStorySlideshow({
+  sectionRef,
+  isVisible,
+}: {
+  sectionRef: RefObject<HTMLDivElement | null>;
+  isVisible: boolean;
+}) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [autoplayCycle, setAutoplayCycle] = useState(0);
   const swipeStartX = useRef<number | null>(null);
@@ -327,8 +334,12 @@ function PhotoStorySlideshow() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent via-sand/80 to-sand"
         aria-hidden="true"
       />
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="mx-auto mb-8 max-w-3xl text-center">
+      <div className="relative z-10 mx-auto max-w-7xl" ref={sectionRef}>
+        <div
+          className={`mx-auto mb-8 max-w-3xl text-center ${
+            isVisible ? "fade-in-up" : "fade-in-hidden"
+          }`}
+        >
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-forest">
             Field stories
           </p>
@@ -344,7 +355,11 @@ function PhotoStorySlideshow() {
           </p>
         </div>
 
-        <div className="space-y-5">
+        <div
+          className={`space-y-5 ${
+            isVisible ? "fade-in-up-delay-1" : "fade-in-hidden"
+          }`}
+        >
           <div
             className="relative min-h-[28rem] touch-pan-y select-none overflow-hidden rounded-xl bg-forest shadow-[0_24px_70px_rgba(31,41,55,0.18)] ring-1 ring-black/5 sm:min-h-[34rem]"
             onTouchStart={handleTouchStart}
@@ -527,6 +542,7 @@ export default function HomePageClient() {
   const whyWeExistFade = useFadeInOnScroll();
   const ourSolutionFade = useFadeInOnScroll();
   const atGlanceFade = useFadeInOnScroll();
+  const fieldStoriesFade = useFadeInOnScroll();
   const sdgFade = useFadeInOnScroll();
   const ourMissionFade = useFadeInOnScroll();
 
@@ -621,7 +637,10 @@ export default function HomePageClient() {
           </div>
         </section>
 
-        <PhotoStorySlideshow />
+        <PhotoStorySlideshow
+          sectionRef={fieldStoriesFade.ref}
+          isVisible={fieldStoriesFade.isVisible}
+        />
         
         {/* WHY WE EXIST */}
         <section id="why" aria-labelledby="why-heading" className="relative overflow-hidden bg-sand px-6 py-16 sm:py-20">
