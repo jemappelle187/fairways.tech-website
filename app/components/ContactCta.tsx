@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { analytics } from "@/lib/analytics";
 import { ContactForm } from "./ContactForm";
@@ -104,7 +105,7 @@ export function ContactCta() {
               analytics.contactFormOpened();
               setOpen(true);
             }}
-            className="inline-flex items-center justify-center rounded-full bg-forest px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
+            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-forest shadow-[0_12px_30px_rgba(15,23,42,0.24)] transition hover:-translate-y-0.5 hover:bg-sand focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-forest"
           >
             Talk to us
           </button>
@@ -164,9 +165,11 @@ export function ContactCta() {
           <div className="relative w-full max-w-md transform rounded-3xl bg-white/95 p-0 shadow-2xl shadow-black/30 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex flex-col items-center px-8 py-10 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center">
-                <img
+                <Image
                   src="/images/logo/master/fairways-master-logo.png"
                   alt="Fairways.Tech"
+                  width={40}
+                  height={40}
                   className="h-10 w-10"
                 />
               </div>
@@ -180,7 +183,7 @@ export function ContactCta() {
               <button
                 type="button"
                 onClick={() => setShowToast(false)}
-                className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-forest/90"
+                className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(31,59,44,0.24)] transition hover:-translate-y-0.5 hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
               >
                 Close
               </button>

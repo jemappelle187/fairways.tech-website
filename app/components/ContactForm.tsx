@@ -350,7 +350,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         <button
           type="button"
           onClick={onClose}
-          className="text-sm text-slate-500 hover:text-slate-700 transition"
+          className="rounded-full px-3 py-2 text-sm font-medium text-slate-500 transition hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-forest/40"
           disabled={isSubmitting}
         >
           Cancel
@@ -358,7 +358,7 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-forest/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(31,59,44,0.2)] transition hover:-translate-y-0.5 hover:bg-forest/90 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50"
         >
           {isSubmitting ? (
             <>
@@ -374,4 +374,3 @@ export function ContactForm({ onSuccess, onClose }: ContactFormProps) {
     </form>
   );
 }
-
