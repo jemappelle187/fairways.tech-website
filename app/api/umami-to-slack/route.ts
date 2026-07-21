@@ -1,5 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
+import {
+  clarityStatusSlackLine,
+  type ClarityLoadStatus,
+  type ClarityStatusPayload,
+} from "@/lib/clarityStatus";
 import { reverseGeocodeGoogleFormattedAddress } from "@/lib/reverseGeocodeGoogleFormattedAddress";
 import { getVisitTrackingDb } from "@/lib/visitTrackingDb";
 
@@ -29,6 +34,7 @@ type SessionEventPayload = BasePayload & {
   actionLabel?: string | null;
   targetUrl?: string | null;
   utm?: Record<string, string>;
+  clarity?: ClarityStatusPayload;
 };
 
 type BrowserGpsPayload = BasePayload & {
@@ -87,6 +93,18 @@ function cleanUtm(value: unknown): Record<string, string> {
       .map((key) => [key, text((value as Record<string, unknown>)[key], 160)] as const)
       .filter(([, entry]) => Boolean(entry))
   );
+}
+
+function cleanClarity(value: unknown): ClarityStatusPayload | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const status = (value as ClarityStatusPayload).status;
+  const waitMs = Number((value as ClarityStatusPayload).waitMs);
+  const allowed: ClarityLoadStatus[] = ["not_configured", "loaded", "blocked"];
+  if (!allowed.includes(status)) return null;
+  return {
+    status,
+    waitMs: Number.isFinite(waitMs) && waitMs >= 0 ? Math.round(waitMs) : 0,
+  };
 }
 
 function getClientIp(req: NextRequest): string | null {
@@ -275,6 +293,7 @@ async function handleSessionEvent(req: NextRequest, body: SessionEventPayload) {
   const hostname = text(body.hostname, 255);
   const environment = environmentLabel(hostname);
   const utm = cleanUtm(body.utm);
+  const clarity = cleanClarity(body.clarity);
   const geo = await lookupIpGeo(clientIp);
   const sql = getVisitTrackingDb();
   const visitorBefore = rows<{ id: string }>(await sql`
@@ -328,7 +347,7 @@ async function handleSessionEvent(req: NextRequest, body: SessionEventPayload) {
       ${body.eventId}, ${body.sessionId}, ${body.visitorId}, ${body.eventType},
       ${body.occurredAt}, ${text(body.url, 2000)}, ${text(body.path, 1000)},
       ${text(body.title, 300) || null}, ${text(body.actionLabel, 160) || null},
-      ${text(body.targetUrl, 2000) || null}, '{}'::jsonb
+      ${text(body.targetUrl, 2000) || null}, ${JSON.stringify({ clarity })}::jsonb
     ) on conflict (id) do nothing returning id
   `);
   if (!insertedEvent.length) {
@@ -412,6 +431,7 @@ async function handleSessionEvent(req: NextRequest, body: SessionEventPayload) {
     body.actionLabel ? `Action: ${slackEscape(text(body.actionLabel, 160))}` : "",
     body.targetUrl ? `Target: ${slackEscape(text(body.targetUrl, 500))}` : "",
   ].filter(Boolean).join("\n");
+  const clarityLine = clarity ? clarityStatusSlackLine(clarity) : null;
   const history = [
     priorBrowser.length
       ? `🔁 ${priorBrowser.length} previous session(s) in this browser • last seen ${amsterdamTime(priorBrowser[0].last_seen_at)}`
@@ -426,6 +446,9 @@ async function handleSessionEvent(req: NextRequest, body: SessionEventPayload) {
     { type: "section", text: { type: "mrkdwn", text: `*🧭 Journey*\n${route}${duration !== "0s" ? `\n⏱️ ${duration}` : ""}${isBot ? "\n🤖 Likely bot" : ""}${session.converted ? "\n🎯 High intent" : ""}` } },
     { type: "section", text: { type: "mrkdwn", text: `*📍 ${slackEscape(location)}*\n${locationDetails}` } },
     { type: "section", text: { type: "mrkdwn", text: `*🌐 ${slackEscape(source)}*${sourceDetails ? `\n${sourceDetails}` : ""}` } },
+    ...(clarityLine
+      ? [{ type: "section", text: { type: "mrkdwn", text: `*📊 Microsoft Clarity*\n${clarityLine}` } }]
+      : []),
     ...(history ? [{ type: "section", text: { type: "mrkdwn", text: `*🕘 Previous visits*\n${history}` } }] : []),
     { type: "context", elements: [{ type: "mrkdwn", text: `⚙️ ${os} • ${text(body.screen, 60) || "Screen unknown"} • ${text(body.language, 40) || "Language unknown"} • ${eventLabel}\n_Session: \`${body.sessionId.slice(0, 8)}…\` • Event: \`${body.eventId.slice(0, 8)}…\`_` }] },
   ];

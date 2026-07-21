@@ -2,6 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import {
+  getClarityStatusSnapshot,
+  resolveClarityStatus,
+  type ClarityStatusPayload,
+} from "@/lib/clarityStatus";
 
 const VISITOR_KEY = "fw_tracker_visitor_id_v1";
 const SESSION_KEY = "fw_tracker_session_v1";
@@ -117,37 +122,50 @@ export function VisitTracker() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const visitor = getVisitor();
-    const session = getSession();
-    const url = window.location.href;
-    if (lastTrackedUrlRef.current === url) return;
-    lastTrackedUrlRef.current = url;
+    let cancelled = false;
 
-    sendEvent({
-      kind: "session_event",
-      eventType: "page_view",
-      eventId: createId(),
-      visitorId: visitor.id,
-      sessionId: session.id,
-      sessionStartedAt: session.startedAt,
-      occurredAt: new Date().toISOString(),
-      newInBrowser: visitor.newInBrowser,
-      title: document.title || null,
-      url,
-      path: `${window.location.pathname}${window.location.search}`,
-      hostname: window.location.hostname,
-      language: navigator.language || null,
-      referrer: document.referrer || null,
-      screen: `${window.innerWidth}x${window.innerHeight}`,
-      utm: getUtmParameters(),
-    });
+    void (async () => {
+      const visitor = getVisitor();
+      const session = getSession();
+      const url = window.location.href;
+      if (lastTrackedUrlRef.current === url) return;
+
+      const clarity = await resolveClarityStatus();
+      if (cancelled || lastTrackedUrlRef.current === url) return;
+      lastTrackedUrlRef.current = url;
+
+      sendEvent({
+        kind: "session_event",
+        eventType: "page_view",
+        eventId: createId(),
+        visitorId: visitor.id,
+        sessionId: session.id,
+        sessionStartedAt: session.startedAt,
+        occurredAt: new Date().toISOString(),
+        newInBrowser: visitor.newInBrowser,
+        title: document.title || null,
+        url,
+        path: `${window.location.pathname}${window.location.search}`,
+        hostname: window.location.hostname,
+        language: navigator.language || null,
+        referrer: document.referrer || null,
+        screen: `${window.innerWidth}x${window.innerHeight}`,
+        utm: getUtmParameters(),
+        clarity,
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [pathname]);
 
   useEffect(() => {
     const sendAction = (
       eventType: "cta_click" | "form_submit",
       label: string,
-      targetUrl: string | null
+      targetUrl: string | null,
+      clarity: ClarityStatusPayload = getClarityStatusSnapshot()
     ) => {
       const visitor = getVisitor();
       const session = getSession();
@@ -170,6 +188,7 @@ export function VisitTracker() {
         actionLabel: label,
         targetUrl,
         utm: getUtmParameters(),
+        clarity,
       });
     };
 
