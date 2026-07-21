@@ -5,6 +5,7 @@ import {
   type ClarityLoadStatus,
   type ClarityStatusPayload,
 } from "@/lib/clarityStatus";
+import { parseUserAgent } from "@/lib/parseUserAgent";
 import { reverseGeocodeGoogleFormattedAddress } from "@/lib/reverseGeocodeGoogleFormattedAddress";
 import { getVisitTrackingDb } from "@/lib/visitTrackingDb";
 
@@ -120,25 +121,6 @@ function getClientIp(req: NextRequest): string | null {
     if (candidate && !local.has(candidate)) return candidate;
   }
   return null;
-}
-
-function parseUserAgent(ua: string | null) {
-  const lower = (ua || "").toLowerCase();
-  const browser = lower.includes("edg/") ? "Edge"
-    : lower.includes("chrome/") ? "Chrome"
-      : lower.includes("safari/") && !lower.includes("chrome/") ? "Safari"
-        : lower.includes("firefox/") ? "Firefox" : "Other";
-  const device = lower.includes("ipad") ? "iPad"
-    : lower.includes("iphone") ? "iPhone"
-      : lower.includes("android") ? "Android device"
-        : /macintosh|windows nt|linux/.test(lower) ? "Desktop/Laptop" : "Unknown";
-  const os = /ipad|iphone/.test(lower) ? "iOS"
-    : lower.includes("android") ? "Android"
-      : /mac os x|macintosh/.test(lower) ? "macOS"
-        : lower.includes("windows nt") ? "Windows"
-          : lower.includes("linux") ? "Linux" : "Other";
-  const isBot = /bot|crawler|spider|slurp|headless|lighthouse|vercel-screenshot/i.test(ua || "");
-  return { browser, device, os, isBot };
 }
 
 async function lookupIpGeo(clientIp: string | null) {
