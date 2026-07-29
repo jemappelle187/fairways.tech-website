@@ -63,10 +63,10 @@ export function CookieBanner() {
               Cookies &amp; privacy
             </p>
             <p className="text-[12px] leading-relaxed text-sand/78 sm:text-[13px]">
-              This website uses essential cookies, optional analytics (Umami / GA),
-              internal visit monitoring, and Microsoft Clarity session insights to
-              keep the site reliable and understand how it is used. For details,
-              please see our{" "}
+              We use essential technologies to keep this website secure and
+              reliable. With your permission, we also use optional analytics to
+              understand how the website is used and improve the experience. Learn
+              more in our{" "}
               <a
                 href="/cookies"
                 className="font-medium text-white underline decoration-sand/45 underline-offset-4 transition hover:decoration-white"
