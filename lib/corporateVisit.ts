@@ -29,6 +29,7 @@ type VisitEvent = {
   event: keyof typeof eventNames;
   page: keyof typeof pages;
   field?: keyof typeof fields;
+  email?: string;
 };
 
 function browserRequest(request: Request) {
@@ -49,17 +50,22 @@ export function preflight(request: Request) {
 
 type VisitBatch = {visit: string; events: VisitEvent[]};
 
+// HTML email input syntax, with the same length bound as the Corporate sign-in form.
+const emailPattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
 function validEvent(data: unknown): data is VisitEvent {
   if (!data || typeof data !== "object" || Array.isArray(data) ||
-      Object.keys(data).some(key => !["page", "event", "field"].includes(key))) return false;
+      Object.keys(data).some(key => !["page", "event", "field", "email"].includes(key))) return false;
   const item = data as Record<string, unknown>;
   if (typeof item.event !== "string" || !Object.prototype.hasOwnProperty.call(eventNames, item.event) ||
       typeof item.page !== "string" || !Object.prototype.hasOwnProperty.call(pages, item.page)) return false;
+  if ("email" in item && (item.event !== "login-attempt" || !["entry", "dashboard"].includes(item.page) || typeof item.email !== "string" ||
+      item.email.length > 254 || /\s/.test(item.email) || !emailPattern.test(item.email))) return false;
   if (item.event === "field") return typeof item.field === "string" && Object.prototype.hasOwnProperty.call(fields, item.field);
   return !("field" in item);
 }
 
-const maxBytes = 1024;
+const maxBytes = 4096;
 async function readEvent(request: Request): Promise<VisitBatch | null> {
   if (!request.body || Number(request.headers.get("content-length")) > maxBytes) return null;
   const reader = request.body.getReader();
@@ -91,8 +97,7 @@ async function readEvent(request: Request): Promise<VisitBatch | null> {
   }
 }
 
-// Best-effort, per warm function instance. The events describe anonymous browser
-// activity and must never be used as verified identity or authentication audit records.
+// Best-effort, per warm function instance. A submitted email is a browser claim.
 let windowEnd = 0;
 const counts = new Map<string, number>();
 let total = 0;
@@ -138,14 +143,19 @@ function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
     "Approximate IP location: " + (area || "Unavailable"),
     "Client: " + clientDescription(headers.get("user-agent") ?? ""),
     "Visit: " + data.visit,
-    ...data.events.map(item => [eventNames[item.event], pages[item.page], ...(item.field ? [fields[item.field]] : [])].join(" · ")),
   ];
+  const activity = data.events.map(item => {
+    const description = [eventNames[item.event], pages[item.page], ...(item.field ? [fields[item.field]] : [])].join(" · ");
+    const text = item.email ? description + "\nEmail entered (unverified): " + item.email : description;
+    return {type: "section", text: {type: "plain_text", text}};
+  });
   return {
     text: title,
     blocks: [
       {type: "header", text: {type: "plain_text", text: title}},
       {type: "context", elements: [{type: "plain_text", text: "🟠 DEV · dev.fairways.tech"}]},
       {type: "section", text: {type: "plain_text", text: lines.join("\n")}},
+      ...activity,
     ],
   };
 }
