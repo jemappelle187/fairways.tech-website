@@ -1,7 +1,7 @@
 import {isIP} from "node:net";
 import {randomUUID} from "node:crypto";
 import {parseUserAgent} from "./parseUserAgent";
-import {lookupCorporateIpLocation} from "./corporateIpLocation";
+import {ipMapLink, lookupCorporateIpLocation} from "./corporateIpLocation";
 
 const origin = "https://dev.fairways.tech";
 const cors = {
@@ -157,8 +157,9 @@ async function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
   const lookup = await lookupCorporateIpLocation(ip);
   const area = lookup?.area || [geoPart(headers, "x-vercel-ip-city"), geoPart(headers, "x-vercel-ip-country-region"),
     /^[A-Z]{2}$/.test(country) ? countryNames.of(country) : country].filter(Boolean).join(", ");
+  const map = lookup ? lookup.mapLink : ipMapLink(headers.get("x-vercel-ip-latitude"), headers.get("x-vercel-ip-longitude"));
   const locationDetails = ["IP-based estimate", "IP: " + ip, lookup?.network,
-    lookup ? "Source: ipapi.co" : area ? "Source: Vercel" : ""].filter(Boolean).join(" • ");
+    lookup ? "Source: ipapi.co" : (area || map) ? "Source: Vercel" : ""].filter(Boolean).join(" • ");
   const deviceIcon = isBot ? "🤖" : /iPhone|iPad|Android/.test(device) ? "📱" : "💻";
   const first = data.events[0].event;
   const last = data.events[data.events.length - 1].event;
@@ -180,13 +181,16 @@ async function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
     last === "visit" || last === "navigation" ? "Page viewed" : eventNames[last]].filter(Boolean).join(" • ");
   const eventId = randomUUID();
   return {
+    unfurl_links: false,
+    unfurl_media: false,
     text: "🟠 DEV " + eventNames[first] + " on dev.fairways.tech",
     blocks: [
       {type: "header", text: {type: "plain_text", text: title, emoji: true}},
       context(["🟠 DEV", "dev.fairways.tech", deviceIcon + " " + device, browser, messageTime.format(new Date())].join(" • ")),
       section("*🧭 Journey*\n" + journey.join("\n")),
       ...emails,
-      section("*📍 " + (area || "Location unavailable") + "*\n" + locationDetails),
+      section("*📍 " + (area || (map ? "Approximate location" : "Location unavailable")) + "*\n" + locationDetails +
+        (map ? "\n🗺️ IP-based coordinates: " + map : "")),
       ...(data.source ? [section("*🌐 " + sources[data.source] + "*" + (data.hasCampaign ? "\nCampaign link" : ""))] : []),
       context("⚙️ " + details + "\n_Session: \`" + data.visit.slice(0, 8) + "…\` • Event: \`" + eventId.slice(0, 8) + "…\`_"),
     ],

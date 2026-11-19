@@ -1,6 +1,6 @@
 import { BlockList, isIP } from "node:net";
 
-type Location = { area: string; network: string };
+type Location = { area: string; network: string; mapLink: string };
 const cache = new Map<string, { expires: number; lookup: Promise<Location | null> }>();
 let rateLimitedUntil = 0;
 
@@ -25,6 +25,21 @@ function normalizedAddress(ip: string) {
   return new URL("http://[" + ip + "]/").hostname.slice(1, -1);
 }
 
+
+function coordinate(value: unknown, maximum: number) {
+  if (typeof value !== "number" && !(typeof value === "string" && /^-?\d+(?:\.\d+)?$/.test(value))) return null;
+  const n = Number(value);
+  return Number.isFinite(n) && Math.abs(n) <= maximum ? n.toFixed(3) : null;
+}
+
+export function ipMapLink(latitude: unknown, longitude: unknown) {
+  const lat = coordinate(latitude, 90);
+  const lon = coordinate(longitude, 180);
+  if (lat === null || lon === null) return "";
+  const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(lat + "," + lon);
+  return "<" + url + "|" + lat + ", " + lon + ">";
+}
+
 function label(value: unknown) {
   return typeof value === "string"
     ? value.slice(0, 160).replace(/[^\p{L}\p{M}\p{N} .,'’()&-]/gu, "").trim().replace(/&/g, "&amp;")
@@ -46,7 +61,7 @@ async function requestLocation(ip: string): Promise<Location | null> {
     const city = label(data.city);
     if (!city) return null;
     return {area: [city, label(data.region), label(data.country_name ?? data.country)].filter(Boolean).join(", "),
-      network: label(data.org)};
+      network: label(data.org), mapLink: ipMapLink(data.latitude, data.longitude)};
   } catch {
     return null;
   }
