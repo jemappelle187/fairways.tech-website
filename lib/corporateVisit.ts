@@ -1,6 +1,7 @@
 import {isIP} from "node:net";
 import {randomUUID} from "node:crypto";
 import {parseUserAgent} from "./parseUserAgent";
+import {lookupCorporateIpLocation} from "./corporateIpLocation";
 
 const origin = "https://dev.fairways.tech";
 const cors = {
@@ -150,11 +151,14 @@ function context(text: string) {
   return {type: "context", elements: [{type: "mrkdwn", text, verbatim: true}]};
 }
 
-function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
+async function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
   const {device, browser, os, isBot} = parseUserAgent(headers.get("user-agent"));
   const country = geoPart(headers, "x-vercel-ip-country");
-  const area = [geoPart(headers, "x-vercel-ip-city"), geoPart(headers, "x-vercel-ip-country-region"),
+  const lookup = await lookupCorporateIpLocation(ip);
+  const area = lookup?.area || [geoPart(headers, "x-vercel-ip-city"), geoPart(headers, "x-vercel-ip-country-region"),
     /^[A-Z]{2}$/.test(country) ? countryNames.of(country) : country].filter(Boolean).join(", ");
+  const locationDetails = ["IP-based estimate", "IP: " + ip, lookup?.network,
+    lookup ? "Source: ipapi.co" : area ? "Source: Vercel" : ""].filter(Boolean).join(" • ");
   const deviceIcon = isBot ? "🤖" : /iPhone|iPad|Android/.test(device) ? "📱" : "💻";
   const first = data.events[0].event;
   const last = data.events[data.events.length - 1].event;
@@ -182,7 +186,7 @@ function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
       context(["🟠 DEV", "dev.fairways.tech", deviceIcon + " " + device, browser, messageTime.format(new Date())].join(" • ")),
       section("*🧭 Journey*\n" + journey.join("\n")),
       ...emails,
-      section("*📍 " + (area || "Location unavailable") + "*\nIP-based estimate • IP: " + ip),
+      section("*📍 " + (area || "Location unavailable") + "*\n" + locationDetails),
       ...(data.source ? [section("*🌐 " + sources[data.source] + "*" + (data.hasCampaign ? "\nCampaign link" : ""))] : []),
       context("⚙️ " + details + "\n_Session: \`" + data.visit.slice(0, 8) + "…\` • Event: \`" + eventId.slice(0, 8) + "…\`_"),
     ],
@@ -240,6 +244,6 @@ export async function receiveVisit(request: Request) {
     console.warn("[CORPORATE_VISIT] Invalid DEV webhook configuration");
     return reply(503);
   }
-  const sent = await postToSlack(webhook, JSON.stringify(slackPayload(data, request.headers, ip)));
+  const sent = await postToSlack(webhook, JSON.stringify(await slackPayload(data, request.headers, ip)));
   return reply(sent ? 204 : 502);
 }
