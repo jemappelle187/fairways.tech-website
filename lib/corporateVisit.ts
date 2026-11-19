@@ -1,4 +1,6 @@
 import {isIP} from "node:net";
+import {randomUUID} from "node:crypto";
+import {parseUserAgent} from "./parseUserAgent";
 
 const origin = "https://dev.fairways.tech";
 const cors = {
@@ -48,7 +50,13 @@ export function preflight(request: Request) {
   }});
 }
 
-type VisitBatch = {visit: string; events: VisitEvent[]};
+const sources = {
+  direct: "Direct visit", dashboard: "Dashboard referral", website: "Fairways.Tech website",
+  external: "External referral", unknown: "Source unavailable",
+} as const;
+const knownPaths = ["/", "/login", "/dashboard/workspace", "/dashboard/administration", "/dashboard/farmers"];
+type VisitBatch = {visit: string; events: VisitEvent[]; firstStep?: number;
+  source?: keyof typeof sources; path?: string; screen?: string; hasCampaign?: boolean};
 
 // HTML email input syntax, with the same length bound as the Corporate sign-in form.
 const emailPattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -84,7 +92,12 @@ async function readEvent(request: Request): Promise<VisitBatch | null> {
     }
     const data = JSON.parse(new TextDecoder().decode(bytes.subarray(0, offset)));
     if (!data || typeof data !== "object" || Array.isArray(data) ||
-        Object.keys(data).some(key => key !== "visit" && key !== "events")) return null;
+        Object.keys(data).some(key => !["visit", "events", "firstStep", "source", "path", "screen", "hasCampaign"].includes(key))) return null;
+    if ("hasCampaign" in data && typeof data.hasCampaign !== "boolean") return null;
+    if (("firstStep" in data && (!Number.isSafeInteger(data.firstStep) || data.firstStep < 1 || data.firstStep > 1e9)) ||
+        ("source" in data && (typeof data.source !== "string" || !Object.hasOwn(sources, data.source))) ||
+        ("path" in data && !knownPaths.includes(data.path)) ||
+        ("screen" in data && (typeof data.screen !== "string" || !/^[1-9]\d{0,4}x[1-9]\d{0,4}$/.test(data.screen) || /\s/.test(data.screen)))) return null;
     if (typeof data.visit !== "string" ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.visit) ||
         !Array.isArray(data.events) || data.events.length < 1 || data.events.length > 12 ||
@@ -125,37 +138,53 @@ function geoPart(headers: Headers, key: string) {
   }
 }
 
-function clientDescription(agent: string) {
-  const browser = /Edg\//.test(agent) ? "Edge" : /Firefox|FxiOS/.test(agent) ? "Firefox" :
-    /Chrome|CriOS/.test(agent) ? "Chrome" : /Safari/.test(agent) ? "Safari" : "Unknown browser";
-  const os = /Android/.test(agent) ? "Android" : /iPhone|iPad/.test(agent) ? "iOS/iPadOS" :
-    /Windows/.test(agent) ? "Windows" : /Mac OS/.test(agent) ? "macOS" : /Linux/.test(agent) ? "Linux" : "Unknown OS";
-  return browser + " · " + os;
+const countryNames = new Intl.DisplayNames(["en"], {type: "region"});
+const messageTime = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/Amsterdam", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
+});
+
+function section(text: string) {
+  return {type: "section", text: {type: "mrkdwn", text, verbatim: true}};
+}
+function context(text: string) {
+  return {type: "context", elements: [{type: "mrkdwn", text, verbatim: true}]};
 }
 
 function slackPayload(data: VisitBatch, headers: Headers, ip: string) {
-  const area = ["x-vercel-ip-city", "x-vercel-ip-country-region", "x-vercel-ip-country"]
-    .map(key => geoPart(headers, key)).filter(Boolean).join(", ");
-  const eventName = eventNames[data.events[0].event];
-  const title = "🟠 DEV " + eventName + " on dev.fairways.tech";
-  const lines = [
-    "IP: " + ip,
-    "Approximate IP location: " + (area || "Unavailable"),
-    "Client: " + clientDescription(headers.get("user-agent") ?? ""),
-    "Visit: " + data.visit,
-  ];
-  const activity = data.events.map(item => {
-    const description = [eventNames[item.event], pages[item.page], ...(item.field ? [fields[item.field]] : [])].join(" · ");
-    const text = item.email ? description + "\nEmail entered (unverified): " + item.email : description;
-    return {type: "section", text: {type: "plain_text", text}};
+  const {device, browser, os, isBot} = parseUserAgent(headers.get("user-agent"));
+  const country = geoPart(headers, "x-vercel-ip-country");
+  const area = [geoPart(headers, "x-vercel-ip-city"), geoPart(headers, "x-vercel-ip-country-region"),
+    /^[A-Z]{2}$/.test(country) ? countryNames.of(country) : country].filter(Boolean).join(", ");
+  const deviceIcon = isBot ? "🤖" : /iPhone|iPad|Android/.test(device) ? "📱" : "💻";
+  const first = data.events[0].event;
+  const last = data.events[data.events.length - 1].event;
+  const hasLogin = data.events.some(item => item.event === "login-attempt");
+  const title = first === "visit" ? "👤 New visit session" : hasLogin ? "🎯 Sign-in attempted" : "👤 Visit session";
+  const firstStep = data.firstStep ?? 1;
+  const journey = data.events.map((item, index) => {
+    let line: string;
+    if (item.event === "field") line = fields[item.field!] + " activated";
+    else if (item.event === "login-attempt") line = "Sign-in attempted";
+    else line = pages[item.page] + (item.event === "navigation" ? " navigation" : " viewed");
+    return (firstStep + index) + ". " + line + (data.path ? " — " + data.path : "");
   });
+  const emails = data.events.flatMap((item, index) => item.email
+    ? [{type: "section", text: {type: "plain_text",
+        text: "✉️ Email entered at step " + (firstStep + index) + " (unverified)\n" + item.email}}] : []);
+  const language = headers.get("accept-language")?.split(/[,;]/, 1)[0].trim() ?? "";
+  const details = [os, data.screen, /^[a-z]{2,3}(?:-[a-z0-9]{2,8}){0,2}$/i.test(language) ? language : "",
+    last === "visit" || last === "navigation" ? "Page viewed" : eventNames[last]].filter(Boolean).join(" • ");
+  const eventId = randomUUID();
   return {
-    text: title,
+    text: "🟠 DEV " + eventNames[first] + " on dev.fairways.tech",
     blocks: [
-      {type: "header", text: {type: "plain_text", text: title}},
-      {type: "context", elements: [{type: "plain_text", text: "🟠 DEV · dev.fairways.tech"}]},
-      {type: "section", text: {type: "plain_text", text: lines.join("\n")}},
-      ...activity,
+      {type: "header", text: {type: "plain_text", text: title, emoji: true}},
+      context(["🟠 DEV", "dev.fairways.tech", deviceIcon + " " + device, browser, messageTime.format(new Date())].join(" • ")),
+      section("*🧭 Journey*\n" + journey.join("\n")),
+      ...emails,
+      section("*📍 " + (area || "Location unavailable") + "*\nIP-based estimate • IP: " + ip),
+      ...(data.source ? [section("*🌐 " + sources[data.source] + "*" + (data.hasCampaign ? "\nCampaign link" : ""))] : []),
+      context("⚙️ " + details + "\n_Session: \`" + data.visit.slice(0, 8) + "…\` • Event: \`" + eventId.slice(0, 8) + "…\`_"),
     ],
   };
 }
